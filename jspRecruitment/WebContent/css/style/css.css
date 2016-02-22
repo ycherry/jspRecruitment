@@ -497,6 +497,7 @@ button,input,textarea,th,td {
 .header {
 	width: 1000px;
 	margin: 0 auto;
+	align:center;
 }
 
 .header_content {

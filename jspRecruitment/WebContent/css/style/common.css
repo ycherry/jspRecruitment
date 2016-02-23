@@ -37,9 +37,12 @@ body {
 }
 
 .updateInfoLabel {
-	text-align: left;
+	text-align: right;
 	margin: 5px;
 	align: left;
+}
+.updateDiv{
+	margin-bottom:10px;
 }
 
 input.error {

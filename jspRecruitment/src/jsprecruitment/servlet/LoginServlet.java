@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jsprecruitment.util.DataBaseOperation;
 
@@ -51,11 +52,11 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(intT);
 		if (intT > 0) {
 			System.out.println("登陆成功");
-			/*
-			 * session.setAttribute("usercode", username);
-			 * session.setAttribute("userType", new Integer(type));
-			 * session.setAttribute("flag", "true");
-			 */
+			  HttpSession session=request.getSession();
+			  session.setAttribute("usercode", username);
+			  session.setAttribute("userType", new Integer(type));
+			  session.setAttribute("flag", "true");
+			 
 			 switch (type) {
 			 case 1:
 			 response.sendRedirect("../jobseeker/index.html");

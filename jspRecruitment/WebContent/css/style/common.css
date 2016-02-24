@@ -4,10 +4,12 @@
 	background: #f8f8f8;
 	border-bottom: 1px solid #dcdcdc;
 }
-.top_left{
-	width:500px;
-	float:left;
+
+.top_left {
+	width: 500px;
+	float: left;
 }
+
 .welcome {
 	height: 35px;
 	line-height: 35px;
@@ -16,7 +18,7 @@
 
 .labelStyle {
 	text-align: right;
-	margin: 5px;
+	margin: 5px 0 10px;
 	align: center;
 }
 
@@ -41,8 +43,9 @@ body {
 	margin: 5px;
 	align: left;
 }
-.updateDiv{
-	margin-bottom:10px;
+
+.updateDiv {
+	margin-bottom: 10px;
 }
 
 input.error {
@@ -53,4 +56,36 @@ input.error {
 label.error {
 	margin-left: 10px;
 	color: red;
+}
+
+.register_header {
+	width: 100% F;
+	height: 100px;
+	background: #2e70c1
+}
+
+.reg_logo {
+	float: left;
+	margin-top: 35px;
+}
+
+.reg_w980 {
+	width: 980px;
+	height: 110px;
+	margin: 0 auto;
+	background: url(../images/reg_bg.png) no-repeat right bottom;
+	position: relative
+}
+
+.reg_msg {
+	float: left;
+	font-size: 26px;
+	font-family: 微软雅黑;
+	margin-top: 40px;
+	color: #fff;
+	height: 30px;
+	line-height: 30px;
+	border-left: 2px solid #fff;
+	margin-left: 20px;
+	padding-left: 20px;
 }

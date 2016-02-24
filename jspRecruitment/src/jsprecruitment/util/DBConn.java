@@ -11,7 +11,7 @@ public class DBConn {
     private Statement stmt;
     private ResultSet rs;
     private static final String drivername="com.mysql.jdbc.Driver";
-    private static final String url="jdbc:mysql://localhost:3306/message?useUnicode=true&characterEncoding=utf-8";
+    private static final String url="jdbc:mysql://localhost:3306/jsprencai?useUnicode=true&characterEncoding=utf-8";
     private static final String username="root";
     private static final String password="yan19941115";
    

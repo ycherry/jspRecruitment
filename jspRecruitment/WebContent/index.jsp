@@ -235,7 +235,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_1.png"
+									src="images/indexIcon/i_m_1.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>找工作</dd>
@@ -245,7 +245,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_2.png"
+									src="images/indexIcon//i_m_2.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>找人才</dd>
@@ -255,7 +255,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_3.png"
+									src="images/indexIcon/i_m_3.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>找企业</dd>
@@ -265,7 +265,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_4.png"
+									src="images/indexIcon/i_m_4.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>微招聘</dd>
@@ -275,7 +275,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_5.png"
+									src="images/indexIcon/i_m_5.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>微简历</dd>
@@ -285,7 +285,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_8.png"
+									src="images/indexIcon/i_m_8.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>招聘会</dd>
@@ -295,7 +295,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_5.png"
+									src="images/indexIcon/i_m_5.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>微简历</dd>
@@ -308,7 +308,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_1.png"
+									src="images/indexIcon/i_m_1.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>找工作</dd>
@@ -318,7 +318,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						<dl class="index_left_mune_list">
 							<dt>
 								<img
-									src="http://127.0.0.1/recruitment/upload/app/template/default/images/i_m_3.png"
+									src="images/indexIcon/i_m_3.png"
 									width="28" height="28" class="png" />
 							</dt>
 							<dd>找企业</dd>
@@ -575,10 +575,6 @@ DD_belatedPNG.fix('.png,.pagination li a');
 	<!--foot  end-->
 	<div id="bg" style=""></div>
 	<div id="uclogin" style="display: none"></div>
-	<script>
-		var integral_pricename = '积分';
-		var weburl = "http://127.0.0.1/recruitment/upload";
-	</script>
 </body>
 </html>
 </body>

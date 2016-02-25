@@ -18,8 +18,12 @@
 
 .labelStyle {
 	text-align: right;
-	margin: 5px 0 10px;
+	margin: 20px 0 30px;
 	align: center;
+}
+.labelFont{
+	font-size:16px;
+	font-family: 微软雅黑;
 }
 
 .invalid {
@@ -40,7 +44,7 @@ body {
 
 .updateInfoLabel {
 	text-align: right;
-	margin: 5px;
+	margin: 5px 0 10px;
 	align: left;
 }
 
@@ -48,44 +52,31 @@ body {
 	margin-bottom: 10px;
 }
 
+
 input.error {
 	border: 1px solid red;
 	color: red;
 }
 
 label.error {
-	margin-left: 10px;
 	color: red;
 }
 
-.register_header {
+.register_header_style {
 	width: 100% F;
-	height: 100px;
-	background: #2e70c1
+	height: 60px;
+	background: #2e70c1;
 }
 
-.reg_logo {
-	float: left;
-	margin-top: 35px;
-}
-
-.reg_w980 {
-	width: 980px;
-	height: 110px;
-	margin: 0 auto;
-	background: url(../images/reg_bg.png) no-repeat right bottom;
-	position: relative
-}
-
-.reg_msg {
-	float: left;
+.reg_text {
 	font-size: 26px;
 	font-family: 微软雅黑;
-	margin-top: 40px;
+	padding-top: 20px;
 	color: #fff;
 	height: 30px;
-	line-height: 30px;
-	border-left: 2px solid #fff;
-	margin-left: 20px;
-	padding-left: 20px;
+	line-height: 20px;
+	text-align:center;
+}
+.reg_form_control{
+	margin-bottom:90px;
 }

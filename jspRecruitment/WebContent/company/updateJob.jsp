@@ -11,10 +11,8 @@
 <title>修改招聘信息</title>
 <script type="text/javascript" src="../Js/util/jquery-1.10.0.js"></script>
 <script type="text/javascript" src="../Js/util/bootstrap.js"></script>
-<script type="text/javascript" src="../Js/util/angular.js"></script>
 <script type="text/javascript"
 	src="../Js/util/jquery.validate-1.13.1.js"></script>
-<script type="text/javascript" src="../Js/company/reg.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 <link rel="stylesheet" href="../css/bootstrap.css.map">
 <link rel="stylesheet" type="text/css" href="../css/common.css">

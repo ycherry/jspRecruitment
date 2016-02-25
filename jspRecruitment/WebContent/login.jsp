@@ -83,7 +83,7 @@
 		</div>
 	</form>
 	<div class="row">
-		<dl class="col-md-offset-2 login_list">
+		<dl class="col-md-offset-3 login_list">
 			<dt>
 				<img src="images/login/log_img1.png" class="png">
 			</dt>

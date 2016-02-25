@@ -1,6 +1,6 @@
 package jsprecruitment.entity;
 
-public class user {
+public class User {
 	private String susername;
 	private String struename;
 	private String password;
@@ -13,7 +13,7 @@ public class user {
 	private String email;
 	private String birthday;
 
-	public user() {
+	public User() {
 	}
 
 	public String getSusername() {

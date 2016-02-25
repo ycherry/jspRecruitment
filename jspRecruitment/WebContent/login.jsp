@@ -26,7 +26,7 @@
 			</div>
 		</div>
 	</div>
-	<form role="form" name="login" action="servlet/LoginServlet">
+	<form role="form" name="login" action="LoginServlet">
 		<div class="logoin_cont_box">
 			<div class="logoin_bg"></div>
 			<div class="login_left ">

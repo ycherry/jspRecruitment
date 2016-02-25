@@ -59,15 +59,15 @@ public class LoginServlet extends HttpServlet {
 			 
 			 switch (type) {
 			 case 1:
-			 response.sendRedirect("../jobseeker/index.html");
+			 response.sendRedirect("jobseeker/index.html");
 			 break;
 			 //登陆用户是求职者
 			 case 2:
-			 response.sendRedirect("../company/index.html");
+			 response.sendRedirect("company/index.html");
 			 break;
 			 //登陆用户是招聘公司
 			 case 3:
-			 response.sendRedirect("../admin/index.html");
+			 response.sendRedirect("admin/index.html");
 			 break;
 			 //登陆用户是管理员
 			 default:

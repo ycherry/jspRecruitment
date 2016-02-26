@@ -45,14 +45,18 @@ public class CompanyRegServlet extends HttpServlet {
 		company.setName(request.getParameter("companyName"));
 		company.setPassword(request.getParameter("password"));
 		String sql="insert into t_user(userName,userPass,userType) values('"+company.getName()+"','"+company.getPassword()+"','2')";
+		String insertToCompanySql="insert into t_company(name) values('"+company.getName()+"')";
 		int count=dbo.insert(sql);
-		if(count>0){
+		int countCompany=dbo.insert(insertToCompanySql);
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		if(count>0&&countCompany>0){
 			System.out.println("注册成功");
-			out.println("注册成功，请登录完善信息");
-			response.sendRedirect("login.jsp");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='login.jsp'</script>");
+//			response.sendRedirect("login.jsp");
 		}else{
 			System.out.println("注册失败");
-			out.print("注册失败，请重新注册");
+			out.print("fail");
 			response.sendRedirect("reg.html");
 		}
 		

@@ -94,7 +94,6 @@ input,textarea{font-family:microsoft yahei,ËÎÌו;}
 .index_mian_right{width:805px; float:right;}
 .mian_right{width:803px; float:right;min-height:725px;_height:725px; background:#fff; padding-bottom:10px;border:1px solid #ddd }
 .foot{ height: 50px;line-height: 50px;margin-top:10px;text-align: center;width: 100%;color:#999}
-.foot a {color: #FFFFFF;}
 .diggg{width:100%; font-weight:normal; text-align:right; padding-top:10px; padding-bottom:10px; float:left}
 .diggg a{ display:inline-block;border:1px solid #ccc; padding:5px 10px; margin-right:10px;color:#666}
 .diggg  .selected{ background:#3281CB;color:#fff; }

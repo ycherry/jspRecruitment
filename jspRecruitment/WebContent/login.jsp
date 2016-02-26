@@ -2,30 +2,74 @@
 <html>
 <head>
 <title>欢迎登陆人才招聘网</title>
-<script type="text/javascript" src="Js/util/jquery.js"></script>
-<script type="text/javascript" src="Js/util/bootstrap.js"></script>
-<script type="text/javascript" src="Js/util/angular.js"></script>
+<script type="text/javascript" src="js/util/jquery.js"></script>
+<script type="text/javascript" src="js/util/bootstrap.js"></script>
+<script type="text/javascript" src="js/util/angular.js"></script>
+<script src="js/util/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="js/layer/layer.min.js" type="text/javascript"></script>
+<script src="js/util/lazyload.min.js" type="text/javascript"></script>
+<script src="js/public.js" type="text/javascript"></script>
+<script src="js/reg_ajax.js" type="text/javascript"></script>
+<script src="js/index.js" type="text/javascript"></script>
+<script src="js/search.js" type="text/javascript"></script>
+<script src="js/util/slides.jquery.js" type="text/javascript"></script>
 <link rel="stylesheet" type="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" type="stylesheet" href="	css/style/common.css">
 <link rel="stylesheet" type="stylesheet" href="	css/style/login.css">
 <link rel="stylesheet" type="stylesheet" href="	css/style/css.css">
+<link rel="stylesheet" href="css/style/index.css" type="text/css" />
 </head>
-<body>
+<body class="index_body_box">
 	<div class="top">
-		<div class="top_left ">
-			<div class="welcome">欢迎来到jsp人才系统！</div>
-		</div>
-	</div>
-	<div class="logoin_banner">
-		<div id="slides" class="s_lb">
-			<div class="slides_container">
-				<div class="slide">
-					<img src='images/login/loginbg.JPG'></a>
+		<div class="top_cot">
+			<div class="top_cot_content">
+				<div class="top_left fl">
+					<div class="yun_welcome fl">欢迎来到jsp人才系统！</div>
 				</div>
-
+				<div class="top_right_re fr">
+					<div class="top_right">
+						<div class=" fr">
+							<div class="yun_topLogin_cont">
+								<div class="yun_topLogin">
+									<a class="yun_More" href="javascript:void(0)">用户登录</a>
+									<ul class="yun_Moredown" style="display: none">
+										<li><a href="login.jsp">会员登录</a></li>
+									</ul>
+								</div>
+								<div class="yun_topLogin">
+									<a class="yun_More" href="javascript:void(0)">用户注册</a>
+									<ul class="yun_Moredown fn-hide" style="display: none">
+										<li><a href="jobseeker/reg.html">个人注册</a></li>
+										<li><a href="company/reg.html">企业注册</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<div class="clear"></div>
+	<script language="javascript">
+		$(function() {
+			var offset = 150;
+			$(window).scroll(
+					function() {
+						($(this).scrollTop() > offset) ? $("#header_fix")
+								.show() : $("#header_fix").hide();
+					});
+
+			$(".header_fixed_login_dl").hover(function() {
+				var t = $(this).attr("did");
+				$("#" + t + "_t").show();
+			}, function() {
+				var t = $(this).attr("did");
+				$("#" + t + "_t").hide();
+			});
+		});
+	</script>
+	<!--滚动展示内容 end-->
 	<form role="form" name="login" action="LoginServlet">
 		<div class="logoin_cont_box">
 			<div class="logoin_bg"></div>

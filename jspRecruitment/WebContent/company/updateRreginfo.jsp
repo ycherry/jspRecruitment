@@ -21,9 +21,9 @@
 <body >
 	<%
 		DBConn dbc = new DBConn();
-		String cuserName = (String) session.getAttribute("usercode");
+		Company company = (Company) request.getSession().getAttribute("company");
 		Statement at = dbc.getStmtread();
-		String sql = "select * from t_company where cuserName=" + "'" + cuserName + "'";
+		String sql = "select * from t_company where name =" + "'" + company.getName() + "'";
 		ResultSet rs = dbc.getRs(sql);
 		System.out.println(sql);
 		while (rs.next()) {

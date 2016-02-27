@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String password = request.getParameter("password");
 		String username = request.getParameter("user");
 		int type = Integer.parseInt(request.getParameter("type"));

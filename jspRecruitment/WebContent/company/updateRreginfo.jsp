@@ -23,7 +23,7 @@
 		DBConn dbc = new DBConn();
 		Company company = (Company) request.getSession().getAttribute("company");
 		Statement at = dbc.getStmtread();
-		String sql = "select * from t_company where name =" + "'" + company.getName() + "'";
+		String sql = "select * from t_company where userName =" + "'" + company.getName() + "'";
 		ResultSet rs = dbc.getRs(sql);
 		System.out.println(sql);
 		while (rs.next()) {
@@ -40,9 +40,62 @@
 					<label>企业名称:</label>
 				</div>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="ctruename"
-						placeholder="请输入您的用户名（必填）" required ng-model="ctruename"
-						ng-init="ctruename='<%=rs.getString(3)%>'">
+					<input type="text" class="form-control" name="companyName"
+						placeholder="请输入您的企业名称（必填）">
+				</div>
+			</div>
+			<div class="row updateDiv">
+				<div class="col-sm-3 updateInfoLabel">
+					<label>公司性质:</label>
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control" name="nature" title="请选择企业性质(必填)" >
+					<option>外资企业</option>
+					<option>合资企业</option>
+					<option>私营企业</option>
+					<option>民营企业</option>
+					<option>股份制企业</option>
+					<option>集体企业</option>					
+					</select>
+				</div>
+			</div>
+			<div class="row updateDiv">
+				<div class="col-sm-3 updateInfoLabel">
+					<label>所属行业:</label>
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control" name="industry" title="请选择行业(必填)" >
+					<option>计算机/互联网</option>
+					<option>销售/客服/技术支持</option>
+					<option>会计/金融/银行/保险</option>
+					<option>生产/营运/采购/物流</option>
+					<option>生物/制药/医疗/护理</option>
+					<option>广告/市场/媒体/艺术</option>		
+					<option>建筑/房地产</option>
+					<option>人事/行政/高级管理</option>
+					<option>咨询/法律/教育/科研</option>
+					<option>服务业</option>
+					<option>公务员/翻译/其他</option>
+					<option>化工/能源</option>	
+					<option>贸易/百货</option>
+					<option>机械/设备/技工</option>
+					<option>通信/电子</option>					
+					</select>
+				</div>
+			</div>
+			<div class="row updateDiv">
+				<div class="col-sm-3 updateInfoLabel">
+					<label>公司规模:</label>
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control" name="scale" title="请选择企业性质(必填)" >
+					<option>10人以下</option>
+					<option>10-50人</option>
+					<option>50-200人</option>
+					<option>200-500人</option>
+					<option>500-1000人</option>
+					<option>1000人以上</option>					
+					</select>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -50,9 +103,8 @@
 					<label>联系电话:</label>
 				</div>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="tel"
-						placeholder="请输入您的联系电话（必填）" required ng-model="tel"
-						ng-init="tel='<%=rs.getString(4)%>'">
+					<input type="text" class="form-control" name="telphone"
+						placeholder="请输入您的联系电话（必填）" >
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -61,18 +113,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="email" class="form-control" name="email"
-						placeholder="请输入您的电子邮件（必填）" required ng-model="email"
-						ng-init="email='<%=rs.getString(7)%>'">
-				</div>
-			</div>
-			<div class="row updateDiv">
-				<div class="col-sm-3 updateInfoLabel">
-					<label>公司性质:</label>
-				</div>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" name="manage"
-						placeholder="请输入您的公司类型（必填）" required ng-model="manage"
-						ng-init="manage='<%=rs.getString(5)%>'">
+						placeholder="请输入您的电子邮件（必填）">
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -81,8 +122,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="address"
-						placeholder="请输入您的公司地址（必填）" ng-model="address"
-						ng-init="address='<%=rs.getString(6)%>'" required>
+						placeholder="请输入您的公司地址（必填）">
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -90,19 +130,14 @@
 					<label>企业简介:</label>
 				</div>
 				<div class="col-sm-6">
-					<textarea type="text" class="form-control" name="resume"
-						placeholder="请介绍一下您的公司吧"><%=rs.getString(8)%></textarea>
+					<textarea type="text" class="form-control" name="introduction"
+						placeholder="请介绍一下您的公司吧"><%=rs.getString(10)%></textarea>
 				</div>
 			</div>
 			<div >
 				<div>
 					<button type="submit" name="Submit" class="btn btn-primary"
-						ng-disabled="updateCompnyInfoForm.$invalid">&nbsp;&nbsp;&nbsp;&nbsp;修&nbsp;&nbsp;&nbsp;&nbsp;改&nbsp;&nbsp;&nbsp;&nbsp;</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-3">
-					<span class="invalid" ng-show="updateCompnyInfoForm.$invalid">请按要求填数据!</span>
+						>&nbsp;&nbsp;&nbsp;&nbsp;修&nbsp;&nbsp;&nbsp;&nbsp;改&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				</div>
 			</div>
 		</div>

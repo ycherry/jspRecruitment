@@ -47,14 +47,14 @@ public class CompanyRegServlet extends HttpServlet {
 		company.setPassword(request.getParameter("password"));
 		System.out.println("企业名称："+company.getName());
 		String sql="insert into t_user(userName,userPass,userType) values('"+company.getName()+"','"+company.getPassword()+"','2')";
-		String insertToCompanySql="insert into t_company(name) values('"+company.getName()+"')";
+		String insertToCompanySql="insert into t_company(userName) values('"+company.getName()+"')";
 		int count=dbo.insert(sql);
 		int countCompany=dbo.insert(insertToCompanySql);
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		if(count>0&&countCompany>0){
 			System.out.println("注册成功");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='login.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册成功，请完善注册信息！sucess');window.location.href='login.jsp'</script>");
 //			response.sendRedirect("login.jsp");
 		}else{
 			System.out.println("注册失败");

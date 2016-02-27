@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jsprecruitment.entity.Company;
+import jsprecruitment.entity.Jobseeker;
 import jsprecruitment.util.DataBaseOperation;
 
 /**
@@ -53,18 +55,28 @@ public class LoginServlet extends HttpServlet {
 		if (intT > 0) {
 			System.out.println("登陆成功");
 			  HttpSession session=request.getSession();
-			  session.setAttribute("usercode", username);
-			  session.setAttribute("userType", new Integer(type));
-			  session.setAttribute("flag", "true");
+//			  session.setAttribute("usercode", username);
+//			  session.setAttribute("userType", new Integer(type));
+//			  session.setAttribute("flag", "true");
 			 
 			 switch (type) {
-			 case 1:
-			 response.sendRedirect("jobseeker/index.html");
-			 break;
+			 case 1:{
+				 Jobseeker jobseeker=new Jobseeker();
+				 jobseeker.setSusername(username);
+				 session.setAttribute("jobseeker", jobseeker);
+				 response.sendRedirect("jobseeker/index.html");
+				 break;
+			 }
+			
 			 //登陆用户是求职者
-			 case 2:
-			 response.sendRedirect("company/index.html");
-			 break;
+			 case 2:{
+				 Company company=new Company();
+				 company.setName(username);
+				 session.setAttribute("company", company);
+				 response.sendRedirect("company/index.jsp");
+				 break; 
+			 }
+			
 			 //登陆用户是招聘公司
 			 case 3:
 			 response.sendRedirect("admin/index.html");

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="jsprecruitment.util.*,javax.servlet.http.HttpServletRequest"%>
+<%@ page import="jsprecruitment.util.*,jsprecruitment.entity.*,javax.servlet.http.HttpServletRequest"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>

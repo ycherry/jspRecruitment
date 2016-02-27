@@ -1,10 +1,26 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%@page contentType="text/html;charset=UTF-8" import="java.util.*"%>
-<%@page import="jsprecruitment.util.*"%>
+<%@page import="jsprecruitment.util.*,jsprecruitment.entity.*"%>
 <%@page import="java.sql.ResultSet"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+<%
+	Jobseeker jobseeker = new Jobseeker();
+	Company company = new Company();
+	if (request.getSession(false) != null) {
+		System.out.println("第一步");
+		System.out.println(((Company) request.getSession().getAttribute("company")));
+		if (((Company) request.getSession().getAttribute("company")) != null) {
+			System.out.println(((Company) request.getSession().getAttribute("company")).getName());
+			company = (Company) request.getSession().getAttribute(
+					"company");
+		} else if (((Jobseeker) request.getSession().getAttribute(
+				"jobseeker")) != null) {
+			jobseeker = (Jobseeker) request.getSession().getAttribute(
+					"jobseeker");
+		}
+	}
+%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>jsp人才系统_最新招聘信息_找工作</title>
 <meta name="keywords" content="jsp人才系统，招聘，招聘网，找工作" />
@@ -38,12 +54,32 @@ DD_belatedPNG.fix('.png,.pagination li a');
 					<div class="top_right">
 						<div class=" fr">
 							<div class="yun_topLogin_cont">
+								<%
+									//	System.out.println("index session: " + company.getName()
+									//			+ "  seeker：" + jobseeker.getSusername());
+									if (company.getName() == null && jobseeker.getSusername() == null) {
+								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
 									<ul class="yun_Moredown" style="display: none">
 										<li><a href="login.jsp">会员登录</a></li>
 									</ul>
 								</div>
+								<%
+									} else if (company.getName() != null) {
+								%>
+								<div class="yun_topLogin">
+									<a class="yun_More"><%=company.getName()%> 欢迎您！</a>
+								</div>
+								<%
+									} else if (jobseeker.getSusername() != null) {
+								%>
+								<div class="yun_topLogin">
+									<a class="yun_More"><%=jobseeker.getSusername()%> 欢迎您！</a>
+								</div>
+								<%
+									}
+								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户注册</a>
 									<ul class="yun_Moredown fn-hide" style="display: none">
@@ -234,9 +270,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						</div>
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_1.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_1.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>找工作</dd>
 						</dl>
@@ -244,9 +279,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						class="index_left_mune_a" target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon//i_m_2.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon//i_m_2.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>找人才</dd>
 						</dl>
@@ -254,9 +288,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						class="index_left_mune_a" target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_3.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_3.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>找企业</dd>
 						</dl>
@@ -264,9 +297,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						class="index_left_mune_a" target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_4.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_4.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>微招聘</dd>
 						</dl>
@@ -274,9 +306,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						class="index_left_mune_a" target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_5.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_5.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>微简历</dd>
 						</dl>
@@ -284,9 +315,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						class="index_left_mune_a" target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_8.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_8.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>招聘会</dd>
 						</dl>
@@ -294,9 +324,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						class="index_left_mune_a" target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_5.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_5.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>微简历</dd>
 						</dl>
@@ -307,9 +336,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						</div>
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_1.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_1.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>找工作</dd>
 						</dl>
@@ -317,9 +345,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 						class="index_left_mune_a" target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
-								<img
-									src="images/indexIcon/i_m_3.png"
-									width="28" height="28" class="png" />
+								<img src="images/indexIcon/i_m_3.png" width="28" height="28"
+									class="png" />
 							</dt>
 							<dd>找企业</dd>
 						</dl>
@@ -546,27 +573,6 @@ DD_belatedPNG.fix('.png,.pagination li a');
 							</ul>
 							<dd>
 					</dl>
-				</div>
-				<div class="footer_right" style="text-align: left">
-					<div class="footer_touch">服务热线</div>
-					<div class="footer_tel">400-880-5523</div>
-
-					<ul class="footer_last">
-
-						<li
-							style="width: 70px; float: left; margin-top: 5px; text-align: left">
-							<a class="move_01" style="color: #ff0000" target="_blank"
-							href="http://127.0.0.1/recruitment/upload/index.php?c=wap"
-							target="_blank">触屏版</a>
-						</li>
-
-						<li
-							style="width: 70px; float: left; margin-top: 5px; text-align: left">
-							<a class="move_03" style="color: #ff0000" target="_blank"
-							href="http://127.0.0.1/recruitment/upload/index.php?c=weixin"
-							target="_blank">微信</a>
-						</li>
-					</ul>
 				</div>
 			</div>
 			<div class="clear"></div>

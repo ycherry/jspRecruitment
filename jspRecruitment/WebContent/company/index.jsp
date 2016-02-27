@@ -1,14 +1,20 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
-"http://www.w3.org/TR/html4/frameset.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page
+	import="jsprecruitment.util.*,jsprecruitment.entity.*,javax.servlet.http.HttpServletRequest"%>
+<%@ page import="java.sql.*"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<title>人才招聘网站</title>
+<title>jsp人才系统</title>
 <link rel="stylesheet" href="../css/style/css.css" type="text/css" />
 <link rel="stylesheet" href="../css/style/m_css.css" type="text/css" />
 <link rel="stylesheet" href="../css/style/m_header.css" type="text/css" />
 <link rel="stylesheet" href="../css/style/index.css" type="text/css" />
-<link rel="stylesheet" type="stylesheet" href="	../css/style/login.css">
+<link rel="stylesheet" type="text/css" href="../css/style/login.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/style/sidebar.css">
@@ -38,15 +44,15 @@ body {
 	padding: 0px;
 	margin: 0px;
 	text-align: center;
-	align:center
+	align: center
 }
 
 #container {
-	width: 90%;
-	margin:0 auto;
+	width: 100%;
+	margin: 0 auto;
 	padding: 0px 100px 100px 100px;
 	align: center;
-	position: 	relative;
+	position: relative;
 }
 
 #left {
@@ -78,6 +84,11 @@ body {
 
 
 <body class="index_body_box">
+	<%
+	Company company=(Company)request.getSession().getAttribute("company");
+		System.out.println("session用户名"
+				+ company.getName());
+	%>
 	<div id="container">
 		<div class="header">
 			<div class="w950">
@@ -89,12 +100,11 @@ body {
 				<div class="top_right_re fltR">
 					<div class="top_right">
 						<div class="header_seach_State fltR">
-							<span class="header_seach_State_name">你好！yyyyaya</span> <span
-								class="user_m_line">|</span> <a href="javascript:void(0)"
-								onClick="logout('index.php?act=logout')"
-								class="header_seach_State_a">退出</a> <span class="user_m_line">|</span>
-							<a href="http://127.0.0.1/recruitment/upload" target="_blank"
-								title='返回网站首页' class="user_m_fanh">返回网站首页</a>
+							<span class="header_seach_State_name">欢迎您 <%=company.getName()%>
+							</span> <span class="user_m_line">|</span> <a href="../login.jsp"
+								class="header_seach_State_a" onclick=<%request.getSession().invalidate(); %>>退出</a> <span class="user_m_line">|</span>
+							<a href="" target="_blank" title='返回首页'
+								class="user_m_fanh">返回首页 </a>
 						</div>
 					</div>
 				</div>
@@ -112,13 +122,13 @@ body {
 	</div>
 	<!-- footer start -->
 	<div class="row">
-		<dl class="col-md-offset-3 login_list">
+		<dl class="col-md-offset-2 login_list">
 			<dt>
 				<img src="../images/login/log_img1.png" class="png">
 			</dt>
 			<dd>
 				<div class="login_list_h1">强大的招聘平台</div>
-				<div class="login_list_p">提供快捷、高效、可靠地网上招聘</div>
+				<div class="login_list_p">提供快捷、高效、可靠地网上招聘</div>
 			</dd>
 		</dl>
 		<dl class="login_list">
@@ -126,8 +136,8 @@ body {
 				<img src="../images/login/log_img2.png" class="png">
 			</dt>
 			<dd>
-				<div class="login_list_h1">收获职业机会</div>
-				<div class="login_list_p">好机会主动找上你，成就职业成功</div>
+				<div class="login_list_h1">收获职业机会</div>
+				<div class="login_list_p">好机会主动找上你，成就职业成功</div>
 			</dd>
 		</dl>
 		<dl class="login_list">
@@ -149,15 +159,9 @@ body {
 						<dt>关于我们</dt>
 						<dd>
 							<ul>
-								<li><a
-									href="https://www.baidu.com/"
-									title="关于我们">关于我们</a></li>
-								<li><a
-									href="https://www.baidu.com/"
-									title="注册协议">注册协议</a></li>
-								<li><a
-									href="https://www.baidu.com/"
-									title="法律声明">法律声明</a></li>
+								<li><a href="https://www.baidu.com/" title="关于我们">关于我们</a></li>
+								<li><a href="https://www.baidu.com/" title="注册协议">注册协议</a></li>
+								<li><a href="https://www.baidu.com/" title="法律声明">法律声明</a></li>
 							</ul>
 						<dd>
 					</dl>
@@ -165,18 +169,10 @@ body {
 						<dt>支付信息</dt>
 						<dd>
 							<ul>
-								<li><a
-									href="https://www.baidu.com/"
-									title="银行帐户">银行帐户</a></li>
-								<li><a
-									href="https://www.baidu.com/"
-									title="品牌推广">品牌推广</a></li>
-								<li><a
-									href="https://www.baidu.com/"
-									title="收费标准">收费标准</a></li>
-								<li><a
-									href="https://www.baidu.com/"
-									title="经营资源">经营资源</a></li>
+								<li><a href="https://www.baidu.com/" title="银行帐户">银行帐户</a></li>
+								<li><a href="https://www.baidu.com/" title="品牌推广">品牌推广</a></li>
+								<li><a href="https://www.baidu.com/" title="收费标准">收费标准</a></li>
+								<li><a href="https://www.baidu.com/" title="经营资源">经营资源</a></li>
 							</ul>
 						<dd>
 					</dl>
@@ -195,7 +191,7 @@ body {
 							<ul>
 								<li><a
 									href="http://127.0.0.1/recruitment/upload/about/kf.html"
-									title="客服中心">客服中心</a></li>
+									title="客服中心">客服中心</a></li>
 								<li><a
 									href="http://127.0.0.1/recruitment/upload/about/gg.html"
 									title="广告投放">广告投放</a></li>
@@ -211,8 +207,10 @@ body {
 	</div>
 
 	<!--foot  end-->
-	
 
+	<script type="text/javascript">
+		
+	</script>
 </body>
 
 </html>

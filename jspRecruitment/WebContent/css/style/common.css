@@ -61,7 +61,10 @@ input.error {
 label.error {
 	color: red;
 }
-
+select.error{
+	border: 1px solid red;
+	color: red;
+}
 .register_header_style {
 	width: 100% F;
 	height: 60px;

@@ -25,7 +25,7 @@
 		<a href="#userMeun" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>&nbsp;&nbsp;用户信息管理</a>
 		<ul id="userMeun" class="nav nav-list collapse menu-second">
-			<li><a href="updateRreginfo.jsp" target="mainFrame"><i
+			<li><a href="updateCompanyinfo.jsp" target="mainFrame"><i
 					class=""></i>&nbsp;&nbsp;修改信息</a></li>
 			<li><a href="changePassword.jsp" target="mainFrame"><i
 					class=""></i>&nbsp;&nbsp;修改密码</a></li>

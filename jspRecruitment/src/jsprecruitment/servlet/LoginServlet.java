@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 			 //登陆用户是求职者
 			 case 2:{
 				 Company company=new Company();
-				 company.setName(username);
+				 company.setUserName(username);
 				 session.setAttribute("company", company);
 				 response.sendRedirect("company/index.jsp");
 				 break; 

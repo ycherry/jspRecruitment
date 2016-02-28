@@ -43,11 +43,11 @@ public class CompanyRegServlet extends HttpServlet {
 		Company company=new Company();
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
-		company.setName(request.getParameter("companyName"));
+		company.setUserName(request.getParameter("companyName"));
 		company.setPassword(request.getParameter("password"));
-		System.out.println("企业名称："+company.getName());
-		String sql="insert into t_user(userName,userPass,userType) values('"+company.getName()+"','"+company.getPassword()+"','2')";
-		String insertToCompanySql="insert into t_company(userName) values('"+company.getName()+"')";
+		System.out.println("企业名称："+company.getUserName());
+		String sql="insert into t_user(userName,userPass,userType) values('"+company.getUserName()+"','"+company.getPassword()+"','2')";
+		String insertToCompanySql="insert into t_company(userName) values('"+company.getUserName()+"')";
 		int count=dbo.insert(sql);
 		int countCompany=dbo.insert(insertToCompanySql);
 		response.setCharacterEncoding("utf-8");

@@ -11,7 +11,7 @@
 		System.out.println("第一步");
 		System.out.println(((Company) request.getSession().getAttribute("company")));
 		if (((Company) request.getSession().getAttribute("company")) != null) {
-			System.out.println(((Company) request.getSession().getAttribute("company")).getName());
+			System.out.println(((Company) request.getSession().getAttribute("company")).getUserName());
 			company = (Company) request.getSession().getAttribute(
 					"company");
 		} else if (((Jobseeker) request.getSession().getAttribute(
@@ -57,7 +57,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 								<%
 									//	System.out.println("index session: " + company.getName()
 									//			+ "  seeker：" + jobseeker.getSusername());
-									if (company.getName() == null && jobseeker.getSusername() == null) {
+									if (company.getUserName() == null && jobseeker.getSusername() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -66,10 +66,10 @@ DD_belatedPNG.fix('.png,.pagination li a');
 									</ul>
 								</div>
 								<%
-									} else if (company.getName() != null) {
+									} else if (company.getUserName() != null) {
 								%>
 								<div class="yun_topLogin">
-									<a class="yun_More"><%=company.getName()%> 欢迎！</a>
+									<a class="yun_More"><%=company.getUserName()%> 欢迎！</a>
 								</div>
 								<%
 									} else if (jobseeker.getSusername() != null) {

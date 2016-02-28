@@ -12,25 +12,28 @@
 <script type="text/javascript" src="../js/util/bootstrap.js"></script>
 <script type="text/javascript"
 	src="../js/util/jquery.validate-1.13.1.js"></script>
+<script type="text/javascript" src="../js/util/bootstrap-select.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/style/sidebar.css">
 <link rel="stylesheet" href="../css/bootstrap.css.map">
 <link rel="stylesheet" type="text/css" href="../css/style/common.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-select.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap-select.css.map">
 </head>
 <body >
 	<%
 		DBConn dbc = new DBConn();
 		Company company = (Company) request.getSession().getAttribute("company");
 		Statement at = dbc.getStmtread();
-		String sql = "select * from t_company where userName =" + "'" + company.getName() + "'";
+		String sql = "select * from t_company where userName =" + "'" + company.getUserName() + "'";
 		ResultSet rs = dbc.getRs(sql);
 		System.out.println(sql);
 		while (rs.next()) {
 			System.out.println(rs.getString(3));
 	%>
 	<form role="form" name="updateCompnyInfoForm" method="post"
-		action="reginfo.jsp" novalidate bgcolor="#F5f7f7">
+		action="../updateCompanyInfoServlet" target="mainFrame" bgcolor="#F5f7f7" >
 		<div class="container" align="center">
 			<div class="row regTitle">
 				<font color="red"><strong>企业用户修改注册信息</strong></font>
@@ -41,7 +44,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="companyName"
-						placeholder="请输入您的企业名称（必填）">
+						placeholder="请输入您的企业名称（必填）" value=<%=rs.getString(2) %>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -49,13 +52,14 @@
 					<label>公司性质:</label>
 				</div>
 				<div class="col-sm-6">
-					<select class="form-control" name="nature" title="请选择企业性质(必填)" >
-					<option>外资企业</option>
-					<option>合资企业</option>
-					<option>私营企业</option>
-					<option>民营企业</option>
-					<option>股份制企业</option>
-					<option>集体企业</option>					
+					<select class="form-control selectpicker" name="nature"  >
+					<option data-hidden="true"><%=rs.getString(4) %></option>
+					<option value="外资企业">外资企业</option>
+					<option value="外资企业">合资企业</option>
+					<option value="私营企业">私营企业</option>
+					<option value="私营企业">民营企业</option>
+					<option value="股份制企业">股份制企业</option>
+					<option value="集体企业">集体企业</option>					
 					</select>
 				</div>
 			</div>
@@ -64,7 +68,8 @@
 					<label>所属行业:</label>
 				</div>
 				<div class="col-sm-6">
-					<select class="form-control" name="industry" title="请选择行业(必填)" >
+					<select class="form-control selectpicker" name="industry" >
+					<option data-hidden="true"><%=rs.getString(5) %></option>
 					<option>计算机/互联网</option>
 					<option>销售/客服/技术支持</option>
 					<option>会计/金融/银行/保险</option>
@@ -88,7 +93,8 @@
 					<label>公司规模:</label>
 				</div>
 				<div class="col-sm-6">
-					<select class="form-control" name="scale" title="请选择企业性质(必填)" >
+					<select class="form-control selectpicker" name="scale" >
+					<option data-hidden="true"><%=rs.getString(8) %></option>
 					<option>10人以下</option>
 					<option>10-50人</option>
 					<option>50-200人</option>
@@ -104,7 +110,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="telphone"
-						placeholder="请输入您的联系电话（必填）" >
+						placeholder="请输入您的联系电话（必填）" value=<%=rs.getString(7) %> >
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -113,7 +119,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="email" class="form-control" name="email"
-						placeholder="请输入您的电子邮件（必填）">
+						placeholder="请输入您的电子邮件（必填）"  value=<%=rs.getString(9) %>  >
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -122,7 +128,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="address"
-						placeholder="请输入您的公司地址（必填）">
+						placeholder="请输入您的公司地址（必填）"  value=<%=rs.getString(6) %> >
 				</div>
 			</div>
 			<div class="row updateDiv">

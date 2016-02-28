@@ -87,7 +87,7 @@ body {
 	<%
 	Company company=(Company)request.getSession().getAttribute("company");
 		System.out.println("session用户名"
-				+ company.getName());
+				+ company.getUserName());
 	%>
 	<div id="container">
 		<div class="header">
@@ -100,7 +100,7 @@ body {
 				<div class="top_right_re fltR">
 					<div class="top_right">
 						<div class="header_seach_State fltR">
-							<span class="header_seach_State_name">欢迎您 <%=company.getName()%>
+							<span class="header_seach_State_name">欢迎您 <%=company.getUserName()%>
 							</span> <span class="user_m_line">|</span> <a href="../login.jsp"
 								class="header_seach_State_a">退出</a> <span class="user_m_line">|</span>
 							<a href="../index.jsp"  title='返回首页'

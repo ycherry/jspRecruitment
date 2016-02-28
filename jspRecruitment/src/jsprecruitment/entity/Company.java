@@ -1,8 +1,9 @@
 package jsprecruitment.entity;
 
 public class Company {
-	private String name;
+	private String userName;
 	private String password;
+	private String companyName;
 	private String nature;
 	private String industry;
 	private String address;
@@ -11,17 +12,24 @@ public class Company {
 	private String email;
 	private String introduction;
 
-	public String getName() {
-		return name;
+	
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 	public String getNature() {
 		return nature;

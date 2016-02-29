@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http=equiv= "Content=Type " content="text/html; charset=UTF-8">
+<title>发布求职信息</title>
+<script type="text/javascript" src="../js/util/jquery-1.10.0.js"></script>
+<script type="text/javascript" src="../js/util/bootstrap.js"></script>
+<script type="text/javascript"
+	src="../js/util/jquery.validate-1.13.1.js"></script>
+<script type="text/javascript" src="../js/util/bootstrap-select.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/bootstrap.css.map">
+<link rel="stylesheet" type="text/css" href="../css/style/common.css">
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+<link rel="stylesheet" type="text/css"
+	href="../css/bootstrap-select.css">
+<link rel="stylesheet" type="text/css"
+	href="../css/bootstrap-select.css.map">
+</head>
+<body>
+	<form role="form" method="post" id="pubJobForm"
+		action="../PubJobServlet">
+
+		<div class="container" align="center">
+			<div class="row regTitle">
+				<font color="red"><strong>发布招聘信息</strong></font>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3 ">
+					<label>职位名称:</label>
+				</div>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="position"
+						id="position" placeholder="请输入职位名称（必填）">
+				</div>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3 ">
+					<label>招聘人数:</label>
+				</div>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="amount" id="amount"
+						placeholder="请输入招聘人数（必填）">
+				</div>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3 ">
+					<label>工作地区:</label>
+				</div>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="distinct"
+						id="distinct" placeholder="请输入工作地区（必填）">
+				</div>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3 ">
+					<label>学历要求:</label>
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control selectpicker" name="education">
+						<option>不限</option>
+						<option>初中及以下</option>
+						<option>高中/中技/中专</option>
+						<option>大专</option>
+						<option>本科</option>
+						<option>硕士</option>
+						<option>博士</option>
+					</select>
+				</div>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3 ">
+					<label>工作年限:</label>
+				</div>
+				<div class="col-sm-6">
+					<select class="form-control selectpicker" name="experience">
+						<option>不限</option>
+						<option>无经验/option>
+						<option>1-3年</option>
+						<option>3-5年</option>
+						<option>5-10年</option>
+						<option>10年以上</option>
+					</select>
+				</div>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3 ">
+					<label>薪水范围:</label>
+				</div>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="salary" id="salary"
+						placeholder="请输入职位薪水（必填）">
+				</div>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3 ">
+					<label>有效时间:</label>
+				</div>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="deadline"
+						id="deadline" placeholder="请输入有效时间（必填）">
+				</div>
+			</div>
+			<div class="row updateInfoLabel">
+				<div class="col-sm-offset-1 col-sm-3">
+					<label>职位描述:</label>
+				</div>
+				<div class="col-sm-6">
+					<textarea class="form-control" rows="3" cols="12"
+						placeholder="请输入职位要求" name="contents" id="contents"></textarea>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-offset-3 col-sm-3">
+					<button type="submit" name="Submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;修&nbsp;&nbsp;&nbsp;&nbsp;改&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</div>
+				<div class="col-sm-offset-1 col-sm-3">
+					<button type="reset" name="reset" class="btn btn-default">&nbsp;&nbsp;&nbsp;&nbsp;重&nbsp;&nbsp;&nbsp;&nbsp;置&nbsp;&nbsp;&nbsp;&nbsp;</button>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#pubJobForm").validate({
+				rules : {
+					position : {
+						required : true
+					},
+					amount : {
+						required : true
+					},
+					distinct : {
+						required : true
+					},
+					salary : {
+						required : true
+					},
+					deadline : {
+						required : true
+					}
+
+				},
+				messages : {
+					position : {
+						required : "行业名称不能为空！"
+					},
+					amount : {
+						required : "招聘人数不能为空 !"
+					},
+					distinct : {
+						required : "工资不能为空！"
+					},
+					salary : {
+						required : "薪水不能为空！"
+					},
+					deadline : {
+						required : "截止时间不能为空！"
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>

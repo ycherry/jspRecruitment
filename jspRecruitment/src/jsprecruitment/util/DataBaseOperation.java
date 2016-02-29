@@ -22,7 +22,7 @@ public class DataBaseOperation
 		try
 		{
 			stmt = con.getStmtread();
-			rs = stmt.executeQuery("SELECT COUNT(*) FROM " + strSql);
+			rs = stmt.executeQuery(strSql);
 			if (rs.next())
 			{
 				intCount = rs.getInt(1);

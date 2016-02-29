@@ -48,9 +48,9 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("user");
 		int type = Integer.parseInt(request.getParameter("type"));
 		DataBaseOperation data = new DataBaseOperation();
-		int intT = data.getRowCount("t_user where username='" + username
+		int intT = data.getRowCount("select * from t_user where userName='" + username
 				+ "'and userPass='" + password + "' and userType=" + type);
-		System.out.println("t_user where username='" + username
+		System.out.println("select * from t_user where username='" + username
 				+ "'and userPass='" + password + "' and userType=" + type);
 		System.out.println(intT);
 		if (intT > 0) {

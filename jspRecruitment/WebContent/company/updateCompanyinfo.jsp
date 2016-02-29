@@ -38,7 +38,7 @@
 			System.out.println(rs.getString(3));
 	%>
 	<form role="form" name="updateCompnyInfoForm" id="updateCompnyInfoForm"
-		method="post" action="../updateCompanyInfoServlet" target="mainFrame"
+		method="post" action="../UpdateCompanyInfoServlet" target="mainFrame"
 		bgcolor="#F5f7f7">
 		<div class="container" align="center">
 			<div class="row regTitle">

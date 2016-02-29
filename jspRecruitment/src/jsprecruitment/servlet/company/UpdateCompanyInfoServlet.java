@@ -16,13 +16,13 @@ import jsprecruitment.util.DataBaseOperation;
  * Servlet implementation class updateRegInfoServlet
  */
 
-public class updateCompanyInfoServlet extends HttpServlet {
+public class UpdateCompanyInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public updateCompanyInfoServlet() {
+	public UpdateCompanyInfoServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

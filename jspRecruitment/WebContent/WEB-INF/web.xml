@@ -26,6 +26,14 @@
     <url-pattern>/UpdateCompanyInfoServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>PubJobServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.company.PubJobServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PubJobServlet</servlet-name>
+    <url-pattern>/PubJobServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ComapnyChangePasswordServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.company.ComapnyChangePasswordServlet</servlet-class>
   </servlet>

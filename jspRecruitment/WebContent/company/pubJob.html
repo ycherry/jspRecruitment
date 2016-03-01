@@ -75,7 +75,7 @@
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="experience">
 						<option>不限</option>
-						<option>无经验/option>
+						<option>无经验</option>
 						<option>1-3年</option>
 						<option>3-5年</option>
 						<option>5-10年</option>
@@ -97,8 +97,8 @@
 					<label>有效时间:</label>
 				</div>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="deadline"
-						id="deadline" placeholder="请输入有效时间（必填）">
+					<input type="date" class="form-control" name="deadline"
+						id="deadline" placeholder="请输入有效时间，例如：xxxx-xx-xx（年-月-日）（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -113,7 +113,7 @@
 
 			<div class="row">
 				<div class="col-sm-offset-3 col-sm-3">
-					<button type="submit" name="Submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;修&nbsp;&nbsp;&nbsp;&nbsp;改&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<button type="submit" name="Submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				</div>
 				<div class="col-sm-offset-1 col-sm-3">
 					<button type="reset" name="reset" class="btn btn-default">&nbsp;&nbsp;&nbsp;&nbsp;重&nbsp;&nbsp;&nbsp;&nbsp;置&nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -122,45 +122,59 @@
 		</div>
 	</form>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#pubJobForm").validate({
-				rules : {
-					position : {
-						required : true
-					},
-					amount : {
-						required : true
-					},
-					distinct : {
-						required : true
-					},
-					salary : {
-						required : true
-					},
-					deadline : {
-						required : true
-					}
+		$(document)
+				.ready(
+						function() {
+							jQuery.validator
+									.addMethod(
+											"isValidDate",
+											function(val, element) {
+												var date = /^(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)$/;
+												return this.optional(element)
+														|| date.test(val);
+											}, "请输入正确格式的日期！");
+							$("#pubJobForm").validate({
+								rules : {
+									position : {
+										required : true
+									},
+									amount : {
+										required : true
+									},
+									distinct : {
+										required : true
+									},
+									salary : {
+										required : true
+									},
+									deadline : {
+										required : true,
+										isValidDate : true,
+										date : true
+									}
 
-				},
-				messages : {
-					position : {
-						required : "行业名称不能为空！"
-					},
-					amount : {
-						required : "招聘人数不能为空 !"
-					},
-					distinct : {
-						required : "工资不能为空！"
-					},
-					salary : {
-						required : "薪水不能为空！"
-					},
-					deadline : {
-						required : "截止时间不能为空！"
-					}
-				}
-			});
-		});
+								},
+								messages : {
+									position : {
+										required : "行业名称不能为空！"
+									},
+									amount : {
+										required : "招聘人数不能为空 !"
+									},
+									distinct : {
+										required : "工作地区不能为空!"
+									},
+									salary : {
+										required : "薪水不能为空！"
+									},
+									deadline : {
+										required : "截止时间不能为空！",
+										isValidDate : "请输入正确的日期格式!",
+										date : "请输入正确的日期格式!"
+									}
+								}
+							});
+						});
 	</script>
 </body>
 </html>

@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 				 Jobseeker jobseeker=new Jobseeker();
 				 jobseeker.setUserName(username);
 				 session.setAttribute("jobseeker", jobseeker);
-				 response.sendRedirect("jobseeker/index.html");
+				 response.sendRedirect("jobseeker/index.jsp");
 				 break;
 			 }
 			

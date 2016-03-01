@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 			 switch (type) {
 			 case 1:{
 				 Jobseeker jobseeker=new Jobseeker();
-				 jobseeker.setSusername(username);
+				 jobseeker.setUserName(username);
 				 session.setAttribute("jobseeker", jobseeker);
 				 response.sendRedirect("jobseeker/index.html");
 				 break;

@@ -43,9 +43,9 @@
 			<li><a href="findJob.jsp" target="mainFrame"><i class="icon-list-alt"></i> 浏览全部求职者信息</a></li>
 		</ul>
 		<a href="#mailMenu" class="nav-header menu-first collapsed"
-			data-toggle="collapse"><i class=""></i>邮件管理</a>
+			data-toggle="collapse"><i class=""></i>面试管理</a>
 		<ul id="mailMenu" class="nav nav-list collapse menu-second">
-			<li><a href="../mail/index.jsp" target="mainFrame"><i class="icon-pencil"></i> 发送邮件</a></li>
+			<li><a href="../mail/index.jsp" target="mainFrame"><i class="icon-pencil"></i> 面试邀请</a></li>
 		</ul>
 		<a href="#otherMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>退出系统</a>

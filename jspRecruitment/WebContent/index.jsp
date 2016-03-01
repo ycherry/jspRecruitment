@@ -57,7 +57,7 @@ DD_belatedPNG.fix('.png,.pagination li a');
 								<%
 									//	System.out.println("index session: " + company.getName()
 									//			+ "  seeker：" + jobseeker.getSusername());
-									if (company.getUserName() == null && jobseeker.getSusername() == null) {
+									if (company.getUserName() == null && jobseeker.getUserName() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -72,10 +72,10 @@ DD_belatedPNG.fix('.png,.pagination li a');
 									<a class="yun_More"><%=company.getUserName()%> 欢迎！</a>
 								</div>
 								<%
-									} else if (jobseeker.getSusername() != null) {
+									} else if (jobseeker.getUserName() != null) {
 								%>
 								<div class="yun_topLogin">
-									<a class="yun_More"><%=jobseeker.getSusername()%> 欢迎您！</a>
+									<a class="yun_More"><%=jobseeker.getUserName()%> 欢迎您！</a>
 								</div>
 								<%
 									}

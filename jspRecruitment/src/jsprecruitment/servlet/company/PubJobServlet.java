@@ -73,7 +73,7 @@ public class PubJobServlet extends HttpServlet {
 		job.setContents(request.getParameter("contents"));
 		job.setAddTime(new java.sql.Date(date.getTime()));
 		System.out.println("系统时间" + new java.sql.Date(date.getTime()));
-		job.setDistinct(request.getParameter("distinct"));
+		job.setDistrict(request.getParameter("district"));
 		job.setEducation(request.getParameter("education"));
 		job.setExperience(request.getParameter("experience"));
 		job.setPosition(request.getParameter("position"));
@@ -85,7 +85,7 @@ public class PubJobServlet extends HttpServlet {
 		ResultSet rs = dbo.select(selectSql);
 		try {
 			if (rs != null && rs.getString(1) != null) {
-				String insertSql = "insert into t_company_job(cid,position,companyName,amount,distinct,education,experience,salary,contents,addtime,deadline) values ('"
+				String insertSql = "insert into t_company_job(cid,position,companyName,amount,district,education,experience,salary,contents,addtime,deadline) values ('"
 						+ rs.getInt(1)
 						+ "','"
 						+ job.getPosition()
@@ -94,7 +94,7 @@ public class PubJobServlet extends HttpServlet {
 						+ "','"
 						+ job.getAmount()
 						+ "','"
-						+ job.getDistinct()
+						+ job.getDistrict()
 						+ "','"
 						+ job.getEducation()
 						+ "','"
@@ -111,14 +111,14 @@ public class PubJobServlet extends HttpServlet {
 				System.out.println(insertSql);
 				if (dbo.insert(insertSql) > 0) {
 					System.out.println("发布职位成功！");
-					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='jobseeker/pubJob.jsp'</script>");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/pubJob.html'</script>");
 				} else {
 					System.out.println("发布职位失败！");
-					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='jobseeker/pubJob.jsp'</script>");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.html'</script>");
 				}
 			} else {
 				System.out.println("查询公司成功！");
-				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='jobseeker/pubJob.jsp'</script>");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.html'</script>");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

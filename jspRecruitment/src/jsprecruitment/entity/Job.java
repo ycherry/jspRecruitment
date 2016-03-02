@@ -7,7 +7,7 @@ public class Job {
 	private String position;
 	private String companyName;
 	private String amount;
-	private String distinct;
+	private String district;
 	private String education;
 	private String experience;
 	private String salary;
@@ -38,11 +38,12 @@ public class Job {
 	public void setAmount(String amount) {
 		this.amount = amount;
 	}
-	public String getDistinct() {
-		return distinct;
+	
+	public String getDistrict() {
+		return district;
 	}
-	public void setDistinct(String distinct) {
-		this.distinct = distinct;
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 	public String getEducation() {
 		return education;

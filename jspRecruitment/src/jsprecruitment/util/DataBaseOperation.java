@@ -23,7 +23,7 @@ public class DataBaseOperation {
 			if (rs.next()) {
 				intCount = rs.getInt(1);
 			} else {
-				intCount = -1;
+				intCount = 0;
 			}
 		} catch (Exception e) {
 			intCount = -2;

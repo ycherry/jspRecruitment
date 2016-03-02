@@ -28,6 +28,7 @@
 				<th>所求职位</th>
 				<th>发布时间</th>
 				<th>有效时间</th>
+				<th>求职人数</th>
 				<th>预览</th>
 				<th>编辑</th>
 				<th>删除</th>
@@ -35,6 +36,7 @@
 		</thead>
 		<%
 			DBConn con = new DBConn();
+		    DataBaseOperation dbo= new DataBaseOperation();
 			String strChecked = "checked";
 			int companyId = ((Company) request.getSession().getAttribute(
 					"company")).getId();
@@ -44,12 +46,14 @@
 					+ companyId + "'order by id desc");
 			while (rs.next()) {
 				int intId = rs.getInt(1);
+				String selectSql="select * from t_job_apply where jobId='"+rs.getString(1)+"'";
 		%>
 		<tbody>
 			<tr>
 				<td><a href="viewDetails.jsp?intId=<%=intId%>"><%=rs.getString(3)%></td>
 				<td><%=rs.getString(11)%></td>
 				<td><%=rs.getString(12)%></td>
+				<td><%=dbo.getRowCount(selectSql) %></td>
 				<td><a href="viewJobDetails.jsp?intId=<%=intId %>">预览</a></td>
 				<td><a href="updateJob.jsp?intId=<%=intId%>">编辑</a></td>
 				<td><a href="delJobDo.jsp?intId=<%=intId%>">删除</a></td>

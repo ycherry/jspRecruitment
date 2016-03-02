@@ -55,6 +55,8 @@ public class PubJobServlet extends HttpServlet {
 		Date date = new Date();
 		DataBaseOperation dbo = new DataBaseOperation();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String iniId=request.getParameter("intId");
+		System.out.println("intId"+iniId);
 		PrintWriter out = response.getWriter();
 		// 获取网页数据
 		job.setAmount(request.getParameter("amount"));
@@ -111,14 +113,14 @@ public class PubJobServlet extends HttpServlet {
 				System.out.println(insertSql);
 				if (dbo.insert(insertSql) > 0) {
 					System.out.println("发布职位成功！");
-					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/pubJob.html'</script>");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/pubJob.jsp'</script>");
 				} else {
 					System.out.println("发布职位失败！");
-					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.html'</script>");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
 				}
 			} else {
 				System.out.println("查询公司成功！");
-				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.html'</script>");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

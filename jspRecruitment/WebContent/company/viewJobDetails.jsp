@@ -43,31 +43,32 @@
 			<td><%=rs.getString(4)%></td>
 			<td nowrap="nowrap" class="td_style">职位名称</td>
 			<td><%=rs.getString(3)%></td>
-		</tr>
-		<tr>
 			<td nowrap="nowrap" class="td_style">招聘人数</td>
 			<td><%=rs.getString(5)%></td>
-			<td nowrap="nowrap" class="td_style">工作地区</td>
-			<td><%=rs.getString(6)%></td>
 		</tr>
 		<tr>
 			<td nowrap="nowrap" class="td_style">学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</td>
 			<td><%=rs.getString(7)%></td>
 			<td nowrap="nowrap" class="td_style">薪&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;水</td>
 			<td><%=rs.getString(9)%></td>
+			<td nowrap="nowrap" class="td_style">工作地区</td>
+			<td><%=rs.getString(6)%></td>
 		</tr>
 		<tr>
 			<td nowrap="nowrap" class="td_style">发布日期</td>
 			<td><%=rs.getString(11)%></td>
 			<td nowrap="nowrap" class="td_style">截止日期</td>
 			<td><%=rs.getString(12)%></td>
+			 <td nowrap="nowrap" class="td_style">工作经历</td>
+			<td><%=rs.getString(8)%></td>
 		</tr>
 		<tr>
+		   
 			<td nowrap="nowrap" class="td_style">职位要求</td>
-			<td colspan="3"><%=rs.getString(10)%></td>
+			<td colspan="5"><%=rs.getString(10)%></td>
 		</tr>
 		<tr>
-			<td colspan="4"><a class="btn btn-primary" href="updateJob.jsp?intId=<%=intId%>">&nbsp;&nbsp;&nbsp;&nbsp;编&nbsp;&nbsp;&nbsp;&nbsp;辑&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
+			<td colspan="6"><a class="btn btn-primary" href="pubJob.jsp?intId=<%=intId%>">&nbsp;&nbsp;&nbsp;&nbsp;编&nbsp;&nbsp;&nbsp;&nbsp;辑&nbsp;&nbsp;&nbsp;&nbsp;</a></td>
 		</tr>
 	</table>
 	

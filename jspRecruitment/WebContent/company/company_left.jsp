@@ -33,7 +33,7 @@
 		<a href="#recruitmentMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>招聘管理</a>
 		<ul id="recruitmentMenu" class="nav nav-list collapse menu-second">
-			<li><a href="pubJob.html" target="mainFrame"><i class="icon-pencil"></i> 发布招聘信息</a></li>
+			<li><a href="pubJob.jsp" target="mainFrame"><i class="icon-pencil"></i> 发布招聘信息</a></li>
 			<li><a href="allJob.jsp" target="mainFrame"><i class="icon-list-alt"></i> 编辑招聘信息</a></li>
 		</ul>
 		<a href="#resumeMenu" class="nav-header menu-first collapsed"

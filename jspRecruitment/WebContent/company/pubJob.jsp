@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page
+	import="jsprecruitment.util.*,jsprecruitment.entity.*,javax.servlet.http.HttpServletRequest"%>
+<%@ page import="java.sql.*,java.util.*,java.text.SimpleDateFormat"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,12 +23,40 @@
 	href="../css/bootstrap-select.css.map">
 </head>
 <body>
+	<%
+		String intId = (String) request.getParameter("intId");
+	%>
 	<form role="form" method="post" id="pubJobForm"
 		action="../PubJobServlet">
-
+		<%
+			Job job = new Job();
+			if (intId != null) {
+				DBConn dbc = new DBConn();
+				Statement at = dbc.getStmtread();
+				String sql = "select * from t_company_job where id='" + intId
+						+ "'";
+				System.out.println(sql);
+				ResultSet rs = dbc.getRs(sql);
+				while (rs.next()) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					java.util.Date utilDate = sdf.parse(rs.getString(12));
+					java.sql.Date sqlDate = new java.sql.Date(
+							utilDate.getTime());
+					job.setAmount(rs.getString(5));
+					job.setCompanyName(rs.getString(4));
+					job.setContents(rs.getString(10));
+					job.setDeadline(sqlDate);
+					job.setDistrict(rs.getString(6));
+					job.setEducation(rs.getString(7));
+					job.setExperience(rs.getString(8));
+					job.setPosition(rs.getString(3));
+					job.setSalary(rs.getString(9));
+				}
+			}
+		%>
 		<div class="container" align="center">
 			<div class="row regTitle">
-				<font color="red"><strong>发布招聘信息</strong></font>
+				<font color="red"><strong>发布招聘信息 </strong></font>
 			</div>
 			<div class="row updateInfoLabel">
 				<div class="col-sm-offset-1 col-sm-3 ">
@@ -31,7 +64,8 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="position"
-						id="position" placeholder="请输入职位名称（必填）">
+						id="position" placeholder="请输入职位名称（必填）"
+						value=<%=job.getPosition()%>>
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -133,6 +167,7 @@
 												return this.optional(element)
 														|| date.test(val);
 											}, "请输入正确格式的日期！");
+
 							$("#pubJobForm").validate({
 								rules : {
 									position : {
@@ -152,7 +187,6 @@
 										isValidDate : true,
 										date : true
 									}
-
 								},
 								messages : {
 									position : {

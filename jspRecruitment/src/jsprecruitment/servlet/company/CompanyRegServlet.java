@@ -2,6 +2,8 @@ package jsprecruitment.servlet.company;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,20 +49,29 @@ public class CompanyRegServlet extends HttpServlet {
 		company.setPassword(request.getParameter("password"));
 		System.out.println("企业名称："+company.getUserName());
 		String sql="insert into t_user(userName,userPass,userType) values('"+company.getUserName()+"','"+company.getPassword()+"','2')";
-		String insertToCompanySql="insert into t_company(userName) values('"+company.getUserName()+"')";
-		int count=dbo.insert(sql);
-		int countCompany=dbo.insert(insertToCompanySql);
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		if(count>0&&countCompany>0){
-			System.out.println("注册成功");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册成功，请完善注册信息！sucess');window.location.href='login.jsp'</script>");
-//			response.sendRedirect("login.jsp");
-		}else{
-			System.out.println("注册失败");
-			out.print("fail");
-			response.sendRedirect("reg.html");
+		String selectsql="select id from t_user where userName='"+company.getUserName()+"'";
+		try {
+			int count=dbo.insert(sql);
+			ResultSet rs=dbo.select(selectsql);
+			String insertToCompanySql = "insert into t_company(userName,uid) values('"+company.getUserName()+"','"+rs.getInt(1)+"')";
+			
+			int countCompany=dbo.insert(insertToCompanySql);
+			response.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			if(count>0&&countCompany>0){
+				System.out.println("注册成功");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册成功，请完善注册信息！sucess');window.location.href='login.jsp'</script>");
+//				response.sendRedirect("login.jsp");
+			}else{
+				System.out.println("注册失败");
+				out.print("fail");
+				response.sendRedirect("reg.html");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		
 	}
 

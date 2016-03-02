@@ -21,8 +21,9 @@
 	margin: 20px 0 30px;
 	align: center;
 }
-.labelFont{
-	font-size:16px;
+
+.labelFont {
+	font-size: 16px;
 	font-family: 微软雅黑;
 }
 
@@ -52,7 +53,6 @@ body {
 	margin-bottom: 10px;
 }
 
-
 input.error {
 	border: 1px solid red;
 	color: red;
@@ -61,10 +61,12 @@ input.error {
 label.error {
 	color: red;
 }
-select.error{
+
+select.error {
 	border: 1px solid red;
 	color: red;
 }
+
 .register_header_style {
 	width: 100% F;
 	height: 60px;
@@ -78,11 +80,17 @@ select.error{
 	color: #fff;
 	height: 30px;
 	line-height: 20px;
-	text-align:center;
+	text-align: center;
 }
-.reg_form_control{
-	margin-bottom:90px;
+
+.reg_form_control {
+	margin-bottom: 90px;
 }
-.login_form{
-	height:100px;
+
+.login_form {
+	height: 100px;
+}
+
+.td_style {
+	background-color: #eef;
 }

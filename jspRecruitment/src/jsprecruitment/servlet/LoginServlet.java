@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 		DataBaseOperation data = new DataBaseOperation();
 		int intT = data.getRowCount("select * from t_user where userName='" + username + "'and userPass='" + password
 				+ "' and userType=" + type);
-		System.out.println("select * from t_user where username='" + username + "'and userPass='" + password
+		System.out.println("select * from t_user where userName='" + username + "'and userPass='" + password
 				+ "' and userType=" + type);
 		System.out.println(intT);
 		if (intT > 0) {
@@ -72,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 				// 登陆用户是求职者
 			case 2: {
 				Company company = new Company();
-				String selectSql = "select id form t_company where userName='" + username + "'";
+				String selectSql = "select id from t_company where userName='" + username + "'";
 				ResultSet rs = data.select(selectSql);
 				try {
 					company.setId(rs.getInt(1));

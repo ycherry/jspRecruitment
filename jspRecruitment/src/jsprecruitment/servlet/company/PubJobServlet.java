@@ -56,7 +56,7 @@ public class PubJobServlet extends HttpServlet {
 		DataBaseOperation dbo = new DataBaseOperation();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String iniId=request.getParameter("intId");
-		System.out.println("intId"+iniId);
+		System.out.println("intId:"+iniId);
 		PrintWriter out = response.getWriter();
 		// 获取网页数据
 		job.setAmount(request.getParameter("amount"));

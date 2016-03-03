@@ -3,6 +3,7 @@ package jsprecruitment.entity;
 import java.sql.Date;
 
 public class Job {
+	private String jobId;
 	private String companyId;
 	private String position;
 	private String companyName;
@@ -14,6 +15,12 @@ public class Job {
 	private String contents;
 	private Date addTime;
 	private Date deadline;
+	public String getJobId() {
+		return jobId;
+	}
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
 	public String getCompanyId() {
 		return companyId;
 	}

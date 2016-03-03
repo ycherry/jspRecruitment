@@ -23,12 +23,10 @@
 	href="../css/bootstrap-select.css.map">
 </head>
 <body>
-	<%
-		String intId = (String) request.getParameter("intId");
-	%>
 	<form role="form" method="post" id="pubJobForm"
 		action="../PubJobServlet">
 		<%
+		String intId = (String) request.getParameter("intId");
 			Job job = new Job();
 			if (intId != null) {
 				DBConn dbc = new DBConn();
@@ -42,6 +40,7 @@
 					java.util.Date utilDate = sdf.parse(rs.getString(12));
 					java.sql.Date sqlDate = new java.sql.Date(
 							utilDate.getTime());
+					job.setJobId(intId);
 					job.setAmount(rs.getString(5));
 					job.setCompanyName(rs.getString(4));
 					job.setContents(rs.getString(10));

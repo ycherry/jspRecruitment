@@ -25,47 +25,17 @@
 <body>
 	<form role="form" method="post" id="pubJobForm"
 		action="../PubJobServlet">
-		<%
-		String intId = (String) request.getParameter("intId");
-			Job job = new Job();
-			if (intId != null) {
-				DBConn dbc = new DBConn();
-				Statement at = dbc.getStmtread();
-				String sql = "select * from t_company_job where id='" + intId
-						+ "'";
-				System.out.println(sql);
-				ResultSet rs = dbc.getRs(sql);
-				while (rs.next()) {
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					java.util.Date utilDate = sdf.parse(rs.getString(12));
-					java.sql.Date sqlDate = new java.sql.Date(
-							utilDate.getTime());
-					job.setJobId(intId);
-					job.setAmount(rs.getString(5));
-					job.setCompanyName(rs.getString(4));
-					job.setContents(rs.getString(10));
-					job.setDeadline(sqlDate);
-					job.setDistrict(rs.getString(6));
-					job.setEducation(rs.getString(7));
-					job.setExperience(rs.getString(8));
-					job.setPosition(rs.getString(3));
-					job.setSalary(rs.getString(9));
-				}
-			}
-		%>
 		<div class="container" align="center">
 			<div class="row regTitle">
 				<font color="red"><strong>发布招聘信息 </strong></font>
 			</div>
-			<input type="hidden" name="intId" value=<%=intId%>>
 			<div class="row updateInfoLabel">
 				<div class="col-sm-offset-1 col-sm-3 ">
 					<label>职位名称:</label>
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="position"
-						id="position" placeholder="请输入职位名称（必填）"
-						value=<%=job.getPosition()!=null?job.getPosition():' '%>>
+						id="position" placeholder="请输入职位名称（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -74,7 +44,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="amount" id="amount"
-						placeholder="请输入招聘人数（必填）" value=<%=job.getAmount()!=null?job.getAmount():' ' %>>
+						placeholder="请输入招聘人数（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -83,7 +53,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="district"
-						id="distinct" placeholder="请输入工作地区（必填）" value=<%=job.getDistrict()!=null?job.getDistrict():' ' %>>
+						id="distinct" placeholder="请输入工作地区（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -92,7 +62,6 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="education">
-					    <option hidden="true"><%=job.getEducation()!=null?job.getEducation():"不限" %></option>
 						<option>不限</option>
 						<option>初中及以下</option>
 						<option>高中/中技/中专</option>
@@ -109,7 +78,6 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="experience">
-					    <option hidden="true"><%=job.getExperience()!=null?job.getExperience():"不限" %></option>
 						<option>不限</option>
 						<option>无经验</option>
 						<option>1-3年</option>
@@ -125,7 +93,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="salary" id="salary"
-						placeholder="请输入职位薪水（必填）"  value=<%=job.getSalary()!=null?job.getSalary():' ' %>>
+						placeholder="请输入职位薪水（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -134,7 +102,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="date" class="form-control" name="deadline"
-						id="deadline" placeholder="请输入有效时间，例如：xxxx-xx-xx（年-月-日）（必填）"  value=<%=job.getDeadline()!=null?job.getDeadline():' ' %>>
+						id="deadline" placeholder="请输入有效时间，例如：xxxx-xx-xx（年-月-日）（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -143,7 +111,7 @@
 				</div>
 				<div class="col-sm-6">
 					<textarea class="form-control" rows="3" cols="12"
-						placeholder="请输入职位要求" name="contents" id="contents"  value=<%=job.getContents()!=null?job.getContents():' ' %>></textarea>
+						placeholder="请输入职位要求" name="contents" id="contents"></textarea>
 				</div>
 			</div>
 			<div class="row">
@@ -157,60 +125,58 @@
 		</div>
 	</form>
 	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-		/*					jQuery.validator
-									.addMethod(
-											"isValidDate",
-											function(val, element) {
-												var date = /^(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)$/;
-												return this.optional(element)
-														|| date.test(val);
-											}, "请输入正确格式的日期！");
-		*/
+		$(document).ready(function() {
+			/*					jQuery.validator
+										.addMethod(
+												"isValidDate",
+												function(val, element) {
+													var date = /^(([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))-02-29)$/;
+													return this.optional(element)
+															|| date.test(val);
+												}, "请输入正确格式的日期！");
+			 */
 
-							$("#pubJobForm").validate({
-								rules : {
-									position : {
-										required : true
-									},
-									amount : {
-										required : true
-									},
-									district : {
-										required : true
-									},
-									salary : {
-										required : true
-									},
-									deadline : {
-										required : true,
-								//		isValidDate : true,
-										date : true
-									}
-								},
-								messages : {
-									position : {
-										required : "行业名称不能为空！"
-									},
-									amount : {
-										required : "招聘人数不能为空 !"
-									},
-									district : {
-										required : "工作地区不能为空!"
-									},
-									salary : {
-										required : "薪水不能为空！"
-									},
-									deadline : {
-										required : "截止时间不能为空！",
-							//			isValidDate : "请输入正确的日期格式!",
-										date : "请输入正确的日期格式!"
-									}
-								}
-							});
-						});
+			$("#pubJobForm").validate({
+				rules : {
+					position : {
+						required : true
+					},
+					amount : {
+						required : true
+					},
+					district : {
+						required : true
+					},
+					salary : {
+						required : true
+					},
+					deadline : {
+						required : true,
+						//		isValidDate : true,
+						date : true
+					}
+				},
+				messages : {
+					position : {
+						required : "行业名称不能为空！"
+					},
+					amount : {
+						required : "招聘人数不能为空 !"
+					},
+					district : {
+						required : "工作地区不能为空!"
+					},
+					salary : {
+						required : "薪水不能为空！"
+					},
+					deadline : {
+						required : "截止时间不能为空！",
+						//			isValidDate : "请输入正确的日期格式!",
+						date : "请输入正确的日期格式!"
+					}
+				}
+			});
+		});
 	</script>
 </body>
 </html>

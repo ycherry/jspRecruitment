@@ -37,8 +37,8 @@ public class PubJobServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		this.doPost(request, response);
 	}
@@ -47,16 +47,14 @@ public class PubJobServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		Job job = new Job();
 		Date date = new Date();
 		DataBaseOperation dbo = new DataBaseOperation();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String intId = request.getParameter("intId");
-		System.out.println("intId:" + intId);
 		PrintWriter out = response.getWriter();
 		// 获取网页数据
 		job.setAmount(request.getParameter("amount"));
@@ -71,7 +69,8 @@ public class PubJobServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String userName = ((Company) request.getSession().getAttribute("company")).getUserName();
+		String userName = ((Company) request.getSession().getAttribute(
+				"company")).getUserName();
 		job.setContents(request.getParameter("contents"));
 		job.setAddTime(new java.sql.Date(date.getTime()));
 		System.out.println("系统时间" + new java.sql.Date(date.getTime()));
@@ -81,61 +80,49 @@ public class PubJobServlet extends HttpServlet {
 		job.setPosition(request.getParameter("position"));
 		job.setSalary(request.getParameter("salary"));
 		// 执行sql语句
-		String selectSql = "select id,companyName from t_company where userName='" + userName + "'";
+		String selectSql = "select id,companyName from t_company where userName='"
+				+ userName + "'";
 		System.out.println("selectSql" + selectSql);
 		ResultSet rs = dbo.select(selectSql);
-		if (intId==null) {
-			try {
-				if (rs != null && rs.getString(1) != null) {
-					String insertSql = "insert into t_company_job(cid,position,companyName,amount,district,education,experience,salary,contents,addtime,deadline) values ('"
-							+ rs.getInt(1) + "','" + job.getPosition() + "','" + rs.getString(2) + "','"
-							+ job.getAmount() + "','" + job.getDistrict() + "','" + job.getEducation() + "','"
-							+ job.getExperience() + "','" + job.getSalary() + "','" + job.getContents() + "','"
-							+ job.getAddTime() + "','" + job.getDeadline() + "') ";
-					System.out.println(insertSql);
-					if (dbo.insert(insertSql) > 0) {
-						System.out.println("发布职位成功！");
-						out.println(
-								"<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/pubJob.jsp'</script>");
-					} else {
-						System.out.println("发布职位失败！");
-						out.println(
-								"<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
-					}
+		try {
+			if (rs != null && rs.getString(1) != null) {
+				String insertSql = "insert into t_company_job(cid,position,companyName,amount,district,education,experience,salary,contents,addtime,deadline) values ('"
+						+ rs.getInt(1)
+						+ "','"
+						+ job.getPosition()
+						+ "','"
+						+ rs.getString(2)
+						+ "','"
+						+ job.getAmount()
+						+ "','"
+						+ job.getDistrict()
+						+ "','"
+						+ job.getEducation()
+						+ "','"
+						+ job.getExperience()
+						+ "','"
+						+ job.getSalary()
+						+ "','"
+						+ job.getContents()
+						+ "','"
+						+ job.getAddTime()
+						+ "','" + job.getDeadline() + "') ";
+				System.out.println(insertSql);
+				if (dbo.insert(insertSql) > 0) {
+					System.out.println("发布职位成功！");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/pubJob.jsp'</script>");
 				} else {
-					System.out.println("查询公司成功！");
-					out.println(
-							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
+					System.out.println("发布职位失败！");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
 				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} else {
+				System.out.println("查询公司成功！");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
 			}
-		} else {
-			try {
-				String updateSql = "update t_company_job set cid='" + rs.getInt(1) + "',position='" + job.getPosition()
-						+ "',companyName='" + rs.getString(2) + "',amount='" + job.getAmount() + "',district='"
-						+ job.getDistrict() + "',education='" + job.getEducation() + "',experience='"
-						+ job.getExperience() + "',salary='" + job.getSalary() + "',contents='" + job.getContents()
-						+ "',addtime='" + job.getAddTime() + "',deadline='" + job.getDeadline() + "'where id='" + intId
-						+ "'";
-				if (dbo.update(updateSql) > 0) {
-					System.out.println("更新职位成功！");
-					out.println(
-							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('update sucess');window.location.href='company/allJob.jsp'</script>");
-				} else {
-					System.out.println("更新职位失败！");
-					out.println(
-							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('update fail');window.location.href='company/pubJob.jsp?intId="
-									+ intId + "'</script>");
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		// to do:获取系统时间存入数据库
 	}
 
 }

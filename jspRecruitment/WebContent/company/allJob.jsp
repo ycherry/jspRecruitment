@@ -55,8 +55,8 @@
 				<td><%=rs.getString(12)%></td>
 				<td><%=dbo.getRowCount(selectSql) %></td>
 				<td><a href="viewJobDetails.jsp?intId=<%=intId %>">预览</a></td>
-				<td><a href="pubjob.jsp?intId=<%=intId%>">编辑</a></td>
-				<td><a href="delJobDo.jsp?intId=<%=intId%>">删除</a></td>
+				<td><a href="pubJob.jsp?intId=<%=intId%>">编辑</a></td>
+				<td><a href=" ../DeleteJobServlet?intId=<%=intId%>">删除</a></td>
 			</tr>
 		</tbody>
 		<%

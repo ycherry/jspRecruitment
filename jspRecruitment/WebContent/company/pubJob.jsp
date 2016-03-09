@@ -57,6 +57,7 @@
 			<div class="row regTitle">
 				<font color="red"><strong>发布招聘信息 </strong></font>
 			</div>
+			<input type="hidden" name="intId" value=<%=intId%>>
 			<div class="row updateInfoLabel">
 				<div class="col-sm-offset-1 col-sm-3 ">
 					<label>职位名称:</label>
@@ -64,7 +65,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="position"
 						id="position" placeholder="请输入职位名称（必填）"
-						value=<%=job.getPosition()%>>
+						value=<%=job.getPosition()!=null?job.getPosition():' '%>>
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -73,7 +74,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="amount" id="amount"
-						placeholder="请输入招聘人数（必填）">
+						placeholder="请输入招聘人数（必填）" value=<%=job.getAmount()!=null?job.getAmount():' ' %>>
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -82,7 +83,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="district"
-						id="distinct" placeholder="请输入工作地区（必填）">
+						id="distinct" placeholder="请输入工作地区（必填）" value=<%=job.getDistrict()!=null?job.getDistrict():' ' %>>
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -91,6 +92,7 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="education">
+					    <option hidden="true"><%=job.getEducation()!=null?job.getEducation():"不限" %></option>
 						<option>不限</option>
 						<option>初中及以下</option>
 						<option>高中/中技/中专</option>
@@ -107,6 +109,7 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="experience">
+					    <option hidden="true"><%=job.getExperience()!=null?job.getExperience():"不限" %></option>
 						<option>不限</option>
 						<option>无经验</option>
 						<option>1-3年</option>
@@ -122,7 +125,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="salary" id="salary"
-						placeholder="请输入职位薪水（必填）">
+						placeholder="请输入职位薪水（必填）"  value=<%=job.getSalary()!=null?job.getSalary():' ' %>>
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -131,7 +134,7 @@
 				</div>
 				<div class="col-sm-6">
 					<input type="date" class="form-control" name="deadline"
-						id="deadline" placeholder="请输入有效时间，例如：xxxx-xx-xx（年-月-日）（必填）">
+						id="deadline" placeholder="请输入有效时间，例如：xxxx-xx-xx（年-月-日）（必填）"  value=<%=job.getDeadline()!=null?job.getDeadline():' ' %>>
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
@@ -140,10 +143,9 @@
 				</div>
 				<div class="col-sm-6">
 					<textarea class="form-control" rows="3" cols="12"
-						placeholder="请输入职位要求" name="contents" id="contents"></textarea>
+						placeholder="请输入职位要求" name="contents" id="contents"  value=<%=job.getContents()!=null?job.getContents():' ' %>></textarea>
 				</div>
 			</div>
-
 			<div class="row">
 				<div class="col-sm-offset-3 col-sm-3">
 					<button type="submit" name="Submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;</button>
@@ -158,7 +160,7 @@
 		$(document)
 				.ready(
 						function() {
-							jQuery.validator
+		/*					jQuery.validator
 									.addMethod(
 											"isValidDate",
 											function(val, element) {
@@ -166,6 +168,7 @@
 												return this.optional(element)
 														|| date.test(val);
 											}, "请输入正确格式的日期！");
+		*/
 
 							$("#pubJobForm").validate({
 								rules : {
@@ -183,7 +186,7 @@
 									},
 									deadline : {
 										required : true,
-										isValidDate : true,
+								//		isValidDate : true,
 										date : true
 									}
 								},
@@ -202,7 +205,7 @@
 									},
 									deadline : {
 										required : "截止时间不能为空！",
-										isValidDate : "请输入正确的日期格式!",
+							//			isValidDate : "请输入正确的日期格式!",
 										date : "请输入正确的日期格式!"
 									}
 								}

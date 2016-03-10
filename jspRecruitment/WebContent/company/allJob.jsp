@@ -63,34 +63,5 @@
 			}
 		%>
 	</table>
-	<!--  <table width="100%" heigth="500" border="0" cellpadding="0"
-		cellspacing="0" bgcolor="#FFFFFF">
-		<tr>
-			<td height="20">&nbsp;</td>
-		</tr>
-		<tr>
-			<td align="left" valign="top"><table width="692" border="0"
-					align="left" cellpadding="0" cellspacing="0" bgcolor="#F5f7f7">
-					<tr align=center">
-						<td height="27" colspan="4"><div id="reg">
-								<font color=red> 删除求职信息</font>
-								<div></td>
-					</tr>
-					<tr>
-						<td width="153" height="22" align="center">所求职位</td>
-						<td width="165" align="center">发布时间</td>
-						<td width="219" align="center">有效时间</td>
-						<td width="155" align="center">编辑</td>
-						<td width="155" align="center">删除</td>
-					</tr>
-
-					<tr>
-						
-					</tr>
-
-				</table></td>
-		</tr>
-	</table>
-	-->
 </body>
 </html>

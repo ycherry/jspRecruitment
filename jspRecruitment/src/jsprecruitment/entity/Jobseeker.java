@@ -1,12 +1,14 @@
 package jsprecruitment.entity;
 
+import java.sql.Date;
+
 public class Jobseeker {
 	private String userName;
 	private String fullName;
 	private String password;
 	private String industry;
-	private String birthday;
-	private String sex;
+	private Date birthday;
+	private String gender;
 	private String experience;
 	private String address;
 	private String education;
@@ -39,17 +41,19 @@ public class Jobseeker {
 	public void setIndustry(String industry) {
 		this.industry = industry;
 	}
-	public String getBirthday() {
+	
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	public String getSex() {
-		return sex;
+	
+	public String getGender() {
+		return gender;
 	}
-	public void setSex(String sex) {
-		this.sex = sex;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public String getExperience() {
 		return experience;

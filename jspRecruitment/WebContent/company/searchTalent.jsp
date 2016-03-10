@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@page import="jsprecruitment.util.*,jsprecruitment.entity.*"%>
-<%@page import="java.sql.*"%>
+<%@page import="java.sql.*,java.io.*,java.util.Date"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,8 +23,8 @@
 	href="../css/bootstrap-select.css.map">
 </head>
 <body>
-	<form role="form" name="updateCompnyInfoForm" id="updateCompnyInfoForm"
-		method="post" action="../UpdateCompanyInfoServlet" target="mainFrame"
+	<form role="form" name="searchTalentForm" id="searchTalentForm"
+		method="post" action="searchTalent.jsp" target="mainFrame"
 		bgcolor="#F5f7f7">
 		<div class="container" align="center">
 			<div class="row regTitle">
@@ -37,6 +37,7 @@
 				</div>
 				<div class="col-sm-3">
 					<select class="form-control selectpicker" name="industry">
+						<option>全部</option>
 						<option>计算机/互联网</option>
 						<option>销售/ 客服/技术支持</option>
 						<option>会计/金融/银行 /保险</option>
@@ -58,11 +59,12 @@
 					<label>工作省份:</label>
 				</div>
 				<div class="col-sm-3">
-					<select class="form-control selectpicker" name="nature">
+					<select class="form-control selectpicker" name="district">
+						<option>全部</option>
 						<%
 							DBConn con = new DBConn();
 							DataBaseOperation dbo = new DataBaseOperation();
-							ResultSet rs = con.getRs("SELECT name FROM t_city");
+							ResultSet rs = con.getRs("SELECT name FROM t_city where id between 2 and 35");
 							while (rs.next()) {
 						%>
 						<option><%=rs.getString(1)%></option>
@@ -77,7 +79,7 @@
 					<label>薪资待遇:</label>
 				</div>
 				<div class="col-sm-3">
-					<select class="form-control selectpicker" name="industry">
+					<select class="form-control selectpicker" name="salary">
 						<option>全部</option>
 						<option>面议</option>
 						<option>1000以下</option>
@@ -93,11 +95,11 @@
 						<option>10000以上</option>
 					</select>
 				</div>
-					<div class="col-sm-2 updateInfoLabel">
+				<div class="col-sm-2 updateInfoLabel">
 					<label>学历要求:</label>
 				</div>
 				<div class="col-sm-3">
-					<select class="form-control selectpicker" name="scale">
+					<select class="form-control selectpicker" name="education">
 						<option>全部</option>
 						<option>高中以下</option>
 						<option>高中</option>
@@ -111,12 +113,12 @@
 			</div>
 			<div class="row updateDiv">
 				<div class="col-sm-2 updateInfoLabel">
-					<label>工作经验：</label>
+					<label>工作经验:</label>
 				</div>
 				<div class="col-sm-3">
-					<select class="form-control selectpicker" name="scale">
+					<select class="form-control selectpicker" name="experience">
 						<option>全部</option>
-						<option>无经验下</option>
+						<option>无经验</option>
 						<option>应届毕业生</option>
 						<option>1年以上</option>
 						<option>2年以上</option>
@@ -134,5 +136,39 @@
 			</div>
 		</div>
 	</form>
+	<%
+	    request.setCharacterEncoding("utf-8");
+		PrintWriter outWriter = response.getWriter();
+		String industry = null;
+		String salary = null;
+		String district = null;
+		String education = null;
+		String experience = null;
+		Date date=new Date();
+		int year=date.getYear();	
+		industry = request.getParameter("industry");
+		salary = request.getParameter("salary");
+		district = request.getParameter("district");
+		education = request.getParameter("education");
+		experience = request.getParameter("experience");
+		System.out.println("request industry:" + request.getParameter("industry") + ";salary:"
+				+ request.getParameter("salary") + ";district:" + request.getParameter("district") + ";education:"
+				+ request.getParameter("education") + ";experience:" + request.getParameter("experience"));
+		System.out.println("industry:" + industry + ";salary:" + salary + ";disctrict:" + district + ";education:"
+				+ education + ";experience:" + experience);
+		String selectSql = "select * from t_resume";
+		ResultSet resultset = con.getRs(selectSql);
+	//	System.out.println("resultset:"+resultset.next());
+		while (resultset.next()) {
+			System.out.println("resultset.getString(5)" + resultset.getString(5));
+			System.out.println("resultset.getString(4)" + resultset.getString(4));
+			System.out.println("resultset.getString(13)" + resultset.getString(13));
+			System.out.println("resultset.getString(17)" + resultset.getString(17));
+			System.out.println("resultset.getString(8)" + resultset.getString(8));
+			System.out.println("resultset.getString(10)" + resultset.getString(10));
+			System.out.println("resultset.getString(7)" + (year-resultset.getDate(7).getYear()));
+
+		}
+	%>
 </body>
 </html>

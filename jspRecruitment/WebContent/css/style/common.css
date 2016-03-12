@@ -154,3 +154,7 @@ select.error {
 .fl {
 	float: left;
 }
+
+.filter_box{
+	border:1px solid #ebebeb;
+}

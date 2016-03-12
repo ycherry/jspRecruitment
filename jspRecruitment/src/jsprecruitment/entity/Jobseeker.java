@@ -17,6 +17,9 @@ public class Jobseeker {
 	private String intentionJobs;
 	private String specialty;
 	private String photo;
+	private String expectedSalary;
+	private String workDistrict;
+	private String selfIntroduction;
 	public String getUserName() {
 		return userName;
 	}
@@ -102,6 +105,24 @@ public class Jobseeker {
 	}
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+	public String getExpectedSalary() {
+		return expectedSalary;
+	}
+	public void setExpectedSalary(String expectedSalary) {
+		this.expectedSalary = expectedSalary;
+	}
+	public String getWorkDistrict() {
+		return workDistrict;
+	}
+	public void setWorkDistrict(String workDistrict) {
+		this.workDistrict = workDistrict;
+	}
+	public String getSelfIntroduction() {
+		return selfIntroduction;
+	}
+	public void setSelfIntroduction(String selfIntroduction) {
+		this.selfIntroduction = selfIntroduction;
 	}
 	
 }

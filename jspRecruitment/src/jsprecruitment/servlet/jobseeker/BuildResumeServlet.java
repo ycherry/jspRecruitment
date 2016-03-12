@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,6 +50,7 @@ public class BuildResumeServlet extends HttpServlet {
 		DataBaseOperation dbo = new DataBaseOperation();
 		PrintWriter out = response.getWriter();
 		Jobseeker jobseeker = new Jobseeker();
+		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String birthday = request.getParameter("birthday");
 		System.out.println("servlet birthday:" + birthday);
@@ -77,6 +79,7 @@ public class BuildResumeServlet extends HttpServlet {
 		jobseeker.setExpectedSalary(request.getParameter("expectedSalary"));
 		jobseeker.setWorkDistrict(request.getParameter("workDistrict"));
 		jobseeker.setSelfIntroduction(request.getParameter("selfIntroduction"));
+		jobseeker.setUpdateTime(new java.sql.Date(date.getTime()));
 
 		String updateSql = "update t_resume set fullName='"
 				+ jobseeker.getFullName() + "',address='"
@@ -91,7 +94,8 @@ public class BuildResumeServlet extends HttpServlet {
 				+ jobseeker.getExpectedSalary() + "',workDistrict='"
 				+ jobseeker.getWorkDistrict() + "',selfIntroduction='"
 				+ jobseeker.getSelfIntroduction() + "',birthday='"
-				+ jobseeker.getBirthday() + "' where userName='"
+				+ jobseeker.getBirthday() + "',updateTime='"
+				+ jobseeker.getUpdateTime() + "' where userName='"
 				+ jobseeker.getUserName() + "'";
 		if (dbo.update(updateSql) > 0) {
 			System.out.println("修改个人简历成功");

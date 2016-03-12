@@ -51,7 +51,7 @@
 			jobseeker.setExpectedSalary(rs.getString(17));
 			jobseeker.setWorkDistrict(rs.getString(16));
 			jobseeker.setSelfIntroduction(rs.getString(18));
-			System.out.println("birthday:"+jobseeker.getBirthday());
+			System.out.println("birthday:" + jobseeker.getBirthday());
 		}
 	%>
 	<form role="form" name="buildResumeForm" id="buildResumeForm"
@@ -104,7 +104,8 @@
 				<div class="col-sm-6">
 					<input type="date" class="form-control" name="birthday"
 						id="birthday" placeholder="请输入生日，例如：xxxx-xx-xx（年-月-日）（必填）"
-						value=<%=jobseeker.getBirthday()==null ? " ":jobseeker.getBirthday()%>>
+						value=<%=jobseeker.getBirthday() == null ? " " : jobseeker
+					.getBirthday()%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -223,8 +224,9 @@
 					<label>期望城市:</label>
 				</div>
 				<div class="col-sm-6">
-					<select class="form-control selectpicker" name="district">
-						<option>不限</option>
+					<select class="form-control selectpicker" name="workDistrict">
+						<option data-hidden="true"><%=jobseeker.getWorkDistrict() != null ? jobseeker
+					.getWorkDistrict() : "不限"%></option>
 						<%
 							DataBaseOperation dbo = new DataBaseOperation();
 							ResultSet resultSet = dbc

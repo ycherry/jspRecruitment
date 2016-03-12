@@ -20,6 +20,7 @@ public class Jobseeker {
 	private String expectedSalary;
 	private String workDistrict;
 	private String selfIntroduction;
+	private Date updateTime;
 	public String getUserName() {
 		return userName;
 	}
@@ -123,6 +124,12 @@ public class Jobseeker {
 	}
 	public void setSelfIntroduction(String selfIntroduction) {
 		this.selfIntroduction = selfIntroduction;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 }

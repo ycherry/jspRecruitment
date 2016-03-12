@@ -65,7 +65,8 @@ public class UpdateCompanyInfoServlet extends HttpServlet {
 				+ "',telphone='" + company.getTelphone() + "'where userName='"
 				+ company.getUserName() + "'";
 		System.out.println(sql);
-		int count=dbo.insert(sql);
+	//	int count=dbo.insert(sql);
+		int count=dbo.update(sql);
 		if(count>0){
 			System.out.println("修改公司基本成功");
 			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/updateCompanyinfo.jsp'</script>");

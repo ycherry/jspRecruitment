@@ -64,7 +64,8 @@
 						<%
 							DBConn con = new DBConn();
 							DataBaseOperation dbo = new DataBaseOperation();
-							ResultSet rs = con.getRs("SELECT name FROM t_city where id between 2 and 35");
+							ResultSet rs = con
+									.getRs("SELECT name FROM t_city where id between 2 and 35");
 							while (rs.next()) {
 						%>
 						<option><%=rs.getString(1)%></option>
@@ -137,37 +138,68 @@
 		</div>
 	</form>
 	<%
-	    request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		PrintWriter outWriter = response.getWriter();
 		String industry = null;
 		String salary = null;
 		String district = null;
 		String education = null;
 		String experience = null;
-		Date date=new Date();
-		int year=date.getYear();	
+		Date date = new Date();
+		int year = date.getYear();
 		industry = request.getParameter("industry");
 		salary = request.getParameter("salary");
 		district = request.getParameter("district");
 		education = request.getParameter("education");
 		experience = request.getParameter("experience");
-		System.out.println("request industry:" + request.getParameter("industry") + ";salary:"
-				+ request.getParameter("salary") + ";district:" + request.getParameter("district") + ";education:"
-				+ request.getParameter("education") + ";experience:" + request.getParameter("experience"));
-		System.out.println("industry:" + industry + ";salary:" + salary + ";disctrict:" + district + ";education:"
-				+ education + ";experience:" + experience);
+		System.out.println("request industry:"
+				+ request.getParameter("industry") + ";salary:"
+				+ request.getParameter("salary") + ";district:"
+				+ request.getParameter("district") + ";education:"
+				+ request.getParameter("education") + ";experience:"
+				+ request.getParameter("experience"));
+		System.out.println("industry:" + industry + ";salary:" + salary
+				+ ";disctrict:" + district + ";education:" + education
+				+ ";experience:" + experience);
 		String selectSql = "select * from t_resume";
 		ResultSet resultset = con.getRs(selectSql);
-	//	System.out.println("resultset:"+resultset.next());
+		//	System.out.println("resultset:"+resultset.next());
 		while (resultset.next()) {
-			System.out.println("resultset.getString(5)" + resultset.getString(5));
-			System.out.println("resultset.getString(4)" + resultset.getString(4));
-			System.out.println("resultset.getString(13)" + resultset.getString(13));
-			System.out.println("resultset.getString(17)" + resultset.getString(17));
-			System.out.println("resultset.getString(8)" + resultset.getString(8));
-			System.out.println("resultset.getString(10)" + resultset.getString(10));
-			System.out.println("resultset.getString(7)" + (year-resultset.getDate(7).getYear()));
-
+			System.out.println("resultset.getString(5)"
+					+ resultset.getString(5));
+			System.out.println("resultset.getString(4)"
+					+ resultset.getString(4));
+			System.out.println("resultset.getString(13)"
+					+ resultset.getString(13));
+			System.out.println("resultset.getString(17)"
+					+ resultset.getString(17));
+			System.out.println("resultset.getString(8)"
+					+ resultset.getString(8));
+			System.out.println("resultset.getString(10)"
+					+ resultset.getString(10));
+			System.out.println("resultset.getString(7)"
+					+ (year - resultset.getDate(7).getYear()));
+	%>
+	<div class="talent">
+		<div class="search_talent_list">
+			<div class="search_talent_list_font">
+				<a href="../jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString(1)%>"target="mainFrame" class="disc_talent fl"><%=resultset.getString(5)%></a>
+				<span class="fl disc_talent_mes"><%=resultset.getString(4)%>,<%=year - resultset.getDate(7).getYear()%>岁</span>
+			</div>
+			<div class="disc_talent_time">更新时间：<%=resultset.getString(19) %>
+			</div>
+			<div class="disc_talent_detail">
+			<span class="search_talent_list_box">意向：<em class="search_talent_list_box_em"><%=resultset.getString(13) %></em></span>
+			<span class="search_talent_list_box_line">|</span>
+			<span class="search_talent_list_box">薪资：<em class="search_talent_list_box_em"><%=resultset.getString(17) %></em></span>
+			<span class="search_talent_list_box_line">|</span>
+			<span class="search_talent_list_box">经验：<em class="search_talent_list_box_em"><%=resultset.getString(8) %></em></span>
+			<span class="search_talent_list_box_line">|</span>
+			<span class="search_talent_list_box">学历：<em class="search_talent_list_box_em"><%=resultset.getString(10) %></em></span>
+			</div>
+		</div>
+	</div>
+	<%
 		}
 	%>
 </body>

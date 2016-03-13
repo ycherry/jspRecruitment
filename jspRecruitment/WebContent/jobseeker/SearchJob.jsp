@@ -34,35 +34,31 @@
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 12px;
+	display: block;
 }
 
 #filter dl {
-	padding: 0;
-	margin-top: 2px;
-	margin-bottom: 0;
 	clear: both;
-	padding: 4px 2px;
 	border-bottom: 1px solid #ebebeb;
 }
-
-#filter dt,dd {
-	display: block;
-	float: left;
-	width: auto;
-	padding: 0;
-	margin: 3px 0;
-}
+ 
 
 #filter dt {
+	float: left;
+	width: auto;
 	height: 14px;
-	padding-bottom: 4px;
+	padding: 0 0 4px 0;
 	font-weight: bold;
 	color: #333333;
+	margin: 3px 0 3px 0;
 }
 
 #filter dd {
+	float: left;
+	width: auto;
+	padding: 0;
 	color: #005AA0;
-	margin-right: 8px;
+	margin: 3px 8px 3px 0;
 }
 
 #filter a {
@@ -82,7 +78,7 @@
 </head>
 
 <body class="container" align="center">
-	<div class="filter_box">
+	<div class="filter_box" id="talentList">
 		<div id="filter">
 			<dl>
 				<dt>招聘行业：</dt>
@@ -195,32 +191,18 @@
 		</div>
 	</div>
 	<%
-		/*		request.setCharacterEncoding("utf-8");
-			 PrintWriter outWriter = response.getWriter();
-			 String industry = null;
-			 String salary = null;
-			 String district = null;
-			 String education = null;
-			 String experience = null;
-			 Date date = new Date();
-			 int year = date.getYear();
-			 industry = request.getParameter("industry");
-			 salary = request.getParameter("salary");
-			 district = request.getParameter("district");
-			 education = request.getParameter("education");
-			 experience = request.getParameter("experience");
-		 */
 		String industry = null;
 		String workDistrict = null;
 		String salary = null;
 		String experience = null;
 		String education = null;
+		PrintWriter out1 = response.getWriter();
 		industry = request.getParameter("industry");
 		workDistrict = request.getParameter("workDistrict");
 		salary = request.getParameter("salary");
 		experience = request.getParameter("experience");
 		education = request.getParameter("education");
-		String selectSql=null;
+		String selectSql = null;
 		if (industry != null && workDistrict != null && salary != null
 				&& experience != null && education != null) {
 			industry = industry != null && !industry.equals("")
@@ -238,16 +220,16 @@
 			education = education != null && !education.equals("")
 					? java.net.URLDecoder.decode(education, "utf-8")
 					: "";
-			selectSql = "select * from t_company_job where ";
+			selectSql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and ";
 			if (industry.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
-				selectSql += "industry='" + industry + "'and ";
+				selectSql += " industry='" + industry + "' and ";
 			}
 			if (workDistrict.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
-				selectSql += "district='" + workDistrict + "' and ";
+				selectSql += " district='" + workDistrict + "' and ";
 			}
 			if (salary.equals("全部")) {
 				selectSql += " 1=1 and ";
@@ -257,55 +239,56 @@
 			if (experience.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
-				selectSql += "experience='" + experience + "' and ";
+				selectSql += " experience='" + experience + "' and ";
 			}
 			if (education.equals("全部")) {
 				selectSql += " 1=1 ";
 			} else {
-				selectSql += "education='" + education+"'";
+				selectSql += " education='" + education + "'";
 			}
 			System.out.println(selectSql);
+			out1.println("<script>alert(taaa);</script>");
 
-		}else{
+		} else {
 			selectSql = "select * from t_company_job";
 		}
 		ResultSet resultset = con.getRs(selectSql);
-		System.out.println("resultset:"+resultset.next());
-			while (resultset.next()) {
+
+		//	System.out.println("resultset:"+resultset.next());
+		while (resultset.next()) {
 	%>
 	<div class="talent">
 		<div class="search_talent_list">
 			<div class="search_talent_list_font">
 				<a
-					href="../jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString(1)%>"
-					target="mainFrame" class="disc_talent fl"><%=resultset.getString(5)%></a>
+					href="../company/ViewJob.jsp?jobId=<%=resultset.getString(1)%>"
+					target="mainFrame" class="disc_talent fl"><%=resultset.getString(3)%></a>
 				<span class="fl disc_talent_mes"><%=resultset.getString(4)%></span>
 			</div>
-			<div class="disc_talent_time">
-				更新时间：<%=resultset.getString(1)%>
+			<div class="disc_job_pay">
+				<%=resultset.getString(9)%>
 			</div>
+			<div class="clear"></div>
 			<div class="disc_talent_detail">
-				<span class="search_talent_list_box">意向：<em
-					class="search_talent_list_box_em"><%=resultset.getString(1)%></em></span>
-				<span class="search_talent_list_box_line">|</span> <span
-					class="search_talent_list_box">薪资：<em
-					class="search_talent_list_box_em"><%=resultset.getString(1)%></em></span>
+				<span class="search_talent_list_box">更新时间：<em
+					class="search_talent_list_box_em"><%=resultset.getString(11)%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">经验：<em
-					class="search_talent_list_box_em"><%=resultset.getString(1)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString(8)%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">学历：<em
-					class="search_talent_list_box_em"><%=resultset.getString(1)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString(7)%></em></span>
 			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
 	<%
-	
 		}
 	%>
 	<!--滚动展示内容-->
 	<SCRIPT>
 		$(function() {
+			var array = null;
 			//选中filter下的所有a标签，为其添加hover方法，该方法有两个参数，分别是鼠标移上和移开所执行的函数。  
 			$("#filter a").hover(function() {
 				$(this).addClass("seling");
@@ -315,7 +298,7 @@
 
 			//选中filter下所有的dt标签，并且为dt标签后面的第一个dd标签下的a标签添加样式seled。(感叹jquery的强大)  
 			$("#filter dt+dd a").attr("class", "seled"); /*注意：这儿应该是设置(attr)样式，而不是添加样式(addClass)， 
-																																							                                                     不然后面通过$("#filter a[class='seled']")访问不到class样式为seled的a标签。*/
+																																																					                                                     不然后面通过$("#filter a[class='seled']")访问不到class样式为seled的a标签。*/
 
 			//为filter下的所有a标签添加单击事件  
 			$("#filter a").click(function() {
@@ -327,16 +310,17 @@
 				});
 
 				$(this).attr("class", "seled");
-
+				$(this).attr("id", $(this).html());
+				alert($(this).attr("id"));
 				alert(RetSelecteds()); //返回选中结果  
 				window.location.href = RetSelecteds();
 			});
-			alert(RetSelecteds()); //返回选中结果  
+			//	alert(RetSelecteds()); //返回选中结果  
 		});
 
 		function RetSelecteds() {
 			var result = "SearchJob.jsp?";
-			var array = [ "industry", "workDistrict", "salary", "education",
+			array = [ "industry", "workDistrict", "salary", "education",
 					"experience" ];
 			var i = 0;
 			$("#filter a[class='seled']").each(
@@ -351,6 +335,7 @@
 
 						i++;
 					});
+			//result += "#talentList";
 			return result;
 		}
 	</script>

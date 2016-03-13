@@ -108,9 +108,8 @@ select.error {
 
 .search_talent_list_font {
 	color: #a4a4a4;
-	height:25px;
-	width:500px;
-	margin:5px 0 5px 30px;;
+	width: 500px;
+	margin: 5px 0 5px 30px;
 }
 
 .disc_talent {
@@ -122,19 +121,20 @@ select.error {
 	padding-left: 30px;
 	padding-top: 5px;
 }
-.disc_talent_time{
-	float:right;
-	color:#9d9999;
-	font-size:14px;
-	margin-right:10px;
-	margin-top:-20px;
+
+.disc_talent_time {
+	float: right;
+	color: #9d9999;
+	font-size: 14px;
+	margin-right: 10px;
+	margin-top: -20px;
 }
 
 .disc_talent_detail {
 	color: #c9c9ca;
 	display: block;
-	float: left;	
-	margin:0 0 5px 30px;
+	float: left;
+	margin: 0 0 5px 30px;
 }
 
 .search_talent_list_box {
@@ -142,10 +142,12 @@ select.error {
 	color: #666;
 	line-height: 30px;
 }
-.search_talent_list_box_line{
-	padding:0px 10px;
-	color:#c9c9ca;
+
+.search_talent_list_box_line {
+	padding: 0px 10px;
+	color: #c9c9ca;
 }
+
 .search_talent_list_box_em {
 	color: #666;
 	font-style: normal;
@@ -155,6 +157,20 @@ select.error {
 	float: left;
 }
 
-.filter_box{
-	border:1px solid #ebebeb;
+.filter_box {
+	border: 1px solid #ebebeb;
+	height: auto;
+}
+
+.clear {
+	clear: both;
+}
+
+.disc_job_pay {
+	float: right;
+	background: url("../../images/disc_icon9.png") no-repeat 4px 2px;
+	color: #ff7300;
+	font-size: 16px;
+	margin: 0px 10px 0 20px;
+	padding-left: 20px;
 }

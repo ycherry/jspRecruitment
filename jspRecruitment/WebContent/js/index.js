@@ -1,4 +1,4 @@
-//JS -- Ç°Ì¨Ê×Ò³
+//JS -- Ç°Ì¨ï¿½ï¿½Ò³
 
 function show_job(id,showhtml){
 	if(showhtml=="1"){
@@ -50,19 +50,19 @@ function showDiv2(obj){
 	}
 }
 function clean(){
-	$("#edu").val("ÇëÑ¡Ôñ");
+	$("#edu").val("ï¿½ï¿½Ñ¡ï¿½ï¿½");
 	$("#eduid").val("");
-	$("#exp").val("ÇëÑ¡Ôñ");
+	$("#exp").val("ï¿½ï¿½Ñ¡ï¿½ï¿½");
 	$("#expid").val("");
-	$("#mun").val("ÇëÑ¡Ôñ")
+	$("#mun").val("ï¿½ï¿½Ñ¡ï¿½ï¿½")
 	$("#munid").val("");;
-	$("#salary").val("ÇëÑ¡Ôñ");
+	$("#salary").val("ï¿½ï¿½Ñ¡ï¿½ï¿½");
 	$("#salaryid").val("");
-	$("#index_job_class_val").val("ÇëÑ¡ÔñÖ°Î»Àà±ð");
+	$("#index_job_class_val").val("ï¿½ï¿½Ñ¡ï¿½ï¿½Ö°Î»ï¿½ï¿½ï¿½");
 	$("#job_class").val("");
-	$("#city").val("ÇëÑ¡Ôñ¹¤×÷µØµã");
+	$("#city").val("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½");
 	$("#cityid").val("");
-	$("#hy").val("ÇëÑ¡ÔñÐÐÒµÀà±ð");
+	$("#hy").val("ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½");
 	$("#hyid").val("");
 }
 $(function(){
@@ -99,7 +99,7 @@ $(function(){
 		$("#index_logoin").html(data);
 	});*/
 	
-	/*Ê×Ò³ÓÒ²àÐÂÎÅ¡¢¹«¸æÇÐ»»*/
+	/*ï¿½ï¿½Ò³ï¿½Ò²ï¿½ï¿½ï¿½ï¿½Å¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½*/
 	$(".yun_index_h1_list li").hover(function(){
 		var num=$(this).index(); 
 		$(".yun_index_h1_list li").removeClass("yun_index_h1_cur");
@@ -116,7 +116,7 @@ $(function(){
 		$(this).find(".index_r_wap_box").show();
 	});
 
-	/*Ê×Ò³Àà±ð¿ªÊ¼*/
+	/*ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ê¼*/
 	$("#navMenu").click(function(){
 		$("#boxNav").show();
 	});
@@ -128,10 +128,10 @@ $(function(){
 	$("#navLst .index_nav_l").hover(function(){
 		$(this).parent().attr('class','show');
 	},function(){$(this).parent().attr('class','');});*/
-	/*Ê×Ò³Àà±ð½áÊø*/
+	/*ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 })
 
-/*Ê×Ò³¹ã¸æ*/
+/*ï¿½ï¿½Ò³ï¿½ï¿½ï¿½*/
 $(document).ready(function(){
 	$('#bottom_ad_is_show').val('1');
 	var duilian = $("div.duilian");
@@ -173,4 +173,3 @@ function buttom_ad(){
 		}
 	}
 }
-/*Ê×Ò³¹ã¸æ½áÊø*/

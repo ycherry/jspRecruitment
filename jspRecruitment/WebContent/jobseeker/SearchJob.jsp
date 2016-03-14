@@ -263,7 +263,7 @@
 				<a
 					href="../company/ViewJob.jsp?jobId=<%=resultset.getString(1)%>"
 					target="mainFrame" class="disc_talent fl"><%=resultset.getString(3)%></a>
-				<span class="fl disc_talent_mes"><%=resultset.getString(4)%></span>
+				<a class="fl disc_talent_mes" href="../company/ViewCompany.jsp?cid=<%=resultset.getString(2)%>"><%=resultset.getString(4)%></a>
 			</div>
 			<div class="disc_job_pay">
 				<%=resultset.getString(9)%>

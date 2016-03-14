@@ -42,25 +42,21 @@
 	<div class="yun_content">
 		<div class="comappiy_left_sidebar fl">
 			<div class="Company_left_cont">
-				<div class="Company_post_top fl">
-					<div class="Company_post_name fl">
-						<span class="Company_post_name_h1"><%=rs.getString(3) == null ? "暂无" : rs.getString(3)%></span>
-					</div>
-					<div class="Company_post_qy_name">
-						<a
-							href="http://127.0.0.1/recruitment/upload/company/index.php?c=show&id=5"><%=rs.getString(4) == null ? "暂无" : rs.getString(4)%></a>
-					</div>
-					<div class="Company_post_State">
-						<span class="Company_post_State_s"> <span class="c_Grey">刷新日期：</span><%=rs.getString(11) == null ? "暂无" : rs.getString(11)%>
-						</span> <span class="Company_post_State_s"><span class="c_Grey">有效日期至：</span><%=rs.getString(12) == null ? "暂无" : rs.getString(12)%></span>
-						<span class="Company_post_State_s"><span
-							class="Company_post_State_s"><span class="c_Grey">简历投递：</span><span
-								class="Orange blod"><%=resumeCount == 0 ? "暂无" : resumeCount%></span></span>
-					</div>
-					<div>
-						<div class="stamp_exceed"></div>
-					</div>
+
+				<div class="Company_post_name fl">
+					<span class="Company_post_name_h1"><%=rs.getString(3) == null ? "暂无" : rs.getString(3)%></span>
 				</div>
+				<div class="Company_post_qy_name">
+					<a href="ViewCompany.jsp?cid=<%=rs.getString(2)%>"><%=rs.getString(4) == null ? "暂无" : rs.getString(4)%></a>
+				</div>
+				<div class="Company_post_State">
+					<span class="Company_post_State_s"> <span class="c_Grey">刷新日期：</span><%=rs.getString(11) == null ? "暂无" : rs.getString(11)%>
+					</span> <span class="Company_post_State_s"><span class="c_Grey">有效日期至：</span><%=rs.getString(12) == null ? "暂无" : rs.getString(12)%></span>
+					<span class="Company_post_State_s"><span
+						class="Company_post_State_s"><span class="c_Grey">简历投递：</span><span
+							class="Orange blod"><%=resumeCount == 0 ? "暂无" : resumeCount%></span></span>
+				</div>
+
 				<div class="Company_Basic_information">
 					<div class="Company_Basic_information_list">
 						<i
@@ -106,6 +102,7 @@
 					</div>
 				</div>
 			</div>
+			<div class="clear"></div>
 			<div class="Company_post_msg">
 				<i class="Company_h1_line"></i><span class="Company_co">职位描述</span>
 			</div>
@@ -119,7 +116,7 @@
 			<div class="Company_post_touch">
 				<div class="Company_post_touch_list">
 					<div class="Company_post_touch_list_left">
-						<span class="c_Grey">电子邮箱：</span><%=rs.getString(21)==null?"暂无":rs.getString(21) %>
+						<span class="c_Grey">电子邮箱：</span><%=rs.getString(21) == null ? "暂无" : rs.getString(21)%>
 					</div>
 				</div>
 
@@ -129,14 +126,14 @@
 						<span class="c_Grey">联系手机：</span><%=rs.getString(19) == null ? "暂无" : rs.getString(19)%></div>
 				</div>
 				<div class="Company_post_touch_list">
-					<span class="c_Grey">公司地址：</span><%=rs.getString(18)==null?"暂无":rs.getString(18) %>
+					<span class="c_Grey">公司地址：</span><%=rs.getString(18) == null ? "暂无" : rs.getString(18)%>
 				</div>
 			</div>
 			<div class="Company_post_msg m10">
 				<i class="Company_h1_line"></i><span class="Company_co">公司简介</span>
 			</div>
 			<div class="Company_content fl">
-				<div class="Company_Profile"><%=rs.getString(22)==null?"暂无":rs.getString(22) %></div>
+				<div class="Company_Profile"><%=rs.getString(22) == null ? "暂无" : rs.getString(22)%></div>
 				<div class="clear"></div>
 			</div>
 			<div class="comapply_sq">

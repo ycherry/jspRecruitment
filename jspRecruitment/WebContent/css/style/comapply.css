@@ -1,8 +1,8 @@
 @charset "gb2312";
 /* CSS Document */ 
-.comappiy_left_sidebar{width:100%; padding:0px 20px; background:#fff;border:1px solid #ececec; position:relative}
-.Company_left_cont{width:100%; background:#fff; float:left}
-.Company_post_top{width:100%;}
+.comappiy_left_sidebar{width:100%; padding:0px 20px; background:#fff;border:1px solid #ececec;}
+.Company_left_cont{width:100%; background:#fff;}
+.Company_post_top{width:100%;height:auto;}
 .Company_post_name{width:100%; padding-top:15px; padding-bottom:5px;float:left; position:relative}
 .Company_post_qy_name{width:100%; float:left; font-size:14px; padding-bottom:10px;}
 .Company_post_Welfare{width:100%; float:left; padding:0px 0 10px 0;}

@@ -138,7 +138,7 @@
 			</div>
 			<div class="comapply_sq">
 
-				<a id="sq_job" href="javascript:;" class="comapply_sq_submit">申请此职位</a>
+				<a id="sq_job" href="../ApplyJobServlet?jobId=<%=rs.getString(1) %>&&jobName=<%=rs.getString(3) %>&&companyName=<%=rs.getString(4) %>&&companyId=<%=rs.getString(2) %>" class="comapply_sq_submit">申请此职位</a>
 				<div class="comapply_sq_r"></div>
 			</div>
 		</div>

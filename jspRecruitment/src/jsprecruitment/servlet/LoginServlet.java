@@ -63,16 +63,26 @@ public class LoginServlet extends HttpServlet {
 			switch (type) {
 			case 1: {
 				Jobseeker jobseeker = new Jobseeker();
-				jobseeker.setUserName(username);
-				session.setAttribute("jobseeker", jobseeker);
-				response.sendRedirect("jobseeker/index.jsp");
+				String selectSql="select * from t_resume where userName='"+username+"'";
+				ResultSet rs = data.select(selectSql);
+				try {
+					jobseeker.setId(rs.getInt(1));
+					jobseeker.setUid(rs.getInt(2));
+					jobseeker.setUserName(username);
+					session.setAttribute("jobseeker", jobseeker);
+					response.sendRedirect("jobseeker/index.jsp");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				break;
 			}
 
 				// 登陆用户是求职者
 			case 2: {
 				Company company = new Company();
-				String selectSql = "select id from t_company where userName='" + username + "'";
+				String selectSql = "select * from t_company where userName='" + username + "'";
 				ResultSet rs = data.select(selectSql);
 				try {
 					company.setId(rs.getInt(1));

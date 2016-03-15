@@ -73,7 +73,14 @@
     <servlet-name>BuildResumeServlet</servlet-name>
     <url-pattern>/BuildResumeServlet</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>ApplyJobServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.jobseeker.ApplyJobServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApplyJobServlet</servlet-name>
+    <url-pattern>/ApplyJobServlet</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

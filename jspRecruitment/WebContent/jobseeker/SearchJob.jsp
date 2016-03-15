@@ -252,6 +252,7 @@
 		} else {
 			selectSql = "select * from t_company_job";
 		}
+		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
 
 		//	System.out.println("resultset:"+resultset.next());
@@ -297,8 +298,13 @@
 			});
 
 			//选中filter下所有的dt标签，并且为dt标签后面的第一个dd标签下的a标签添加样式seled。(感叹jquery的强大)  
-			$("#filter dt+dd a").attr("class", "seled"); /*注意：这儿应该是设置(attr)样式，而不是添加样式(addClass)， 
-																																																					                                                     不然后面通过$("#filter a[class='seled']")访问不到class样式为seled的a标签。*/
+			$("#filter dt+dd a").attr("class", "seled");
+			var selectedProvinceArr = ['安徽'];
+			$("#filter a").each(function(index, item, arr){
+				if (selectedProvinceArr.indexOf($(item).html()) !== -1) {
+					$(item).attr("class", "seled");
+				}
+			});
 
 			//为filter下的所有a标签添加单击事件  
 			$("#filter a").click(function() {
@@ -314,6 +320,7 @@
 				alert($(this).attr("id"));
 				alert(RetSelecteds()); //返回选中结果  
 				window.location.href = RetSelecteds();
+				
 			});
 			//	alert(RetSelecteds()); //返回选中结果  
 		});

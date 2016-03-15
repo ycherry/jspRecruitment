@@ -196,7 +196,7 @@ button,input,textarea,th,td {
 	padding-left: 10px;
 	position: relative;
 	text-align: left;
-	width: 70px;
+	width: 80px;
 	z-index: 13;
 }
 
@@ -205,7 +205,7 @@ button,input,textarea,th,td {
 	border-left: 1px solid #CCCCCC;
 	border-right: 1px solid #CCCCCC;
 	padding-left: 9px;
-	width: 69px;
+	width: 80px;
 }
 
 .yun_Moredown {

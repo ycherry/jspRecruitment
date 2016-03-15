@@ -69,13 +69,13 @@ DD_belatedPNG.fix('.png,.pagination li a');
 									} else if (company.getUserName() != null) {
 								%>
 								<div class="yun_topLogin">
-									<a class="yun_More"><%=company.getUserName()%> 欢迎！</a>
+									<a class="yun_More" href="company/index.jsp"><%=company.getUserName()%>欢迎！</a>
 								</div>
 								<%
 									} else if (jobseeker.getUserName() != null) {
 								%>
 								<div class="yun_topLogin">
-									<a class="yun_More"><%=jobseeker.getUserName()%> 欢迎您！</a>
+									<a class="yun_More" href="jobseeker/index.jsp"><%=jobseeker.getUserName()%>您好！</a>
 								</div>
 								<%
 									}

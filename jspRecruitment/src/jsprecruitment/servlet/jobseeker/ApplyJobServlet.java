@@ -61,21 +61,18 @@ public class ApplyJobServlet extends HttpServlet {
 			if (dbo.insert(insertSql) > 0) {
 				System.out.println("申请职位成功！");
 				out.println(
-						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='../company/ViewJob.jsp?jobId="
+						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/ViewJob.jsp?jobId="
 								+ jobId + "'</script>");
 			} else {
 				System.out.println("申请职位失败！");
 				out.println(
-						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='../company/ViewJob.jsp?jobId='"
+						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/ViewJob.jsp?jobId='"
 								+ jobId + "''</script>");
 			}
 		} else {
 			System.out.println("不能重复申请！");
-//			out.println(
-//					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('不能重复申请');window.location.href='../company/ViewJob.jsp?jobId="
-//							+ jobId + "</script>");
 			out.println(
-					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('"+jobId+"');window.location.href='company/ViewJob.jsp?jobId="
+					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('no repeat!');window.location.href='company/ViewJob.jsp?jobId="
 							+ jobId + "'</script>");
 		}
 	}

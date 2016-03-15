@@ -31,7 +31,7 @@
 		String jobId = (String) request.getParameter("jobId");
 		Statement at = dbc.getStmtread();
 		int resumeCount = dbo
-				.getRowCount("select * from t_job_apply where jobId='"
+				.getRowCount("select count(*) from t_job_apply where jobId='"
 						+ jobId + "'");
 		String sql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and t_company_job.id='"
 				+ jobId + "'";

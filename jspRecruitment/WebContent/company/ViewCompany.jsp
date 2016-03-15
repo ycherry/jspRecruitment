@@ -31,8 +31,7 @@
 		DataBaseOperation dbo = new DataBaseOperation();
 		String cid = (String) request.getParameter("cid");
 		Statement at = dbc.getStmtread();
-		String sql = "select * from t_company where id='"
-				+ cid + "'";
+		String sql = "select * from t_company where id='" + cid + "'";
 		System.out.println(sql);
 		ResultSet rs = dbc.getRs(sql);
 		while (rs.next()) {
@@ -42,7 +41,7 @@
 			<div class="firm_left_con">
 				<div class="firm_sta">
 					<div class="firm_sta_mes">
-						<h3>doudou</h3>
+						<h3><%=rs.getString(2) == null ? "暂无" : rs.getString(2)%></h3>
 					</div>
 				</div>
 				<div class="firm_det" id="company" data-slide='1'>
@@ -51,97 +50,68 @@
 					</div>
 					<div class="firm_det_link">
 						<span class="firm_mes1">性&nbsp;&nbsp;&nbsp;质 ：<span
-							class="JoB_material_right JoB_material_line">国家机关</span>
+							class="JoB_material_right JoB_material_line"><%=rs.getString(4) == null ? "暂无" : rs.getString(4)%></span>
 						</span><span class="firm_mes1">规&nbsp;&nbsp;&nbsp;模 ：<span
-							class="JoB_material_right JoB_material_line">50-200人</span>
+							class="JoB_material_right JoB_material_line"><%=rs.getString(8) == null ? "暂无" : rs.getString(8)%></span>
 						</span><span class="firm_mes1">行&nbsp;&nbsp;&nbsp;业 ：<span
-							class="JoB_material_right JoB_material_line">计算机/互联网</span>
+							class="JoB_material_right JoB_material_line"><%=rs.getString(5) == null ? "暂无" : rs.getString(5)%></span>
 						</span>
 					</div>
 					<div class="firm_det" id="company" data-slide='1'>
 						<div class="firm_det_tit">
 							<span>公司简介</span>
 						</div>
-						<div class="firm_det_con">信息技术</div>
+						<div class="firm_det_con"><%=rs.getString(10) == null ? "暂无" : rs.getString(10)%></div>
 					</div>
 					<div class="firm_det" id="contact" data-slide='2'>
 						<div class="firm_det_tit">
 							<span>联系方式</span>
 						</div>
 						<div class="firm_det_link">
-							<span class="firm_mes1">联 &nbsp;系&nbsp;人：<i> <em
-									class="JoB_material_right JoB_material_line">张三</em>
-							</i></span> <span class="firm_mes1">联系电话：<i> <em
-									class="JoB_material_right JoB_material_line"><img
-										src='http://127.0.0.1/recruitment/upload/data/upload/tel/5/linktel.gif' /></em>
-							</i></span> <span class="firm_mes1">联系邮件：<i>1231232324@qq.com</i></span>
+							<span class="firm_mes1">联系电话：<i> <em
+									class="JoB_material_right JoB_material_line"><%=rs.getString(7) == null ? "暂无" : rs.getString(7)%></em>
+							</i></span> <span class="firm_mes1">联系邮件：<i><%=rs.getString(9) == null ? "暂无" : rs.getString(9)%></i></span>
+							<span class="firm_mes1">地 &nbsp;&nbsp;&nbsp;址：<i> <em
+									class="JoB_material_right JoB_material_line"><%=rs.getString(6) == null ? "暂无" : rs.getString(6)%></em>
+							</i></span>
 						</div>
 						<div class="firm_det" id="job" data-slide='3'>
 							<div class="firm_det_tit">
 								<span>招聘职位</span>
 							</div>
-
+							<%
+								String selectSql = "select * from t_company_job where cid='"
+											+ cid + "'";
+									ResultSet resultset = dbc.getRs(selectSql);
+									while (resultset.next()) {
+							%>
 							<div class="firm_post">
 								<div class="firm_post_con">
 									<div class="firm_post_cen">
 										<div class="fpc_name">
 											<a
-												href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=5">网路工程师</a>
+												href="ViewJob.jsp?jobId=<%=resultset.getString(1)%>"><%=resultset.getString(3) %></a>
 										</div>
 										<div class="fpc_type">
-											<span class="fpc_type_fr">发布时间：2016-03-09</span> <span>工作城市：天津</span>
-											<span>经验：不限</span> <span>学历：不限</span> <span>薪资：<i>不限</i></span>
+											<span class="fpc_type_fr">发布时间：<%=resultset.getString(11) %></span> <span>工作城市：<%=resultset.getString(6) %></span>
+											<span>经验：<%=resultset.getString(8) %></span> <span>学历：<%=resultset.getString(7) %></span> <span>薪资：<i><%=resultset.getString(8) %></i></span>
 										</div>
 									</div>
 									<div class="firm_post_right">
 										<a
-											href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=5">查看</a>
+											href="ViewJob.jsp?jobId='<%=resultset.getString(1)%>'">查看</a>
 									</div>
 								</div>
 							</div>
-							<div class="firm_post">
-								<div class="firm_post_con">
-									<div class="firm_post_cen">
-										<div class="fpc_name">
-											<a
-												href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=4">java工程师</a>
-										</div>
-										<div class="fpc_type">
-											<span class="fpc_type_fr">发布时间：2016-03-09</span> <span>工作城市：天津</span>
-											<span>经验：不限</span> <span>学历：不限</span> <span>薪资：<i>不限</i></span>
-										</div>
-									</div>
-									<div class="firm_post_right">
-										<a
-											href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=4">查看</a>
-									</div>
-								</div>
-							</div>
+							<%
+								}
+							%>
+					
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="clear"></div>
-			<div class="commpay_Comment">
-				<div id="huifu" style="display: none;">
-					<form action="index.php" method="post"
-						onsubmit="return check_huifu('');">
-						<div class="Comment_w608">
-							<textarea class="Comment_textarea_hf" tip-text="说两句吧```"
-								id="reply" name="content"></textarea>
-							<input type="hidden" name="id" value="" />
-						</div>
-						<div class="Comment_w608">
-							<input class="program_reply" type="submit" name="submit2"
-								value="回复" />
-						</div>
-					</form>
-				</div>
-				<div class="clear"></div>
-				<div id="map_show" style="display: none;">
-					<div id="map_container" style="width: 580px; height: 350px;"></div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<%

@@ -85,12 +85,7 @@
 						<div class="Company_Basic_information_r">
 							<span class="Company_Basic_information_l"> <span
 								class="c_Grey">招聘：</span><%=rs.getString(5) == null ? "暂无" : rs.getString(5)%>
-							</span> <span class="Company_Basic_information_l"> <span
-								class="c_Grey">年龄：</span>不限
-							</span> <span class="Company_Basic_information_l"> <span
-								class="c_Grey">性别：</span>不限
-							</span> <span class="Company_Basic_information_l"><span
-								class="c_Grey">婚姻：</span>不限</span>
+							</span> 
 						</div>
 					</div>
 					<div class="Company_Basic_information_list">

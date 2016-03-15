@@ -41,7 +41,6 @@
 	clear: both;
 	border-bottom: 1px solid #ebebeb;
 }
- 
 
 #filter dt {
 	float: left;
@@ -247,7 +246,6 @@
 				selectSql += " education='" + education + "'";
 			}
 			System.out.println(selectSql);
-			out1.println("<script>alert(taaa);</script>");
 
 		} else {
 			selectSql = "select * from t_company_job";
@@ -261,10 +259,10 @@
 	<div class="talent">
 		<div class="search_talent_list">
 			<div class="search_talent_list_font">
-				<a
-					href="../company/ViewJob.jsp?jobId=<%=resultset.getString(1)%>"
+				<a href="../company/ViewJob.jsp?jobId=<%=resultset.getString(1)%>"
 					target="mainFrame" class="disc_talent fl"><%=resultset.getString(3)%></a>
-				<a class="fl disc_talent_mes" href="../company/ViewCompany.jsp?cid=<%=resultset.getString(2)%>"><%=resultset.getString(4)%></a>
+				<a class="fl disc_talent_mes"
+					href="../company/ViewCompany.jsp?cid=<%=resultset.getString(2)%>"><%=resultset.getString(4)%></a>
 			</div>
 			<div class="disc_job_pay">
 				<%=resultset.getString(9)%>
@@ -289,7 +287,8 @@
 	<!--滚动展示内容-->
 	<SCRIPT>
 		$(function() {
-			var array = null;
+			console.log(decodeURI(decodeURI(window.location.href)));
+
 			//选中filter下的所有a标签，为其添加hover方法，该方法有两个参数，分别是鼠标移上和移开所执行的函数。  
 			$("#filter a").hover(function() {
 				$(this).addClass("seling");
@@ -299,9 +298,14 @@
 
 			//选中filter下所有的dt标签，并且为dt标签后面的第一个dd标签下的a标签添加样式seled。(感叹jquery的强大)  
 			$("#filter dt+dd a").attr("class", "seled");
-			var selectedProvinceArr = ['安徽'];
-			$("#filter a").each(function(index, item, arr){
-				if (selectedProvinceArr.indexOf($(item).html()) !== -1) {
+			var urlData = GetUrlData();
+			console.log(urlData);
+			$("#filter a").each(function(index, item, arr) {
+				if (urlData.indexOf($(item).html()) !== -1) {
+					$(this).parents("dl").children("dd").each(function() {
+						//	$('a', item).removeClass("seled");
+						$(this).find("a").removeClass("seled");
+					});
 					$(item).attr("class", "seled");
 				}
 			});
@@ -317,23 +321,23 @@
 
 				$(this).attr("class", "seled");
 				$(this).attr("id", $(this).html());
-				alert($(this).attr("id"));
-				alert(RetSelecteds()); //返回选中结果  
+				//	alert($(this).attr("id"));
+				//	alert(RetSelecteds()); //返回选中结果  
 				window.location.href = RetSelecteds();
-				
+
 			});
 			//	alert(RetSelecteds()); //返回选中结果  
 		});
 
 		function RetSelecteds() {
 			var result = "SearchJob.jsp?";
-			array = [ "industry", "workDistrict", "salary", "education",
+			var array = [ "industry", "workDistrict", "salary", "education",
 					"experience" ];
 			var i = 0;
 			$("#filter a[class='seled']").each(
 					function() {
 						var s = $(this).html() != '' ? encodeURI(encodeURI($(
-								this).html())) : '';
+								this).html())) : encodeURI(encodeURI("全部"));
 						if (i < 4) {
 							result += array[i] + "=" + s + "&&";
 						} else {
@@ -344,6 +348,26 @@
 					});
 			//result += "#talentList";
 			return result;
+		}
+
+		function GetUrlData() {
+			var array = [ "industry", "workDistrict", "salary", "education",
+					"experience" ];
+			var url = location.search;
+			var request = new Object();
+			var urlData = new Array(5);
+			if (url.indexOf("?") != -1) {
+				var str = url.substr(1);
+				strs = str.split("&&");
+				for (var i = 0; i < strs.length; i++) {
+					request[strs[i].split("=")[0]] = unescape(decodeURI(decodeURI(strs[i]
+							.split("=")[1])));
+				}
+			}
+			for (var i = 0; i <= 4; i++) {
+				urlData[i] = request[array[i]];
+			}
+			return urlData;
 		}
 	</script>
 

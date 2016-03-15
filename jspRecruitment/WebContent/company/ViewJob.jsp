@@ -17,7 +17,7 @@
 <script type="text/javascript" src="../js/util/bootstrap-select.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/bootstrap.css.map">
-<link rel="stylesheet" type="text/css" href="../css/style/comapply.css">
+<link rel="stylesheet" type="text/css" href="../css/style/comapplyJob.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
 	href="../css/bootstrap-select.css">

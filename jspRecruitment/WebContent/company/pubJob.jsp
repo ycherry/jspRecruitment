@@ -47,15 +47,30 @@
 						placeholder="请输入招聘人数（必填）">
 				</div>
 			</div>
+
 			<div class="row updateInfoLabel">
 				<div class="col-sm-offset-1 col-sm-3 ">
 					<label>工作地区:</label>
 				</div>
+
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="district"
-						id="distinct" placeholder="请输入工作地区（必填）">
+					<select class="form-control selectpicker" name="district"
+						id="district">
+						<%
+							DBConn con = new DBConn();
+							DataBaseOperation dbo = new DataBaseOperation();
+							ResultSet districtrs = con.getRs("SELECT name FROM t_city where id between 2 and 35");
+							while (districtrs.next()) {
+						%>
+						<option><%=districtrs.getString(1)%></option>
+						<%
+							}
+						%>
+					</select>
 				</div>
+
 			</div>
+
 			<div class="row updateInfoLabel">
 				<div class="col-sm-offset-1 col-sm-3 ">
 					<label>学历要求:</label>
@@ -63,12 +78,14 @@
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="education">
 						<option>不限</option>
-						<option>初中及以下</option>
-						<option>高中/中技/中专</option>
-						<option>大专</option>
-						<option>本科</option>
-						<option>硕士</option>
-						<option>博士</option>
+						<%
+							ResultSet educationrs = con.getRs("SELECT * FROM t_filter where keyid =38");
+							while (educationrs.next()) {
+						%>
+						<option><%=educationrs.getString(3)%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>
@@ -78,12 +95,14 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="experience">
-						<option>不限</option>
-						<option>无经验</option>
-						<option>1-3年</option>
-						<option>3-5年</option>
-						<option>5-10年</option>
-						<option>10年以上</option>
+						<%
+							ResultSet experiencers = con.getRs("SELECT * FROM t_filter where keyid =10");
+							while (experiencers.next()) {
+						%>
+						<option><%=experiencers.getString(3)%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>
@@ -92,8 +111,16 @@
 					<label>薪水范围:</label>
 				</div>
 				<div class="col-sm-6">
-					<input type="text" class="form-control" name="salary" id="salary"
-						placeholder="请输入职位薪水（必填）">
+					<select class="form-control selectpicker" name="salary">
+						<%
+							ResultSet salaryrs = con.getRs("SELECT * FROM t_filter where keyid =34");
+							while (salaryrs.next()) {
+						%>
+						<option><%=salaryrs.getString(3)%></option>
+						<%
+							}
+						%>
+					</select>
 				</div>
 			</div>
 			<div class="row updateInfoLabel">

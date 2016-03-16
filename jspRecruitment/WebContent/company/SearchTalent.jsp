@@ -2,11 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@page import="jsprecruitment.util.*,jsprecruitment.entity.*"%>
 <%@page import="java.sql.*,java.io.*,java.util.Date"%>
-<%
-	request.setCharacterEncoding("utf-8");
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="../js/util/jquery-1.8.0.min.js"></script>
@@ -35,7 +32,7 @@
 	margin-right: auto;
 	font-size: 12px;
 	display: block;
-	padding-bottom:20px;
+	padding-bottom: 20px;
 }
 
 #filter dl {
@@ -76,7 +73,6 @@
 	background-color: #005AA0;
 	color: #FFFFFF;
 }
-
 </style>
 </head>
 
@@ -86,29 +82,29 @@
 	</div>
 	<div class="filter_box" id="talentList">
 		<div id="filter">
-				<dl>
-					<dt>招聘行业：</dt>
-					<dd>
-						<div>
-							<a>全部</a>
-						</div>
-					</dd>
-					<%
-						DBConn con = new DBConn();
-						DataBaseOperation dbo = new DataBaseOperation();
-						ResultSet industryrs = con.getRs("SELECT * FROM t_industry");
-						while (industryrs.next()) {
-					%>
-					<dd>
-						<div>
-							<a><%=industryrs.getString(2)%></a>
-						</div>
-					</dd>
+			<dl>
+				<dt>招聘行业：</dt>
+				<dd>
+					<div>
+						<a>全部</a>
+					</div>
+				</dd>
+				<%
+					DBConn con = new DBConn();
+					DataBaseOperation dbo = new DataBaseOperation();
+					ResultSet industryrs = con.getRs("SELECT * FROM t_industry");
+					while (industryrs.next()) {
+				%>
+				<dd>
+					<div>
+						<a><%=industryrs.getString(2)%></a>
+					</div>
+				</dd>
 
-					<%
-						}
-					%>
-				</dl>
+				<%
+					}
+				%>
+			</dl>
 			<dl>
 				<dt>工作省份：</dt>
 				<dd>
@@ -198,6 +194,8 @@
 		String salary = null;
 		String experience = null;
 		String education = null;
+		Date date = new Date();
+		int year = date.getYear();
 		PrintWriter out1 = response.getWriter();
 		industry = request.getParameter("industry");
 		workDistrict = request.getParameter("workDistrict");
@@ -219,7 +217,7 @@
 			education = education != null && !education.equals("")
 					? java.net.URLDecoder.decode(education, "utf-8")
 					: "";
-			selectSql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and ";
+			selectSql = "select * from t_resume where ";
 			if (industry.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
@@ -233,7 +231,7 @@
 			if (salary.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
-				selectSql += " salary='" + salary + "' and ";
+				selectSql += " expectedSalary='" + salary + "' and ";
 			}
 			if (experience.equals("全部")) {
 				selectSql += " 1=1 and ";
@@ -248,7 +246,7 @@
 			System.out.println(selectSql);
 
 		} else {
-			selectSql = "select * from t_company_job";
+			selectSql = "select * from t_resume ";
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
@@ -259,24 +257,27 @@
 	<div class="talent">
 		<div class="search_talent_list">
 			<div class="search_talent_list_font">
-				<a href="../company/ViewJob.jsp?jobId=<%=resultset.getString(1)%>"
-					target="mainFrame" class="disc_talent fl"><%=resultset.getString(3)%></a>
-				<a class="fl disc_talent_mes"
-					href="../company/ViewCompany.jsp?cid=<%=resultset.getString(2)%>"><%=resultset.getString(4)%></a>
+				<a
+					href="../jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString(1)%>"
+					target="mainFrame" class="disc_talent fl"><%=resultset.getString(5)%></a>
+				<span class="fl disc_talent_mes"><%=resultset.getString(4)%>,<%=year - resultset.getDate(7).getYear()%>岁</span>
 			</div>
 			<div class="disc_job_pay">
-				<%=resultset.getString(9)%>
+			期望薪资：<%=resultset.getString(17)%>
 			</div>
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
-				<span class="search_talent_list_box">更新时间：<em
-					class="search_talent_list_box_em"><%=resultset.getString(11)%></em></span>
+				<span class="search_talent_list_box">意向：<em
+					class="search_talent_list_box_em"><%=resultset.getString(13)%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
+					class="search_talent_list_box">更新时间：<em
+					class="search_talent_list_box_em"><%=resultset.getString(19)%></em></span>
+				<span class="search_talent_list_box_line">|</span><span
 					class="search_talent_list_box">经验：<em
 					class="search_talent_list_box_em"><%=resultset.getString(8)%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">学历：<em
-					class="search_talent_list_box_em"><%=resultset.getString(7)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString(10)%></em></span>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -284,6 +285,8 @@
 	<%
 		}
 	%>
+
+
 	<!--滚动展示内容-->
 	<SCRIPT>
 		$(function() {
@@ -330,7 +333,7 @@
 		});
 
 		function RetSelecteds() {
-			var result = "SearchJob.jsp?";
+			var result = "SearchTalent.jsp?";
 			var array = [ "industry", "workDistrict", "salary", "education",
 					"experience" ];
 			var i = 0;

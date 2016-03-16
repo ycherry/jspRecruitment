@@ -39,7 +39,7 @@
 		<a href="#resumeMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>简历管理</a>
 		<ul id="resumeMenu" class="nav nav-list collapse menu-second">
-			<li><a href="searchTalent.jsp" target="mainFrame"><i class="icon-pencil"></i> 简历搜索</a></li>
+			<li><a href="SearchTalent.jsp" target="mainFrame"><i class="icon-pencil"></i> 简历搜索</a></li>
 			<li><a href="findJob.jsp" target="mainFrame"><i class="icon-list-alt"></i> 浏览全部求职者信息</a></li>
 		</ul>
 		<a href="#mailMenu" class="nav-header menu-first collapsed"

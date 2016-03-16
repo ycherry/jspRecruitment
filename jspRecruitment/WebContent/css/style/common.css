@@ -97,9 +97,9 @@ select.error {
 
 .talent {
 	border: 1px solid #ebebeb;
-	margin: 5px 25px;
+	margin: 5px 0px;
 	float: left;
-	width: 95%;
+	width: 100%;
 }
 
 .search_talent_list {
@@ -160,6 +160,7 @@ select.error {
 .filter_box {
 	border: 1px solid #ebebeb;
 	height: auto;
+	width:100%;
 }
 
 .clear {

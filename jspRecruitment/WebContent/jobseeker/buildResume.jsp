@@ -28,11 +28,9 @@
 <body>
 	<%
 		DBConn dbc = new DBConn();
-		Jobseeker jobseeker = (Jobseeker) request.getSession()
-				.getAttribute("jobseeker");
+		Jobseeker jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
 		//		Statement at = dbc.getStmtread();
-		String sql = "select * from t_resume where userName ='"
-				+ jobseeker.getUserName() + "'";
+		String sql = "select * from t_resume where userName ='" + jobseeker.getUserName() + "'";
 		ResultSet rs = dbc.getRs(sql);
 		System.out.println(sql);
 		while (rs.next()) {
@@ -68,8 +66,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="fullName"
 						placeholder="请输入您的真实（必填）"
-						value=<%=jobseeker.getFullName() == null ? ' ' : jobseeker
-					.getFullName()%>>
+						value=<%=jobseeker.getFullName() == null ? ' ' : jobseeker.getFullName()%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -78,8 +75,7 @@
 				</div>
 				<div class="col-sm-3">
 					<%
-						if (jobseeker.getGender() == null
-								|| jobseeker.getGender().equals("男")) {
+						if (jobseeker.getGender() == null || jobseeker.getGender().equals("男")) {
 					%>
 					<label class="radio-inline"><input type="radio"
 						name="gender" id="male" value="男" checked="checked">男</label> <label
@@ -104,8 +100,7 @@
 				<div class="col-sm-6">
 					<input type="date" class="form-control" name="birthday"
 						id="birthday" placeholder="请输入生日，例如：xxxx-xx-xx（年-月-日）（必填）"
-						value=<%=jobseeker.getBirthday() == null ? " " : jobseeker
-					.getBirthday()%>>
+						value=<%=jobseeker.getBirthday() == null ? " " : jobseeker.getBirthday()%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -121,21 +116,15 @@
 						<%
 							}
 						%>
-						<option>计算机/互联网</option>
-						<option>销售/ 客服/技术支持</option>
-						<option>会计/金融/银行 /保险</option>
-						<option>生产/营运/采购/ 物流</option>
-						<option>生物/制药/医疗/ 护理</option>
-						<option>广告/市场/媒体/ 艺术</option>
-						<option>建筑/房地产</option>
-						<option>人事/行政/高级 管理</option>
-						<option>咨询/法律/教育/ 科研</option>
-						<option>服务业</option>
-						<option>公务员/翻译/其 他</option>
-						<option>化工/能源</option>
-						<option>贸易/百货</option>
-						<option>机械/设备/技工</option>
-						<option>通信/电子</option>
+						<%
+							ResultSet industryrs = dbc.getRs("SELECT * FROM t_industry");
+							while (industryrs.next()) {
+						%>
+						<option><%=industryrs.getString(2)%></option>
+
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>
@@ -145,13 +134,15 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="experience">
-						<option data-hidden="true"><%=jobseeker.getExperience() != null ? jobseeker
-					.getExperience() : "无经验"%></option>
-						<option>无经验</option>
-						<option>1-3年</option>
-						<option>3-5年</option>
-						<option>5-10年</option>
-						<option>10年以上</option>
+						<option data-hidden="true"><%=jobseeker.getExperience() != null ? jobseeker.getExperience() : "无经验"%></option>
+						<%
+							ResultSet experiencers = dbc.getRs("SELECT * FROM t_filter where keyid =10");
+							while (experiencers.next()) {
+						%>
+						<option><%=experiencers.getString(3)%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>
@@ -162,8 +153,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="intentionJobs"
 						placeholder="请输入您的期望行业"
-						value=<%=jobseeker.getIntentionJobs() != null ? jobseeker
-					.getIntentionJobs() : " "%>>
+						value=<%=jobseeker.getIntentionJobs() != null ? jobseeker.getIntentionJobs() : " "%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -172,20 +162,15 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="expectedSalary">
-						<option data-hidden="true"><%=jobseeker.getExpectedSalary() != null ? jobseeker
-					.getExpectedSalary() : "不限"%></option>
-						<option>不限</option>
-						<option>1000以下</option>
-						<option>1000-1999</option>
-						<option>2000-2999</option>
-						<option>3000-3999</option>
-						<option>4000-4999</option>
-						<option>5000-5999</option>
-						<option>6000-6999</option>
-						<option>7000-7999</option>
-						<option>8000-8999</option>
-						<option>9000-9999</option>
-						<option>10000以上</option>
+						<option data-hidden="true"><%=jobseeker.getExpectedSalary() != null ? jobseeker.getExpectedSalary() : "不限"%></option>
+						<%
+							ResultSet salaryrs = dbc.getRs("SELECT * FROM t_filter where keyid =34");
+							while (salaryrs.next()) {
+						%>
+						<option><%=salaryrs.getString(3)%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>
@@ -195,16 +180,15 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="education">
-						<option data-hidden="true"><%=jobseeker.getEducation() != null ? jobseeker
-					.getEducation() : "不限"%></option>
-						<option>不限</option>
-						<option>高中以下</option>
-						<option>高中</option>
-						<option>中专</option>
-						<option>大专</option>
-						<option>本科</option>
-						<option>硕士</option>
-						<option>博士</option>
+						<option data-hidden="true"><%=jobseeker.getEducation() != null ? jobseeker.getEducation() : "不限"%></option>
+						<%
+							ResultSet educationrs = dbc.getRs("SELECT * FROM t_filter where keyid =38");
+							while (educationrs.next()) {
+						%>
+						<option><%=educationrs.getString(3)%></option>
+						<%
+							}
+						%>
 					</select>
 				</div>
 			</div>
@@ -215,8 +199,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="specialty"
 						placeholder="请输入您的特长（必填）"
-						value=<%=jobseeker.getSpecialty() == null ? ' ' : jobseeker
-					.getSpecialty()%>>
+						value=<%=jobseeker.getSpecialty() == null ? ' ' : jobseeker.getSpecialty()%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -225,12 +208,10 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="workDistrict">
-						<option data-hidden="true"><%=jobseeker.getWorkDistrict() != null ? jobseeker
-					.getWorkDistrict() : "不限"%></option>
+						<option data-hidden="true"><%=jobseeker.getWorkDistrict() != null ? jobseeker.getWorkDistrict() : "不限"%></option>
 						<%
 							DataBaseOperation dbo = new DataBaseOperation();
-							ResultSet resultSet = dbc
-									.getRs("SELECT name FROM t_city where id between 2 and 35");
+							ResultSet resultSet = dbc.getRs("SELECT name FROM t_city where id between 2 and 35");
 							while (resultSet.next()) {
 						%>
 						<option><%=resultSet.getString(1)%></option>
@@ -248,8 +229,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="telphone"
 						placeholder="请输入您的联系电话（必填）"
-						value=<%=jobseeker.getTelphone() == null ? ' ' : jobseeker
-					.getTelphone()%>>
+						value=<%=jobseeker.getTelphone() == null ? ' ' : jobseeker.getTelphone()%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -269,8 +249,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="address"
 						placeholder="请输入您的居住地址（必填）"
-						value=<%=jobseeker.getAddress() == null ? ' ' : jobseeker
-					.getAddress()%>>
+						value=<%=jobseeker.getAddress() == null ? ' ' : jobseeker.getAddress()%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -279,8 +258,7 @@
 				</div>
 				<div class="col-sm-6">
 					<textarea type="text" class="form-control" name="selfIntroduction"
-						placeholder="请介绍一下您的自己"><%=jobseeker.getSelfIntroduction() == null ? ' ' : jobseeker
-					.getSelfIntroduction()%></textarea>
+						placeholder="请介绍一下您的自己"><%=jobseeker.getSelfIntroduction() == null ? ' ' : jobseeker.getSelfIntroduction()%></textarea>
 				</div>
 			</div>
 			<div>

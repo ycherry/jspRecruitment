@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
 				String selectSql = "select * from t_company where userName='" + username + "'";
 				ResultSet rs = data.select(selectSql);
 				try {
-					company.setId(rs.getInt(1));
+					company.setId(rs.getString(1));
 					company.setUserName(username);
 					session.setAttribute("company", company);
 					response.sendRedirect("company/index.jsp");

@@ -25,7 +25,7 @@
 	<table class="table table-bordered  table-responsive table-hover">
 		<thead>
 			<tr>
-				<th>所求职位</th>
+				<th>职位名称</th>
 				<th>发布时间</th>
 				<th>有效时间</th>
 				<th>求职人数</th>
@@ -38,7 +38,7 @@
 			DBConn con = new DBConn();
 		    DataBaseOperation dbo= new DataBaseOperation();
 			String strChecked = "checked";
-			int companyId = ((Company) request.getSession().getAttribute(
+			String companyId = ((Company) request.getSession().getAttribute(
 					"company")).getId();
 			//			String sql="select id "
 			String companyName = null;
@@ -46,7 +46,7 @@
 					+ companyId + "'order by id desc");
 			while (rs.next()) {
 				int intId = rs.getInt(1);
-				String selectSql="select * from t_job_apply where jobId='"+rs.getString(1)+"'";
+				String selectSql="select count(*) from t_job_apply where jobId='"+rs.getString(1)+"'";
 		%>
 		<tbody>
 			<tr>

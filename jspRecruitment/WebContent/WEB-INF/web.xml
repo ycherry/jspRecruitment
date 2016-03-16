@@ -57,6 +57,14 @@
     <servlet-name>DeleteJobServlet</servlet-name>
     <url-pattern>/DeleteJobServlet</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>JobInterviewServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.company.JobInterviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobInterviewServlet</servlet-name>
+    <url-pattern>/JobInterviewServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>JobseekerRegServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.jobseeker.JobseekerRegServlet</servlet-class>

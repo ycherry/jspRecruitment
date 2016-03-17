@@ -44,6 +44,7 @@ public class UpdateCompanyInfoServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		Company company = new Company();
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
@@ -69,10 +70,10 @@ public class UpdateCompanyInfoServlet extends HttpServlet {
 		int count=dbo.update(sql);
 		if(count>0){
 			System.out.println("修改公司基本成功");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/updateCompanyinfo.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改信息成功！');window.location.href='company/updateCompanyinfo.jsp'</script>");
 		}else{
 			System.out.println("修改公司基本失败");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/updateCompanyinfo.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改信息失败！');window.location.href='company/updateCompanyinfo.jsp'</script>");
 		}
 
 	}

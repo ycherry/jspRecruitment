@@ -46,6 +46,7 @@ public class UpdateJobServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 				request.setCharacterEncoding("utf-8");
+				response.setContentType("text/html;charset=UTF-8");
 				Job job = new Job();
 				Date date = new Date();
 				DataBaseOperation dbo = new DataBaseOperation();
@@ -97,10 +98,10 @@ public class UpdateJobServlet extends HttpServlet {
 								+ job.getDeadline() + "'where id='" + intId + "'";
 						if (dbo.update(updateSql) > 0) {
 							System.out.println("更新职位成功！");
-							out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('update sucess');window.location.href='company/allJob.jsp'</script>");
+							out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('更新职位成功！');window.location.href='company/allJob.jsp'</script>");
 						} else {
 							System.out.println("更新职位失败！");
-							out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('update fail');window.location.href='company/pubJob.jsp?intId="
+							out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('更新职位失败！');window.location.href='company/pubJob.jsp?intId="
 									+ intId + "'</script>");
 						}
 					} catch (SQLException e) {
@@ -109,7 +110,7 @@ public class UpdateJobServlet extends HttpServlet {
 					}
 				} else {
 					System.out.println("更新职位失败1！");
-					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('update fail');window.location.href='company/pubJob.jsp?intId="
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert(更新职位失败！');window.location.href='company/pubJob.jsp?intId="
 							+ intId + "'</script>");
 				}
 

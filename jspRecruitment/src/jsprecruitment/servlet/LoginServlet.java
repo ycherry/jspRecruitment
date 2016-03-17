@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String password = request.getParameter("password");
 		String username = request.getParameter("user");
 		int type = Integer.parseInt(request.getParameter("type"));
@@ -64,8 +65,8 @@ public class LoginServlet extends HttpServlet {
 				String selectSql="select * from t_resume where userName='"+username+"'";
 				ResultSet rs = data.select(selectSql);
 				try {
-					jobseeker.setId(rs.getInt(1));
-					jobseeker.setUid(rs.getInt(2));
+					jobseeker.setId(rs.getString(1));
+					jobseeker.setUid(rs.getString(2));
 					jobseeker.setUserName(username);
 					session.setAttribute("company", company);
 					session.setAttribute("jobseeker", jobseeker);
@@ -108,8 +109,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			PrintWriter out = response.getWriter();
-			out.print("<script language=\"javascript\">alert(\"密码或用户名错误，请检查后重新登陆\")</script>");
-			response.sendRedirect("index.jsp");
+			out.print("<script language='javascript'>alert('密码或用户名错误，请检查后重新登陆');window.location.href='login.jsp';</script>");
 			System.out.println("登陆失败");
 		}
 	}

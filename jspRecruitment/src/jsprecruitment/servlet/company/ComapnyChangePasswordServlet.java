@@ -39,6 +39,7 @@ public class ComapnyChangePasswordServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
 		String userName=((Company)request.getSession().getAttribute("company")).getUserName();
@@ -50,15 +51,15 @@ public class ComapnyChangePasswordServlet extends HttpServlet {
 			if(dbo.update(changePassSql)>0){
 				System.out.println("修改密码成功");
 				request.getSession().invalidate();
-				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');parent.location.href='login.jsp'</script>");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改密码成功');parent.location.href='login.jsp'</script>");
 			}else{
 				System.out.println("修改公司密码失败");
-				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/changePassword.jsp'</script>");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改密码失败');window.location.href='company/changePassword.jsp'</script>");
 			}
 			
 		}else{
 			System.out.println("修改公司密码失败");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/changePassword.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('原密码错误，请重新检查');window.location.href='company/changePassword.jsp'</script>");
 		}
 	}
 

@@ -51,6 +51,7 @@ public class PubJobServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		Job job = new Job();
 		Date date = new Date();
 		DataBaseOperation dbo = new DataBaseOperation();
@@ -110,14 +111,14 @@ public class PubJobServlet extends HttpServlet {
 				System.out.println(insertSql);
 				if (dbo.insert(insertSql) > 0) {
 					System.out.println("发布职位成功！");
-					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/pubJob.jsp'</script>");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('发布职位成功！');window.location.href='company/pubJob.jsp'</script>");
 				} else {
 					System.out.println("发布职位失败！");
-					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('发布职位失败！');window.location.href='company/pubJob.jsp'</script>");
 				}
 			} else {
 				System.out.println("查询公司成功！");
-				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/pubJob.jsp'</script>");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('发布职位失败！');window.location.href='company/pubJob.jsp'</script>");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

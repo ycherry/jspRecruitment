@@ -43,6 +43,7 @@ public class JobseekerRegServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
 		Jobseeker jobseeker=new Jobseeker();
@@ -57,16 +58,17 @@ public class JobseekerRegServlet extends HttpServlet {
 					String jobseekerRegSql="insert into t_resume(uid,userName) values('"+rs.getString(1)+"','"+rs.getString(2)+"')";
 					if(dbo.insert(jobseekerRegSql)>0){
 						System.out.println("注册成功");
-						out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='login.jsp'</script>");
+						out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册成功，请完善基本信息！');window.location.href='login.jsp'</script>");
 					}else{
 						System.out.println("t_resume注册失败");
-						out.print("fail");
-						response.sendRedirect("reg.html");
+						out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册失败！');window.location.href=reg.html'</script>");
+			//			response.sendRedirect("reg.html");
 					}
 				}else{
 					System.out.println("查询注册失败");
-					out.print("fail");
-					response.sendRedirect("reg.html");
+					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册失败！');window.location.href=reg.html'</script>");
+				//	out.println("fail");
+				//	response.sendRedirect("reg.html");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -74,8 +76,9 @@ public class JobseekerRegServlet extends HttpServlet {
 			}
 		}else{
 			System.out.println("t_user注册失败");
-			out.print("fail");
-			response.sendRedirect("reg.html");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册失败！');window.location.href=reg.html'</script>");
+		//	out.println("注册失败!");
+		//	response.sendRedirect("reg.html");
 		}
 		
 	}

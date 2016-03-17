@@ -3,8 +3,8 @@ package jsprecruitment.entity;
 import java.sql.Date;
 
 public class Jobseeker {
-	private int id;
-	private int uid;
+	private String id;
+	private String uid;
 	private String userName;
 	private String fullName;
 	private String password;
@@ -25,16 +25,17 @@ public class Jobseeker {
 	private Date updateTime;
 	
 	
-	public int getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getUid() {
+	public String getUid() {
 		return uid;
 	}
-	public void setUid(int uid) {
+	public void setUid(String uid) {
 		this.uid = uid;
 	}
 	public String getUserName() {

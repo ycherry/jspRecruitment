@@ -42,6 +42,7 @@ public class DeleteJobServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String intId=request.getParameter("intId");
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
@@ -49,11 +50,11 @@ public class DeleteJobServlet extends HttpServlet {
 		String deleteSql="delete from t_company_job where id='"+intId+"'";
 		if(dbo.delete(deleteSql)>0){
 			System.out.println("删除成功");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='../company/allJob.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('删除职位成功！');window.location.href='../company/allJob.jsp'</script>");
 		}else{
 			System.out.println("删除失败！");
 			out.println(
-					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='../company/allJob.jsp'</script>");
+					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('删除职位失败！');window.location.href='../company/allJob.jsp'</script>");
 		}
 		
 	}

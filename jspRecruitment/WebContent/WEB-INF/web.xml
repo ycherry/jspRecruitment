@@ -74,6 +74,14 @@
     <url-pattern>/JobseekerRegServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>JobseekerChangePasswordServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.jobseeker.JobseekerChangePasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobseekerChangePasswordServlet</servlet-name>
+    <url-pattern>/JobseekerChangePasswordServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>BuildResumeServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.jobseeker.BuildResumeServlet</servlet-class>
   </servlet>

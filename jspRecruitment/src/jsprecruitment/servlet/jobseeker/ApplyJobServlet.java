@@ -37,6 +37,7 @@ public class ApplyJobServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		DataBaseOperation dbo = new DataBaseOperation();
 		Date date = new Date();
 		PrintWriter out = response.getWriter();
@@ -61,18 +62,18 @@ public class ApplyJobServlet extends HttpServlet {
 			if (dbo.insert(insertSql) > 0) {
 				System.out.println("申请职位成功！");
 				out.println(
-						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='company/ViewJob.jsp?jobId="
+						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('申请职位成功！');window.location.href='company/ViewJob.jsp?jobId="
 								+ jobId + "'</script>");
 			} else {
 				System.out.println("申请职位失败！");
 				out.println(
-						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='company/ViewJob.jsp?jobId='"
+						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('申请职位失败！');window.location.href='company/ViewJob.jsp?jobId='"
 								+ jobId + "''</script>");
 			}
 		} else {
 			System.out.println("不能重复申请！");
 			out.println(
-					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('no repeat!');window.location.href='company/ViewJob.jsp?jobId="
+					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('不能重复申请同一个职位！!');window.location.href='company/ViewJob.jsp?jobId="
 							+ jobId + "'</script>");
 		}
 	}

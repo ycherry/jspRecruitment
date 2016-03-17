@@ -47,6 +47,7 @@ public class BuildResumeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		DataBaseOperation dbo = new DataBaseOperation();
 		PrintWriter out = response.getWriter();
 		Jobseeker jobseeker = new Jobseeker();
@@ -99,10 +100,10 @@ public class BuildResumeServlet extends HttpServlet {
 				+ jobseeker.getUserName() + "'";
 		if (dbo.update(updateSql) > 0) {
 			System.out.println("修改个人简历成功");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='jobseeker/buildResume.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改简历成功！');window.location.href='jobseeker/buildResume.jsp'</script>");
 		} else {
 			System.out.println("修改个人简历失败");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='jobseeker/buildResume.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改简历失败！');window.location.href='jobseeker/buildResume.jsp'</script>");
 		}
 
 	}

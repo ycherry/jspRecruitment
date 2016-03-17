@@ -253,6 +253,8 @@
 
 		//	System.out.println("resultset:"+resultset.next());
 		while (resultset.next()) {
+			String resumeId=resultset.getString(1);
+			String resumeUid=resultset.getString(2);
 	%>
 	<div class="talent">
 		<div class="search_talent_list">
@@ -263,7 +265,7 @@
 				<span class="fl disc_talent_mes"><%=resultset.getString(4)%>,<%=year - resultset.getDate(7).getYear()%>岁</span>
 			</div>
 			<div class="disc_job_pay">
-			期望薪资：<%=resultset.getString(17)%>
+				期望薪资：<%=resultset.getString(17)%>
 			</div>
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
@@ -278,6 +280,10 @@
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">学历：<em
 					class="search_talent_list_box_em"><%=resultset.getString(10)%></em></span>
+
+			</div>
+			<div class="interview_btn_align">
+				<button class="interview_btn" onclick="window.location.href='JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=resumeUid%>'">邀请面试</button>
 			</div>
 			<div class="clear"></div>
 		</div>

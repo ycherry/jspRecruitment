@@ -160,7 +160,7 @@ select.error {
 .filter_box {
 	border: 1px solid #ebebeb;
 	height: auto;
-	width:100%;
+	width: 100%;
 }
 
 .clear {
@@ -174,4 +174,20 @@ select.error {
 	font-size: 16px;
 	margin: 0px 10px 0 20px;
 	padding-left: 20px;
+}
+
+.interview_btn {
+	width: 85px;
+	height: 25px;
+	line-height: 25px;
+	border: none;
+	background: #456dab;
+	color: #fff;
+	cursor: pointer;
+	font-family: 微软雅黑;
+	display: inline-block
+}
+.interview_btn_align{
+	text-align:right;
+	margin-right:20px;
 }

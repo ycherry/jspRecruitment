@@ -139,14 +139,14 @@
 				</div>
 				<div class="col-sm-6">
 					<textarea class="form-control" rows="3" cols="12"
-						placeholder="请输入职位要求" name="contents" id="note"></textarea>
+						placeholder="请输入职位要求" name="note" id="note"></textarea>
 				</div>
 			</div>
 			<%
 			session.setAttribute("interview", interview);		
 			%>
 			<div>
-					<button type="submit" name="Submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;邀请面试&nbsp;&nbsp;&nbsp;&nbsp;</button>
+					<button type="submit" name="Submit" class="btn btn-primary">邀请面试</button>
 			</div>
 		</div>
 	</form>

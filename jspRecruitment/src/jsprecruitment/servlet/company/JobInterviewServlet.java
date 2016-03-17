@@ -46,6 +46,7 @@ public class JobInterviewServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		Date date = new Date();
 		DataBaseOperation dbo = new DataBaseOperation();
 		PrintWriter out = response.getWriter();
@@ -64,34 +65,40 @@ public class JobInterviewServlet extends HttpServlet {
 		interview.setDistrict(request.getParameter("district"));
 
 		System.out.println("getResumeUid" + interview.getResumeUid());
-		String insertSql = "insert into t_company_interview (resumeId,resumeUid,jobId,jobName,companyId,companyName,interviewTime,note,telphone,district) values('"
-				+ interview.getResumeId()
-				+ "','"
-				+ interview.getResumeUid()
-				+ "','"
-				+ interview.getJobId()
-				+ "','"
-				+ interview.getJobName()
-				+ "','"
-				+ interview.getCompanyId()
-				+ "','"
-				+ interview.getCompanyName()
-				+ "','"
-				+ interview.getInterviewTime()
-				+ "','"
-				+ interview.getNote()
-				+ "','"
-				+ interview.getTelphone()
-				+ "','"
-				+ interview.getDistrict() + "')";
-		if (dbo.insert(insertSql) > 0) {
-			System.out.println("发布面试邀请成功！");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('sucess');window.location.href='jobseeker/ViewResume.jsp?resumeId="+interview.getResumeId()+"'</script>");
-		} else {
-			System.out.println("发布面试邀请失败！");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('fail');window.location.href='jobseeker/ViewResume.jsp?resumeId="+interview.getResumeId()+"'</script>");
+		String selectSql="select count(*) from t_company_interview where resumeId='"+interview.getResumeId()+"' and jobId='"+interview.getJobId()+"'";
+		if(dbo.getRowCount(selectSql)<=0){
+			String insertSql = "insert into t_company_interview (resumeId,resumeUid,jobId,jobName,companyId,companyName,interviewTime,note,telphone,district) values('"
+					+ interview.getResumeId()
+					+ "','"
+					+ interview.getResumeUid()
+					+ "','"
+					+ interview.getJobId()
+					+ "','"
+					+ interview.getJobName()
+					+ "','"
+					+ interview.getCompanyId()
+					+ "','"
+					+ interview.getCompanyName()
+					+ "','"
+					+ interview.getInterviewTime()
+					+ "','"
+					+ interview.getNote()
+					+ "','"
+					+ interview.getTelphone()
+					+ "','"
+					+ interview.getDistrict() + "')";
+			if (dbo.insert(insertSql) > 0) {
+				System.out.println("发布面试邀请成功！");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请成功！');window.location.href='jobseeker/ViewResume.jsp?resumeId="+interview.getResumeId()+"'</script>");
+			} else {
+				System.out.println("发布面试邀请失败！");
+				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请失败！');window.location.href='jobseeker/ViewResume.jsp?resumeId="+interview.getResumeId()+"'</script>");
+			}
+		}else{
+			System.out.println("不能重复发邀请！");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('一个职位不能重复邀请一个人！!');window.location.href='jobseeker/ViewResume.jsp?resumeId="+interview.getResumeId()+"'</script>");
 		}
-	
+		
 	}
 
 }

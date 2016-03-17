@@ -101,7 +101,7 @@ body {
 					<div class="top_right">
 						<div class="header_seach_State fltR">
 							<span class="header_seach_State_name">欢迎您 <%=jobseeker.getUserName()%>
-							</span> <span class="user_m_line">|</span> <a href="../login.jsp"
+							</span> <span class="user_m_line">|</span> <a href="../LogoutServlet"
 								class="header_seach_State_a">退出</a> <span class="user_m_line">|</span>
 							<a href="../index.jsp"  title='返回首页'
 								class="user_m_fanh">返回首页 </a>

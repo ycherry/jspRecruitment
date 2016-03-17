@@ -48,6 +48,8 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("user");
 		int type = Integer.parseInt(request.getParameter("type"));
 		DataBaseOperation data = new DataBaseOperation();
+		Jobseeker jobseeker = new Jobseeker();
+		Company company = new Company();
 		int intT = data.getRowCount("select * from t_user where userName='" + username + "'and userPass='" + password
 				+ "' and userType=" + type);
 		System.out.println("select * from t_user where userName='" + username + "'and userPass='" + password
@@ -56,19 +58,16 @@ public class LoginServlet extends HttpServlet {
 		if (intT > 0) {
 			System.out.println("登陆成功");
 			HttpSession session = request.getSession();
-			// session.setAttribute("usercode", username);
-			// session.setAttribute("userType", new Integer(type));
-			// session.setAttribute("flag", "true");
-
 			switch (type) {
 			case 1: {
-				Jobseeker jobseeker = new Jobseeker();
+				
 				String selectSql="select * from t_resume where userName='"+username+"'";
 				ResultSet rs = data.select(selectSql);
 				try {
 					jobseeker.setId(rs.getInt(1));
 					jobseeker.setUid(rs.getInt(2));
 					jobseeker.setUserName(username);
+					session.setAttribute("company", company);
 					session.setAttribute("jobseeker", jobseeker);
 					response.sendRedirect("jobseeker/index.jsp");
 				} catch (SQLException e) {
@@ -81,12 +80,13 @@ public class LoginServlet extends HttpServlet {
 
 				// 登陆用户是求职者
 			case 2: {
-				Company company = new Company();
+				
 				String selectSql = "select * from t_company where userName='" + username + "'";
 				ResultSet rs = data.select(selectSql);
 				try {
 					company.setId(rs.getString(1));
 					company.setUserName(username);
+					session.setAttribute("jobseeker", jobseeker);
 					session.setAttribute("company", company);
 					response.sendRedirect("company/index.jsp");
 				} catch (SQLException e) {

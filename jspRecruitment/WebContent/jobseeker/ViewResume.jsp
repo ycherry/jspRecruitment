@@ -118,9 +118,16 @@
 					</div>
 				</div>
 			</div>
+			<%
+				    Company company = new Company();
+					company = (Company) session.getAttribute("company");
+					String visibility = company.getId() == null ? "hidden" : "visible";
+			%>
 			<div class="row">
 				<div class="col-sm-offset-4 col-sm-3 ">
-					<input type="button" class="btn_1 sq_resume" value="邀请面试" onclick="window.location.href='../company/JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=rs.getString(2)%>'">
+					<input type="button" class="btn_1 sq_resume" value="邀请面试"
+						onclick="window.location.href='../company/JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=rs.getString(2)%>'"
+						style="visibility:<%=visibility%>;">
 				</div>
 			</div>
 		</div>

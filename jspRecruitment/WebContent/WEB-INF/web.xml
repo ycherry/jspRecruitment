@@ -57,7 +57,7 @@
     <servlet-name>DeleteJobServlet</servlet-name>
     <url-pattern>/DeleteJobServlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>JobInterviewServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.company.JobInterviewServlet</servlet-class>
   </servlet>
@@ -88,6 +88,14 @@
   <servlet-mapping>
     <servlet-name>ApplyJobServlet</servlet-name>
     <url-pattern>/ApplyJobServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

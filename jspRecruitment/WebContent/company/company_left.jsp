@@ -40,7 +40,7 @@
 			data-toggle="collapse"><i class=""></i>简历管理</a>
 		<ul id="resumeMenu" class="nav nav-list collapse menu-second">
 			<li><a href="SearchTalent.jsp" target="mainFrame"><i class="icon-pencil"></i> 简历搜索</a></li>
-			<li><a href="findJob.jsp" target="mainFrame"><i class="icon-list-alt"></i> 浏览全部求职者信息</a></li>
+			<li><a href="ReceivedResume.jsp" target="mainFrame"><i class="icon-list-alt"></i> 收到的简历</a></li>
 		</ul>
 		<a href="#mailMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>面试管理</a>

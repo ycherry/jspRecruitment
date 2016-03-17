@@ -42,7 +42,7 @@
 .member_Information_amount_n{ font-size:28px;color:#fd9800}
 .member_Information_amountw80{width:95px;}
 .member_right_h1{height:20px; position:relative; float:left; padding-top:10px;width:120px;}
-.member_right_span{ width:110px;height:34px; line-height:34px; background:url(../images/u_m_tit.png) no-repeat right; text-align:center;color:#fff;font-size:14px;position:absolute;left:0px;top:-4px;}
+.member_right_span{ width:110px;height:34px; line-height:34px; background:url(../../images/u_m_tit.png) no-repeat right; text-align:center;color:#fff;font-size:14px;position:absolute;left:0px;top:-4px;}
 .member_right_span_on{  font-weight:bold;color:#076dd3;}
 .m_u_red{color:#F30}
 .member_right_em{ margin-right:10px;color:#000; line-height:40px; display:inline-block; font-size:14px;}
@@ -156,7 +156,7 @@
 .black_submit_cont{width:170px; margin:0 auto; text-align:center}
 .textarea_Reply_cont {width:400px;margin-top:10px;border:1px solid #dce5ef;line-height:20px;color:#666; font-size:12px; padding-left:5px;}
 .Reply_cont_submit{background: url(../images/bth5.jpg) no-repeat;border:none;color: #FFFFFF;cursor: pointer; font-size: 14px;height: 32px;width: 60px; display:block; float:right; margin-top:10px; margin-right:5px;}
-.resume_box_list{width:782px; margin-left:10px; _margin-left:5px;float:left; margin-top:12px;}
+.resume_box_list{width:100%;float:left; margin-top:12px;}
 .resume {width:100%;background:#eee;}
 .resume th{height:38px; background:#f8f8f8;color:#333; font-weight:normal; font-size:16px;;font-family:microsoft yahei,ËÎÌו; }
 .resume td{height:30px; text-align:center;font-size:14px; background:#fff; padding:5px;}
@@ -621,7 +621,7 @@
 .List_Title_w170{width:170px;}
 .List_Title_w120{width:120px;}
 .List_Title_w200{width:200px;}
-.List_Title_w230{width:230px;}
+.List_Title_w230{width:260px;}
 .List_Title_w110{width:110px; text-align:center}
 .List_Title_w500{width:500px;}
 .List_Title_w360{width:360px;}

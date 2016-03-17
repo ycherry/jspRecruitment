@@ -23,16 +23,15 @@
 	DBConn dbc = new DBConn();
 	Jobseeker jobseeker = (Jobseeker) request.getSession()
 			.getAttribute("jobseeker");
-	String resumeId=null;
-	if( jobseeker.getUserName()!=null){
+	String resumeId = null;
+	if (jobseeker.getUserName() != null) {
 		String sql = "select * from t_resume where userName ='"
 				+ jobseeker.getUserName() + "'";
 		ResultSet rs = dbc.getRs(sql);
 		while (rs.next()) {
-			resumeId=rs.getString(1);
+			resumeId = rs.getString(1);
 		}
 	}
-	
 %>
 <body LINK=firebrick VLINK=#660000 ALINK=red>
 	<div class="sidebar-menu">
@@ -41,7 +40,8 @@
 			data-toggle="collapse"><i class=""></i>&nbsp;&nbsp;用户信息管理</a>
 		<ul id="userMeun" class="nav nav-list collapse menu-second">
 			<li><a href="buildResume.jsp" target="mainFrame"><i class=""></i>&nbsp;&nbsp;填写简历信息</a></li>
-			<li><a href="ViewResume.jsp?resumeId=<%=resumeId %>" target="mainFrame"><i class=""></i>&nbsp;&nbsp;预览简历信息</a></li>
+			<li><a href="ViewResume.jsp?resumeId=<%=resumeId%>"
+				target="mainFrame"><i class=""></i>&nbsp;&nbsp;预览简历信息</a></li>
 			<li><a href="changePassword.jsp" target="mainFrame"><i
 					class=""></i>&nbsp;&nbsp;修改密码</a></li>
 		</ul>
@@ -50,8 +50,10 @@
 		<ul id="recruitmentMenu" class="nav nav-list collapse menu-second">
 			<li><a href="SearchJob.jsp" target="mainFrame"><i
 					class="icon-pencil"></i> 搜索职位信息</a></li>
-			<li><a href="editJobSelect.jsp" target="mainFrame"><i
-					class="icon-list-alt"></i> 编辑招聘信息</a></li>
+			<li><a href="InterviewInvitation.jsp" target="mainFrame"><i
+					class="icon-list-alt"></i> 面试邀请</a></li>
+			<li><a href="AppliedJobs.jsp" target="mainFrame"><i
+					class="icon-list-alt"></i> 申请的职位</a></li>
 		</ul>
 		<a href="#resumeMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>简历管理</a>

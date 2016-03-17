@@ -13,7 +13,7 @@ em,i{ font-style:normal}
 .mt5{ margin-top:5px;}
 .mt20{ margin-top:20px;}
 .mt12{ margin-top:16px;}
-.w950{width:1000px; margin:0 auto}
+.w950{width:100%; margin:0 auto}
 .cblue{color:#1178c3}
 input,textarea{font-family:microsoft yahei,ËÎÌו;}
 .re{ position:relative}
@@ -25,7 +25,7 @@ input,textarea{font-family:microsoft yahei,ËÎÌו;}
 .header_seach{width:250px; margin-top:15px;}
 .header_seach .he_input{width:174px;height:29px; line-height:29px; border:none;text-indent:10px; font-size:14px; float:left; overflow:hidden; background:url(../images/yon_text.jpg) no-repeat;color:#9ab8e5; font-size:13px;}
 .he_submit{width:36px;height:35px; background:url(../images/bth1.jpg) no-repeat;border:none; float:left; cursor:pointer}
-.header_seach_State{color:#fff; margin-top:15px; font-size:14px;}
+.header_seach_State{color:#fff; margin-top:15px; font-size:14px;margin-right:10px;}
 .header_seach_State_news{ display:inline-block; background:url(../images/skin_dark_s.png) no-repeat left center; padding-left:20px; margin-right:5px;}
 .header_seach_State .header_seach_State_a{color:#fff; margin-left:5px;}
 .header_seach_State_name{ display:inline-block; margin-right:5px;margin-left:5px;}
@@ -92,7 +92,7 @@ input,textarea{font-family:microsoft yahei,ËÎÌו;}
 .left_sidebar_list_box_cur  .left_sidebar_h5_ie6{_width:46px;_height:160px; _padding:0px;}
 /*ÓÒ²א*/
 .index_mian_right{width:805px; float:right;}
-.mian_right{width:803px; float:right;min-height:725px;_height:725px; background:#fff; padding-bottom:10px;border:1px solid #ddd }
+.mian_right{width:100%;min-height:496px; background:#fff; padding-bottom:10px;border:1px solid #ddd }
 .foot{ height: 50px;line-height: 50px;margin-top:10px;text-align: center;width: 100%;color:#999}
 .diggg{width:100%; font-weight:normal; text-align:right; padding-top:10px; padding-bottom:10px; float:left}
 .diggg a{ display:inline-block;border:1px solid #ccc; padding:5px 10px; margin-right:10px;color:#666}

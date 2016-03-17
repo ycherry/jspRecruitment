@@ -30,38 +30,34 @@
 					<div id="" class="resume_box_list">
 						<div class="List_Ope List_Title ">
 							<span class="List_Title_span List_Title_w170">面试职位</span> <span
-								class="List_Title_span List_Title_w330">公司名称</span> <span
-								class="List_Title_span List_Title_w230"
-								style="text-align: center">操作</span>
+								class="List_Title_span List_Title_w170">公司名称</span> <span
+								class="List_Title_span List_Title_w170"
+								style="text-align: center">操作</span><span
+								class="List_Title_span List_Title_w170"
+								style="text-align: center">面试时间</span> <span
+								class="List_Title_span List_Title_w170"
+								style="text-align: center">我的操作</span>
 						</div>
 						<div class="List_Ope List_Ope_Advisory">
 							<span class="List_Title_span List_Title_w170"> <a
 								href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=2"
 								class="List_Title_span_com">java工程师</a>
-							</span> <span class="List_Title_span List_Title_w330"> <a
+							</span> <span class="List_Title_span List_Title_w170"> <a
 								href="http://127.0.0.1/recruitment/upload/company/index.php?c=show&id=4"
 								target="_blank">信息技术</a>
-							</span> <span class="List_Title_span List_Title_w230"
-								style="text-align: center"> <a
-								href="javascript:void(0);"
-								onclick="layer_del('您确定要删除？', 'index.php?c=msg&act=del&id=3'); "
-								class="cblue">删除</a> <span class="u_List_line">|</span> <a
-								href="javascript:void(0);"
-								onclick="layer_del('您确定要屏蔽该公司并删除该邀请？','index.php?c=msg&act=shield&id=3');"
-								class="cblue">屏蔽</a><span class="u_List_line">|</span> <a
-								href="javascript:void(0);"
+							</span> <span class="List_Title_span List_Title_w170"
+								style="text-align: center"> <a href="javascript:void(0);"
 								onclick="layer_del('确定要拒绝面试邀请？', 'index.php?c=msg&act=inviteset&id=3&browse=4')"
 								class="cblue">拒绝面试</a><span class="u_List_line">|</span><a
 								href="javascript:void(0);"
 								onclick="layer_del('确定要同意面试邀请？', 'index.php?c=msg&act=inviteset&id=3&browse=3')"
 								class="cblue">同意面试</a> <span class="u_List_line">|</span> <a
 								href="javascript:getcont('3');">查看</a>
-							</span>
-							<div style="width: 100%; float: left">
-								<span style="padding-left: 10px;">邀请时间：2016-03-15</span> <span
-									style="padding-left: 48px;">我的操作： <font color="#f60">尚未回复</font>
-								</span>
-							</div>
+							</span> <span class="List_Title_span List_Title_w170"> <a
+								href="http://127.0.0.1/recruitment/upload/company/index.php?c=show&id=4"
+								target="_blank">2016-03-15</a>
+							</span><span class="List_Title_span List_Title_w170"><font
+								color="#f60">尚未回复</font> </span>
 						</div>
 					</div>
 					<div class="diggg"></div>

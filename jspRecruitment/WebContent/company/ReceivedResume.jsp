@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page
+	import="jsprecruitment.util.*,jsprecruitment.entity.*,javax.servlet.http.HttpServletRequest"%>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
@@ -27,10 +33,14 @@
 	href="../css/style/company/user-n2012.css">
 <link rel="stylesheet" type="text/css"
 	href="../css/style/company/index_style.css">
+<link rel="stylesheet" type="text/css"
+	href="../css/bootstrap-select.css">
+<link rel="stylesheet" type="text/css"
+	href="../css/bootstrap-select.css.map">
 <meta content="MSHTML 6.00.6000.16939" name=GENERATOR>
 </head>
 <body>
-	<div class="w1000">
+	<div>
 		<div class="admin_mainbody">
 			<div class=right_box>
 				<div class=admincont_box>
@@ -43,23 +53,27 @@
 								onload="returnmessage('supportiframe');" style="display: none"></iframe>
 							<div class="hr_tip_box">
 								<div class="hr_subMetx">
-									<span class="hr_subMetx_span fltL">招聘职位：</span>
-									<div class="text_seclet text_seclet_cur2 re">
-										<input id="qypr" class="SpFormLBut text_seclet_w250"
-											type="button" onclick="search_show('job_qypr');" value="全部职位">
-										<div id="job_qypr" class="cus-sel-opt-panel "
-											style="display: none;">
-											<ul class="Search_Condition_box_list">
-												<li><a href="index.php?c=hr&state=">全部职位</a></li>
-												<li><a href="index.php?c=hr&jobid=2&state=">java工程师</a>
-												</li>
-												<li><a href="index.php?c=hr&jobid=3&state=">web工程师</a>
-												</li>
-											</ul>
-										</div>
-									</div>
+									<span class="hr_subMetx_span fltL">招聘职位：</span> <select
+										class="selectpicker ">
+										<option data-hidden="true"><%=request.getParameter("jobName") %></option>
+										<option
+											onclick='<jsp:forward page="../ReceivedResumeServlet?jobId=0&&jobName='全部职位'"></jsp:forward>'>全部职位</option>
+										<%
+											DBConn dbc = new DBConn();
+											Company company = (Company) request.getSession().getAttribute("company");
+											String selectSql = "select * from t_company_job where cid='" + company.getId() + "' ";
+											System.out.println(selectSql);
+											ResultSet rs = dbc.getRs(selectSql);
+											while (rs.next()) {
+										%>
+										<option
+											onclick='<jsp:forward page="../ReceivedResumeServlet?jobId=<%=rs.getString(1)%>&&jobName='<%=rs.getString(3) %>'"></jsp:forward>'><%=rs.getString(3)%></option>
+										<%
+											}
+										%>
+									</select>
 								</div>
-								<div class="hr_subMetx">
+								<!--  						<div class="hr_subMetx">
 									<form action="index.php" method="get">
 										<span class="hr_subMetx_span fltL">关 键 字：</span>
 										<div class="hr_subMetx_se">
@@ -71,6 +85,7 @@
 										</div>
 									</form>
 								</div>
+			-->
 							</div>
 							<div class="clear"></div>
 							<form action="index.php?c=hr&act=hrset" target="supportiframe"
@@ -81,26 +96,28 @@
 									<span class="job_news_list_span job_w30">&nbsp;</span> <span
 										class="job_news_list_span job_w80" style="text-align: left">姓名</span>
 									<span class="job_news_list_span job_w160">求职意向</span> <span
-										class="job_news_list_span job_w100">工作经验</span> <span
-										class="job_news_list_span job_w100">期望薪资</span> <span
+										class="job_news_list_span job_w140">工作经验</span> <span
+										class="job_news_list_span job_w140">期望薪资</span> <span
 										class="job_news_list_span job_w155">申请的职位</span> <span
+										class="job_news_list_span job_w155">申请时间</span><span
 										class="job_news_list_span job_w100"
 										style="width: 140px; text-align: center">操作</span>
 								</div>
 								<div class="job_news_list" style="padding-bottom: 18px;">
 									<span class="job_news_list_span job_w30"
-										style="padding-right: 6px;"> <input type="checkbox"
+										style="padding-right: 10px;"> <input type="checkbox"
 										name="delid[]" value="2">
 									</span> <span class="job_news_list_span job_w80"
 										style="text-align: left"><a
 										href="http://127.0.0.1/recruitment/upload/resume/index.php?c=show&id=2"
 										target="_blank" class="com_Release_name">阿百川&nbsp;</a></span> <span
 										class="job_news_list_span job_w160">软件工程师 &nbsp;</span> <span
-										class="job_news_list_span job_w100">应届毕业生 &nbsp;</span> <span
-										class="job_news_list_span job_w100">10000及以上&nbsp;</span> <span
+										class="job_news_list_span job_w140">应届毕业生 &nbsp;</span> <span
+										class="job_news_list_span job_w140">10000及以上&nbsp;</span> <span
 										class="job_news_list_span job_w155"><a
 										href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=3"
-										target="_blank" class="uesr_name_a">web工程师</a></span> <span
+										target="_blank" class="uesr_name_a">web工程师</a></span><span
+										class="job_news_list_span job_w155">2016-03-15</span> <span
 										class="job_news_list_span job_w100"
 										style="width: 140px; text-align: right;"> <font
 										color="red">已邀请</font> <span class="com_m_line">|</span> <a
@@ -108,10 +125,6 @@
 										onclick="layer_del('屏蔽该用户，并删除该条信息？', 'index.php?c=job&act=opera&p_uid=6'); "
 										class="uesr_name_a">屏蔽/删除</a>
 									</span>
-									<div class="clear"></div>
-									<div class="com_mem_hr_list_b_b">
-										<span style="padding-left: 30px; color: #999">申请时间：2016-03-15</span>
-									</div>
 								</div>
 								<div class="diggg mt10 fltR"></div>
 							</form>

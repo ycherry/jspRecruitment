@@ -65,6 +65,17 @@
     <servlet-name>JobInterviewServlet</servlet-name>
     <url-pattern>/JobInterviewServlet</url-pattern>
   </servlet-mapping>
+  
+  
+  <servlet>
+    <servlet-name>ReceivedResumeServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.company.ReceivedResumeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReceivedResumeServlet</servlet-name>
+    <url-pattern>/ReceivedResumeServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>JobseekerRegServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.jobseeker.JobseekerRegServlet</servlet-class>
@@ -97,7 +108,7 @@
     <servlet-name>ApplyJobServlet</servlet-name>
     <url-pattern>/ApplyJobServlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.LogoutServlet</servlet-class>
   </servlet>

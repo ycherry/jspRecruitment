@@ -33,10 +33,6 @@
 	href="../css/style/company/user-n2012.css">
 <link rel="stylesheet" type="text/css"
 	href="../css/style/company/index_style.css">
-<link rel="stylesheet" type="text/css"
-	href="../css/bootstrap-select.css">
-<link rel="stylesheet" type="text/css"
-	href="../css/bootstrap-select.css.map">
 <meta content="MSHTML 6.00.6000.16939" name=GENERATOR>
 </head>
 <body>
@@ -54,20 +50,20 @@
 							<div class="hr_tip_box">
 								<div class="hr_subMetx">
 									<span class="hr_subMetx_span fltL">招聘职位：</span> <select
-										class="selectpicker ">
-										<option data-hidden="true"><%=request.getParameter("jobName") %></option>
-										<option
-											onclick='<jsp:forward page="../ReceivedResumeServlet?jobId=0&&jobName='全部职位'"></jsp:forward>'>全部职位</option>
+										class="selectpicker " id="position" onchange="positionChange()">
+										<option  value="<%=request.getParameter("jobName") == null? "0": request.getParameter("jobId")%>" data-hidden="true"><%=request.getParameter("jobName") == null? "全部职位": request.getParameter("jobName")%></option>
+										<option value="0">全部职位</option>
 										<%
 											DBConn dbc = new DBConn();
-											Company company = (Company) request.getSession().getAttribute("company");
-											String selectSql = "select * from t_company_job where cid='" + company.getId() + "' ";
+											Company company = (Company) request.getSession().getAttribute(
+													"company");
+											String selectSql = "select * from t_company_job where cid='"
+													+ company.getId() + "' ";
 											System.out.println(selectSql);
 											ResultSet rs = dbc.getRs(selectSql);
 											while (rs.next()) {
 										%>
-										<option
-											onclick='<jsp:forward page="../ReceivedResumeServlet?jobId=<%=rs.getString(1)%>&&jobName='<%=rs.getString(3) %>'"></jsp:forward>'><%=rs.getString(3)%></option>
+										<option value="<%=rs.getString(1)%>"><%=rs.getString(3)%></option>
 										<%
 											}
 										%>
@@ -143,6 +139,7 @@
 		</div>
 	</div>
 	<script>
+console.log(window.location.href);
 		$(document).ready(function() {
 			$(".com_mem_hr_list_bj").click(function() {
 				var browse = $(this).attr('browse');
@@ -155,6 +152,13 @@
 				});
 			});
 		});
+		function positionChange(){
+		//	alert(window.location.href);
+			var jobId=$("#position option:selected").val();
+			var jobName=$("#position option:selected").text();
+			console.log(jobId+" and "+ jobName);
+			window.location.href="../ReceivedResumeServlet?jobId="+jobId+"&&jobName="+jobName+;
+		}
 	</script>
 	</div>
 	<div class="clear"></div>

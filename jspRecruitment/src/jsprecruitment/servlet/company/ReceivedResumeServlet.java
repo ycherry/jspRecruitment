@@ -34,6 +34,7 @@ public class ReceivedResumeServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		DataBaseOperation dbo=new DataBaseOperation();
 		Company company=(Company)request.getSession().getAttribute("company");
@@ -43,16 +44,18 @@ public class ReceivedResumeServlet extends HttpServlet {
 		String jobName=request.getParameter("jobName");
 		System.out.println("jobId:"+jobId);
 		if(jobId.equals("0")){
-			selectSql="select * from t_company_job where cid='"+company+"'";
+			selectSql="select * from t_company_job where cid="+company;
 			
 		}else{
-			selectSql="select * from t_company_job where id='"+jobId+"'";
+			selectSql="select * from t_company_job where id="+jobId;
 		}
+		System.out.println("selectSql1:"+selectSql);
 		ResultSet rs=dbo.select(selectSql);
 		request.setAttribute("resultSet", rs);
 		request.setAttribute("jobName", jobName);
-		RequestDispatcher rd=request.getRequestDispatcher("company/ReceivedResume.jsp");
-		rd.forward(request, response);
+		getServletConfig().getServletContext().getRequestDispatcher("/../jspRecruitment/company/ReceivedResume.jsp").forward(request, response);
+//		RequestDispatcher rd=request.getRequestDispatcher("/company/ReceivedResume.jsp").forward(request, response);;
+//		rd.forward(request, response);
 	}
 
 	/**

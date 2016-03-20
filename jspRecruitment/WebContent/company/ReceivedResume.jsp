@@ -11,7 +11,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv=Content-Type content="text/span; charset=utf-8">
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/js/util/jquery-1.10.0.js"></script>
 <script type="text/javascript"
@@ -42,7 +42,7 @@
 	href="<%=request.getContextPath()%>/css/style/company/index_style.css">
 <meta content="MSHTML 6.00.6000.16939" name=GENERATOR>
 </head>
-<body>
+<body onload="loadData()">
 	<div>
 		<div class="admin_mainbody">
 			<div class=right_box>
@@ -60,13 +60,18 @@
 										class="selectpicker " id="position"
 										onchange="positionChange()">
 										<option
-											value="<%=request.getAttribute("jobName") == null ? "0" : request.getAttribute("jobId")%>"
-											data-hidden="true"><%=request.getAttribute("jobName") == null ? "全部职位" : request.getAttribute("jobName")%></option>
+											value="<%=request.getAttribute("jobName") == null ? "0" : request
+					.getAttribute("jobId")%>"
+											data-hidden="true"><%=request.getAttribute("jobName") == null
+					? "全部职位"
+					: request.getAttribute("jobName")%></option>
 										<option value="0">全部职位</option>
 										<%
 											DBConn dbc = new DBConn();
-											Company company = (Company) request.getSession().getAttribute("company");
-											String selectSql = "select * from t_company_job where cid='" + company.getId() + "' ";
+											Company company = (Company) request.getSession().getAttribute(
+													"company");
+											String selectSql = "select * from t_company_job where cid='"
+													+ company.getId() + "' ";
 											System.out.println(selectSql);
 											ResultSet rs = dbc.getRs(selectSql);
 											while (rs.next()) {
@@ -107,9 +112,12 @@
 										class="job_news_list_span job_w140">操作</span>
 								</div>
 								<%
+								    int resumeNumber=0;
 									if (request.getAttribute("resultSet") != null) {
-										ResultSet resultset = (ResultSet) request.getAttribute("resultSet");
+										ResultSet resultset = (ResultSet) request
+												.getAttribute("resultSet");
 										while (resultset.next()) {
+											resumeNumber++;
 								%>
 								<div class="job_news_list" style="padding-bottom: 18px;">
 
@@ -118,21 +126,44 @@
 										name="delid[]" value="2">
 									</span> <span class="job_news_list_span job_w80"
 										style="text-align: left"><a
-										href="http://127.0.0.1/recruitment/upload/resume/index.php?c=show&id=2"
+										href="<%=request.getContextPath() %>/jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString(1) %>"
 										target="_blank" class="com_Release_name"><%=resultset.getString(5)%></a></span>
 									<span class="job_news_list_span job_w120"><%=resultset.getString(13)%></span>
 									<span class="job_news_list_span job_w120"><%=resultset.getString(8)%></span>
 									<span class="job_news_list_span job_w120"><%=resultset.getString(17)%></span>
 									<span class="job_news_list_span job_w120"><a
-										href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=3"
+										href="<%=request.getContextPath() %>/company/ViewJob.jsp?jobId=<%=Encode.getNewString(resultset.getString(21)) %>"
 										target="_blank" class="uesr_name_a"><%=resultset.getString(24)%></a></span><span
 										class="job_news_list_span job_w120"><%=resultset.getString(27)%></span>
-									<span class="job_news_list_span job_w100"
-										style="width: 140px; text-align: right;"> <font
-										color="red">已邀请</font> <span class="com_m_line">|</span> <a
+									<span class="job_news_list_span job_w140"
+										style="text-align: center;">
+										<%
+										String status=null;
+										String applySelectSql="select status from t_job_apply where resumeId='"+resultset.getString(1)+"' and jobId='"+resultset.getString(23)+"'";
+										
+												ResultSet applyRs=dbc.getRs(applySelectSql);
+												if(applyRs.next()){
+													status=applyRs.getString(1);
+												}
+										if(status.equals("2")){
+											%>
+											 <font color="red">已拒绝</font>
+										<% }else{
+										
+										String interviewSelectSql="select * from t_company_interview where resumeId='"+resultset.getString(1)+"' and jobId='"+resultset.getString(23)+"'";
+										if(dbc.getRs(interviewSelectSql).next()){
+											%>
+	                                       <font color="red">已邀请</font>
+										<%}else{ %>
+										<a
+										href="<%=request.getContextPath() %>/company/JobInterview.jsp?resumeId=<%=resultset.getString(1) %>&&resumeUid=<%=resultset.getString(2) %>"
+										class="uesr_name_a">邀请面试</a>
+										<%} %>
+										 <span class="com_m_line">|</span> <a
 										href="javascript:void(0)"
-										onclick="layer_del('屏蔽该用户，并删除该条信息？', 'index.php?c=job&act=opera&p_uid=6'); "
+										onclick="deleteModal(<%=resultset.getString(1) %>,<%=resultset.getString(23) %>)"
 										class="uesr_name_a">屏蔽/删除</a>
+										<%} %>
 									</span>
 
 								</div>
@@ -144,9 +175,9 @@
 							</form>
 							<div class="clear"></div>
 							<div class="job_list_tip">
-								<span class="job_list_tip_span">共有（<span class="f60">1</span>）份简历申请贵公司发布的职位
-								</span><a href="http://127.0.0.1/recruitment/upload/resume/"
-									class="fb_Com_xz" target="_blank"
+								<span class="job_list_tip_span">共有（<span class="f60"><%=resumeNumber %></span>）份简历申请贵公司发布的职位
+								</span><a href="<%=request.getContextPath() %>/company/SearchTalent.jsp"
+									class="fb_Com_xz" target="mainFrame"
 									style="text-align: center; line-height: 25px;">找人才</a>
 							</div>
 							<div class="clear"></div>
@@ -170,6 +201,14 @@
 			});
 			
 		});
+		function loadData(){
+			var jobName="<%=request.getAttribute("jobName")%>";
+			console.log("调用onload");
+			console.log("jobName:"+jobName);
+			if(jobName=="null"){
+				positionChange();
+			}
+		}
 		function positionChange(){
 			//	alert(window.location.href);
 				var jobId=$("#position option:selected").val();
@@ -177,12 +216,24 @@
 				var contextpath="<%=request.getContextPath()%>";
 			console.log("contextpath:" + contextpath);
 			console.log(jobId + " and " + jobName);
-			//		window.location.href="/ReceivedResumeServlet?jobId="+ jobId + "&&jobName=" + jobName;
 			window.location.href = contextpath
 					+ "/ReceivedResumeServlet?jobId=" + jobId;
 		}
+		
+		function deleteModal(resumeId,jobId){
+			if(confirm("确定要拒绝给用户 ?")){
+				console.log("确定拒绝");
+				console.log("jobId"+jobId);
+				console.log("resumeId"+resumeId);
+				var contextpath="<%=request.getContextPath()%>";
+				window.location.href=contextpath + "/RefuseApplyServlet?jobId='"+jobId+"'&&resumeId='"+resumeId+"'";
+			}else{
+				console.log("取消拒绝");
+			}
+			
+		}
+		
 	</script>
-	</div>
 	<div class="clear"></div>
 </body>
 </html>

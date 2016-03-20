@@ -65,8 +65,6 @@
     <servlet-name>JobInterviewServlet</servlet-name>
     <url-pattern>/JobInterviewServlet</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <servlet-name>ReceivedResumeServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.company.ReceivedResumeServlet</servlet-class>
@@ -75,7 +73,14 @@
     <servlet-name>ReceivedResumeServlet</servlet-name>
     <url-pattern>/ReceivedResumeServlet</url-pattern>
   </servlet-mapping>
-  
+    <servlet>
+    <servlet-name>RefuseApplyServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.company.RefuseApplyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RefuseApplyServlet</servlet-name>
+    <url-pattern>/RefuseApplyServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>JobseekerRegServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.jobseeker.JobseekerRegServlet</servlet-class>

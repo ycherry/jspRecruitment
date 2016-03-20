@@ -87,6 +87,14 @@ public class JobInterviewServlet extends HttpServlet {
 					+ interview.getTelphone()
 					+ "','"
 					+ interview.getDistrict() + "')";
+			String selectSql2="select count(*) from t_job_apply where resumeId='"+interview.getResumeId()+"' and jobId='"+interview.getJobId()+"'";
+			if(dbo.getRowCount(selectSql2)>0){
+				String updateSql="update t_job_apply set status=1";
+				if(dbo.update(updateSql)>0){
+					System.out.println("更新表状态成功！");
+				}
+			}
+			
 			if (dbo.insert(insertSql) > 0) {
 				System.out.println("发布面试邀请成功！");
 				out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请成功！');window.location.href='jobseeker/ViewResume.jsp?resumeId="+interview.getResumeId()+"'</script>");

@@ -38,9 +38,6 @@ public class ReceivedResumeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
@@ -57,8 +54,11 @@ public class ReceivedResumeServlet extends HttpServlet {
 		String jobName = "";
 		System.out.println("jobId:" + jobId);
 		if (jobId.equals("0")) {
-			selectSql = "select *, count(distinct t_resume.id)  from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
-					+ companyId+" group by t_resume.id";
+//去重查找
+//			selectSql = "select *, count(distinct t_resume.id)  from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
+//					+ companyId+" group by t_resume.id";
+			selectSql = "select * from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
+					+ companyId;
 			rs = dbc.getRs(selectSql);
 			jobName = "全部职位";
 		} else {

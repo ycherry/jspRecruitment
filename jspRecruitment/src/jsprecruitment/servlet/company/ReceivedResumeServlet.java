@@ -57,8 +57,8 @@ public class ReceivedResumeServlet extends HttpServlet {
 		String jobName = "";
 		System.out.println("jobId:" + jobId);
 		if (jobId.equals("0")) {
-			selectSql = "select distinct t_resume.id  from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
-					+ companyId;
+			selectSql = "select *, count(distinct t_resume.id)  from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
+					+ companyId+" group by t_resume.id";
 			rs = dbc.getRs(selectSql);
 			jobName = "全部职位";
 		} else {

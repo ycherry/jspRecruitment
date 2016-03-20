@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,7 @@ public class ReceivedResumeServlet extends HttpServlet {
 		String jobName=request.getParameter("jobName");
 		System.out.println("jobId:"+jobId);
 		if(jobId.equals("0")){
-			selectSql="select * from t_company_job where cid="+company;
+			selectSql="select * from t_company_job where cid="+companyId;
 			
 		}else{
 			selectSql="select * from t_company_job where id="+jobId;
@@ -53,9 +54,10 @@ public class ReceivedResumeServlet extends HttpServlet {
 		ResultSet rs=dbo.select(selectSql);
 		request.setAttribute("resultSet", rs);
 		request.setAttribute("jobName", jobName);
-		getServletConfig().getServletContext().getRequestDispatcher("/../jspRecruitment/company/ReceivedResume.jsp").forward(request, response);
-//		RequestDispatcher rd=request.getRequestDispatcher("/company/ReceivedResume.jsp").forward(request, response);;
-//		rd.forward(request, response);
+		request.setAttribute("jobId", jobId);
+		ServletContext application=this.getServletContext();
+		RequestDispatcher rd=application.getRequestDispatcher("/company/ReceivedResume.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

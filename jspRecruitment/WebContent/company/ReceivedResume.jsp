@@ -12,27 +12,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv=Content-Type content="text/span; charset=utf-8">
-<meta http-equiv=X-UA-Compatible content="IE=edge">
-<script type="text/javascript" src="../js/util/jquery-1.10.0.js"></script>
-<script type="text/javascript" src="../js/util/bootstrap.js"></script>
 <script type="text/javascript"
-	src="../js/util/jquery.validate-1.13.1.js"></script>
-<script type="text/javascript" src="../js/util/bootstrap-select.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../css/style/sidebar.css">
-<link rel="stylesheet" href="../css/bootstrap.css.map">
-<link rel="stylesheet" type="text/css" href="../css/style/common.css">
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
+	src="<%=request.getContextPath()%>/js/util/jquery-1.10.0.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/util/bootstrap.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/util/jquery.validate-1.13.1.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/util/bootstrap-select.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="../css/bootstrap-select.css">
+	href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css"
-	href="../css/bootstrap-select.css.map">
+	href="<%=request.getContextPath()%>/css/style/sidebar.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/bootstrap.css.map">
 <link rel="stylesheet" type="text/css"
-	href="../css/style/company/m_style.css">
+	href="<%=request.getContextPath()%>/css/style/common.css">
 <link rel="stylesheet" type="text/css"
-	href="../css/style/company/user-n2012.css">
+	href="<%=request.getContextPath()%>/css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
-	href="../css/style/company/index_style.css">
+	href="<%=request.getContextPath()%>/css/bootstrap-select.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/bootstrap-select.css.map">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/style/company/m_style.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/style/company/user-n2012.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/style/company/index_style.css">
 <meta content="MSHTML 6.00.6000.16939" name=GENERATOR>
 </head>
 <body>
@@ -46,22 +53,25 @@
 					<div class="com_body">
 						<div class=admin_textbox_04>
 							<iframe id="supportiframe" name="supportiframe"
-								onload="returnmessage('supportiframe');" style="display: none"></iframe>
+								style="display: none"></iframe>
 							<div class="hr_tip_box">
 								<div class="hr_subMetx">
 									<span class="hr_subMetx_span fltL">招聘职位：</span> <select
-										class="selectpicker " id="position" onchange="positionChange()">
-										<option  value="<%=request.getParameter("jobName") == null? "0": request.getParameter("jobId")%>" data-hidden="true"><%=request.getParameter("jobName") == null? "全部职位": request.getParameter("jobName")%></option>
+										class="selectpicker " id="position"
+										onchange="positionChange()">
+										<option
+											value="<%=request.getParameter("jobName") == null? "0": request.getParameter("jobId")%>"
+											data-hidden="true"><%=request.getParameter("jobName") == null? "全部职位":Encode.getNewString(request.getParameter("jobName")) %></option>
 										<option value="0">全部职位</option>
 										<%
 											DBConn dbc = new DBConn();
-											Company company = (Company) request.getSession().getAttribute(
-													"company");
-											String selectSql = "select * from t_company_job where cid='"
-													+ company.getId() + "' ";
-											System.out.println(selectSql);
-											ResultSet rs = dbc.getRs(selectSql);
-											while (rs.next()) {
+																			Company company = (Company) request.getSession().getAttribute(
+																					"company");
+																			String selectSql = "select * from t_company_job where cid='"
+																					+ company.getId() + "' ";
+																			System.out.println(selectSql);
+																			ResultSet rs = dbc.getRs(selectSql);
+																			while (rs.next()) {
 										%>
 										<option value="<%=rs.getString(1)%>"><%=rs.getString(3)%></option>
 										<%
@@ -91,13 +101,13 @@
 								<div class="job_news_list job_news_list_h1 mt10">
 									<span class="job_news_list_span job_w30">&nbsp;</span> <span
 										class="job_news_list_span job_w80" style="text-align: left">姓名</span>
-									<span class="job_news_list_span job_w160">求职意向</span> <span
-										class="job_news_list_span job_w140">工作经验</span> <span
-										class="job_news_list_span job_w140">期望薪资</span> <span
-										class="job_news_list_span job_w155">申请的职位</span> <span
-										class="job_news_list_span job_w155">申请时间</span><span
-										class="job_news_list_span job_w100"
-										style="width: 140px; text-align: center">操作</span>
+									<span class="job_news_list_span job_w120">求职意向</span> <span
+										class="job_news_list_span job_w120">工作经验</span> <span
+										class="job_news_list_span job_w120">期望薪资</span> <span
+										class="job_news_list_span job_w120">申请的职位</span> <span
+										class="job_news_list_span job_w120">申请时间</span><span
+										class="job_news_list_span job_w140"
+										>操作</span>
 								</div>
 								<div class="job_news_list" style="padding-bottom: 18px;">
 									<span class="job_news_list_span job_w30"
@@ -107,13 +117,13 @@
 										style="text-align: left"><a
 										href="http://127.0.0.1/recruitment/upload/resume/index.php?c=show&id=2"
 										target="_blank" class="com_Release_name">阿百川&nbsp;</a></span> <span
-										class="job_news_list_span job_w160">软件工程师 &nbsp;</span> <span
-										class="job_news_list_span job_w140">应届毕业生 &nbsp;</span> <span
-										class="job_news_list_span job_w140">10000及以上&nbsp;</span> <span
-										class="job_news_list_span job_w155"><a
+										class="job_news_list_span job_w120">软件工程师 &nbsp;</span> <span
+										class="job_news_list_span job_w120">应届毕业生 &nbsp;</span> <span
+										class="job_news_list_span job_w120">10000及以上&nbsp;</span> <span
+										class="job_news_list_span job_w120"><a
 										href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=3"
 										target="_blank" class="uesr_name_a">web工程师</a></span><span
-										class="job_news_list_span job_w155">2016-03-15</span> <span
+										class="job_news_list_span job_w120">2016-03-15</span> <span
 										class="job_news_list_span job_w100"
 										style="width: 140px; text-align: right;"> <font
 										color="red">已邀请</font> <span class="com_m_line">|</span> <a
@@ -157,7 +167,8 @@ console.log(window.location.href);
 			var jobId=$("#position option:selected").val();
 			var jobName=$("#position option:selected").text();
 			console.log(jobId+" and "+ jobName);
-			window.location.href="../ReceivedResumeServlet?jobId="+jobId+"&&jobName="+jobName+;
+			window.location.href="<%=request.getContextPath()%>/ReceivedResumeServlet?jobId="
+					+ jobId + "&&jobName=" + jobName;
 		}
 	</script>
 	</div>

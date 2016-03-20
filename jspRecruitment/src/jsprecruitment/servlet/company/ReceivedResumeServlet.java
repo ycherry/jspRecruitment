@@ -1,7 +1,9 @@
 package jsprecruitment.servlet.company;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -12,58 +14,85 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jsprecruitment.entity.Company;
+import jsprecruitment.util.DBConn;
 import jsprecruitment.util.DataBaseOperation;
+import jsprecruitment.util.Encode;
 
 /**
  * Servlet implementation class ReceivedResumeServlet
  */
 public class ReceivedResumeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ReceivedResumeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ReceivedResumeServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at:
+		// ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		DataBaseOperation dbo=new DataBaseOperation();
-		Company company=(Company)request.getSession().getAttribute("company");
-		String companyId=company.getId();
-		String selectSql=null;
-		String jobId=request.getParameter("jobId");
-		String jobName=request.getParameter("jobName");
-		System.out.println("jobId:"+jobId);
-		if(jobId.equals("0")){
-			selectSql="select * from t_company_job where cid="+companyId;
-			
-		}else{
-			selectSql="select * from t_company_job where id="+jobId;
+		DBConn dbc = new DBConn();
+		Company company = (Company) request.getSession().getAttribute("company");
+		String companyId = company.getId();
+		String selectSql = null;
+		ResultSet rs = null;
+		String jobId = request.getParameter("jobId");
+		System.out.println("jobId:" + jobId);
+		// String
+		// jobName=java.net.URLDecoder.decode(request.getParameter("jobName"),
+		// "utf-8");
+		String jobName = "";
+		System.out.println("jobId:" + jobId);
+		if (jobId.equals("0")) {
+			selectSql = "select distinct t_resume.id  from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
+					+ companyId;
+			rs = dbc.getRs(selectSql);
+			jobName = "全部职位";
+		} else {
+			selectSql = "select * from t_resume,t_job_apply where t_resume.id = t_job_apply.resumeId and t_job_apply.jobId='"
+					+ jobId + "'";
+			String selectNameSql = "select jobName from t_job_apply where jobId='" + jobId + "'";
+			rs = dbc.getRs(selectSql);
+			ResultSet resultset = dbc.getRs(selectNameSql);
+			try {
+				if (resultset.next()) {
+					jobName = resultset.getString(1);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		System.out.println("selectSql1:"+selectSql);
-		ResultSet rs=dbo.select(selectSql);
+		System.out.println("selectSql1:" + selectSql);
 		request.setAttribute("resultSet", rs);
 		request.setAttribute("jobName", jobName);
 		request.setAttribute("jobId", jobId);
-		ServletContext application=this.getServletContext();
-		RequestDispatcher rd=application.getRequestDispatcher("/company/ReceivedResume.jsp");
+		System.out.println("jobName:" + jobName);
+		System.out.println("jobName:" + request.getAttribute("jobName"));
+		ServletContext application = this.getServletContext();
+		RequestDispatcher rd = application.getRequestDispatcher("/company/ReceivedResume.jsp");
 		rd.forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

@@ -60,18 +60,16 @@
 										class="selectpicker " id="position"
 										onchange="positionChange()">
 										<option
-											value="<%=request.getParameter("jobName") == null? "0": request.getParameter("jobId")%>"
-											data-hidden="true"><%=request.getParameter("jobName") == null? "全部职位":Encode.getNewString(request.getParameter("jobName")) %></option>
+											value="<%=request.getAttribute("jobName") == null ? "0" : request.getAttribute("jobId")%>"
+											data-hidden="true"><%=request.getAttribute("jobName") == null ? "全部职位" : request.getAttribute("jobName")%></option>
 										<option value="0">全部职位</option>
 										<%
 											DBConn dbc = new DBConn();
-																			Company company = (Company) request.getSession().getAttribute(
-																					"company");
-																			String selectSql = "select * from t_company_job where cid='"
-																					+ company.getId() + "' ";
-																			System.out.println(selectSql);
-																			ResultSet rs = dbc.getRs(selectSql);
-																			while (rs.next()) {
+											Company company = (Company) request.getSession().getAttribute("company");
+											String selectSql = "select * from t_company_job where cid='" + company.getId() + "' ";
+											System.out.println(selectSql);
+											ResultSet rs = dbc.getRs(selectSql);
+											while (rs.next()) {
 										%>
 										<option value="<%=rs.getString(1)%>"><%=rs.getString(3)%></option>
 										<%
@@ -106,32 +104,42 @@
 										class="job_news_list_span job_w120">期望薪资</span> <span
 										class="job_news_list_span job_w120">申请的职位</span> <span
 										class="job_news_list_span job_w120">申请时间</span><span
-										class="job_news_list_span job_w140"
-										>操作</span>
+										class="job_news_list_span job_w140">操作</span>
 								</div>
+								<%
+									if (request.getAttribute("resultSet") != null) {
+										ResultSet resultset = (ResultSet) request.getAttribute("resultSet");
+										while (resultset.next()) {
+								%>
 								<div class="job_news_list" style="padding-bottom: 18px;">
+
 									<span class="job_news_list_span job_w30"
 										style="padding-right: 10px;"> <input type="checkbox"
 										name="delid[]" value="2">
 									</span> <span class="job_news_list_span job_w80"
 										style="text-align: left"><a
 										href="http://127.0.0.1/recruitment/upload/resume/index.php?c=show&id=2"
-										target="_blank" class="com_Release_name">阿百川&nbsp;</a></span> <span
-										class="job_news_list_span job_w120">软件工程师 &nbsp;</span> <span
-										class="job_news_list_span job_w120">应届毕业生 &nbsp;</span> <span
-										class="job_news_list_span job_w120">10000及以上&nbsp;</span> <span
-										class="job_news_list_span job_w120"><a
+										target="_blank" class="com_Release_name"><%=resultset.getString(5)%></a></span>
+									<span class="job_news_list_span job_w120"><%=resultset.getString(13)%></span>
+									<span class="job_news_list_span job_w120"><%=resultset.getString(8)%></span>
+									<span class="job_news_list_span job_w120"><%=resultset.getString(17)%></span>
+									<span class="job_news_list_span job_w120"><a
 										href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=3"
-										target="_blank" class="uesr_name_a">web工程师</a></span><span
-										class="job_news_list_span job_w120">2016-03-15</span> <span
-										class="job_news_list_span job_w100"
+										target="_blank" class="uesr_name_a"><%=resultset.getString(24)%></a></span><span
+										class="job_news_list_span job_w120"><%=resultset.getString(27)%></span>
+									<span class="job_news_list_span job_w100"
 										style="width: 140px; text-align: right;"> <font
 										color="red">已邀请</font> <span class="com_m_line">|</span> <a
 										href="javascript:void(0)"
 										onclick="layer_del('屏蔽该用户，并删除该条信息？', 'index.php?c=job&act=opera&p_uid=6'); "
 										class="uesr_name_a">屏蔽/删除</a>
 									</span>
+
 								</div>
+								<%
+									}
+									}
+								%>
 								<div class="diggg mt10 fltR"></div>
 							</form>
 							<div class="clear"></div>
@@ -149,7 +157,6 @@
 		</div>
 	</div>
 	<script>
-console.log(window.location.href);
 		$(document).ready(function() {
 			$(".com_mem_hr_list_bj").click(function() {
 				var browse = $(this).attr('browse');
@@ -161,14 +168,18 @@ console.log(window.location.href);
 					location.reload();
 				});
 			});
+			
 		});
 		function positionChange(){
-		//	alert(window.location.href);
-			var jobId=$("#position option:selected").val();
-			var jobName=$("#position option:selected").text();
-			console.log(jobId+" and "+ jobName);
-			window.location.href="<%=request.getContextPath()%>/ReceivedResumeServlet?jobId="
-					+ jobId + "&&jobName=" + jobName;
+			//	alert(window.location.href);
+				var jobId=$("#position option:selected").val();
+				var jobName=$("#position option:selected").text();
+				var contextpath="<%=request.getContextPath()%>";
+			console.log("contextpath:" + contextpath);
+			console.log(jobId + " and " + jobName);
+			//		window.location.href="/ReceivedResumeServlet?jobId="+ jobId + "&&jobName=" + jobName;
+			window.location.href = contextpath
+					+ "/ReceivedResumeServlet?jobId=" + jobId;
 		}
 	</script>
 	</div>

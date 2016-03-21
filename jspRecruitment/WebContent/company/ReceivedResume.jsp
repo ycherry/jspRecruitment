@@ -156,7 +156,7 @@
 	                                       <font color="red">已邀请</font>
 										<%}else{ %>
 										<a
-										href="<%=request.getContextPath() %>/company/JobInterview.jsp?resumeId=<%=resultset.getString(1) %>&&resumeUid=<%=resultset.getString(2) %>"
+										href="<%=request.getContextPath() %>/company/JobInterview.jsp?resumeId=<%=resultset.getString(1) %>&&resumeUid=<%=resultset.getString(2) %>&&jobName=<%=resultset.getString(24) %>"
 										class="uesr_name_a">邀请面试</a>
 										<%} %>
 										 <span class="com_m_line">|</span> <a

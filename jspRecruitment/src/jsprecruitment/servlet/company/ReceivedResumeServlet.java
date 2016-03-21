@@ -54,9 +54,11 @@ public class ReceivedResumeServlet extends HttpServlet {
 		String jobName = "";
 		System.out.println("jobId:" + jobId);
 		if (jobId.equals("0")) {
-//去重查找
-//			selectSql = "select *, count(distinct t_resume.id)  from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
-//					+ companyId+" group by t_resume.id";
+			// 去重查找
+			// selectSql = "select *, count(distinct t_resume.id) from
+			// t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and
+			// companyId="
+			// + companyId+" group by t_resume.id";
 			selectSql = "select * from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
 					+ companyId;
 			rs = dbc.getRs(selectSql);
@@ -76,6 +78,7 @@ public class ReceivedResumeServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
 		System.out.println("selectSql1:" + selectSql);
 		request.setAttribute("resultSet", rs);
 		request.setAttribute("jobName", jobName);

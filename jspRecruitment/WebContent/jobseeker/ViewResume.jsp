@@ -126,7 +126,7 @@
 			<div class="row">
 				<div class="col-sm-offset-4 col-sm-3 ">
 					<input type="button" class="btn_1 sq_resume" value="邀请面试"
-						onclick="window.location.href='../company/JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=rs.getString(2)%>'"
+						onclick="window.location.href='../company/JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=rs.getString(2)%>&&jobName=全部职位'"
 						style="visibility:<%=visibility%>;">
 				</div>
 			</div>

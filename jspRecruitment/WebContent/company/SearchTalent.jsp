@@ -283,7 +283,7 @@
 
 			</div>
 			<div class="interview_btn_align">
-				<button class="interview_btn" onclick="window.location.href='JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=resumeUid%>'">邀请面试</button>
+				<button class="interview_btn" onclick="window.location.href='JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=resumeUid%>>&&jobName=全部职位'">邀请面试</button>
 			</div>
 			<div class="clear"></div>
 		</div>

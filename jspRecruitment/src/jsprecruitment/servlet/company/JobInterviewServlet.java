@@ -85,9 +85,6 @@ public class JobInterviewServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.out.println("getJobId:" + interview.getJobId());
-		System.out.println("getResumeUid:" + interview.getResumeUid());
 		String selectSql = "select count(*) from t_company_interview where resumeId='" + interview.getResumeId()
 				+ "' and jobId='" + interview.getJobId() + "'";
 		if (dbo.getRowCount(selectSql) <= 0) {
@@ -99,7 +96,7 @@ public class JobInterviewServlet extends HttpServlet {
 			String selectSql2 = "select count(*) from t_job_apply where resumeId='" + interview.getResumeId()
 					+ "' and jobId='" + interview.getJobId() + "'";
 			if (dbo.getRowCount(selectSql2) > 0) {
-				String updateSql = "update t_job_apply set status=1";
+				String updateSql = "update t_job_apply set status=1 where resumeId='"+interview.getResumeId()+"' and jobId='"+interview.getJobId()+"'";
 				if (dbo.update(updateSql) > 0) {
 					System.out.println("更新表状态成功！");
 				}

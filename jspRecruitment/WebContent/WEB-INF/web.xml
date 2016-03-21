@@ -122,6 +122,14 @@
     <url-pattern>/ApplyJobServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DeleteApplyInfoServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.jobseeker.DeleteApplyInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteApplyInfoServlet</servlet-name>
+    <url-pattern>/DeleteApplyInfoServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.LogoutServlet</servlet-class>
   </servlet>

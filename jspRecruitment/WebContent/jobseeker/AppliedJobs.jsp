@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page
+	import="jsprecruitment.util.*,jsprecruitment.entity.*,javax.servlet.http.HttpServletRequest"%>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -21,47 +24,82 @@
 <meta content="MSHTML 6.00.6000.16939" name="Generator">
 </head>
 <body>
+	<%
+		DataBaseOperation dbo = new DataBaseOperation();
+	    DBConn dbc=new DBConn();
+		Jobseeker jobseeker = (Jobseeker) request.getSession()
+				.getAttribute("jobseeker");
+		String countSql = "select count(*) from t_job_apply where resumeId='"
+				+ jobseeker.getId() + "'";
+		int count = dbo.getRowCount(countSql);
+	%>
 	<div class="mian_right fltR">
 		<div class="member_right_h1 fltL">
 			<span class="member_right_span fltL">申请的职位</span>
 		</div>
 		<div class="resume_box_list">
 			<div class="resume_Prompt">
-				您已申请 <span style="color: red;">1</span> 条职位,请耐心等待企业回复！
+				您已申请 <span style="color: red;"><%=count%></span> 条职位,请耐心等待企业回复！
 			</div>
 			<div class="clear"></div>
 			<div id="gms_showclew"></div>
 			<div class="List_Ope List_Title mt12">
-				<span class="List_Title_span List_Title_w260">申请的职位</span>
-				<span class="List_Title_span List_Title_w110">当前状态</span> <span
-					class="List_Title_span List_Title_w110">投递简历</span> <span
-					class="List_Title_span List_Title_w110">申请时间</span> <span
-					class="List_Title_span List_Title_w80">操作</span>
+				<span class="List_Title_span List_Title_w200">申请的职位</span> <span
+					class="List_Title_span List_Title_w200">公司名称</span> <span
+					class="List_Title_span List_Title_w150">当前状态</span> <span
+					class="List_Title_span List_Title_w150">申请时间</span> <span
+					class="List_Title_span List_Title_w150">操作</span>
 			</div>
+			<%
+			String selectSql="select * from t_company_job,t_job_apply where t_job_apply.jobId=t_company_job.id and resumeId='"+jobseeker.getId()+"'";
+			ResultSet rs=dbc.getRs(selectSql);
+			while(rs.next()){
+			%>
 			<div class="List_Ope List_Ope_bor">
-				<span class="List_Title_span List_Title_w260">
-					<div>
-						<a
-							href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=3"
-							target="_blank" title="web工程师" class="List_Title_span_com">web工程师</a>
-					</div> <a
-					href="http://127.0.0.1/recruitment/upload/company/index.php?c=show&id=4"
-					target="_blank" title="信息技术" class="List_Ope_a">信息技术 </a>
-				</span> <span class="List_Title_span List_Title_w110 mt10"> <span
-					class=" is_browse2">已查看</span>
-				</span> <span class="List_Title_span List_Title_w110 mt10">产品经理</span> <span
-					class="List_Title_span List_Title_w110 mt10">2016-03-15</span> <span
-					class="List_Title_span List_Title_w80 mt10"> <a
+				<span class="List_Title_span List_Title_w200"> <a
+					href="<%=request.getContextPath() %>/company/ViewJob.jsp?jobId=<%=rs.getString(1)%>"
+					target="mainFrame" title="web工程师" class="List_Title_span_com"><%=rs.getString(3) %></a>
+				</span> <span class="List_Title_span List_Title_w200"> <a
+					href="<%=request.getContextPath() %>/company/ViewCompany.jsp?jobId=<%=rs.getString(2) %>"
+					target="mainFrame" title="信息技术" class="List_Ope_a"><%=rs.getString(4) %> </a>
+				</span><span class="List_Title_span List_Title_w150">
+				<%
+				String status=null;
+				if(rs.getString(21)==null||rs.getString(21).equals("")){
+					status="未查看";
+				}else if(rs.getString(21).equals("1")){
+					status="已邀请面试";
+				}else if(rs.getString(21).equals("2")){
+					status="不符合公司职位需求";
+				}
+				%> <span
+					class=" is_browse2"><%=status %></span>
+				</span> <span class="List_Title_span List_Title_w150"><%=rs.getString(20) %></span> <span
+					class="List_Title_span List_Title_w150"> <a
 					href="javascript:void(0)"
-					onclick="layer_del('确定要删除？','index.php?c=job&act=del&id=2');"
+					onclick="deleteApplyInfo(<%=rs.getString(14) %>,<%=rs.getString(16) %>)"
 					class="List_dete cblue">删除</a>
 				</span>
 			</div>
+			<%} %>
 			<div class="clear"></div>
 		</div>
 		<div class="diggg" style="margin-top: 10px; float: right"></div>
 	</div>
-
+<script type="text/javascript">
+function deleteApplyInfo(resumeId,jobId){
+	if(confirm("确认删除求职信息？")){
+		console.log("确认删除!");
+		console.log("resumeId:"+resumeId);
+		console.log("jobId:"+jobId);
+		var contextpath="<%=request.getContextPath()%>";
+		window.location.href=contextpath + "/DeleteApplyInfoServlet?jobId='"+jobId+"'&&resumeId='"+resumeId+"'";
+	}else{
+		console.log("取消删除!");
+	}
+	
+}
+</script>
 
 
 

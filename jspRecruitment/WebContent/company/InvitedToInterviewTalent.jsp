@@ -52,8 +52,6 @@
 						<div class="com_body">
 							<!-- <div class="job_re_ts"> 您已邀请 <span class="re_cor blod">1</span> 份简历面试 </div>-->
 							<div class=admin_textbox_04>
-								<iframe id="supportiframe" name="supportiframe"
-									onload="returnmessage('supportiframe');" style="display: none"></iframe>
 								<form action="index.php?c=invite&act=del" method="post"
 									target="supportiframe" id='myform'>
 									<div class=table>
@@ -81,7 +79,7 @@
 												<span class="job_news_list_span job_w130"
 													style="width: 95px;">&nbsp;<a
 													href="<%=request.getContextPath()%>/jobseeker/ViewResume.jsp?resumeId=<%=rs.getString(1) %>"
-													target=_blank class="com_Release_name"><%=rs.getString(5)%></a></span>
+													target=mainFrame class="com_Release_name"><%=rs.getString(5)%></a></span>
 												<span class="job_news_list_span job_w150"><%=rs.getString(24)%></span>
 												<span class="job_news_list_span job_w100"><%=rs.getString(8)%></span>
 												<span class="job_news_list_span job_w100"><%=rs.getString(17)%></span>

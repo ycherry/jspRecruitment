@@ -78,6 +78,8 @@ public class JobInterviewServlet extends HttpServlet {
 		try {
 			if (rs.next()) {
 				interview.setJobId(rs.getString(1));
+				interview.setCompanyName(rs.getString(4));
+				interview.setCompanyId(rs.getString(2));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -85,6 +87,7 @@ public class JobInterviewServlet extends HttpServlet {
 		}
 
 		System.out.println("getJobId:" + interview.getJobId());
+		System.out.println("getResumeUid:" + interview.getResumeUid());
 		String selectSql = "select count(*) from t_company_interview where resumeId='" + interview.getResumeId()
 				+ "' and jobId='" + interview.getJobId() + "'";
 		if (dbo.getRowCount(selectSql) <= 0) {
@@ -108,6 +111,11 @@ public class JobInterviewServlet extends HttpServlet {
 					out.println(
 							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请成功！');window.location.href='company/ReceivedResume.jsp'</script>");
 				}
+				if(resourcePage.equals("/jspRecruitment/company/SearchTalent.jsp")){
+					out.println(
+							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请成功！');window.location.href='company/SearchTalent.jsp'</script>");
+				}
+				
 				out.println(
 						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请成功！');window.location.href='jobseeker/ViewResume.jsp?resumeId="
 								+ interview.getResumeId() + "'</script>");
@@ -116,6 +124,10 @@ public class JobInterviewServlet extends HttpServlet {
 				if(resourcePage.equals("/jspRecruitment/ReceivedResumeServlet")){
 					out.println(
 							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请失败！');window.location.href='company/ReceivedResume.jsp'</script>");
+				}
+				if(resourcePage.equals("/jspRecruitment/company/SearchTalent.jsp")){
+					out.println(
+							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请失败！');window.location.href='company/SearchTalent.jsp'</script>");
 				}
 				out.println(
 						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请失败！');window.location.href='jobseeker/ViewResume.jsp?resumeId="
@@ -126,6 +138,10 @@ public class JobInterviewServlet extends HttpServlet {
 			if(resourcePage.equals("/jspRecruitment/ReceivedResumeServlet")){
 				out.println(
 						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('一个职位不能重复邀请一个人！');window.location.href='company/ReceivedResume.jsp'</script>");
+			}
+			if(resourcePage.equals("/jspRecruitment/company/SearchTalent.jsp")){
+				out.println(
+						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请失败！');window.location.href='company/SearchTalent.jsp'</script>");
 			}
 			out.println(
 					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('一个职位不能重复邀请一个人！');window.location.href='jobseeker/ViewResume.jsp?resumeId="

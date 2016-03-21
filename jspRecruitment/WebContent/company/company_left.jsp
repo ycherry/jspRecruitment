@@ -45,7 +45,7 @@
 		<a href="#mailMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>面试管理</a>
 		<ul id="mailMenu" class="nav nav-list collapse menu-second">
-			<li><a href="../mail/index.jsp" target="mainFrame"><i class="icon-pencil"></i> 面试邀请</a></li>
+			<li><a href="InvitedToInterviewTalent.jsp" target="mainFrame"><i class="icon-pencil"></i> 面试邀请</a></li>
 		</ul>
 		<a href="#otherMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>退出系统</a>

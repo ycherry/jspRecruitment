@@ -222,9 +222,6 @@
 		
 		function deleteModal(resumeId,jobId){
 			if(confirm("确定要拒绝给用户 ?")){
-				console.log("确定拒绝");
-				console.log("jobId"+jobId);
-				console.log("resumeId"+resumeId);
 				var contextpath="<%=request.getContextPath()%>";
 				window.location.href=contextpath + "/RefuseApplyServlet?jobId='"+jobId+"'&&resumeId='"+resumeId+"'";
 			}else{

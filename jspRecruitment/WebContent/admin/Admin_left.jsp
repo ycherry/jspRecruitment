@@ -19,20 +19,6 @@
 <link rel="stylesheet" href="../css/bootstrap.css.map">
 <link rel="stylesheet" type="text/css" href="../css/style/common.css">
 </head>
-<%
-	DBConn dbc = new DBConn();
-	Jobseeker jobseeker = (Jobseeker) request.getSession()
-			.getAttribute("jobseeker");
-	String resumeId = null;
-	if (jobseeker.getUserName() != null) {
-		String sql = "select * from t_resume where userName ='"
-				+ jobseeker.getUserName() + "'";
-		ResultSet rs = dbc.getRs(sql);
-		while (rs.next()) {
-			resumeId = rs.getString(1);
-		}
-	}
-%>
 <body LINK=firebrick VLINK=#660000 ALINK=red>
 	<div class="sidebar-menu">
 		<!-- http://getbootstrap.com/components/#glyphicons 图标 -->
@@ -56,7 +42,7 @@
 			data-toggle="collapse"><i class=""></i>简历管理</a>
 		<ul id="resumeMenu" class="nav nav-list collapse menu-second">
 			<li><a href="buildResume.jsp" target="mainFrame"><i class=""></i>&nbsp;&nbsp;填写简历信息</a></li>
-			<li><a href="ViewResume.jsp?resumeId=<%=resumeId%>"
+			<li><a href="#"
 				target="mainFrame"><i class=""></i>&nbsp;&nbsp;预览简历信息</a></li>
 		</ul>
 		<a href="#otherMenu" class="nav-header menu-first collapsed"

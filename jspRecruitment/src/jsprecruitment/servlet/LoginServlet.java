@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jsprecruitment.entity.Admin;
 import jsprecruitment.entity.Company;
 import jsprecruitment.entity.Jobseeker;
 import jsprecruitment.util.DataBaseOperation;
@@ -51,17 +52,23 @@ public class LoginServlet extends HttpServlet {
 		DataBaseOperation data = new DataBaseOperation();
 		Jobseeker jobseeker = new Jobseeker();
 		Company company = new Company();
-		int intT = data.getRowCount("select * from t_user where userName='" + username + "'and userPass='" + password
-				+ "' and userType=" + type);
-		System.out.println("select * from t_user where userName='" + username + "'and userPass='" + password
-				+ "' and userType=" + type);
+		int intT=0;
+		String selectUserSql=null;
+		if(username.equals("admin")){
+			selectUserSql="select count(*) from t_user where userName='" + username + "'and userPass='" + password+"' and userType=3";
+			type=3;
+		}else{
+			selectUserSql="select count(*) from t_user where userName='" + username + "'and userPass='" + password
+					+ "' and userType=" + type;
+		}	
+		intT=data.getRowCount(selectUserSql);
+		System.out.println(selectUserSql);
 		System.out.println(intT);
 		if (intT > 0) {
 			System.out.println("登陆成功");
 			HttpSession session = request.getSession();
 			switch (type) {
-			case 1: {
-				
+			case 1: {				
 				String selectSql="select * from t_resume where userName='"+username+"'";
 				ResultSet rs = data.select(selectSql);
 				try {
@@ -78,7 +85,6 @@ public class LoginServlet extends HttpServlet {
 				
 				break;
 			}
-
 				// 登陆用户是求职者
 			case 2: {
 				
@@ -99,9 +105,14 @@ public class LoginServlet extends HttpServlet {
 			}
 
 				// 登陆用户是招聘公司
-			case 3:
-				response.sendRedirect("admin/index.html");
+			case 3:{
+				Admin admin=new Admin();
+				admin.setUserName("username");
+				session.setAttribute("admin", admin);
+				response.sendRedirect("admin/Index.jsp");
 				break;
+			}
+				
 			// 登陆用户是管理员
 			default:
 				response.sendRedirect("../index.jsp");

@@ -130,6 +130,14 @@
     <url-pattern>/DeleteApplyInfoServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ResponseOfInterviewServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.jobseeker.ResponseOfInterviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ResponseOfInterviewServlet</servlet-name>
+    <url-pattern>/ResponseOfInterviewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.LogoutServlet</servlet-class>
   </servlet>

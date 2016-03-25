@@ -722,9 +722,9 @@
 .resume_list_gj_r_qxgj{color:#F30; text-decoration:underline}
 .member_Information_Balance{ margin-left:10px;}
 .member_Information_Balance_fold{ color:#ff7300; font-size:16px;}
-.audition_list{width:100%;line-height:25px; float:left}
-.audition_list_span{ display:inline-block;width:90px; text-align:right; float:left}
-.audition_list_em{ display:inline-block;width:230px;float:left}
+.audition_list{line-height:25px; float:left}
+.audition_list_span{ display:inline-block;width:125px; text-align:right; float:left}
+.audition_list_em{ display:inline-block;width:125px;float:left;text-align:left}
 .user_show_png{width: 780px;border: 1px solid #e6e8e9;background:#eff1f2;color: #333;padding-top: 5px;padding-bottom: 5px;line-height: 23px;float: left;font-size: 12px;font-family: ËÎÌו;margin-top:10px;}
 .user_showbtn_02{width:100px;height:30px; background:#f60;border:none;color:#fff; float:left; margin-left:10px;}
 .admin_tit{width:100%; float:left}.compl_list{width:100%; float:left; margin-top:20px;border-bottom:1px dashed #ccc; padding-bottom:20px;}

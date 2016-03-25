@@ -45,10 +45,8 @@
 						</div>
 						<%
 							DBConn dbc = new DBConn();
-							Jobseeker jobseeker = (Jobseeker) request.getSession()
-									.getAttribute("jobseeker");
-							String selectInterviewSql = "select * from t_company_interview where resumeId='"
-									+ jobseeker.getId() + "'";
+							Jobseeker jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
+							String selectInterviewSql = "select * from t_company_interview where resumeId='" + jobseeker.getId() + "'";
 							ResultSet rs = dbc.getRs(selectInterviewSql);
 							while (rs.next()) {
 								System.out.println(rs.getObject("companyName"));
@@ -71,39 +69,59 @@
 							</span> <span class="List_Title_span List_Title_w230"
 								style="text-align: center"><a href="javascript:void(0);"
 								onclick="deleteInterview(<%=rs.getObject("id")%>,'3')"
-								class="cblue">删除</a><span class="u_List_line">|</span>
-								<%
-									if (status == null) {
-								%> <a href="javascript:void(0);"
+								class="cblue">删除</a><span class="u_List_line">|</span> <%
+ 	if (status == null) {
+ %> <a href="javascript:void(0);"
 								onclick="refuseInterview(<%=rs.getObject("id")%>,'2')"
 								class="cblue">拒绝面试</a><span class="u_List_line">|</span><a
 								href="javascript:void(0);"
 								onclick="acceptInterview(<%=rs.getObject("id")%>,'1')"
-								class="cblue">同意面试</a> <span class="u_List_line">|</span> 
-								<%	}%> <a
-								href="#jobInterview<%=rs.getObject("id")%>" data-toggle="modal">查看</a>
+								class="cblue">同意面试</a> <span class="u_List_line">|</span> <%
+ 	}
+ %> <a href="#jobInterview<%=rs.getObject("id")%>" data-toggle="modal">查看</a>
 							</span> <span class="List_Title_span List_Title_w150"> <a
 								href="http://127.0.0.1/recruitment/upload/company/index.php?c=show&id=4"
 								target="_blank">2016-03-15</a>
 							</span><span class="List_Title_span List_Title_w150"><font
 								color="#f60"><%=responseMessage%></font> </span>
 						</div>
-						<div class="modal" id="jobInterview<%=rs.getObject("id")%>">
+						<div class="modal" id="jobInterview<%=rs.getObject("id")%>"
+							style="z-index: 2000">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">
 											<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 										</button>
-										<h4 class="modal-title">模态弹出窗标题</h4>
+										<h4 class="modal-title">邀请面试</h4>
 									</div>
 									<div class="modal-body">
-										<p>模态弹出窗主体内容</p>
+										<div class="audition_list">
+											<span class="audition_list_span">面试职位：</span><em
+												class="audition_list_em" id="jobname"><%=rs.getObject("jobName") %></em> <span
+												class="audition_list_span">企业名称：</span><em
+												class="audition_list_em" id="linkman"><%=rs.getObject("companyName") %></em>
+										</div>
+										<div class="audition_list">
+											<span class="audition_list_span">联系电话：</span><em
+												class="audition_list_em" id="linktel"><%=rs.getObject("telphone") %></em> <span
+												class="audition_list_span">面试时间：</span><em
+												class="audition_list_em" id="intertime"><%=rs.getObject("interviewTime") %></em>
+										</div>
+										<div class="audition_list">
+											<span class="audition_list_span">面试地点：</span><em
+												class="audition_list_em" id="address"><%=rs.getObject("district") %></em>
+										</div>
+										<div class="clear"></div>
+										<div class="audition_list">
+											<span class="audition_list_span">面试备注：</span><em
+												class="audition_list_em" id="content"><%=rs.getObject("Note") %></em>
+										</div>
+										<div class="clear"></div>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default"
 											data-dismiss="modal">关闭</button>
-										<button type="button" class="btn btn-primary">保存</button>
 									</div>
 								</div>
 								<!-- /.modal-content -->

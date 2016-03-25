@@ -85,20 +85,18 @@
 												<span class="job_news_list_span job_w100"><%=rs.getString(17)%></span>
 												<span class="job_news_list_span job_w100"><%=rs.getString(27)%></span>
 												<%
-													if (rs.getString(32) == null) {
-												%>
-												<span class="job_news_list_span job_w80"> <font
-													color="blue">对方未回复</font>
-												</span>
-												<%
-													} else {
-												%>
-												<span class="job_news_list_span job_w80"> <font
-													color="blue"><%=rs.getString(32) %></font>
-												</span>
-												<%
+												    String responseMessage=null;
+													 if(rs.getString(32) != null&&rs.getString(32).equals("1")){
+														responseMessage="对方已接受";
+													}else if(rs.getString(32) != null&&rs.getString(32).equals("2")){
+														responseMessage="对方已拒绝";
+													}else{
+														responseMessage="对方未回复";
 													}
 												%>
+												<span class="job_news_list_span job_w80"> <font
+													color="blue"><%=responseMessage %></font>
+												</span>
 												<span class="job_news_list_span job_w80"><a
 													href="javascript:void(0)"
 													onclick="deleteInterviewInfo(<%=rs.getString(1) %>,<%=rs.getString(23) %>)"

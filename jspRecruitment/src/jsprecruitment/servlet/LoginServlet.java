@@ -107,9 +107,9 @@ public class LoginServlet extends HttpServlet {
 				// 登陆用户是招聘公司
 			case 3:{
 				Admin admin=new Admin();
-				admin.setUserName("username");
+				admin.setUserName(username);
 				session.setAttribute("admin", admin);
-				response.sendRedirect("admin/Index.jsp");
+				response.sendRedirect("admin/index.jsp");
 				break;
 			}
 				

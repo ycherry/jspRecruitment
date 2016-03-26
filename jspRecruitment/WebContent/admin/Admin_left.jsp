@@ -23,27 +23,25 @@
 	<div class="sidebar-menu">
 		<!-- http://getbootstrap.com/components/#glyphicons 图标 -->
 		<a href="#userMeun" class="nav-header menu-first collapsed"
-			data-toggle="collapse"><i class=""></i>&nbsp;&nbsp;用户信息管理</a>
+			data-toggle="collapse"><i class=""></i>用户信息管理</a>
 		<ul id="userMeun" class="nav nav-list collapse menu-second">
-			<li><a href="changePassword.jsp" target="mainFrame"><i
-					class=""></i>&nbsp;&nbsp;修改密码</a></li>
+			<li><a href="<%=request.getContextPath() %>/admin/ChangePassword.jsp" target="mainFrame"><i
+					class=""></i>修改密码</a></li>
 		</ul>
 		<a href="#recruitmentMenu" class="nav-header menu-first collapsed"
-			data-toggle="collapse"><i class=""></i>求职管理</a>
+			data-toggle="collapse"><i class=""></i>用户管理</a>
 		<ul id="recruitmentMenu" class="nav nav-list collapse menu-second">
 			<li><a href="SearchJob.jsp" target="mainFrame"><i
-					class="icon-pencil"></i> 搜索职位信息</a></li>
-			<li><a href="InterviewInvitation.jsp" target="mainFrame"><i
-					class="icon-list-alt"></i> 面试邀请</a></li>
-			<li><a href="AppliedJobs.jsp" target="mainFrame"><i
-					class="icon-list-alt"></i> 申请的职位</a></li>
+					class="icon-pencil"></i> 用户信息管理</a></li>
+			<li><a href="<%=request.getContextPath() %>/admin/ResumeManagement.jsp" target="mainFrame"><i
+					class="icon-list-alt"></i> 简历管理</a></li>
 		</ul>
 		<a href="#resumeMenu" class="nav-header menu-first collapsed"
-			data-toggle="collapse"><i class=""></i>简历管理</a>
+			data-toggle="collapse"><i class=""></i>企业管理</a>
 		<ul id="resumeMenu" class="nav nav-list collapse menu-second">
-			<li><a href="buildResume.jsp" target="mainFrame"><i class=""></i>&nbsp;&nbsp;填写简历信息</a></li>
+			<li><a href="buildResume.jsp" target="mainFrame"><i class=""></i>企业基本信息管理</a></li>
 			<li><a href="#"
-				target="mainFrame"><i class=""></i>&nbsp;&nbsp;预览简历信息</a></li>
+				target="mainFrame"><i class=""></i>职位管理</a></li>
 		</ul>
 		<a href="#otherMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>退出系统</a>

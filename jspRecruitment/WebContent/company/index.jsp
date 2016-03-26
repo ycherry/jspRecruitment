@@ -205,12 +205,6 @@ body {
 			</div>
 		</div>
 	</div>
-
-	<!--foot  end-->
-
-	<script type="text/javascript">
-		
-	</script>
 </body>
 
 </html>

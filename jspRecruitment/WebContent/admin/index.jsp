@@ -72,6 +72,7 @@ body {
 	width: 80%;
 	height: 500px;
 	float: left;
+	background-color: black;
 }
 
 #iframe-main {
@@ -200,12 +201,6 @@ body {
 			</div>
 		</div>
 	</div>
-
-	<!--foot  end-->
-
-	<script type="text/javascript">
-		
-	</script>
 </body>
 
 </html>

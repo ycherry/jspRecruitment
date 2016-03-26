@@ -138,6 +138,14 @@
     <url-pattern>/ResponseOfInterviewServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AdminChangePasswordServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.admin.AdminChangePasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminChangePasswordServlet</servlet-name>
+    <url-pattern>/AdminChangePasswordServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.LogoutServlet</servlet-class>
   </servlet>

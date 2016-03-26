@@ -65,7 +65,7 @@ body {
 						<td><%=rs.getObject("scale") == null ? "未填" : rs
 						.getObject("scale")%></td>
 						<td><a class="a_style" href="javascript:void(0)"
-							onclick="deleteJobseeker(<%=rs.getObject("id")%>,<%=rs.getObject("userId")%>)">删除</a></td>
+							onclick="deleteCompany(<%=rs.getObject("id")%>,<%=rs.getObject("userId")%>)">删除</a></td>
 					</tr>
 					<%
 						}
@@ -76,10 +76,10 @@ body {
 		</div>
 	</div>
 	<script type="text/javascript">	
-   function deleteJobseeker(resumeId,userId){
-	if(confirm("删除后数据不能恢复，包括简历信息，企业招聘信息，求职信息 ，确定删除？")){
+   function deleteCompany(companyId,userId){
+	if(confirm("删除后数据不能恢复，包括简历信息，招聘信息，求职申请信息 ，确定删除？")){
 		console.log("确认删除!");
-		window.location.href="../DeleteJobseekerServlet?resumeId='"+resumeId+"'&&userId='"+userId+"'";
+		window.location.href="../DeleteCompanyServlet?companyId='"+companyId+"'&&userId='"+userId+"'";
 	}else{
 		console.log("取消删除!");
 	}

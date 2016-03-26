@@ -154,6 +154,22 @@
     <url-pattern>/DeleteJobseekerServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AdminDeleteJobServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.admin.AdminDeleteJobServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminDeleteJobServlet</servlet-name>
+    <url-pattern>/AdminDeleteJobServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteCompanyServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.admin.DeleteCompanyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCompanyServlet</servlet-name>
+    <url-pattern>/DeleteCompanyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.LogoutServlet</servlet-class>
   </servlet>

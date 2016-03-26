@@ -40,7 +40,7 @@
 			data-toggle="collapse"><i class=""></i>企业管理</a>
 		<ul id="resumeMenu" class="nav nav-list collapse menu-second">
 			<li><a href="CompanyManagement.jsp" target="mainFrame"><i class=""></i>基本信息管理</a></li>
-			<li><a href="#"
+			<li><a href="JobManagement.jsp"
 				target="mainFrame"><i class=""></i>职位管理</a></li>
 		</ul>
 		<a href="#otherMenu" class="nav-header menu-first collapsed"

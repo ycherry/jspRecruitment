@@ -38,19 +38,20 @@
 				ResultSet rs = dbc.getRs(sql);
 				while (rs.next()) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					java.util.Date utilDate = sdf.parse(rs.getString(12));
+					java.util.Date utilDate = sdf.parse(rs
+							.getObject("deadline").toString());
 					java.sql.Date sqlDate = new java.sql.Date(
 							utilDate.getTime());
 					job.setJobId(intId);
-					job.setAmount(rs.getString(5));
-					job.setCompanyName(rs.getString(4));
-					job.setContents(rs.getString(10));
+					job.setAmount(rs.getObject("amount").toString());
+					job.setCompanyName(rs.getObject("companyName").toString());
+					job.setContents(rs.getObject("contents").toString());
 					job.setDeadline(sqlDate);
-					job.setDistrict(rs.getString(6));
-					job.setEducation(rs.getString(7));
-					job.setExperience(rs.getString(8));
-					job.setPosition(rs.getString(3));
-					job.setSalary(rs.getString(9));
+					job.setDistrict(rs.getObject("district").toString());
+					job.setEducation(rs.getObject("education").toString());
+					job.setExperience(rs.getObject("experience").toString());
+					job.setPosition(rs.getObject("position").toString());
+					job.setSalary(rs.getObject("salary").toString());
 				}
 			}
 		%>
@@ -147,9 +148,8 @@
 					<label>职位描述:</label>
 				</div>
 				<div class="col-sm-6">
-					<textarea class="form-control" rows="3" cols="12"
-						placeholder="请输入职位要求" name="contents" id="contents"
-						value=<%=job.getContents() != null ? job.getContents() : ' '%>></textarea>
+					<textarea class="form-control" rows="4" cols="12"
+						placeholder="请输入职位要求" name="contents" id="contents"><%=job.getContents() != null ? job.getContents() : ' '%></textarea>
 				</div>
 			</div>
 			<div class="row">

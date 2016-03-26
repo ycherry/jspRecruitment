@@ -146,6 +146,14 @@
     <url-pattern>/AdminChangePasswordServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DeleteJobseekerServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.admin.DeleteJobseekerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteJobseekerServlet</servlet-name>
+    <url-pattern>/DeleteJobseekerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.LogoutServlet</servlet-class>
   </servlet>

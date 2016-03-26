@@ -34,7 +34,7 @@
 		String resumeId = (String) request.getParameter("resumeId");
 		Statement at = dbc.getStmtread();
 		String sql = "select * from t_resume where id='" + resumeId + "'";
-		System.out.println(sql);
+		System.out.println("view resume:"+sql);
 		ResultSet rs = dbc.getRs(sql);
 		while (rs.next()) {
 	%>
@@ -43,7 +43,7 @@
 			<div class="resume_content_top_box">
 				<div class="resume_content_left">
 					<div class="resume_content_name">
-						<span class="resume_content_name_s"><%=rs.getString(5)%></span>(<%=rs.getString(4)%>,<%=(year - rs.getDate(7).getYear())%>岁)
+						<span class="resume_content_name_s"><%=rs.getString(5)==null?"暂无":rs.getString(5)%></span>(<%=rs.getString(4)==null?"暂无":rs.getString(4)%>,<%=rs.getDate(7)==null?"暂无":(year - rs.getDate(7).getYear())%>岁)
 					</div>
 					<span class="resume_content_msg_c" style="width: 140px;"> <span
 						class="resume_content_msg_span">学历：</span><%=rs.getString(10) == null ? "未知" : rs.getString(10)%>

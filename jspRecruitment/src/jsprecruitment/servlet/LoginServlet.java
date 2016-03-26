@@ -108,6 +108,8 @@ public class LoginServlet extends HttpServlet {
 			case 3:{
 				Admin admin=new Admin();
 				admin.setUserName(username);
+				session.setAttribute("jobseeker", jobseeker);
+				session.setAttribute("company", company);
 				session.setAttribute("admin", admin);
 				response.sendRedirect("admin/index.jsp");
 				break;

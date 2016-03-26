@@ -54,7 +54,7 @@ public class CompanyRegServlet extends HttpServlet {
 		try {
 			int count=dbo.insert(sql);
 			ResultSet rs=dbo.select(selectsql);
-			String insertToCompanySql = "insert into t_company(userName,uid) values('"+company.getUserName()+"','"+rs.getInt(1)+"')";
+			String insertToCompanySql = "insert into t_company(userName,userId) values('"+company.getUserName()+"','"+rs.getInt(1)+"')";
 			
 			int countCompany=dbo.insert(insertToCompanySql);
 			response.setCharacterEncoding("utf-8");

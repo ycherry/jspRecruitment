@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,16 +46,18 @@ public class JobseekerRegServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
+		Date date=new Date();
 		Jobseeker jobseeker=new Jobseeker();
 		jobseeker.setUserName(request.getParameter("jobseekerName"));
 		jobseeker.setPassword(request.getParameter("password"));
+		jobseeker.setFirstUpdateTime(new java.sql.Date(date.getTime()));
 		String sql="insert into t_user(userName,userPass,userType) values('"+jobseeker.getUserName()+"','"+jobseeker.getPassword()+"','1')";
 		if(dbo.insert(sql)>0){
 			String jobseekerSql="select * from t_user where userName='"+jobseeker.getUserName()+"'";
 			ResultSet rs=dbo.select(jobseekerSql);
 			try {
 				if(rs!=null&&rs.getString(1)!=null){
-					String jobseekerRegSql="insert into t_resume(uid,userName) values('"+rs.getString(1)+"','"+rs.getString(2)+"')";
+					String jobseekerRegSql="insert into t_resume(uid,userName,firstUpdateTime) values('"+rs.getString("id")+"','"+rs.getString("userName")+"','"+jobseeker.getFirstUpdateTime()+"')";
 					if(dbo.insert(jobseekerRegSql)>0){
 						System.out.println("注册成功");
 						out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册成功，请完善基本信息！');window.location.href='login.jsp'</script>");

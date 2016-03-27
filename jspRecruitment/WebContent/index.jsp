@@ -7,33 +7,46 @@
 <%
 	Jobseeker jobseeker = new Jobseeker();
 	Company company = new Company();
+	Admin admin = new Admin();
+	String jobseekerId = null;
+	String companyId = null;
+	String adminName = null;
 	if (request.getSession(false) != null) {
 		System.out.println("第一步");
-		System.out.println(((Company) request.getSession().getAttribute("company")));
-		if (((Company) request.getSession().getAttribute("company")) != null) {
-			System.out.println(((Company) request.getSession().getAttribute("company")).getUserName());
+		if (((Company) request.getSession().getAttribute("company")) != null
+				&& (((Company) request.getSession().getAttribute(
+						"company"))).getId() != null) {
 			company = (Company) request.getSession().getAttribute(
 					"company");
+			companyId = company.getId();
+			System.out.println("company.getUserName()"
+					+ company.getUserName());
 		} else if (((Jobseeker) request.getSession().getAttribute(
-				"jobseeker")) != null) {
+				"jobseeker")) != null
+				&& (((Jobseeker) request.getSession().getAttribute(
+						"jobseeker"))).getId() != null) {
 			jobseeker = (Jobseeker) request.getSession().getAttribute(
 					"jobseeker");
+			jobseekerId = jobseeker.getId();
+			System.out.println("jobseeker.getUserName():"
+					+ jobseeker.getUserName());
+			System.out.println("jobseeker.getUid():"
+					+ jobseeker.getUid());
+			System.out
+					.println("jobseeker.getId():" + jobseeker.getId());
+		} else if (((Admin) request.getSession().getAttribute("admin")) != null
+				&& (((Admin) request.getSession().getAttribute("admin")))
+						.getUserName() != null) {
+			admin = (Admin) request.getSession().getAttribute("admin");
+			adminName = admin.getUserName();
 		}
 	}
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>jsp人才系统_最新招聘信息_找工作</title>
 <meta name="keywords" content="jsp人才系统，招聘，招聘网，找工作" />
-<meta name="description"
-	content="phpyun人才系统（http://127.0.0.1/recruitment/upload）大品牌的招聘网站，找工作的理想选择，规模大信息真实的专业招聘网站，查询人才网最新招聘信息，找工作，上phpyun人才系统!" />
 <link rel="stylesheet" href="css/style/css.css" type="text/css" />
 <link rel="stylesheet" href="css/style/index.css" type="text/css" />
-<!--[if IE 6]>
-<script src="http://127.0.0.1/recruitment/upload/js/png.js"></script>
-<script>
-DD_belatedPNG.fix('.png,.pagination li a');
-</script>
-<![endif]-->
 <script src="js/util/jquery-1.8.0.min.js" language="javascript"></script>
 <script src="js/layer/layer.min.js" language="javascript"></script>
 <script src="js/util/lazyload.min.js" language="javascript"></script>
@@ -57,7 +70,8 @@ DD_belatedPNG.fix('.png,.pagination li a');
 								<%
 									//	System.out.println("index session: " + company.getName()
 									//			+ "  seeker：" + jobseeker.getSusername());
-									if (company.getUserName() == null && jobseeker.getUserName() == null) {
+									if (company.getUserName() == null
+											&& jobseeker.getUserName() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -442,10 +456,16 @@ DD_belatedPNG.fix('.png,.pagination li a');
 				<div class="Latest_talent_h1 ">
 					<b><i
 						class="Latest_talent_h1_icon Latest_talent_h1_icon_user png"></i>最新人才</b><a
-						href="http://127.0.0.1/recruitment/upload/resume/index.php?c=search"
+						href="<%=request.getContextPath()%>/company/SearchTalent.jsp"
 						class="index_more" target="_blank">更多>></a>
 				</div>
+
 				<div class="Latest_talent_cont">
+					<%
+						String selectTalent = "select  * from t_resume where updateTime is not null order by firstUpdateTime desc limit 0,5";
+						ResultSet talentrs = dbc.getRs(selectTalent);
+						while (talentrs.next()) {
+					%>
 					<div class="Latest_talent_cont_box">
 						<div class="com_index_rue_list fl">
 							<dl>
@@ -456,28 +476,48 @@ DD_belatedPNG.fix('.png,.pagination li a');
 										onerror="showImgDelay(this,'http://127.0.0.1/recruitment/upload/data/logo/20141210/14204024737.JPG',2);" />
 								</dt>
 								<dd>
+									<%
+										String name = null;
+											if (talentrs.getString("gender").equals("女")) {
+												name = talentrs.getString("fullName").charAt(0) + "女士";
+
+											} else if (talentrs.getString("gender").equals("男")) {
+												name = talentrs.getString("fullName").charAt(0) + "先生";
+											}
+									%>
 									<div class="com_index_rue_list_t">
 										<strong class="fl"><a class="cblue blod"
-											href="http://127.0.0.1/recruitment/upload/resume/index.php?c=show&id=1"
-											target="_blank">阿先生</a></strong> <span
-											class="com_index_rue_list_date fr">2016-01-26</span>
+											href="javascript:void(0)"
+											onclick="viewTalentDetail(<%=jobseekerId%>,<%=companyId%>,<%=adminName%>,<%=talentrs.getString("id")%>)"
+											target="_blank"><%=name%></a></strong> <span
+											class="com_index_rue_list_date fr"><%=talentrs.getString("updateTime")%></span>
 									</div>
 									<div class="com_index_rue_list_t index_talent">
 										<span class="com_index_rue_listspan">￥</span> <em
-											class="com_index_rue_list_xz f60">1000 - 1999</em>
+											class="com_index_rue_list_xz f60"><%=talentrs.getString("expectedSalary")%></em>
 									</div>
 									<div class="com_index_rue_list_t index_exper">
-										<span class="com_index_rue_listspan">经验：</span> <em
-											class="com_index_rue_list_xz com_index_rue_list_jy f61">1年以上</em>
+										<div class="com_index_rue_listspan experience">
+											<span>经验：</span>
+										</div>
+										<div
+											class="com_index_rue_list_xz com_index_rue_list_jy f61 experience_value">
+											<em><%=talentrs.getString("experience")%></em>
+										</div>
+
 									</div>
 								</dd>
 							</dl>
 							<div class="com_index_rue_list_yx">
-								<span class="com_index_rue_listspan">意向职位：</span>物业管理经理/主管,
+								<span class="com_index_rue_listspan">意向职位：</span><%=talentrs.getString("intentionJobs")%>
 							</div>
 						</div>
 					</div>
+					<%
+						}
+					%>
 				</div>
+
 			</div>
 			<div class="clear"></div>
 			<div class="index_w1000">
@@ -586,7 +626,13 @@ DD_belatedPNG.fix('.png,.pagination li a');
 </body>
 </html>
 <script>
-	$(function() {
-		$.get("http://127.0.0.1/recruitment/upload/index.php?m=cron");
-	});
+	function viewTalentDetail(jobseekerId,companyId,adminName,talentId){
+		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
+		if(jobseekerId==null&& companyId==null&&  adminName==null){
+		   alert("请先登录！");
+		}else{
+		//	window.location.href="jobseeker/ViewResume.jsp?resumeId="+talentId;
+		    window.open("jobseeker/ViewResume.jsp?resumeId="+talentId);
+		}
+	}
 </script>

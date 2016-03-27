@@ -23,6 +23,7 @@ public class Jobseeker {
 	private String workDistrict;
 	private String selfIntroduction;
 	private Date updateTime;
+	private Date firstUpdateTime;
 	
 	
 	
@@ -147,6 +148,12 @@ public class Jobseeker {
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public Date getFirstUpdateTime() {
+		return firstUpdateTime;
+	}
+	public void setFirstUpdateTime(Date firstUpdateTime) {
+		this.firstUpdateTime = firstUpdateTime;
 	}
 	
 }

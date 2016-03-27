@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
 		DataBaseOperation data = new DataBaseOperation();
 		Jobseeker jobseeker = new Jobseeker();
 		Company company = new Company();
+		Admin admin=new Admin();
 		int intT=0;
 		String selectUserSql=null;
 		if(username.equals("admin")){
@@ -72,11 +73,12 @@ public class LoginServlet extends HttpServlet {
 				String selectSql="select * from t_resume where userName='"+username+"'";
 				ResultSet rs = data.select(selectSql);
 				try {
-					jobseeker.setId(rs.getString(1));
-					jobseeker.setUid(rs.getString(2));
+					jobseeker.setId(rs.getString("id"));
+					jobseeker.setUid(rs.getString("uid"));
 					jobseeker.setUserName(username);
 					session.setAttribute("company", company);
 					session.setAttribute("jobseeker", jobseeker);
+					session.setAttribute("admin", admin);
 					response.sendRedirect("jobseeker/index.jsp");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -91,10 +93,11 @@ public class LoginServlet extends HttpServlet {
 				String selectSql = "select * from t_company where userName='" + username + "'";
 				ResultSet rs = data.select(selectSql);
 				try {
-					company.setId(rs.getString(1));
+					company.setId(rs.getString("id"));
 					company.setUserName(username);
 					session.setAttribute("jobseeker", jobseeker);
 					session.setAttribute("company", company);
+					session.setAttribute("admin", admin);
 					response.sendRedirect("company/index.jsp");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -105,8 +108,7 @@ public class LoginServlet extends HttpServlet {
 			}
 
 				// 登陆用户是招聘公司
-			case 3:{
-				Admin admin=new Admin();
+			case 3:{				
 				admin.setUserName(username);
 				session.setAttribute("jobseeker", jobseeker);
 				session.setAttribute("company", company);

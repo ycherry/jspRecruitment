@@ -283,7 +283,7 @@ text-align: left;top: -1px;width:185px;}
 /*user*/
 .Latest_talent_cont{width:100%; float:left; _overflow:hidden}
 .Latest_talent_cont_box{width:1050px;}
-.com_index_rue_list{width:235px;height:90px;border:1px solid #efefef; padding:5px 0px 5px 5px; margin-right:10px; margin-top:10px;}
+.com_index_rue_list{width:265px;height:90px;border:1px solid #efefef; padding:5px 0px 5px 5px; margin-right:40px; margin-top:10px;}
 .com_index_rue_list dl{width:100%; float:left;border-bottom:1px solid #f0f0f0; padding-bottom:10px;}
 .com_index_rue_list dt{width:30px; float:left; padding-left:3px; padding-top:5px;}
 .com_index_rue_list dt img{border-radius:2px;}
@@ -301,10 +301,10 @@ white-space:nowrap;}
 .f60{color:#e13a22;}
 .index_h1_right{ line-height:34px; margin-right:10px;}
 /*最新人才*/
-.index_talent{ width:110px;height:20px; line-height:20px;text-overflow:ellipsis; 
+.index_talent{ width:100px;height:20px; line-height:20px;text-overflow:ellipsis; 
 overflow:hidden; 
 white-space:nowrap; }
-.index_exper{ width:85px;height:20px; line-height:20px; overflow:hidden;text-overflow:ellipsis; }
+.index_exper{ width:100px;height:20px; line-height:20px; overflow:hidden;text-overflow:ellipsis; }
 .f61{color:#6a6a6a;}
 .Emergency_list_b span{ position:relative; z-index:1;}
 .Emergency_list_t_line{ font-size:12px; padding:0px 3px;color:#686e72}
@@ -329,6 +329,15 @@ white-space:nowrap; }
 .j_job_box_list_job_name{ color:#004694; margin-left:10px;}
 
 .header_zt{width:100%; overflow:hidden; background:#177fc8; text-align:center}
+.experience{
+	width:40px;
+	text-align:center;
+}
+.experience_value{
+	width:60px;
+	text-align:center;
+}
+
 
 
 

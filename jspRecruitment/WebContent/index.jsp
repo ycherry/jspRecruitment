@@ -19,8 +19,6 @@
 			company = (Company) request.getSession().getAttribute(
 					"company");
 			companyId = company.getId();
-			System.out.println("company.getUserName()"
-					+ company.getUserName());
 		} else if (((Jobseeker) request.getSession().getAttribute(
 				"jobseeker")) != null
 				&& (((Jobseeker) request.getSession().getAttribute(
@@ -28,12 +26,6 @@
 			jobseeker = (Jobseeker) request.getSession().getAttribute(
 					"jobseeker");
 			jobseekerId = jobseeker.getId();
-			System.out.println("jobseeker.getUserName():"
-					+ jobseeker.getUserName());
-			System.out.println("jobseeker.getUid():"
-					+ jobseeker.getUid());
-			System.out
-					.println("jobseeker.getId():" + jobseeker.getId());
 		} else if (((Admin) request.getSession().getAttribute("admin")) != null
 				&& (((Admin) request.getSession().getAttribute("admin")))
 						.getUserName() != null) {
@@ -68,10 +60,9 @@
 						<div class=" fr">
 							<div class="yun_topLogin_cont">
 								<%
-									//	System.out.println("index session: " + company.getName()
-									//			+ "  seeker：" + jobseeker.getSusername());
 									if (company.getUserName() == null
-											&& jobseeker.getUserName() == null) {
+											&& jobseeker.getUserName() == null
+											&& admin.getUserName() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -92,6 +83,12 @@
 									<a class="yun_More" href="jobseeker/index.jsp"><%=jobseeker.getUserName()%>您好！</a>
 								</div>
 								<%
+									} else if (admin.getUserName() != null) {
+								%>
+								<div class="yun_topLogin">
+									<a class="yun_More" href="admin/index.jsp"><%=admin.getUserName()%>您好！</a>
+								</div>
+								<%
 									}
 								%>
 								<div class="yun_topLogin">
@@ -109,24 +106,10 @@
 		</div>
 	</div>
 	<div class="clear"></div>
-
-
 	<!--滚动展示内容-->
 	<div class="header_fixed" id="header_fix" style="display: none">
 		<div class="header_fixed_cont">
-			<ul class="header_fixed_list">
-				<li class=""><a
-					href="http://127.0.0.1/recruitment/upload/index.php">首页</a></li>
-				<li class=""><a href="http://127.0.0.1/recruitment/upload/job/">找工作</a></li>
-				<li class=""><a
-					href="http://127.0.0.1/recruitment/upload/resume/">找人才</a></li>
-				<li class=""><a
-					href="http://127.0.0.1/recruitment/upload/company/">找企业</a></li>
-				<li class=""><a
-					href="http://127.0.0.1/recruitment/upload/tiny/">微简历</a></li>
-				<li class=""><a
-					href="http://127.0.0.1/recruitment/upload/once/">微招聘</a></li>
-			</ul>
+
 			<div class="header_fixed_login">
 				<div class="header_fixed_login_l" style="display: block">
 					<a href="http://127.0.0.1/recruitment/upload/index.php?m=login"
@@ -144,32 +127,8 @@
 					</span>
 				</div>
 			</div>
-			<div class="header_fixed_close">
-				<a href="javascript:;" onclick="$('#header_fix').remove();">关闭</a>
-			</div>
 		</div>
-
 	</div>
-	<script language="javascript">
-		$(function() {
-			var offset = 150;
-			$(window).scroll(
-					function() {
-						($(this).scrollTop() > offset) ? $("#header_fix")
-								.show() : $("#header_fix").hide();
-					});
-
-			$(".header_fixed_login_dl").hover(function() {
-				var t = $(this).attr("did");
-				$("#" + t + "_t").show();
-			}, function() {
-				var t = $(this).attr("did");
-				$("#" + t + "_t").hide();
-			});
-		});
-	</script>
-	<!--滚动展示内容 end-->
-
 	<script>
 		$(document).ready(
 				function() {
@@ -212,24 +171,23 @@
 								%>
 								<li><i></i> <a class="index_nav_l"
 									href="http://127.0.0.1/recruitment/upload/job/?c=search&job1=35">
-										<p class="lnk"><%=rs.getString(3)%></p> <i
+										<p class="lnk"><%=rs.getString("name")%></p> <i
 										class="index_nav_icon"></i>
 								</a>
 									<div style="top: -38px;" class="posBox">
 										<div class="posJobSort">
 											<div class="l">
 												<dl class=''>
-
 													<dd>
 														<%
 															String subsql = "select * from t_jobclass where keyid='"
-																		+ rs.getString(1) + "'";
+																		+ rs.getString("id") + "'";
 																ResultSet subrs = dbc.getRs(subsql);
 																while (subrs.next()) {
 														%>
 														<a
 															href="http://127.0.0.1/recruitment/upload/job/?c=search&job1=35&job1_son=50&job_post=166"
-															target="_blank"><%=subrs.getString(3)%></a>
+															target="_blank"><%=subrs.getString("name")%></a>
 														<%
 															}
 														%>
@@ -243,8 +201,6 @@
 								%>
 							</ul>
 						</div>
-						<div class="lstMaskWhite1"></div>
-						<div class="lstMaskGray1"></div>
 					</div>
 				</div>
 			</div>
@@ -383,40 +339,53 @@
 			<div class="index_Emergency_job">
 				<div class="Latest_talent_h1 ">
 					<b><i
-						class="Latest_talent_h1_icon Latest_talent_h1_icon_jj png"></i>紧急招聘</b><a
-						href="http://127.0.0.1/recruitment/upload/job/index.php?c=search&urgent=1"
-						class="index_more" target="_blank">更多>></a>
-				</div>
-				<div class="Emergency_index_cont">
-					<ul>
-					</ul>
-				</div>
-			</div>
-			<div class="Famous_recruitment">
-				<div class="Latest_talent_h1 ">
-					<b><i
-						class="Latest_talent_h1_icon Latest_talent_h1_icon_mq png"></i>名企招聘</b>
-					<!--<a href="###" target="_blank" class="index_more">我也要出现在这里？</a>-->
-				</div>
-				<div class="Famous_recruitment_cont_box">
-					<div class="Famous_recruitment_cont">
-						<div class="index_left15560">
-							<div id="mainids"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="index_Emergency_job">
-				<div class="Latest_talent_h1 ">
-					<b><i
-						class="Latest_talent_h1_icon Latest_talent_h1_icon_new png"></i>推荐职位</b><a
+						class="Latest_talent_h1_icon Latest_talent_h1_icon_new png"></i>最新职位</b><a
 						href="http://127.0.0.1/recruitment/upload/job/index.php?c=search&rec=1"
 						class="index_more" target="_blank">更多>></a>
 				</div>
 				<div class="Recommended_jobs_cont">
-					<div class="Famous_recruitment_cont">
-						<ul>
-						</ul>
+					<div class="Latest_talent_cont_box">
+						<%
+							String selectJobSql = "select * from t_company_job order by addTime desc limit 0,3";
+							ResultSet jobrs = dbc.getRs(selectJobSql);
+							while (jobrs.next()) {
+						%>
+						<div class="com_index_rue_list fl">
+							<dl style="border-bottom: 0px; padding-bottom: 0px">
+								<dd id="com_index_rue_list2">
+									<div class="com_index_rue_list_t">
+										<strong class="fl"><a class="cblue blod"
+											href="javascript:void(0)"
+											onclick="viewJobDetail(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>',<%=jobrs.getString("id")%>)"
+											target="_blank"><%=jobrs.getString("position")%></a></strong> <span
+											class="com_index_rue_list_date fr"><%=jobrs.getString("addTime")%></span>
+									</div>
+									<div class="com_index_rue_list_yx">
+										<a href="javascript:void(0)"
+											onclick="viewCompanyDetail(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>',<%=jobrs.getString("cid")%>)"><%=jobrs.getString("companyName")%></a>
+									</div>
+									<div class="com_index_rue_list_t index_talent">
+										<span class="com_index_rue_listspan">￥</span> <em
+											class="com_index_rue_list_xz f60"><%=jobrs.getString("salary")%></em>
+									</div>
+
+									<div class="com_index_rue_list_t index_exper">
+										<div class="com_index_rue_listspan experience">
+											<span>经验：</span>
+										</div>
+										<div
+											class="com_index_rue_list_xz com_index_rue_list_jy f61 experience_value">
+											<em><%=jobrs.getString("experience")%></em>
+										</div>
+
+									</div>
+								</dd>
+
+							</dl>
+						</div>
+						<%
+							}
+						%>
 					</div>
 				</div>
 			</div>
@@ -424,7 +393,7 @@
 				<div class="Featured_Jobs_bg1">
 					<div class="Latest_talent_h1">
 						<b><i
-							class="Latest_talent_h1_icon Latest_talent_h1_icon_new_post png"></i>最新职位</b><a
+							class="Latest_talent_h1_icon Latest_talent_h1_icon_new_post png"></i>知名企业</b><a
 							href="http://127.0.0.1/recruitment/upload/job/index.php?c=search"
 							class="index_more" target="_blank">更多>></a>
 					</div>
@@ -456,13 +425,14 @@
 				<div class="Latest_talent_h1 ">
 					<b><i
 						class="Latest_talent_h1_icon Latest_talent_h1_icon_user png"></i>最新人才</b><a
-						href="<%=request.getContextPath()%>/company/SearchTalent.jsp"
+						href="javascript:void(0)"
+						onclick="moreTalents(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>')"
 						class="index_more" target="_blank">更多>></a>
 				</div>
 
 				<div class="Latest_talent_cont">
 					<%
-						String selectTalent = "select  * from t_resume where updateTime is not null order by firstUpdateTime desc limit 0,5";
+						String selectTalent = "select  * from t_resume where updateTime is not null order by firstUpdateTime desc limit 0,3";
 						ResultSet talentrs = dbc.getRs(selectTalent);
 						while (talentrs.next()) {
 					%>
@@ -488,7 +458,7 @@
 									<div class="com_index_rue_list_t">
 										<strong class="fl"><a class="cblue blod"
 											href="javascript:void(0)"
-											onclick="viewTalentDetail(<%=jobseekerId%>,<%=companyId%>,<%=adminName%>,<%=talentrs.getString("id")%>)"
+											onclick="viewTalentDetail(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>',<%=talentrs.getString("id")%>)"
 											target="_blank"><%=name%></a></strong> <span
 											class="com_index_rue_list_date fr"><%=talentrs.getString("updateTime")%></span>
 									</div>
@@ -520,34 +490,9 @@
 
 			</div>
 			<div class="clear"></div>
-			<div class="index_w1000">
-				<div id="bg"></div>
-				<div class="clear"></div>
-				<div style="display: none;" id="goTopBtn" class="png">
-					<img border=0
-						src="http://127.0.0.1/recruitment/upload/app/template/default/images/lanren_top.png"
-						class="png">
-				</div>
-
-			</div>
 		</div>
 	</div>
-	<!--------------------------------弹出框-------------------------------------->
-	<!--职位类别start-->
-	<div class="sPopupDiv" id="jobdiv" style="display: none; float: left;"></div>
-	<!--职位类别end-->
-
-	<!--工作地点start-->
-	<div class="sPopupDiv" id="citydiv" style="display: none"></div>
-	<!--工作地点end-->
-
-	<!--行业类别start-->
-	<div class="sPopupDiv" id="industrydiv" style="display: none"></div>
-	<!--行业类别end-->
-
-
 	<!--foot  start-->
-
 	<div class="clear"></div>
 	<div class="footer">
 		<div class="foot">
@@ -623,8 +568,7 @@
 	<div id="uclogin" style="display: none"></div>
 </body>
 </html>
-</body>
-</html>
+
 <script>
 	function viewTalentDetail(jobseekerId,companyId,adminName,talentId){
 		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
@@ -633,6 +577,31 @@
 		}else{
 		//	window.location.href="jobseeker/ViewResume.jsp?resumeId="+talentId;
 		    window.open("jobseeker/ViewResume.jsp?resumeId="+talentId);
+		}
+	}
+	
+	function moreTalents(jobseekerId,companyId,adminName){
+		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
+		if(jobseekerId==null&& companyId==null&&  adminName==null){
+		   alert("请先登录！");
+		}else{
+		    window.open("company/SearchTalent.jsp");
+		}
+	}
+	function viewJobDetail(jobseekerId,companyId,adminName,jobId){
+		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
+		if(jobseekerId==null&& companyId==null&&  adminName==null){
+		   alert("请先登录！");
+		}else{
+		    window.open("company/ViewJob.jsp?jobId="+jobId);
+		}
+	}
+	function viewCompanyDetail(jobseekerId,companyId,adminName,selectedCompanyId){
+		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
+		if(jobseekerId==null&& companyId==null&&  adminName==null){
+		   alert("请先登录！");
+		}else{
+		    window.open("company/ViewCompany.jsp?cid="+selectedCompanyId);
 		}
 	}
 </script>

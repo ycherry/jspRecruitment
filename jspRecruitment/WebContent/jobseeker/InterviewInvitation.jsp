@@ -49,8 +49,8 @@
 							String selectInterviewSql = "select * from t_company_interview where resumeId='" + jobseeker.getId() + "'";
 							ResultSet rs = dbc.getRs(selectInterviewSql);
 							while (rs.next()) {
-								System.out.println(rs.getObject("companyName"));
-								String status = rs.getString(13);
+								System.out.println(rs.getString("companyName"));
+								String status = rs.getString("status");
 								String responseMessage = null;
 								if (status != null && status.equals("1")) {
 									responseMessage = "已接受";
@@ -62,30 +62,28 @@
 						%>
 						<div class="List_Ope List_Ope_Advisory">
 							<span class="List_Title_span List_Title_w170"> <a
-								href="<%=request.getContextPath()%>/company/ViewJob.jsp?jobId=<%=rs.getObject("jobId")%>"
-								class="List_Title_span_com"><%=rs.getObject("jobName")%></a>
+								href="<%=request.getContextPath()%>/company/ViewJob.jsp?jobId=<%=rs.getString("jobId")%>"
+								class="List_Title_span_com"><%=rs.getString("jobName")%></a>
 							</span> <span class="List_Title_span List_Title_w170"> <a
-								href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getObject("companyId")%>"><%=rs.getObject("companyName")%></a>
+								href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getString("companyId")%>"><%=rs.getObject("companyName")%></a>
 							</span> <span class="List_Title_span List_Title_w230"
 								style="text-align: center"><a href="javascript:void(0);"
-								onclick="deleteInterview(<%=rs.getObject("id")%>,'3')"
+								onclick="deleteInterview(<%=rs.getString("id")%>,'3')"
 								class="cblue">删除</a><span class="u_List_line">|</span> <%
  	if (status == null) {
  %> <a href="javascript:void(0);"
-								onclick="refuseInterview(<%=rs.getObject("id")%>,'2')"
+								onclick="refuseInterview(<%=rs.getString("id")%>,'2')"
 								class="cblue">拒绝面试</a><span class="u_List_line">|</span><a
 								href="javascript:void(0);"
-								onclick="acceptInterview(<%=rs.getObject("id")%>,'1')"
+								onclick="acceptInterview(<%=rs.getString("id")%>,'1')"
 								class="cblue">同意面试</a> <span class="u_List_line">|</span> <%
  	}
- %> <a href="#jobInterview<%=rs.getObject("id")%>" data-toggle="modal">查看</a>
-							</span> <span class="List_Title_span List_Title_w150"> <a
-								href="http://127.0.0.1/recruitment/upload/company/index.php?c=show&id=4"
-								target="_blank">2016-03-15</a>
+ %> <a href="#jobInterview<%=rs.getString("id")%>" data-toggle="modal">查看</a>
+							</span> <span class="List_Title_span List_Title_w150"> <%=rs.getString("interviewTime")%>
 							</span><span class="List_Title_span List_Title_w150"><font
 								color="#f60"><%=responseMessage%></font> </span>
 						</div>
-						<div class="modal" id="jobInterview<%=rs.getObject("id")%>"
+						<div class="modal" id="jobInterview<%=rs.getString("id")%>"
 							style="z-index: 2000">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -98,24 +96,24 @@
 									<div class="modal-body">
 										<div class="audition_list">
 											<span class="audition_list_span">面试职位：</span><em
-												class="audition_list_em" id="jobname"><%=rs.getObject("jobName") %></em> <span
+												class="audition_list_em" id="jobname"><%=rs.getString("jobName") %></em> <span
 												class="audition_list_span">企业名称：</span><em
-												class="audition_list_em" id="linkman"><%=rs.getObject("companyName") %></em>
+												class="audition_list_em" id="linkman"><%=rs.getString("companyName") %></em>
 										</div>
 										<div class="audition_list">
 											<span class="audition_list_span">联系电话：</span><em
-												class="audition_list_em" id="linktel"><%=rs.getObject("telphone") %></em> <span
+												class="audition_list_em" id="linktel"><%=rs.getString("telphone") %></em> <span
 												class="audition_list_span">面试时间：</span><em
-												class="audition_list_em" id="intertime"><%=rs.getObject("interviewTime") %></em>
+												class="audition_list_em" id="intertime"><%=rs.getString("interviewTime") %></em>
 										</div>
 										<div class="audition_list">
 											<span class="audition_list_span">面试地点：</span><em
-												class="audition_list_em" id="address"><%=rs.getObject("district") %></em>
+												class="audition_list_em" id="address"><%=rs.getString("district") %></em>
 										</div>
 										<div class="clear"></div>
 										<div class="audition_list">
 											<span class="audition_list_span">面试备注：</span><em
-												class="audition_list_em" id="content"><%=rs.getObject("Note") %></em>
+												class="audition_list_em" id="content"><%=rs.getString("Note") %></em>
 										</div>
 										<div class="clear"></div>
 									</div>
@@ -137,8 +135,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<div id="getcont" style="width: 350px; height: 250px; display: none;">
 		<div style="padding: 10px;">
 			<div class="audition_list">

@@ -29,7 +29,7 @@
 				+ jobseeker.getUserName() + "'";
 		ResultSet rs = dbc.getRs(sql);
 		while (rs.next()) {
-			resumeId = rs.getString(1);
+			resumeId = rs.getString("id");
 		}
 	}
 %>

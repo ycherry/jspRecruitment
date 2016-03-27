@@ -101,7 +101,7 @@
 					%>
 					<dd>
 						<div>
-							<a><%=industryrs.getString(2)%></a>
+							<a><%=industryrs.getString("name")%></a>
 						</div>
 					</dd>
 
@@ -122,7 +122,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=wdrs.getString(1)%></a>
+						<a><%=wdrs.getString("name")%></a>
 					</div>
 				</dd>
 
@@ -143,7 +143,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=salaryrs.getString(3)%></a>
+						<a><%=salaryrs.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -163,7 +163,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=educationrs.getString(3)%></a>
+						<a><%=educationrs.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -183,7 +183,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=experiencers.getString(3)%></a>
+						<a><%=experiencers.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -259,10 +259,10 @@
 	<div class="talent">
 		<div class="search_talent_list">
 			<div class="search_talent_list_font">
-				<a href="../company/ViewJob.jsp?jobId=<%=resultset.getString(1)%>"
-					target="mainFrame" class="disc_talent fl"><%=resultset.getString(3)%></a>
+				<a href="../company/ViewJob.jsp?jobId=<%=resultset.getString("id")%>"
+					target="mainFrame" class="disc_talent fl"><%=resultset.getString("position")%></a>
 				<a class="fl disc_talent_mes"
-					href="../company/ViewCompany.jsp?cid=<%=resultset.getString(2)%>"><%=resultset.getString(4)%></a>
+					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("cid")%>"><%=resultset.getString("companyName")%></a>
 			</div>
 			<div class="disc_job_pay">
 				<%=resultset.getString(9)%>
@@ -270,13 +270,13 @@
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
 				<span class="search_talent_list_box">更新时间：<em
-					class="search_talent_list_box_em"><%=resultset.getString(11)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("addTime")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">经验：<em
-					class="search_talent_list_box_em"><%=resultset.getString(8)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("experience")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">学历：<em
-					class="search_talent_list_box_em"><%=resultset.getString(7)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("education")%></em></span>
 			</div>
 			<div class="clear"></div>
 		</div>

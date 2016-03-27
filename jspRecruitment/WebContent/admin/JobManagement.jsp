@@ -52,24 +52,24 @@ body {
 
 					<tr>
 						<td><a class="a_style"
-							href="<%=request.getContextPath()%>/company/ViewJob.jsp?jobId=<%=rs.getObject("id")%>"><%=rs.getObject("id") == null ? "未填" : rs
-						.getObject("id")%></a></td>
+							href="<%=request.getContextPath()%>/company/ViewJob.jsp?jobId=<%=rs.getString("id")%>"><%=rs.getString("id") == null ? "未填" : rs
+						.getString("id")%></a></td>
 						<td><a class="a_style"
-							href="<%=request.getContextPath()%>/company/ViewJob.jsp?jobId=<%=rs.getObject("id")%>"><%=rs.getObject("position") == null ? "未填" : rs
-						.getObject("position")%></a></td>
+							href="<%=request.getContextPath()%>/company/ViewJob.jsp?jobId=<%=rs.getString("id")%>"><%=rs.getString("position") == null ? "未填" : rs
+						.getString("position")%></a></td>
 						<td><a class="a_style"
-							href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getObject("cid")%>"><%=rs.getObject("companyName") == null ? "未填" : rs
-						.getObject("companyName")%></a></td>
-						<td><%=rs.getObject("education") == null ? "未填" : rs
-						.getObject("education")%></td>
-						<td><%=rs.getObject("experience") == null ? "未填" : rs
-						.getObject("experience")%></td>
-						<td><%=rs.getObject("salary") == null ? "未填" : rs
-						.getObject("salary")%></td>
-						<td><%=rs.getObject("addTime") == null ? "未填" : rs
-						.getObject("addTime")%></td>
+							href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getString("cid")%>"><%=rs.getString("companyName") == null ? "未填" : rs
+						.getString("companyName")%></a></td>
+						<td><%=rs.getString("education") == null ? "未填" : rs
+						.getString("education")%></td>
+						<td><%=rs.getString("experience") == null ? "未填" : rs
+						.getString("experience")%></td>
+						<td><%=rs.getString("salary") == null ? "未填" : rs
+						.getString("salary")%></td>
+						<td><%=rs.getString("addTime") == null ? "未填" : rs
+						.getString("addTime")%></td>
 						<td><a class="a_style" href="javascript:void(0)"
-							onclick="deleteJob(<%=rs.getObject("id")%>)">删除</a></td>
+							onclick="deleteJob(<%=rs.getString("id")%>)">删除</a></td>
 					</tr>
 					<%
 						}

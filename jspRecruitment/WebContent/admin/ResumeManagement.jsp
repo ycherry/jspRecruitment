@@ -54,24 +54,24 @@ body {
 
 					<tr>
 						<td><a class="a_style"
-							href="<%=request.getContextPath()%>/jobseeker/ViewResume.jsp?resumeId=<%=rs.getObject("id")%>"><%=rs.getObject("id") == null ? "未填" : rs
-						.getObject("id")%></a></td>
-						<td><%=rs.getObject("userName") == null ? "未填" : rs
-						.getObject("userName")%></td>
-						<td><%=rs.getObject("fullName") == null ? "未填" : rs
-						.getObject("fullName")%></td>
-						<td><%=rs.getObject("intentionJobs") == null ? "未填" : rs
-						.getObject("intentionJobs")%></td>
-						<td><%=rs.getObject("address") == null ? "未填" : rs
-						.getObject("address")%></td>
-						<td><%=rs.getObject("expectedSalary") == null ? "未填" : rs
-						.getObject("expectedSalary")%></td>
-						<td><%=rs.getObject("experience") == null ? "未填" : rs
-						.getObject("experience")%></td>
-						<td><%=rs.getObject("updateTime") == null ? "未填" : rs
-						.getObject("updateTime")%></td>
+							href="<%=request.getContextPath()%>/jobseeker/ViewResume.jsp?resumeId=<%=rs.getString("id")%>"><%=rs.getString("id") == null ? "未填" : rs
+						.getString("id")%></a></td>
+						<td><%=rs.getString("userName") == null ? "未填" : rs
+						.getString("userName")%></td>
+						<td><%=rs.getString("fullName") == null ? "未填" : rs
+						.getString("fullName")%></td>
+						<td><%=rs.getString("intentionJobs") == null ? "未填" : rs
+						.getString("intentionJobs")%></td>
+						<td><%=rs.getString("address") == null ? "未填" : rs
+						.getString("address")%></td>
+						<td><%=rs.getString("expectedSalary") == null ? "未填" : rs
+						.getString("expectedSalary")%></td>
+						<td><%=rs.getString("experience") == null ? "未填" : rs
+						.getString("experience")%></td>
+						<td><%=rs.getString("updateTime") == null ? "未填" : rs
+						.getString("updateTime")%></td>
 						<td><a class="a_style" href="javascript:void(0)"
-							onclick="deleteJobseeker(<%=rs.getObject("id")%>,<%=rs.getObject("uid")%>)">删除</a></td>
+							onclick="deleteJobseeker(<%=rs.getString("id")%>,<%=rs.getString("uid")%>)">删除</a></td>
 					</tr>
 					<%
 						}

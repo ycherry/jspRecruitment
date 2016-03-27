@@ -57,24 +57,25 @@
 			%>
 			<div class="List_Ope List_Ope_bor">
 				<span class="List_Title_span List_Title_w200"> <a
-					href="<%=request.getContextPath() %>/company/ViewJob.jsp?jobId=<%=rs.getString(1)%>"
-					target="mainFrame" title="web工程师" class="List_Title_span_com"><%=rs.getString(3) %></a>
+					href="<%=request.getContextPath() %>/company/ViewJob.jsp?jobId=<%=rs.getString("id")%>"
+					target="mainFrame" title="web工程师" class="List_Title_span_com"><%=rs.getString("position") %></a>
 				</span> <span class="List_Title_span List_Title_w200"> <a
-					href="<%=request.getContextPath() %>/company/ViewCompany.jsp?jobId=<%=rs.getString(2) %>"
-					target="mainFrame" title="信息技术" class="List_Ope_a"><%=rs.getString(4) %> </a>
+					href="<%=request.getContextPath() %>/company/ViewCompany.jsp?cid=<%=rs.getString("cid") %>"
+					target="mainFrame" title="信息技术" class="List_Ope_a"><%=rs.getString("companyName") %> </a>
 				</span><span class="List_Title_span List_Title_w150">
 				<%
 				String status=null;
-				if(rs.getString(21)==null||rs.getString(21).equals("")){
+				if(rs.getString("status")==null||rs.getString("status").equals("")){
 					status="未查看";
-				}else if(rs.getString(21).equals("1")){
+				}else if(rs.getString("status").equals("1")){
 					status="已邀请面试";
-				}else if(rs.getString(21).equals("2")){
+				}else if(rs.getString("status").equals("2")){
 					status="不符合公司职位需求";
 				}
+				
 				%> <span
 					class=" is_browse2"><%=status %></span>
-				</span> <span class="List_Title_span List_Title_w150"><%=rs.getString(20) %></span> <span
+				</span> <span class="List_Title_span List_Title_w150"><%=rs.getString("applyTime") %></span> <span
 					class="List_Title_span List_Title_w150"> <a
 					href="javascript:void(0)"
 					onclick="deleteApplyInfo(<%=rs.getString(14) %>,<%=rs.getString(16) %>)"

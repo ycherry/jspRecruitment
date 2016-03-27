@@ -51,21 +51,21 @@ body {
 
 					<tr>
 						<td><a class="a_style"
-							href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getObject("id")%>"><%=rs.getObject("id") == null ? "未填" : rs
-						.getObject("id")%></a></td>
+							href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getString("id")%>"><%=rs.getString("id") == null ? "未填" : rs
+						.getString("id")%></a></td>
 						<td><a class="a_style"
-							href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getObject("id")%>"><%=rs.getObject("companyName") == null ? "未填" : rs
-						.getObject("companyName")%></a></td>
-						<td><%=rs.getObject("userName") == null ? "未填" : rs
-						.getObject("userName")%></td>
+							href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getString("id")%>"><%=rs.getString("companyName") == null ? "未填" : rs
+						.getString("companyName")%></a></td>
+						<td><%=rs.getString("userName") == null ? "未填" : rs
+						.getString("userName")%></td>
 						<td><%=rs.getObject("nature") == null ? "未填" : rs
 						.getObject("nature")%></td>
-						<td><%=rs.getObject("industry") == null ? "未填" : rs
-						.getObject("industry")%></td>
-						<td><%=rs.getObject("scale") == null ? "未填" : rs
-						.getObject("scale")%></td>
+						<td><%=rs.getString("industry") == null ? "未填" : rs
+						.getString("industry")%></td>
+						<td><%=rs.getString("scale") == null ? "未填" : rs
+						.getString("scale")%></td>
 						<td><a class="a_style" href="javascript:void(0)"
-							onclick="deleteCompany(<%=rs.getObject("id")%>,<%=rs.getObject("userId")%>)">删除</a></td>
+							onclick="deleteCompany(<%=rs.getString("id")%>,<%=rs.getString("userId")%>)">删除</a></td>
 					</tr>
 					<%
 						}

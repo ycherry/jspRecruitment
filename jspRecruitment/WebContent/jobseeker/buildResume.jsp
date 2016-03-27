@@ -34,21 +34,21 @@
 		ResultSet rs = dbc.getRs(sql);
 		System.out.println(sql);
 		while (rs.next()) {
-			jobseeker.setFullName(rs.getString(5));
-			jobseeker.setAddress(rs.getString(9));
-			jobseeker.setBirthday(rs.getDate(7));
-			jobseeker.setEducation(rs.getString(10));
-			jobseeker.setEmail(rs.getString(12));
-			jobseeker.setExperience(rs.getString(8));
-			jobseeker.setIndustry(rs.getString(6));
-			jobseeker.setIntentionJobs(rs.getString(13));
-			jobseeker.setPhoto(rs.getString(15));//待做
-			jobseeker.setGender(rs.getString(4));
-			jobseeker.setSpecialty(rs.getString(14));
-			jobseeker.setTelphone(rs.getString(11));
-			jobseeker.setExpectedSalary(rs.getString(17));
-			jobseeker.setWorkDistrict(rs.getString(16));
-			jobseeker.setSelfIntroduction(rs.getString(18));
+			jobseeker.setFullName(rs.getString("fullName"));
+			jobseeker.setAddress(rs.getString("address"));
+			jobseeker.setBirthday(rs.getDate("birthday"));
+			jobseeker.setEducation(rs.getString("education"));
+			jobseeker.setEmail(rs.getString("email"));
+			jobseeker.setExperience(rs.getString("experience"));
+			jobseeker.setIndustry(rs.getString("industry"));
+			jobseeker.setIntentionJobs(rs.getString("intentionJobs"));
+			jobseeker.setPhoto(rs.getString("photo"));//待做
+			jobseeker.setGender(rs.getString("gender"));
+			jobseeker.setSpecialty(rs.getString("specialty"));
+			jobseeker.setTelphone(rs.getString("telphone"));
+			jobseeker.setExpectedSalary(rs.getString("expectedSalary"));
+			jobseeker.setWorkDistrict(rs.getString("workDistrict"));
+			jobseeker.setSelfIntroduction(rs.getString("selfIntroduction"));
 			System.out.println("birthday:" + jobseeker.getBirthday());
 		}
 	%>

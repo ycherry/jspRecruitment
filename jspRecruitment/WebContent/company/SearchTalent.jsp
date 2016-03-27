@@ -250,36 +250,34 @@
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
-
-		//	System.out.println("resultset:"+resultset.next());
 		while (resultset.next()) {
-			String resumeId=resultset.getString(1);
-			String resumeUid=resultset.getString(2);
+			String resumeId=resultset.getString("id");
+			String resumeUid=resultset.getString("uid");
 	%>
 	<div class="talent">
 		<div class="search_talent_list">
 			<div class="search_talent_list_font">
 				<a
-					href="../jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString(1)%>"
-					target="mainFrame" class="disc_talent fl"><%=resultset.getString(5)%></a>
-				<span class="fl disc_talent_mes"><%=resultset.getString(4)%>,<%=year - resultset.getDate(7).getYear()%>岁</span>
+					href="../jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString("id")%>"
+					target="mainFrame" class="disc_talent fl"><%=resultset.getString("fullName")%></a>
+				<span class="fl disc_talent_mes"><%=resultset.getString("gender")%>,<%=year - resultset.getDate("birthday").getYear()%>岁</span>
 			</div>
 			<div class="disc_job_pay">
-				期望薪资：<%=resultset.getString(17)%>
+				期望薪资：<%=resultset.getString("expectedSalary")%>
 			</div>
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
 				<span class="search_talent_list_box">意向：<em
-					class="search_talent_list_box_em"><%=resultset.getString(13)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("intentionJobs")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">更新时间：<em
-					class="search_talent_list_box_em"><%=resultset.getString(19)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("updateTime")%></em></span>
 				<span class="search_talent_list_box_line">|</span><span
 					class="search_talent_list_box">经验：<em
-					class="search_talent_list_box_em"><%=resultset.getString(8)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("experience")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">学历：<em
-					class="search_talent_list_box_em"><%=resultset.getString(10)%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("education")%></em></span>
 
 			</div>
 			<div class="interview_btn_align">

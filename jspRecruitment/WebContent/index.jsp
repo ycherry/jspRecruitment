@@ -340,7 +340,8 @@
 				<div class="Latest_talent_h1 ">
 					<b><i
 						class="Latest_talent_h1_icon Latest_talent_h1_icon_new png"></i>最新职位</b><a
-						href="http://127.0.0.1/recruitment/upload/job/index.php?c=search&rec=1"
+						href="javascript:void(0)"
+						onclick="more('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','jobs')"
 						class="index_more" target="_blank">更多>></a>
 				</div>
 				<div class="Recommended_jobs_cont">
@@ -356,13 +357,13 @@
 									<div class="com_index_rue_list_t">
 										<strong class="fl"><a class="cblue blod"
 											href="javascript:void(0)"
-											onclick="viewJobDetail(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>',<%=jobrs.getString("id")%>)"
+											onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>',<%=jobrs.getString("id")%>,'job')"
 											target="_blank"><%=jobrs.getString("position")%></a></strong> <span
 											class="com_index_rue_list_date fr"><%=jobrs.getString("addTime")%></span>
 									</div>
 									<div class="com_index_rue_list_yx">
 										<a href="javascript:void(0)"
-											onclick="viewCompanyDetail(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>',<%=jobrs.getString("cid")%>)"><%=jobrs.getString("companyName")%></a>
+											onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=jobrs.getString("cid")%>','company')"><%=jobrs.getString("companyName")%></a>
 									</div>
 									<div class="com_index_rue_list_t index_talent">
 										<span class="com_index_rue_listspan">￥</span> <em
@@ -426,7 +427,7 @@
 					<b><i
 						class="Latest_talent_h1_icon Latest_talent_h1_icon_user png"></i>最新人才</b><a
 						href="javascript:void(0)"
-						onclick="moreTalents(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>')"
+						onclick="more('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','talents')"
 						class="index_more" target="_blank">更多>></a>
 				</div>
 
@@ -458,7 +459,7 @@
 									<div class="com_index_rue_list_t">
 										<strong class="fl"><a class="cblue blod"
 											href="javascript:void(0)"
-											onclick="viewTalentDetail(<%=jobseekerId%>,<%=companyId%>,'<%=adminName%>',<%=talentrs.getString("id")%>)"
+											onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>',<%=talentrs.getString("id")%>,'talent')"
 											target="_blank"><%=name%></a></strong> <span
 											class="com_index_rue_list_date fr"><%=talentrs.getString("updateTime")%></span>
 									</div>
@@ -485,6 +486,7 @@
 					</div>
 					<%
 						}
+						dbc.close();
 					%>
 				</div>
 
@@ -570,38 +572,33 @@
 </html>
 
 <script>
-	function viewTalentDetail(jobseekerId,companyId,adminName,talentId){
+	function more(jobseekerId,companyId,adminName,pathName){
 		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
-		if(jobseekerId==null&& companyId==null&&  adminName==null){
+		if(jobseekerId=="null"&& companyId=="null"&&  adminName=="null"){
 		   alert("请先登录！");
+		   return;
 		}else{
-		//	window.location.href="jobseeker/ViewResume.jsp?resumeId="+talentId;
-		    window.open("jobseeker/ViewResume.jsp?resumeId="+talentId);
+			if(pathName=="talents"){
+			    window.open("company/SearchTalent.jsp");
+			}else if(pathName=="jobs"){
+				window.open("jobseeker/SearchJob.jsp");
+			}	
+		}		
+	}
+	function viewDetail(jobseekerId,companyId,adminName,id,pathName){
+		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
+		if(jobseekerId=="null"&& companyId=="null"&&  adminName=="null"){
+		   alert("请先登录！");
+		   return;
+		}else{
+			if(pathName=="job"){
+				 window.open("company/ViewJob.jsp?jobId="+id);
+		    }else if(pathName=="talent"){
+		    	window.open("jobseeker/ViewResume.jsp?resumeId="+id);
+		    }else if(pathName=="company"){
+		    	window.open("company/ViewCompany.jsp?cid="+id);
+			}
 		}
 	}
 	
-	function moreTalents(jobseekerId,companyId,adminName){
-		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
-		if(jobseekerId==null&& companyId==null&&  adminName==null){
-		   alert("请先登录！");
-		}else{
-		    window.open("company/SearchTalent.jsp");
-		}
-	}
-	function viewJobDetail(jobseekerId,companyId,adminName,jobId){
-		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
-		if(jobseekerId==null&& companyId==null&&  adminName==null){
-		   alert("请先登录！");
-		}else{
-		    window.open("company/ViewJob.jsp?jobId="+jobId);
-		}
-	}
-	function viewCompanyDetail(jobseekerId,companyId,adminName,selectedCompanyId){
-		console.log("jobseekerId:"+jobseekerId+" companyId:"+companyId+" adminName:"+adminName);
-		if(jobseekerId==null&& companyId==null&&  adminName==null){
-		   alert("请先登录！");
-		}else{
-		    window.open("company/ViewCompany.jsp?cid="+selectedCompanyId);
-		}
-	}
 </script>

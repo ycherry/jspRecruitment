@@ -62,7 +62,7 @@
 							ResultSet districtrs = con.getRs("SELECT name FROM t_city where id between 2 and 35");
 							while (districtrs.next()) {
 						%>
-						<option><%=districtrs.getString(1)%></option>
+						<option><%=districtrs.getString("name")%></option>
 						<%
 							}
 						%>
@@ -82,7 +82,7 @@
 							ResultSet educationrs = con.getRs("SELECT * FROM t_filter where keyid =38");
 							while (educationrs.next()) {
 						%>
-						<option><%=educationrs.getString(3)%></option>
+						<option><%=educationrs.getString("name")%></option>
 						<%
 							}
 						%>
@@ -99,7 +99,7 @@
 							ResultSet experiencers = con.getRs("SELECT * FROM t_filter where keyid =10");
 							while (experiencers.next()) {
 						%>
-						<option><%=experiencers.getString(3)%></option>
+						<option><%=experiencers.getString("name")%></option>
 						<%
 							}
 						%>
@@ -116,7 +116,7 @@
 							ResultSet salaryrs = con.getRs("SELECT * FROM t_filter where keyid =34");
 							while (salaryrs.next()) {
 						%>
-						<option><%=salaryrs.getString(3)%></option>
+						<option><%=salaryrs.getString("name")%></option>
 						<%
 							}
 						%>

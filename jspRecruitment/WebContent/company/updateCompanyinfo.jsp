@@ -35,7 +35,6 @@
 		ResultSet rs = dbc.getRs(sql);
 		System.out.println(sql);
 		while (rs.next()) {
-			System.out.println(rs.getString(3));
 	%>
 	<form role="form" name="updateCompnyInfoForm" id="updateCompnyInfoForm"
 		method="post" action="../UpdateCompanyInfoServlet" target="mainFrame"
@@ -51,7 +50,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="companyName"
 						placeholder="请输入您的企业名称（必填）"
-						value="<%=rs.getString(2) == null ? "" : rs.getString(2)%>">
+						value="<%=rs.getString("companyName") == null ? "" : rs.getString("companyName")%>">
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -61,8 +60,8 @@
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="nature">
 						<%
-							System.out.println("企业性质" + rs.getString(4) != null);
-								if (rs.getString(4) != null) {
+							System.out.println("企业性质" + rs.getString("nature") != null);
+								if (rs.getString("nature") != null) {
 						%>
 						<option data-hidden="true"><%=rs.getString(4)%></option>
 						<%
@@ -84,9 +83,9 @@
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="industry">
 						<%
-							if (rs.getString(5) != null) {
+							if (rs.getString("industry") != null) {
 						%>
-						<option data-hidden="true"><%=rs.getString(5)%></option>
+						<option data-hidden="true"><%=rs.getString("industry")%></option>
 						<%
 							}
 						%>
@@ -116,9 +115,9 @@
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="scale">
 						<%
-							if (rs.getString(8) != null) {
+							if (rs.getString("scale") != null) {
 						%>
-						<option data-hidden="true"><%=rs.getString(8)%></option>
+						<option data-hidden="true"><%=rs.getString("scale")%></option>
 						<%
 							}
 						%>
@@ -138,7 +137,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="telphone"
 						placeholder="请输入您的联系电话（必填）"
-						value=<%=rs.getString(7) == null ? ' ' : rs.getString(7)%>>
+						value=<%=rs.getString("telphone") == null ? ' ' : rs.getString("telphone")%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -148,7 +147,7 @@
 				<div class="col-sm-6">
 					<input type="email" class="form-control" name="email"
 						placeholder="请输入您的电子邮件（必填）"
-						value=<%=rs.getString(9) == null ? ' ' : rs.getString(9)%>>
+						value=<%=rs.getString("email") == null ? ' ' : rs.getString("email")%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -158,7 +157,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="address"
 						placeholder="请输入您的公司地址（必填）"
-						value=<%=rs.getString(6) == null ? ' ' : rs.getString(6)%>>
+						value=<%=rs.getString("address") == null ? ' ' : rs.getString("address")%>>
 				</div>
 			</div>
 			<div class="row updateDiv">
@@ -167,7 +166,7 @@
 				</div>
 				<div class="col-sm-6">
 					<textarea type="text" class="form-control" name="introduction"
-						placeholder="请介绍一下您的公司吧"><%=rs.getString(10) == null ? ' ' : rs.getString(10)%></textarea>
+						placeholder="请介绍一下您的公司吧"><%=rs.getString("introduction") == null ? ' ' : rs.getString("introduction")%></textarea>
 				</div>
 			</div>
 			<div>

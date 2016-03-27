@@ -78,17 +78,17 @@
 											<div class="job_news_list">
 												<span class="job_news_list_span job_w130"
 													style="width: 95px;">&nbsp;<a
-													href="<%=request.getContextPath()%>/jobseeker/ViewResume.jsp?resumeId=<%=rs.getString(1) %>"
-													target=mainFrame class="com_Release_name"><%=rs.getString(5)%></a></span>
-												<span class="job_news_list_span job_w150"><%=rs.getString(24)%></span>
-												<span class="job_news_list_span job_w100"><%=rs.getString(8)%></span>
-												<span class="job_news_list_span job_w100"><%=rs.getString(17)%></span>
-												<span class="job_news_list_span job_w100"><%=rs.getString(27)%></span>
+													href="<%=request.getContextPath()%>/jobseeker/ViewResume.jsp?resumeId=<%=rs.getObject("id") %>"
+													target=mainFrame class="com_Release_name"><%=rs.getObject("fullName")%></a></span>
+												<span class="job_news_list_span job_w150"><%=rs.getObject("jobName")%></span>
+												<span class="job_news_list_span job_w100"><%=rs.getObject("experience")%></span>
+												<span class="job_news_list_span job_w100"><%=rs.getObject("expectedSalary")%></span>
+												<span class="job_news_list_span job_w100"><%=rs.getObject("interviewTime")%></span>
 												<%
 												    String responseMessage=null;
-													 if(rs.getString(32) != null&&rs.getString(32).equals("1")){
+													 if(rs.getObject("status") != null&&rs.getObject("status").toString().equals("1")){
 														responseMessage="对方已接受";
-													}else if(rs.getString(32) != null&&rs.getString(32).equals("2")){
+													}else if(rs.getObject("status") != null&&rs.getObject("status").toString().equals("2")){
 														responseMessage="对方已拒绝";
 													}else{
 														responseMessage="对方未回复";
@@ -99,7 +99,7 @@
 												</span>
 												<span class="job_news_list_span job_w80"><a
 													href="javascript:void(0)"
-													onclick="deleteInterviewInfo(<%=rs.getString(1) %>,<%=rs.getString(23) %>)"
+													onclick="deleteInterviewInfo(<%=rs.getObject("id") %>,<%=rs.getObject("jobId") %>)"
 													class="uesr_name_a">删除</a></span>
 											</div>
 											<%

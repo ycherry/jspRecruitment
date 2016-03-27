@@ -76,7 +76,7 @@
 											ResultSet rs = dbc.getRs(selectSql);
 											while (rs.next()) {
 										%>
-										<option value="<%=rs.getString(1)%>"><%=rs.getString(3)%></option>
+										<option value="<%=rs.getString("id")%>"><%=rs.getString("position")%></option>
 										<%
 											}
 										%>
@@ -126,42 +126,42 @@
 										name="delid[]" value="2">
 									</span> <span class="job_news_list_span job_w80"
 										style="text-align: left"><a
-										href="<%=request.getContextPath() %>/jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString(1) %>"
-										target="_blank" class="com_Release_name"><%=resultset.getString(5)%></a></span>
-									<span class="job_news_list_span job_w120"><%=resultset.getString(13)%></span>
-									<span class="job_news_list_span job_w120"><%=resultset.getString(8)%></span>
-									<span class="job_news_list_span job_w120"><%=resultset.getString(17)%></span>
+										href="<%=request.getContextPath() %>/jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString("id") %>"
+										target="_blank" class="com_Release_name"><%=resultset.getString("fullName")%></a></span>
+									<span class="job_news_list_span job_w120"><%=resultset.getString("intentionJobs")%></span>
+									<span class="job_news_list_span job_w120"><%=resultset.getString("experience")%></span>
+									<span class="job_news_list_span job_w120"><%=resultset.getString("expectedSalary")%></span>
 									<span class="job_news_list_span job_w120"><a
-										href="<%=request.getContextPath() %>/company/ViewJob.jsp?jobId=<%=Encode.getNewString(resultset.getString(21)) %>"
-										target="_blank" class="uesr_name_a"><%=resultset.getString(24)%></a></span><span
-										class="job_news_list_span job_w120"><%=resultset.getString(27)%></span>
+										href="<%=request.getContextPath() %>/company/ViewJob.jsp?jobId=<%=Encode.getNewString(resultset.getString("jobId")) %>"
+										target="_blank" class="uesr_name_a"><%=resultset.getString("jobName")%></a></span><span
+										class="job_news_list_span job_w120"><%=resultset.getString("applyTime")%></span>
 									<span class="job_news_list_span job_w140"
 										style="text-align: center;">
 										<%
 										String status=null;
-										String applySelectSql="select status from t_job_apply where resumeId='"+resultset.getString(1)+"' and jobId='"+resultset.getString(23)+"'";
+										String applySelectSql="select status from t_job_apply where resumeId='"+resultset.getString("id")+"' and jobId='"+resultset.getString("jobId")+"'";
 										
 												ResultSet applyRs=dbc.getRs(applySelectSql);
 												if(applyRs.next()){
-													status=applyRs.getString(1);
+													status=applyRs.getString("status");
 												}
-										if(status.equals("2")){
+										if(status!=null&&status.equals("2")){
 											%>
 											 <font color="red">已拒绝</font>
 										<% }else{
 										
-										String interviewSelectSql="select * from t_company_interview where resumeId='"+resultset.getString(1)+"' and jobId='"+resultset.getString(23)+"'";
+										String interviewSelectSql="select * from t_company_interview where resumeId='"+resultset.getString("id")+"' and jobId='"+resultset.getString("jobId")+"'";
 										if(dbc.getRs(interviewSelectSql).next()){
 											%>
 	                                       <font color="red">已邀请</font>
 										<%}else{ %>
 										<a
-										href="<%=request.getContextPath() %>/company/JobInterview.jsp?resumeId=<%=resultset.getString(1) %>&&resumeUid=<%=resultset.getString(2) %>&&jobName=<%=resultset.getString(24) %>"
+										href="<%=request.getContextPath() %>/company/JobInterview.jsp?resumeId=<%=resultset.getString("id") %>&&resumeUid=<%=resultset.getString("uid") %>&&jobName=<%=resultset.getString("jobName") %>"
 										class="uesr_name_a">邀请面试</a>
 										<%} %>
 										 <span class="com_m_line">|</span> <a
 										href="javascript:void(0)"
-										onclick="deleteModal(<%=resultset.getString(1) %>,<%=resultset.getString(23) %>)"
+										onclick="deleteModal(<%=resultset.getString("id") %>,<%=resultset.getString("jobId") %>)"
 										class="uesr_name_a">屏蔽/删除</a>
 										<%} %>
 									</span>

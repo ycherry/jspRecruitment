@@ -44,14 +44,14 @@
 			<div class="Company_left_cont">
 
 				<div class="Company_post_name fl">
-					<span class="Company_post_name_h1"><%=rs.getString(3) == null ? "暂无" : rs.getString(3)%></span>
+					<span class="Company_post_name_h1"><%=rs.getString("position") == null ? "暂无" : rs.getString("position")%></span>
 				</div>
 				<div class="Company_post_qy_name">
-					<a href="ViewCompany.jsp?cid=<%=rs.getString(2)%>"><%=rs.getString(4) == null ? "暂无" : rs.getString(4)%></a>
+					<a href="ViewCompany.jsp?cid=<%=rs.getString("cid")%>"><%=rs.getString("companyName") == null ? "暂无" : rs.getString("companyName")%></a>
 				</div>
 				<div class="Company_post_State">
-					<span class="Company_post_State_s"> <span class="c_Grey">刷新日期：</span><%=rs.getString(11) == null ? "暂无" : rs.getString(11)%>
-					</span> <span class="Company_post_State_s"><span class="c_Grey">有效日期至：</span><%=rs.getString(12) == null ? "暂无" : rs.getString(12)%></span>
+					<span class="Company_post_State_s"> <span class="c_Grey">刷新日期：</span><%=rs.getString("addTime") == null ? "暂无" : rs.getString("addTime")%>
+					</span> <span class="Company_post_State_s"><span class="c_Grey">有效日期至：</span><%=rs.getString("deadline") == null ? "暂无" : rs.getString("deadline")%></span>
 					<span class="Company_post_State_s"><span
 						class="Company_post_State_s"><span class="c_Grey">简历投递：</span><span
 							class="Orange blod"><%=resumeCount == 0 ? "暂无" : resumeCount%></span></span>
@@ -63,7 +63,7 @@
 							class="Company_Basic_information_icon Company_Basic_information_icon_a"></i>
 						<div class="Company_Basic_information_r">
 							<span class="c_Grey">月薪：</span> <span
-								class="Company_Basic_information_red"><%=rs.getString(9) == null ? "暂无" : rs.getString(9)%></span>
+								class="Company_Basic_information_red"><%=rs.getString("salary") == null ? "暂无" : rs.getString("salary")%></span>
 						</div>
 					</div>
 					<div class="Company_Basic_information_list">
@@ -71,11 +71,11 @@
 							class="Company_Basic_information_icon Company_Basic_information_icon_b"></i>
 						<div class="Company_Basic_information_r">
 							<span class="Company_Basic_information_l"><span
-								class="c_Grey">经验：</span><%=rs.getString(8) == null ? "暂无" : rs.getString(8)%></span>
+								class="c_Grey">经验：</span><%=rs.getString("experience") == null ? "暂无" : rs.getString("experience")%></span>
 							<span class="Company_Basic_information_l"> <span
-								class="c_Grey">学历：</span><%=rs.getString(7) == null ? "暂无" : rs.getString(7)%>
+								class="c_Grey">学历：</span><%=rs.getString("education") == null ? "暂无" : rs.getString("education")%>
 							</span> <span class="Company_Basic_information_l"> <span
-								class="c_Grey">性质：</span><%=rs.getString(17) == null ? "暂无" : rs.getString(17)%>
+								class="c_Grey">性质：</span><%=rs.getString("nature") == null ? "暂无" : rs.getString("nature")%>
 							</span>
 						</div>
 					</div>
@@ -84,7 +84,7 @@
 							class="Company_Basic_information_icon Company_Basic_information_icon_c"></i>
 						<div class="Company_Basic_information_r">
 							<span class="Company_Basic_information_l"> <span
-								class="c_Grey">招聘：</span><%=rs.getString(5) == null ? "暂无" : rs.getString(5)%>
+								class="c_Grey">招聘人数：</span><%=rs.getString("amount") == null ? "暂无" : rs.getString("amount")%>
 							</span> 
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 						<i
 							class="Company_Basic_information_icon Company_Basic_information_icon_d"></i>
 						<div class="Company_Basic_information_r">
-							<span class="c_Grey">城市：</span><%=rs.getString(6) == null ? "暂无" : rs.getString(6)%></span>
+							<span class="c_Grey">城市：</span><%=rs.getString("district") == null ? "暂无" : rs.getString("district")%></span>
 						</div>
 					</div>
 				</div>
@@ -102,7 +102,7 @@
 				<i class="Company_h1_line"></i><span class="Company_co">职位描述</span>
 			</div>
 			<div class="Company_content fl Company_toggle" id="Company_job_info">
-				<div class="Job_Description"><%=rs.getString(10) == null ? "暂无" : rs.getString(10)%></div>
+				<div class="Job_Description"><%=rs.getString("contents") == null ? "暂无" : rs.getString("contents")%></div>
 			</div>
 			<div class="clear"></div>
 			<div class="Company_post_msg">
@@ -111,29 +111,29 @@
 			<div class="Company_post_touch">
 				<div class="Company_post_touch_list">
 					<div class="Company_post_touch_list_left">
-						<span class="c_Grey">电子邮箱：</span><%=rs.getString(21) == null ? "暂无" : rs.getString(21)%>
+						<span class="c_Grey">电子邮箱：</span><%=rs.getString("email") == null ? "暂无" : rs.getString("email")%>
 					</div>
 				</div>
 
 
 				<div class="Company_post_touch_list">
 					<div class="Company_post_touch_list_left">
-						<span class="c_Grey">联系手机：</span><%=rs.getString(19) == null ? "暂无" : rs.getString(19)%></div>
+						<span class="c_Grey">联系手机：</span><%=rs.getString("telphone") == null ? "暂无" : rs.getString("telphone")%></div>
 				</div>
 				<div class="Company_post_touch_list">
-					<span class="c_Grey">公司地址：</span><%=rs.getString(18) == null ? "暂无" : rs.getString(18)%>
+					<span class="c_Grey">公司地址：</span><%=rs.getString("address") == null ? "暂无" : rs.getString("address")%>
 				</div>
 			</div>
 			<div class="Company_post_msg m10">
 				<i class="Company_h1_line"></i><span class="Company_co">公司简介</span>
 			</div>
 			<div class="Company_content fl">
-				<div class="Company_Profile"><%=rs.getString(22) == null ? "暂无" : rs.getString(22)%></div>
+				<div class="Company_Profile"><%=rs.getString("introduction") == null ? "暂无" : rs.getString("introduction")%></div>
 				<div class="clear"></div>
 			</div>
 			<div class="comapply_sq">
 
-				<a id="sq_job" href="../ApplyJobServlet?jobId=<%=rs.getString(1) %>&&jobName=<%=rs.getString(3) %>&&companyName=<%=rs.getString(4) %>&&companyId=<%=rs.getString(2) %>" class="comapply_sq_submit">申请此职位</a>
+				<a id="sq_job" href="../ApplyJobServlet?jobId=<%=rs.getString("id") %>&&jobName=<%=rs.getString("position") %>&&companyName=<%=rs.getString("companyName") %>&&companyId=<%=rs.getString("cid") %>" class="comapply_sq_submit">申请此职位</a>
 				<div class="comapply_sq_r"></div>
 			</div>
 		</div>

@@ -76,12 +76,12 @@
 											interview.setJobId(rs.getString(1));
 											interview.setJobName(rs.getString(3));
 								*/
-								companyName = rs.getString(4);
-								int intId = rs.getInt(1);
-								int jobId = rs.getInt(1);
-								String selectSql = "select count(*) from t_job_apply where jobId='" + rs.getString(1) + "'";
+								companyName = rs.getObject("companyName").toString();
+								int intId = Integer.parseInt(rs.getObject("id").toString());
+								int jobId = Integer.parseInt(rs.getObject("id").toString());
+								String selectSql = "select count(*) from t_job_apply where jobId='" + rs.getObject("id") + "'";
 						%>
-						<option><%=rs.getString(3)%></option>
+						<option><%=rs.getObject("position")%></option>
 						<%
 							}
 						%>
@@ -111,7 +111,7 @@
 				<div class="col-sm-6">
 					<input type="text" class="form-control" name="telphone"
 						placeholder="请输入您的联系电话（必填）"
-						value=<%=resultset.getString(7) == null ? ' ' : resultset.getString(7)%>>
+						value=<%=resultset.getObject("telphone").toString() == null ? ' ' : resultset.getObject("telphone").toString()%>>
 				</div>
 			</div>
 			<%
@@ -138,7 +138,7 @@
 							ResultSet districtrs = conn.getRs("SELECT name FROM t_city where id between 2 and 35");
 							while (districtrs.next()) {
 						%>
-						<option><%=districtrs.getString(1)%></option>
+						<option><%=districtrs.getObject("name").toString()%></option>
 						<%
 							}
 							conn.close();

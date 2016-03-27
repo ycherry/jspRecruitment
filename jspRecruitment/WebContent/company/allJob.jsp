@@ -45,14 +45,14 @@
 			ResultSet rs = con.getRs("SELECT * FROM t_company_job WHERE cid='"
 					+ companyId + "'order by id desc");
 			while (rs.next()) {
-				int intId = rs.getInt(1);
-				String selectSql="select count(*) from t_job_apply where jobId='"+rs.getString(1)+"'";
+				int intId = Integer.parseInt(rs.getObject("id").toString());
+				String selectSql="select count(*) from t_job_apply where jobId='"+rs.getObject("id")+"'";
 		%>
 		<tbody>
 			<tr>
-				<td><a href="viewDetails.jsp?intId=<%=intId%>"><%=rs.getString(3)%></td>
-				<td><%=rs.getString(11)%></td>
-				<td><%=rs.getString(12)%></td>
+				<td><a href="viewJobDetails.jsp?intId=<%=intId%>"><%=rs.getObject("position")%></td>
+				<td><%=rs.getObject("addTime")%></td>
+				<td><%=rs.getObject("deadline")%></td>
 				<td><%=dbo.getRowCount(selectSql) %></td>
 				<td><a href="viewJobDetails.jsp?intId=<%=intId %>">预览</a></td>
 				<td><a href="updateJob.jsp?intId=<%=intId%>">编辑</a></td>

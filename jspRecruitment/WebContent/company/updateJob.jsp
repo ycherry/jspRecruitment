@@ -39,19 +39,19 @@
 				while (rs.next()) {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					java.util.Date utilDate = sdf.parse(rs
-							.getObject("deadline").toString());
+							.getString("deadline"));
 					java.sql.Date sqlDate = new java.sql.Date(
 							utilDate.getTime());
 					job.setJobId(intId);
-					job.setAmount(rs.getObject("amount").toString());
-					job.setCompanyName(rs.getObject("companyName").toString());
-					job.setContents(rs.getObject("contents").toString());
+					job.setAmount(rs.getString("amount"));
+					job.setCompanyName(rs.getString("companyName"));
+					job.setContents(rs.getString("contents"));
 					job.setDeadline(sqlDate);
-					job.setDistrict(rs.getObject("district").toString());
-					job.setEducation(rs.getObject("education").toString());
-					job.setExperience(rs.getObject("experience").toString());
-					job.setPosition(rs.getObject("position").toString());
-					job.setSalary(rs.getObject("salary").toString());
+					job.setDistrict(rs.getString("district"));
+					job.setEducation(rs.getString("education"));
+					job.setExperience(rs.getString("experience"));
+					job.setPosition(rs.getString("position"));
+					job.setSalary(rs.getString("salary"));
 				}
 			}
 		%>

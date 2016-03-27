@@ -97,7 +97,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=industryrs.getString(2)%></a>
+						<a><%=industryrs.getString("name")%></a>
 					</div>
 				</dd>
 
@@ -118,7 +118,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=wdrs.getString(1)%></a>
+						<a><%=wdrs.getString("name")%></a>
 					</div>
 				</dd>
 
@@ -139,7 +139,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=salaryrs.getString(3)%></a>
+						<a><%=salaryrs.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -159,7 +159,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=educationrs.getString(3)%></a>
+						<a><%=educationrs.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -179,7 +179,7 @@
 				%>
 				<dd>
 					<div>
-						<a><%=experiencers.getString(3)%></a>
+						<a><%=experiencers.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -226,7 +226,7 @@
 			if (workDistrict.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
-				selectSql += " district='" + workDistrict + "' and ";
+				selectSql += " workDistrict='" + workDistrict + "' and ";
 			}
 			if (salary.equals("全部")) {
 				selectSql += " 1=1 and ";

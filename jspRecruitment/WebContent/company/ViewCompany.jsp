@@ -41,8 +41,8 @@
 			<div class="firm_left_con">
 				<div class="firm_sta">
 					<div class="firm_sta_mes">
-						<h3><%=rs.getObject("companyName").toString() == null ? "暂无"
-						: rs.getObject("companyName").toString()%></h3>
+						<h3><%=rs.getString("companyName") == null ? "暂无"
+						: rs.getString("companyName")%></h3>
 					</div>
 				</div>
 				<div class="firm_det" id="company" data-slide='1'>
@@ -51,22 +51,22 @@
 					</div>
 					<div class="firm_det_link">
 						<span class="firm_mes1">性&nbsp;&nbsp;&nbsp;质 ：<span
-							class="JoB_material_right JoB_material_line"><%=rs.getObject("nature").toString() == null ? "暂无" : rs
-						.getObject("nature").toString()%></span>
+							class="JoB_material_right JoB_material_line"><%=rs.getString("nature") == null ? "暂无" : rs
+						.getString("nature")%></span>
 						</span><span class="firm_mes1">规&nbsp;&nbsp;&nbsp;模 ：<span
-							class="JoB_material_right JoB_material_line"><%=rs.getObject("scale").toString() == null ? "暂无" : rs
-						.getObject("scale").toString()%></span>
+							class="JoB_material_right JoB_material_line"><%=rs.getString("scale") == null ? "暂无" : rs
+						.getString("scale")%></span>
 						</span><span class="firm_mes1">行&nbsp;&nbsp;&nbsp;业 ：<span
-							class="JoB_material_right JoB_material_line"><%=rs.getObject("industry").toString() == null ? "暂无"
-						: rs.getObject("industry").toString()%></span>
+							class="JoB_material_right JoB_material_line"><%=rs.getString("industry") == null ? "暂无"
+						: rs.getString("industry")%></span>
 						</span>
 					</div>
 					<div class="firm_det" id="company" data-slide='1'>
 						<div class="firm_det_tit">
 							<span>公司简介</span>
 						</div>
-						<div class="firm_det_con"><%=rs.getObject("introduction").toString() == null ? "暂无"
-						: rs.getObject("introduction").toString()%></div>
+						<div class="firm_det_con"><%=rs.getString("introduction") == null ? "暂无"
+						: rs.getString("introduction")%></div>
 					</div>
 					<div class="firm_det" id="contact" data-slide='2'>
 						<div class="firm_det_tit">
@@ -74,13 +74,13 @@
 						</div>
 						<div class="firm_det_link">
 							<span class="firm_mes1">联系电话：<i> <em
-									class="JoB_material_right JoB_material_line"><%=rs.getObject("telphone").toString() == null ? "暂无"
-						: rs.getObject("telphone").toString()%></em>
-							</i></span> <span class="firm_mes1">联系邮件：<i><%=rs.getObject("email").toString() == null ? "暂无" : rs
-						.getObject("email").toString()%></i></span>
+									class="JoB_material_right JoB_material_line"><%=rs.getString("telphone") == null ? "暂无"
+						: rs.getString("telphone")%></em>
+							</i></span> <span class="firm_mes1">联系邮件：<i><%=rs.getString("email") == null ? "暂无" : rs
+						.getString("email")%></i></span>
 							<span >地 &nbsp;&nbsp;&nbsp;址：<i> <em
-									class="JoB_material_right JoB_material_line"><%=rs.getObject("address").toString() == null ? "暂无"
-						: rs.getObject("address").toString()%></em>
+									class="JoB_material_right JoB_material_line"><%=rs.getString("address") == null ? "暂无"
+						: rs.getString("address")%></em>
 							</i></span>
 						</div>
 						<div class="firm_det" id="job" data-slide='3'>
@@ -97,16 +97,16 @@
 								<div class="firm_post_con">
 									<div class="firm_post_cen">
 										<div class="fpc_name">
-											<a href="ViewJob.jsp?jobId=<%=resultset.getObject("id").toString()%>"><%=resultset.getObject("position")%></a>
+											<a href="ViewJob.jsp?jobId=<%=resultset.getString("id")%>"><%=resultset.getString("position")%></a>
 										</div>
 										<div class="fpc_type">
-											<span class="fpc_type_fr">发布时间：<%=resultset.getObject("addTime").toString()%></span>
-											<span>工作城市：<%=resultset.getString(6)%></span> <span>经验：<%=resultset.getObject("experience").toString()%></span>
-											<span>学历：<%=resultset.getString(7)%></span> <span>薪资：<i><%=resultset.getObject("salary").toString()%></i></span>
+											<span class="fpc_type_fr">发布时间：<%=resultset.getString("addTime")%></span>
+											<span>工作城市：<%=resultset.getString("district")%></span> <span>经验：<%=resultset.getString("experience")%></span>
+											<span>学历：<%=resultset.getString("education")%></span> <span>薪资：<i><%=resultset.getString("salary")%></i></span>
 										</div>
 									</div>
 									<div class="firm_post_right">
-										<a href="ViewJob.jsp?jobId='<%=resultset.getObject("id").toString()%>'">查看</a>
+										<a href="ViewJob.jsp?jobId='<%=resultset.getString("id")%>'">查看</a>
 									</div>
 								</div>
 							</div>

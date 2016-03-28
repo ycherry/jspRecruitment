@@ -124,7 +124,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			PrintWriter out = response.getWriter();
-			out.print("<script language='javascript'>alert('密码或用户名错误，请检查后重新登陆');window.location.href='login.jsp';</script>");
+			out.print("<script language='javascript'>alert('密码或用户名或用户类型错误，请检查后重新登陆');window.location.href='login.jsp';</script>");
 			System.out.println("登陆失败");
 		}
 	}

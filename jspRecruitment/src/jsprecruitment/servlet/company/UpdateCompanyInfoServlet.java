@@ -2,6 +2,7 @@ package jsprecruitment.servlet.company;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,8 +47,9 @@ public class UpdateCompanyInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		Company company = new Company();
-		DataBaseOperation dbo=new DataBaseOperation();
-		PrintWriter out=response.getWriter();
+		DataBaseOperation dbo = new DataBaseOperation();
+		PrintWriter out = response.getWriter();
+		Date date = new Date();
 		company.setUserName(((Company) request.getSession().getAttribute(
 				"company")).getUserName());
 		company.setAddress((String) request.getParameter("address"));
@@ -58,20 +60,22 @@ public class UpdateCompanyInfoServlet extends HttpServlet {
 		company.setNature((String) request.getParameter("nature"));
 		company.setScale((String) request.getParameter("scale"));
 		company.setTelphone((String) request.getParameter("telphone"));
+		company.setUpdateTime(new java.sql.Date(date.getTime()));
 		String sql = "update t_company set address='" + company.getAddress()
 				+ "',companyName='" + company.getCompanyName() + "',email='"
 				+ company.getEmail() + "',industry='" + company.getIndustry()
 				+ "',introduction='" + company.getIntroduction() + "',nature='"
 				+ company.getNature() + "',scale='" + company.getScale()
-				+ "',telphone='" + company.getTelphone() + "'where userName='"
+				+ "',telphone='" + company.getTelphone() + "', updateTime='"
+				+ company.getUpdateTime() + "' where userName='"
 				+ company.getUserName() + "'";
 		System.out.println(sql);
-	//	int count=dbo.insert(sql);
-		int count=dbo.update(sql);
-		if(count>0){
+		// int count=dbo.insert(sql);
+		int count = dbo.update(sql);
+		if (count > 0) {
 			System.out.println("修改公司基本成功");
 			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改信息成功！');window.location.href='company/updateCompanyinfo.jsp'</script>");
-		}else{
+		} else {
 			System.out.println("修改公司基本失败");
 			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('修改信息失败！');window.location.href='company/updateCompanyinfo.jsp'</script>");
 		}

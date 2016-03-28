@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,15 +47,17 @@ public class CompanyRegServlet extends HttpServlet {
 		Company company=new Company();
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
+		Date date=new Date();
 		company.setUserName(request.getParameter("companyName"));
 		company.setPassword(request.getParameter("password"));
+		company.setFirstUpdateTime(new java.sql.Date(date.getTime()));
 		System.out.println("企业名称："+company.getUserName());
 		String sql="insert into t_user(userName,userPass,userType) values('"+company.getUserName()+"','"+company.getPassword()+"','2')";
 		String selectsql="select id from t_user where userName='"+company.getUserName()+"'";
 		try {
 			int count=dbo.insert(sql);
 			ResultSet rs=dbo.select(selectsql);
-			String insertToCompanySql = "insert into t_company(userName,userId) values('"+company.getUserName()+"','"+rs.getInt(1)+"')";
+			String insertToCompanySql = "insert into t_company(userName,userId,firstUpdateTime) values('"+company.getUserName()+"','"+rs.getInt(1)+"','"+company.getFirstUpdateTime()+"')";
 			
 			int countCompany=dbo.insert(insertToCompanySql);
 			response.setCharacterEncoding("utf-8");

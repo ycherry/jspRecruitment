@@ -1,5 +1,7 @@
 package jsprecruitment.entity;
 
+import java.util.Date;
+
 public class Company {
 	private String id;
 	private String userName;
@@ -12,6 +14,8 @@ public class Company {
 	private String scale;
 	private String email;
 	private String introduction;
+	private Date updateTime;
+	private Date firstUpdateTime;
 
 	
 	
@@ -80,6 +84,18 @@ public class Company {
 	}
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
+	}
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+	public Date getFirstUpdateTime() {
+		return firstUpdateTime;
+	}
+	public void setFirstUpdateTime(Date firstUpdateTime) {
+		this.firstUpdateTime = firstUpdateTime;
 	}
 	
 }

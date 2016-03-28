@@ -1,8 +1,8 @@
 @charset "gb2312";
 .index_body_box{width:100%;height:100%; background:#fff;}
 .index_body{width:100%; background:#fff url(../images/index_bgb.jpg) repeat-x left top;}
-.cont_Projector{width:510px; float:left;margin:0 0 0 11px;}
-.Projector {width:510px;float:left;}
+.cont_Projector{width:100%; float:left;}
+.Projector {width:100%;float:left;}
 .yun_Announcement{width:432px;height:34px; line-height:34px;padding: 0 0 0 25px;color:#666; background:#fff url(../images/job-gg.png) no-repeat 8px 10px;overflow:hidden;border:1px solid #e1e1e1; margin-top:10px; float:left}
 .yun_Announcement ul li a{ display:inline-block;color:#3377cc; margin-right:20px;}
 .yun_Announcement ul li .yun_new_dt_em{color:#999; margin-left:20px;}
@@ -155,10 +155,10 @@ text-align: left;top: -1px;width:185px;}
 #mainids .tlogo .show_ban .area {background: #FFFFFF;overflow: hidden;padding: 55px 0 0;float: left}
 #mainids .tlogo ul li.current2 {list-style-type: none;position: relative;width: 313px;}
 #mainids .tlogo ul li.current2 .on {position: relative;z-index: 1003;}
-#slides {position: relative;width:510px;height:248px;float:left;}
-.slides_container {overflow:hidden;position:relative;display:none;width:622px;height:230px;}
-.slides_container div.slide {width:622px;height:248px;display:block;}
-.slides_container img {width:622px;height:230px;display: block;}
+#slides {position: relative;width:100%;height:248px;float:left;}
+.slides_container {overflow:hidden;position:relative;display:none;width:100%;height:230px;}
+.slides_container div.slide {width:100%;height:248px;display:block;}
+.slides_container img {width:100%;height:230px;display: block;}
 #slides .prev {margin-right: 5px;float:left;}
 #slides .next {margin-right: 5px;float:left;}
 .pagination {margin:6px 0 0;list-style: none;z-index:9999;position: absolute;bottom: 15px;right:15px;}
@@ -210,15 +210,15 @@ text-align: left;top: -1px;width:185px;}
 
 .index_nav .pos{border:1px solid #dadada;width:223px;background:#f8f8f8; position:absolute;left:0;top:44px;display:none}
 .index_nav .lst{}
-.index_nav .lst ul li{width:220px;height:35px;border-bottom:1px solid #dedede;vertical-align:bottom; position:relative; z-index:2;}
+.index_nav .lst ul li{width:220px;height:30px;border-bottom:1px solid #dedede;vertical-align:bottom; position:relative; z-index:2;}
 .index_nav .lst ul li:last-child{border-bottom:1px solid #f8f8f8;}
 .index_nav .lst ul li a.index_nav_l{display:block;width:220px;height:34px; overflow:hidden;}
 .index_nav .lst ul li a.index_nav_l i.hbFntWes{display:block;float:left;font-size:14px;color:#999;margin:11px 0 0 10px;cursor:pointer;}
-.index_nav .lst ul li a.index_nav_l p.lnk{display:block;float:left;height:35px;line-height:35px;font-size:14px;color:#666;margin:0 0 0 10px; cursor:pointer;}
+.index_nav .lst ul li a.index_nav_l p.lnk{display:block;float:left;line-height:35px;font-size:14px;color:#666;margin:0 0 0 10px; cursor:pointer;}
 .index_nav .lst ul li a.index_nav_l .index_nav_icon{width:6px;height:9px;display:block;float:right;margin:10px 10px 0 0;cursor:pointer; background:url(../images/index_icon1.png) no-repeat}
 .index_nav .lst ul li a.index_nav_l b.hbFntWes{font-size:14px;color:#999;}
 .index_nav .lst ul li.show{position:relative; z-index:5;margin:-1px 0 0 -1px;_margin:0 0 0 -1px;}
-.index_nav .lst ul li.show a.index_nav_l{border:1px solid #298ddb;border-right:1px solid #fff;display:inline-block;width:224px; position:relative; z-index:6;background:#fff;height:33px;top:0px;}
+.index_nav .lst ul li.show a.index_nav_l{border:1px solid #298ddb;display:inline-block;width:224px; position:relative; z-index:6;background:#fff;height:33px;top:0px;}
 .index_nav .lst ul li.show a.index_nav_l p.lnk{height:33px;line-height:33px;}
 .index_nav .lst ul li.show a.index_nav_l i.hbFntWes{margin:10px 0 0 19px;}
 .index_nav .lst ul li.show a.index_nav_l b.arr{margin:9px 20px 0 0;}
@@ -238,7 +238,7 @@ text-align: left;top: -1px;width:185px;}
 .posJobSort dl dd a{color:#424242;display:inline-block;border-right:1px solid #ccc;height:15px;line-height:15px;margin:9px 0 0 0;padding:0 9px;}
 .posJobSort dl dd a:hover{color:#0af;}
 /*indexsearch*/
-.index_search{width:622px; float:left;margin-top:20px; margin-left:10px; }
+.index_search{width:622px; float:left;margin-top:20px; margin-left:150px; }
 .index_search_box{width:614px;height:36px; border:4px solid #278edb; float:left}
 .index_search_t{width:457px;height:36px; background:#Fff; float:left; overflow:hidden}
 .index_serch_text{width:438px;height:25px; line-height:25px;padding:5px;border:none;border:1px solid #fff; float:left; font-size:14px;color:#aba8a8}

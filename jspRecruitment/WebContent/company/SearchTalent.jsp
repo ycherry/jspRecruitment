@@ -78,7 +78,7 @@
 
 <body class="container" align="center">
 	<div class="row regTitle">
-		<font color="red"><strong>搜索职位信息</strong></font>
+		<font color="red"><strong>搜索简历信息</strong></font>
 	</div>
 	<div class="filter_box" id="talentList">
 		<div id="filter">

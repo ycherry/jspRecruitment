@@ -14,21 +14,17 @@
 	if (request.getSession(false) != null) {
 		System.out.println("第一步");
 		if (((Company) request.getSession().getAttribute("company")) != null
-				&& (((Company) request.getSession().getAttribute(
-						"company"))).getId() != null) {
-			company = (Company) request.getSession().getAttribute(
-					"company");
+				&& (((Company) request.getSession().getAttribute("company"))).getId() != null) {
+			company = (Company) request.getSession().getAttribute("company");
 			companyId = company.getId();
-		} else if (((Jobseeker) request.getSession().getAttribute(
-				"jobseeker")) != null
-				&& (((Jobseeker) request.getSession().getAttribute(
-						"jobseeker"))).getId() != null) {
-			jobseeker = (Jobseeker) request.getSession().getAttribute(
-					"jobseeker");
+		} else
+			if (((Jobseeker) request.getSession().getAttribute("jobseeker")) != null
+					&& (((Jobseeker) request.getSession().getAttribute("jobseeker"))).getId() != null) {
+			jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
 			jobseekerId = jobseeker.getId();
-		} else if (((Admin) request.getSession().getAttribute("admin")) != null
-				&& (((Admin) request.getSession().getAttribute("admin")))
-						.getUserName() != null) {
+		} else
+				if (((Admin) request.getSession().getAttribute("admin")) != null
+						&& (((Admin) request.getSession().getAttribute("admin"))).getUserName() != null) {
 			admin = (Admin) request.getSession().getAttribute("admin");
 			adminName = admin.getUserName();
 		}
@@ -60,9 +56,7 @@
 						<div class=" fr">
 							<div class="yun_topLogin_cont">
 								<%
-									if (company.getUserName() == null
-											&& jobseeker.getUserName() == null
-											&& admin.getUserName() == null) {
+									if (company.getUserName() == null && jobseeker.getUserName() == null && admin.getUserName() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -149,6 +143,12 @@
 	<!--content  start-->
 	<div class="index_body">
 		<div class="index_w1000">
+			<%
+							DataBaseOperation data = new DataBaseOperation();
+							DBConn dbc = new DBConn();
+						
+			%>
+			<!-- 
 			<div class="index_nav_left">
 				<div class="index_nav">
 					<div class="index_nav_tit">
@@ -160,50 +160,25 @@
 					<div class="pos" id="boxNav" style="display: black;">
 						<div class="lst" id="navLst">
 							<ul>
-								<%
-									DataBaseOperation data = new DataBaseOperation();
-									String sql = null;
-									sql = "select * from t_jobclass where keyid= 0 ";
-									DBConn dbc = new DBConn();
-									ResultSet rs = dbc.getRs(sql);
-									while (rs.next()) {
-										System.out.println(rs.getString(3));
-								%>
-								<li><i></i> <a class="index_nav_l"
+								<%/*			DataBaseOperation data = new DataBaseOperation();
+						String sql = null;
+						sql = "select * from t_industry";
+						DBConn dbc = new DBConn();
+						ResultSet rs = dbc.getRs(sql);
+						while (rs.next()) {
+							*/%>
+								<li><a class="index_nav_l"
 									href="http://127.0.0.1/recruitment/upload/job/?c=search&job1=35">
-										<p class="lnk"><%=rs.getString("name")%></p> <i
+										<p class="lnk"><%//=rs.getString("name")%></p> <i
 										class="index_nav_icon"></i>
-								</a>
-									<div style="top: -38px;" class="posBox">
-										<div class="posJobSort">
-											<div class="l">
-												<dl class=''>
-													<dd>
-														<%
-															String subsql = "select * from t_jobclass where keyid='"
-																		+ rs.getString("id") + "'";
-																ResultSet subrs = dbc.getRs(subsql);
-																while (subrs.next()) {
-														%>
-														<a
-															href="http://127.0.0.1/recruitment/upload/job/?c=search&job1=35&job1_son=50&job_post=166"
-															target="_blank"><%=subrs.getString("name")%></a>
-														<%
-															}
-														%>
-													</dd>
-												</dl>
-											</div>
-										</div>
-									</div></li>
-								<%
-									}
-								%>
+								</a></li>
+								<%//			}%>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
+			 -->
 			<div class="index_search fl">
 				<form action="http://127.0.0.1/recruitment/upload/job/" method="get"
 					onsubmit="return search_keyword(this);" id="index_search_form">
@@ -232,9 +207,10 @@
 			</div>
 			<div class="clear"></div>
 			<div class="inbdex_box">
+		<!--  
 				<div class="index_left_mune">
-					<a href="http://127.0.0.1/recruitment/upload/job/"
-						class="index_left_mune_a" target="_blank">
+					<a href="jobseeker/SearchJob.jsp" class="index_left_mune_a"
+						target="_blank">
 						<div>
 							<i class="index_left_mune_icon png"></i>
 						</div>
@@ -245,8 +221,8 @@
 							</dt>
 							<dd>找工作</dd>
 						</dl>
-					</a> <a href="http://127.0.0.1/recruitment/upload/resume/"
-						class="index_left_mune_a" target="_blank">
+					</a> <a href="company/SearchTalent.jsp" class="index_left_mune_a"
+						target="_blank">
 						<dl class="index_left_mune_list">
 							<dt>
 								<img src="images/indexIcon//i_m_2.png" width="28" height="28"
@@ -322,18 +298,20 @@
 						</dl>
 					</a>
 				</div>
+				
 				<div class="cont_Projector">
 					<div class="Projector">
 						<div id="slides" class="s_lb">
 							<div class="slides_container">
 								<div class="slide">
 									<a href='index.jsp' rel='nofollow'><img
-										src='images/zhaopin.jpg' height='215' width='622'></a>
+										src='images/zhaopin.jpg' height='215' width='900'></a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				-->	
 			</div>
 			<div class="clear"></div>
 			<div class="index_Emergency_job">
@@ -347,7 +325,7 @@
 				<div class="Recommended_jobs_cont">
 					<div class="Latest_talent_cont_box">
 						<%
-							String selectJobSql = "select * from t_company_job order by addTime desc limit 0,3";
+							String selectJobSql = "select * from t_company_job order by addTime desc limit 0,6";
 							ResultSet jobrs = dbc.getRs(selectJobSql);
 							while (jobrs.next()) {
 						%>
@@ -433,7 +411,7 @@
 
 				<div class="Latest_talent_cont">
 					<%
-						String selectTalent = "select  * from t_resume where updateTime is not null order by firstUpdateTime desc limit 0,3";
+						String selectTalent = "select  * from t_resume where updateTime is not null order by firstUpdateTime desc limit 0,6";
 						ResultSet talentrs = dbc.getRs(selectTalent);
 						while (talentrs.next()) {
 					%>

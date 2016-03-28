@@ -144,9 +144,8 @@
 	<div class="index_body">
 		<div class="index_w1000">
 			<%
-							DataBaseOperation data = new DataBaseOperation();
-							DBConn dbc = new DBConn();
-						
+				DataBaseOperation data = new DataBaseOperation();
+				DBConn dbc = new DBConn();
 			%>
 			<!-- 
 			<div class="index_nav_left">
@@ -161,12 +160,12 @@
 						<div class="lst" id="navLst">
 							<ul>
 								<%/*			DataBaseOperation data = new DataBaseOperation();
-						String sql = null;
-						sql = "select * from t_industry";
-						DBConn dbc = new DBConn();
-						ResultSet rs = dbc.getRs(sql);
-						while (rs.next()) {
-							*/%>
+									String sql = null;
+									sql = "select * from t_industry";
+									DBConn dbc = new DBConn();
+									ResultSet rs = dbc.getRs(sql);
+									while (rs.next()) {
+										*/%>
 								<li><a class="index_nav_l"
 									href="http://127.0.0.1/recruitment/upload/job/?c=search&job1=35">
 										<p class="lnk"><%//=rs.getString("name")%></p> <i
@@ -207,7 +206,7 @@
 			</div>
 			<div class="clear"></div>
 			<div class="inbdex_box">
-		<!--  
+				<!--  
 				<div class="index_left_mune">
 					<a href="jobseeker/SearchJob.jsp" class="index_left_mune_a"
 						target="_blank">
@@ -311,7 +310,7 @@
 						</div>
 					</div>
 				</div>
-				-->	
+				-->
 			</div>
 			<div class="clear"></div>
 			<div class="index_Emergency_job">
@@ -376,25 +375,49 @@
 							href="http://127.0.0.1/recruitment/upload/job/index.php?c=search"
 							class="index_more" target="_blank">更多>></a>
 					</div>
-					<div class="Famous_recruitment_cont_box">
-						<div class="Featured_Jobs">
-							<div class="Featured_Jobs_list">
-								<dl>
-									<dd>
-										<div class="Featured_Jobs_t1">
-											<a
-												href="http://127.0.0.1/recruitment/upload/company/index.php?c=show&id=1"
-												class="Featured_Jobs_name fl" target="_blank">鸭鸭</a>
+					<div class="Recommended_jobs_cont">
+						<div class="Latest_talent_cont_box">
+							<%
+								String selectJobSql1 = "select * from t_company order by addTime desc limit 0,6";
+								ResultSet jobrs1 = dbc.getRs(selectJobSql1);
+								while (jobrs1.next()) {
+							%>
+							<div class="com_index_rue_list fl">
+								<dl style="border-bottom: 0px; padding-bottom: 0px">
+									<dd id="com_index_rue_list2">
+										<div class="com_index_rue_list_t">
+											<strong class="fl"><a class="cblue blod"
+												href="javascript:void(0)"
+												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>',<%=jobrs1.getString("id")%>,'job')"
+												target="_blank"><%=jobrs1.getString("position")%></a></strong> <span
+												class="com_index_rue_list_date fr"><%=jobrs1.getString("addTime")%></span>
 										</div>
-										<div class="Featured_Jobs_t2" id="post_index">
-											<span> <a
-												href="http://127.0.0.1/recruitment/upload/job/index.php?c=comapply&id=1"
-												target="_blank" class="Featured_Jobs_name_c">开发</a>
-											</span>
+										<div class="com_index_rue_list_yx">
+											<a href="javascript:void(0)"
+												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=jobrs1.getString("cid")%>','company')"><%=jobrs1.getString("companyName")%></a>
+										</div>
+										<div class="com_index_rue_list_t index_talent">
+											<span class="com_index_rue_listspan">￥</span> <em
+												class="com_index_rue_list_xz f60"><%=jobrs1.getString("salary")%></em>
+										</div>
+
+										<div class="com_index_rue_list_t index_exper">
+											<div class="com_index_rue_listspan experience">
+												<span>经验：</span>
+											</div>
+											<div
+												class="com_index_rue_list_xz com_index_rue_list_jy f61 experience_value">
+												<em><%=jobrs1.getString("experience")%></em>
+											</div>
+
 										</div>
 									</dd>
+
 								</dl>
 							</div>
+							<%
+								}
+							%>
 						</div>
 					</div>
 				</div>

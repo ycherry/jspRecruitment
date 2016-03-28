@@ -252,8 +252,6 @@
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
-
-		//	System.out.println("resultset:"+resultset.next());
 		while (resultset.next()) {
 	%>
 	<div class="talent">

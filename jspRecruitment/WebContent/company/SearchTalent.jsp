@@ -2,8 +2,11 @@
 	pageEncoding="utf-8"%>
 <%@page import="jsprecruitment.util.*,jsprecruitment.entity.*"%>
 <%@page import="java.sql.*,java.io.*,java.util.Date"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="../js/util/jquery-1.8.0.min.js"></script>
@@ -194,7 +197,7 @@
 		String salary = null;
 		String experience = null;
 		String education = null;
-		Date date = new Date();
+		java.util.Date  date = new java.util.Date();
 		int year = date.getYear();
 		PrintWriter out1 = response.getWriter();
 		industry = request.getParameter("industry");
@@ -217,7 +220,7 @@
 			education = education != null && !education.equals("")
 					? java.net.URLDecoder.decode(education, "utf-8")
 					: "";
-			selectSql = "select * from t_resume where ";
+			selectSql = "select * from t_resume where fullName is not null and ";
 			if (industry.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
@@ -246,7 +249,7 @@
 			System.out.println(selectSql);
 
 		} else {
-			selectSql = "select * from t_resume ";
+			selectSql = "select * from t_resume where fullName is not null ";
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
@@ -260,24 +263,24 @@
 				<a
 					href="../jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString("id")%>"
 					target="mainFrame" class="disc_talent fl"><%=resultset.getString("fullName")%></a>
-				<span class="fl disc_talent_mes"><%=resultset.getString("gender")%>,<%=year - resultset.getDate("birthday").getYear()%>岁</span>
+				<span class="fl disc_talent_mes"><%=resultset.getString("gender")==null?"暂无":resultset.getString("gender")%>,<%=resultset.getDate("birthday")==null?"暂无":year - resultset.getDate("birthday").getYear()%>岁</span>
 			</div>
 			<div class="disc_job_pay">
-				期望薪资：<%=resultset.getString("expectedSalary")%>
+				期望薪资：<%=resultset.getString("expectedSalary")==null?"暂无":resultset.getString("expectedSalary")%>
 			</div>
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
 				<span class="search_talent_list_box">意向：<em
-					class="search_talent_list_box_em"><%=resultset.getString("intentionJobs")%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("intentionJobs")==null?"暂无":resultset.getString("intentionJobs")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">更新时间：<em
-					class="search_talent_list_box_em"><%=resultset.getString("updateTime")%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("updateTime")==null?"暂无":resultset.getString("updateTime")%></em></span>
 				<span class="search_talent_list_box_line">|</span><span
 					class="search_talent_list_box">经验：<em
-					class="search_talent_list_box_em"><%=resultset.getString("experience")%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("experience")==null?"暂无":resultset.getString("experience")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">学历：<em
-					class="search_talent_list_box_em"><%=resultset.getString("education")%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("education")==null?"暂无":resultset.getString("education")%></em></span>
 
 			</div>
 			<div class="interview_btn_align">

@@ -283,7 +283,7 @@ text-align: left;top: -1px;width:185px;}
 /*user*/
 .Latest_talent_cont{width:100%; float:left; _overflow:hidden}
 .Latest_talent_cont_box{width:1050px;}
-.com_index_rue_list{width:265px;height:90px;border:1px solid #efefef; padding:5px 0px 0px 5px; margin-right:40px; margin-top:10px;}
+.com_index_rue_list{width:265px;height:90px;border:1px solid #efefef; padding:5px 5px 0px 5px; margin-right:35px; margin-top:10px;}
 .com_index_rue_list dl{width:100%; float:left;border-bottom:1px solid #f0f0f0; padding-bottom:10px;}
 .com_index_rue_list dt{width:30px; float:left; padding-left:3px; padding-top:5px;}
 .com_index_rue_list dt img{border-radius:2px;}

@@ -14,17 +14,21 @@
 	if (request.getSession(false) != null) {
 		System.out.println("第一步");
 		if (((Company) request.getSession().getAttribute("company")) != null
-				&& (((Company) request.getSession().getAttribute("company"))).getId() != null) {
-			company = (Company) request.getSession().getAttribute("company");
+				&& (((Company) request.getSession().getAttribute(
+						"company"))).getId() != null) {
+			company = (Company) request.getSession().getAttribute(
+					"company");
 			companyId = company.getId();
-		} else
-			if (((Jobseeker) request.getSession().getAttribute("jobseeker")) != null
-					&& (((Jobseeker) request.getSession().getAttribute("jobseeker"))).getId() != null) {
-			jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
+		} else if (((Jobseeker) request.getSession().getAttribute(
+				"jobseeker")) != null
+				&& (((Jobseeker) request.getSession().getAttribute(
+						"jobseeker"))).getId() != null) {
+			jobseeker = (Jobseeker) request.getSession().getAttribute(
+					"jobseeker");
 			jobseekerId = jobseeker.getId();
-		} else
-				if (((Admin) request.getSession().getAttribute("admin")) != null
-						&& (((Admin) request.getSession().getAttribute("admin"))).getUserName() != null) {
+		} else if (((Admin) request.getSession().getAttribute("admin")) != null
+				&& (((Admin) request.getSession().getAttribute("admin")))
+						.getUserName() != null) {
 			admin = (Admin) request.getSession().getAttribute("admin");
 			adminName = admin.getUserName();
 		}
@@ -56,7 +60,9 @@
 						<div class=" fr">
 							<div class="yun_topLogin_cont">
 								<%
-									if (company.getUserName() == null && jobseeker.getUserName() == null && admin.getUserName() == null) {
+									if (company.getUserName() == null
+											&& jobseeker.getUserName() == null
+											&& admin.getUserName() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -160,12 +166,12 @@
 						<div class="lst" id="navLst">
 							<ul>
 								<%/*			DataBaseOperation data = new DataBaseOperation();
-									String sql = null;
-									sql = "select * from t_industry";
-									DBConn dbc = new DBConn();
-									ResultSet rs = dbc.getRs(sql);
-									while (rs.next()) {
-										*/%>
+			 String sql = null;
+			 sql = "select * from t_industry";
+			 DBConn dbc = new DBConn();
+			 ResultSet rs = dbc.getRs(sql);
+			 while (rs.next()) {
+			 */%>
 								<li><a class="index_nav_l"
 									href="http://127.0.0.1/recruitment/upload/job/?c=search&job1=35">
 										<p class="lnk"><%//=rs.getString("name")%></p> <i
@@ -378,9 +384,9 @@
 					<div class="Recommended_jobs_cont">
 						<div class="Latest_talent_cont_box">
 							<%
-								String selectJobSql1 = "select * from t_company order by addTime desc limit 0,6";
-								ResultSet jobrs1 = dbc.getRs(selectJobSql1);
-								while (jobrs1.next()) {
+								String selectJobSql1 = "select *,count(distinct t_company.nature) from t_company,t_company_job where t_company_job.cid=t_company.id and position is not null and updateTime is not null order by firstUpdateTime desc limit 0,6";
+								ResultSet companyrs = dbc.getRs(selectJobSql1);
+								while (companyrs.next()) {
 							%>
 							<div class="com_index_rue_list fl">
 								<dl style="border-bottom: 0px; padding-bottom: 0px">
@@ -388,29 +394,25 @@
 										<div class="com_index_rue_list_t">
 											<strong class="fl"><a class="cblue blod"
 												href="javascript:void(0)"
-												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>',<%=jobrs1.getString("id")%>,'job')"
-												target="_blank"><%=jobrs1.getString("position")%></a></strong> <span
-												class="com_index_rue_list_date fr"><%=jobrs1.getString("addTime")%></span>
+												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>',<%=companyrs.getString("id")%>,'job')"
+												target="_blank"><%=companyrs.getString("companyName")%></a></strong>
 										</div>
+										<%
+											String cjobSelect = "select * from t_company_job where position is not null and cid='"
+														+ companyrs.getString("id") + "' limit 0,2";
+												ResultSet cjobrs = dbc.getRs(cjobSelect);
+												while (cjobrs.next()) {
+										%>
 										<div class="com_index_rue_list_yx">
 											<a href="javascript:void(0)"
-												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=jobrs1.getString("cid")%>','company')"><%=jobrs1.getString("companyName")%></a>
-										</div>
-										<div class="com_index_rue_list_t index_talent">
-											<span class="com_index_rue_listspan">￥</span> <em
-												class="com_index_rue_list_xz f60"><%=jobrs1.getString("salary")%></em>
-										</div>
-
-										<div class="com_index_rue_list_t index_exper">
-											<div class="com_index_rue_listspan experience">
-												<span>经验：</span>
+												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=cjobrs.getString("cid")%>','company')"><%=cjobrs.getString("position") %></a>
+											<div class="fr">	<span >￥</span> <em
+												class="com_index_rue_list_xz f60"><%=cjobrs.getString("salary") %></em>
 											</div>
-											<div
-												class="com_index_rue_list_xz com_index_rue_list_jy f61 experience_value">
-												<em><%=jobrs1.getString("experience")%></em>
-											</div>
-
 										</div>
+										<%
+											}
+										%>
 									</dd>
 
 								</dl>

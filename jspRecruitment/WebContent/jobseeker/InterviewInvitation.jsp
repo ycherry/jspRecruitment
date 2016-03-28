@@ -36,7 +36,7 @@
 						<div class="List_Ope List_Title ">
 							<span class="List_Title_span List_Title_w170">面试职位</span> <span
 								class="List_Title_span List_Title_w170">公司名称</span> <span
-								class="List_Title_span List_Title_w230"
+								class="List_Title_span List_Title_w210"
 								style="text-align: center">操作</span><span
 								class="List_Title_span List_Title_w150"
 								style="text-align: center">面试时间</span> <span
@@ -66,7 +66,7 @@
 								class="List_Title_span_com"><%=rs.getString("jobName")%></a>
 							</span> <span class="List_Title_span List_Title_w170"> <a
 								href="<%=request.getContextPath()%>/company/ViewCompany.jsp?cid=<%=rs.getString("companyId")%>"><%=rs.getObject("companyName")%></a>
-							</span> <span class="List_Title_span List_Title_w230"
+							</span> <span class="List_Title_span List_Title_w210"
 								style="text-align: center"><a href="javascript:void(0);"
 								onclick="deleteInterview(<%=rs.getString("id")%>,'3')"
 								class="cblue">删除</a><span class="u_List_line">|</span> <%

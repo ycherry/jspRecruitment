@@ -105,10 +105,10 @@
 									<span class="job_news_list_span job_w30">&nbsp;</span> <span
 										class="job_news_list_span job_w80" style="text-align: left">姓名</span>
 									<span class="job_news_list_span job_w120">求职意向</span> <span
-										class="job_news_list_span job_w120">工作经验</span> <span
+										class="job_news_list_span job_w100">工作经验</span> <span
 										class="job_news_list_span job_w120">期望薪资</span> <span
 										class="job_news_list_span job_w120">申请的职位</span> <span
-										class="job_news_list_span job_w120">申请时间</span><span
+										class="job_news_list_span job_w100">申请时间</span><span
 										class="job_news_list_span job_w140">操作</span>
 								</div>
 								<%
@@ -129,12 +129,12 @@
 										href="<%=request.getContextPath() %>/jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString("id") %>"
 										target="_blank" class="com_Release_name"><%=resultset.getString("fullName")%></a></span>
 									<span class="job_news_list_span job_w120"><%=resultset.getString("intentionJobs")%></span>
-									<span class="job_news_list_span job_w120"><%=resultset.getString("experience")%></span>
+									<span class="job_news_list_span job_w100"><%=resultset.getString("experience")%></span>
 									<span class="job_news_list_span job_w120"><%=resultset.getString("expectedSalary")%></span>
 									<span class="job_news_list_span job_w120"><a
 										href="<%=request.getContextPath() %>/company/ViewJob.jsp?jobId=<%=Encode.getNewString(resultset.getString("jobId")) %>"
 										target="_blank" class="uesr_name_a"><%=resultset.getString("jobName")%></a></span><span
-										class="job_news_list_span job_w120"><%=resultset.getString("applyTime")%></span>
+										class="job_news_list_span job_w100"><%=resultset.getString("applyTime")%></span>
 									<span class="job_news_list_span job_w140"
 										style="text-align: center;">
 										<%

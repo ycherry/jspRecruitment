@@ -60,7 +60,7 @@ public class ReceivedResumeServlet extends HttpServlet {
 			// companyId="
 			// + companyId+" group by t_resume.id";
 			selectSql = "select * from t_resume,t_job_apply where t_resume.id=t_job_apply.resumeId and companyId="
-					+ companyId;
+					+ companyId+" order by applyTime desc";
 			rs = dbc.getRs(selectSql);
 			jobName = "全部职位";
 		} else {

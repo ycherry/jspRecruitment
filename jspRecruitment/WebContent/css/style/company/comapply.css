@@ -197,7 +197,7 @@ padding-left: 10px;}
 
 
 .firm_left{ float:left; width:100%; border:1px solid #e8e8e8;}
-.firm_left_con{ padding:22px 26px 50px 20px;}
+.firm_left_con{ padding:0px 26px 50px 20px;}
 .firm_sta{ padding-bottom:5px; overflow:hidden;}
 .firm_sta_logo{ float:left; height:89px; background:url("../images/firm_bg1.png") no-repeat center bottom; margin-right:20px; display:inline-block;}
 .firm_sta_logo img{ width:185px; height:75px; border:1px solid #ddd7d7;}

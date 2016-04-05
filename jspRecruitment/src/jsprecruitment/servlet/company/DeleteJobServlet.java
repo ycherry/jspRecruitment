@@ -48,13 +48,15 @@ public class DeleteJobServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		System.out.println(intId);
 		String deleteSql="delete from t_company_job where id='"+intId+"'";
-		if(dbo.delete(deleteSql)>0){
+		String deleteInterviewSql="delete from t_company_interview where jobId='"+intId+"'";
+		String deleteApplySql="delete from t_job_apply where jobId='"+intId+"'";
+		if(dbo.delete(deleteSql)>0&&dbo.delete(deleteApplySql)>0&&dbo.delete(deleteInterviewSql)>0){
 			System.out.println("删除成功");
-			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('删除职位成功！');window.location.href='../company/allJob.jsp'</script>");
+			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('删除职位成功！');window.location.href='company/allJob.jsp'</script>");
 		}else{
 			System.out.println("删除失败！");
 			out.println(
-					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('删除职位失败！');window.location.href='../company/allJob.jsp'</script>");
+					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('删除职位失败！');window.location.href='company/allJob.jsp'</script>");
 		}
 		
 	}

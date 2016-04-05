@@ -17,7 +17,8 @@
 <script type="text/javascript" src="../js/util/bootstrap-select.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/bootstrap.css.map">
-<link rel="stylesheet" type="text/css" href="../css/style/comapplyJob.css">
+<link rel="stylesheet" type="text/css"
+	href="../css/style/comapplyJob.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
 	href="../css/bootstrap-select.css">
@@ -30,9 +31,7 @@
 		DataBaseOperation dbo = new DataBaseOperation();
 		String jobId = (String) request.getParameter("jobId");
 		Statement at = dbc.getStmtread();
-		int resumeCount = dbo
-				.getRowCount("select count(*) from t_job_apply where jobId='"
-						+ jobId + "'");
+		int resumeCount = dbo.getRowCount("select count(*) from t_job_apply where jobId='" + jobId + "'");
 		String sql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and t_company_job.id='"
 				+ jobId + "'";
 		System.out.println(sql);
@@ -85,7 +84,7 @@
 						<div class="Company_Basic_information_r">
 							<span class="Company_Basic_information_l"> <span
 								class="c_Grey">招聘人数：</span><%=rs.getString("amount") == null ? "暂无" : rs.getString("amount")%>
-							</span> 
+							</span>
 						</div>
 					</div>
 					<div class="Company_Basic_information_list">
@@ -131,31 +130,20 @@
 				<div class="Company_Profile"><%=rs.getString("introduction") == null ? "暂无" : rs.getString("introduction")%></div>
 				<div class="clear"></div>
 			</div>
+			<%
+				Jobseeker jobseeker = new Jobseeker();
+					jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
+					Boolean visibilityOfButton = jobseeker.getId() == null ? false : true;
+			%>
 			<div class="comapply_sq">
-
-				<a id="sq_job" href="../ApplyJobServlet?jobId=<%=rs.getString("id") %>&&jobName=<%=rs.getString("position") %>&&companyName=<%=rs.getString("companyName") %>&&companyId=<%=rs.getString("cid") %>" class="comapply_sq_submit">申请此职位</a>
-				<div class="comapply_sq_r"></div>
+				<a id="sq_job"
+					href="../ApplyJobServlet?jobId=<%=rs.getString("id")%>&&jobName=<%=rs.getString("position")%>&&companyName=<%=rs.getString("companyName")%>&&companyId=<%=rs.getString("cid")%>"
+					class="comapply_sq_submit"
+					style="display:<%=visibilityOfButton ? "block" : "none"%>">申请此职位</a>
+				<a id="sq_job" href="updateJob.jsp?intId=<%=rs.getString("id")%>"
+					class="comapply_sq_submit"
+					style="display:<%=visibilityOfButton ? "none" : "block"%>;">编辑</a>
 			</div>
-		</div>
-	</div>
-	<div id="sqjob_show" class="Pop-up_logoin"
-		style="display: none; background: none;">
-		<div class="Pop-up_logoin_sq">
-			<span>职位名称：</span><em class="yun_red">网路工程师</em>
-		</div>
-		<div class="Pop-up_logoin_sq">
-			<span>公司名称： </span><em>doudou</em>
-		</div>
-		<div class="Pop-up_logoin_sq" id="resume_job">
-			<span>选择简历：</span>
-			<div class="POp_up_r"></div>
-		</div>
-		<div class="Pop-up_logoin_sq" style="clear: both">
-			<span>&nbsp;</span> <input id="companyname" type="hidden"
-				value="doudou" /> <input id="jobname" type="hidden" value="网路工程师" />
-			<input id="companyuid" type="hidden" value="5" /> <input id="jobid"
-				type="hidden" value="5" /> <input id="click_sq"
-				class="login_button2" type="button" value="提交申请" name="Submit">
 		</div>
 	</div>
 	<%

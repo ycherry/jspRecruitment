@@ -116,7 +116,8 @@
 					</div>
 				</dd>
 				<%
-					ResultSet wdrs = con.getRs("SELECT name FROM t_city where id between 2 and 35");
+					ResultSet wdrs = con
+							.getRs("SELECT name FROM t_city where id between 2 and 35");
 					while (wdrs.next()) {
 				%>
 				<dd>
@@ -137,7 +138,8 @@
 					</div>
 				</dd>
 				<%
-					ResultSet salaryrs = con.getRs("SELECT * FROM t_filter where keyid =34");
+					ResultSet salaryrs = con
+							.getRs("SELECT * FROM t_filter where keyid =34");
 					while (salaryrs.next()) {
 				%>
 				<dd>
@@ -157,7 +159,8 @@
 					</div>
 				</dd>
 				<%
-					ResultSet educationrs = con.getRs("SELECT * FROM t_filter where keyid =38");
+					ResultSet educationrs = con
+							.getRs("SELECT * FROM t_filter where keyid =38");
 					while (educationrs.next()) {
 				%>
 				<dd>
@@ -177,7 +180,8 @@
 					</div>
 				</dd>
 				<%
-					ResultSet experiencers = con.getRs("SELECT * FROM t_filter where keyid =10");
+					ResultSet experiencers = con
+							.getRs("SELECT * FROM t_filter where keyid =10");
 					while (experiencers.next()) {
 				%>
 				<dd>
@@ -197,7 +201,7 @@
 		String salary = null;
 		String experience = null;
 		String education = null;
-		java.util.Date  date = new java.util.Date();
+		java.util.Date date = new java.util.Date();
 		int year = date.getYear();
 		PrintWriter out1 = response.getWriter();
 		industry = request.getParameter("industry");
@@ -206,14 +210,17 @@
 		experience = request.getParameter("experience");
 		education = request.getParameter("education");
 		String selectSql = null;
-		if (industry != null && workDistrict != null && salary != null && experience != null && education != null) {
+		if (industry != null && workDistrict != null && salary != null
+				&& experience != null && education != null) {
 			industry = industry != null && !industry.equals("")
 					? java.net.URLDecoder.decode(industry, "utf-8")
 					: "";
 			workDistrict = workDistrict != null && !workDistrict.equals("")
 					? java.net.URLDecoder.decode(workDistrict, "utf-8")
 					: "";
-			salary = salary != null && !salary.equals("") ? java.net.URLDecoder.decode(salary, "utf-8") : "";
+			salary = salary != null && !salary.equals("")
+					? java.net.URLDecoder.decode(salary, "utf-8")
+					: "";
 			experience = experience != null && !experience.equals("")
 					? java.net.URLDecoder.decode(experience, "utf-8")
 					: "";
@@ -254,8 +261,8 @@
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
 		while (resultset.next()) {
-			String resumeId=resultset.getString("id");
-			String resumeUid=resultset.getString("uid");
+			String resumeId = resultset.getString("id");
+			String resumeUid = resultset.getString("uid");
 	%>
 	<div class="talent">
 		<div class="search_talent_list">
@@ -263,30 +270,58 @@
 				<a
 					href="../jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString("id")%>"
 					target="mainFrame" class="disc_talent fl"><%=resultset.getString("fullName")%></a>
-				<span class="fl disc_talent_mes"><%=resultset.getString("gender")==null?"暂无":resultset.getString("gender")%>,<%=resultset.getDate("birthday")==null?"暂无":year - resultset.getDate("birthday").getYear()%>岁</span>
+				<span class="fl disc_talent_mes"><%=resultset.getString("gender") == null
+						? "暂无"
+						: resultset.getString("gender")%>,<%=resultset.getDate("birthday") == null ? "暂无" : year
+						- resultset.getDate("birthday").getYear()%>岁</span>
 			</div>
 			<div class="disc_job_pay">
-				期望薪资：<%=resultset.getString("expectedSalary")==null?"暂无":resultset.getString("expectedSalary")%>
+				期望薪资：<%=resultset.getString("expectedSalary") == null
+						? "暂无"
+						: resultset.getString("expectedSalary")%>
 			</div>
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
 				<span class="search_talent_list_box">意向：<em
-					class="search_talent_list_box_em"><%=resultset.getString("intentionJobs")==null?"暂无":resultset.getString("intentionJobs")%></em></span>
-				<span class="search_talent_list_box_line">|</span> <span
+					class="search_talent_list_box_em"><%=resultset.getString("intentionJobs") == null
+						? "暂无"
+						: resultset.getString("intentionJobs")%></em></span> <span
+					class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">更新时间：<em
-					class="search_talent_list_box_em"><%=resultset.getString("updateTime")==null?"暂无":resultset.getString("updateTime")%></em></span>
-				<span class="search_talent_list_box_line">|</span><span
+					class="search_talent_list_box_em"><%=resultset.getString("updateTime") == null
+						? "暂无"
+						: resultset.getString("updateTime")%></em></span> <span
+					class="search_talent_list_box_line">|</span><span
 					class="search_talent_list_box">经验：<em
-					class="search_talent_list_box_em"><%=resultset.getString("experience")==null?"暂无":resultset.getString("experience")%></em></span>
-				<span class="search_talent_list_box_line">|</span> <span
+					class="search_talent_list_box_em"><%=resultset.getString("experience") == null
+						? "暂无"
+						: resultset.getString("experience")%></em></span> <span
+					class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">学历：<em
-					class="search_talent_list_box_em"><%=resultset.getString("education")==null?"暂无":resultset.getString("education")%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("education") == null
+						? "暂无"
+						: resultset.getString("education")%></em></span>
 
 			</div>
 			<div class="interview_btn_align">
-				<button class="interview_btn" onclick="window.location.href='JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=resumeUid%>&&jobName=全部职位'">邀请面试</button>
+				<button class="interview_btn"
+					onclick="window.location.href='JobInterview.jsp?resumeId=<%=resumeId%>&&resumeUid=<%=resumeUid%>&&jobName=全部职位'">邀请面试</button>
 			</div>
 			<div class="clear"></div>
+		</div>
+	</div>
+	<%
+		}
+		int count = dbo.getRowCount(selectSql);
+		if (count <= 0) {
+	%>
+	<div class="seachno">
+		<div class="seachno_left">
+			<img src="../images/search-no.gif" width="144" height="102">
+		</div>
+		<div class="listno-content">
+			<strong>很抱歉，没有找到满足条件的企业</strong><br> <span> 建议您：<br>
+				1、适当减少已选择的条件<br> 2、适当删减或更改搜索关键字<br>
 		</div>
 	</div>
 	<%

@@ -57,7 +57,7 @@ body {
 
 #left {
 	width: 20%;
-	height: 500px;
+	height: 630px;
 	float: left;
 	background-color: green;
 	align: right;
@@ -65,19 +65,19 @@ body {
 
 #iframe-left {
 	width: 100%;
-	height: 500px;
+	height: 630px;
 }
 
 #main {
 	width: 80%;
-	height: 500px;
+	height: 630px;
 	float: left;
 	background-color: black;
 }
 
 #iframe-main {
 	width: 100%;
-	height: 500px;
+	height: 630px;
 }
 </style>
 </head>
@@ -122,7 +122,7 @@ body {
 	</div>
 	<!-- footer start -->
 	<div class="row">
-		<dl class="col-md-offset-3 login_list">
+		<dl class="col-md-offset-2 login_list">
 			<dt>
 				<img src="../images/login/log_img1.png" class="png">
 			</dt>

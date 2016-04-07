@@ -47,6 +47,8 @@
 		<ul id="recruitmentMenu" class="nav nav-list collapse menu-second">
 			<li><a href="SearchJob.jsp" target="mainFrame"><i
 					class="icon-pencil"></i> 搜索职位信息</a></li>
+			<li><a href="SearchCompany.jsp" target="mainFrame"><i
+					class="icon-pencil"></i> 搜索企业信息</a></li>
 			<li><a href="InterviewInvitation.jsp" target="mainFrame"><i
 					class="icon-list-alt"></i> 面试邀请</a></li>
 			<li><a href="AppliedJobs.jsp" target="mainFrame"><i

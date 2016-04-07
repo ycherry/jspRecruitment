@@ -81,12 +81,12 @@
 
 <body class="container" align="center">
 	<div class="row regTitle">
-		<font color="red"><strong>搜索职位信息</strong></font>
+		<font color="red"><strong>搜索企业信息</strong></font>
 	</div>
 	<div class="filter_box" id="talentList">
 		<div id="filter">
 			<dl>
-				<dt>招聘行业：</dt>
+				<dt>从事行业：</dt>
 				<dd>
 					<div>
 						<a>全部</a>
@@ -109,42 +109,20 @@
 				%>
 			</dl>
 			<dl>
-				<dt>工作省份：</dt>
+				<dt>企业性质：</dt>
 				<dd>
 					<div>
 						<a>全部</a>
 					</div>
 				</dd>
 				<%
-					ResultSet wdrs = con
-							.getRs("SELECT name FROM t_city where id between 2 and 35");
-					while (wdrs.next()) {
+					ResultSet naturers = con
+							.getRs("SELECT * FROM t_filter where keyid =19");
+					while (naturers.next()) {
 				%>
 				<dd>
 					<div>
-						<a><%=wdrs.getString("name")%></a>
-					</div>
-				</dd>
-
-				<%
-					}
-				%>
-			</dl>
-			<dl>
-				<dt>薪水待遇：</dt>
-				<dd>
-					<div>
-						<a>全部</a>
-					</div>
-				</dd>
-				<%
-					ResultSet salaryrs = con
-							.getRs("SELECT * FROM t_filter where keyid =34");
-					while (salaryrs.next()) {
-				%>
-				<dd>
-					<div>
-						<a><%=salaryrs.getString("name")%></a>
+						<a><%=naturers.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -152,41 +130,20 @@
 				%>
 			</dl>
 			<dl>
-				<dt>学历要求：</dt>
+				<dt>企业规模：</dt>
 				<dd>
 					<div>
 						<a>全部</a>
 					</div>
 				</dd>
 				<%
-					ResultSet educationrs = con
-							.getRs("SELECT * FROM t_filter where keyid =38");
-					while (educationrs.next()) {
+					ResultSet scalers = con
+							.getRs("SELECT * FROM t_filter where keyid =26");
+					while (scalers.next()) {
 				%>
 				<dd>
 					<div>
-						<a><%=educationrs.getString("name")%></a>
-					</div>
-				</dd>
-				<%
-					}
-				%>
-			</dl>
-			<dl>
-				<dt>工作经验：</dt>
-				<dd>
-					<div>
-						<a>全部</a>
-					</div>
-				</dd>
-				<%
-					ResultSet experiencers = con
-							.getRs("SELECT * FROM t_filter where keyid =10");
-					while (experiencers.next()) {
-				%>
-				<dd>
-					<div>
-						<a><%=experiencers.getString("name")%></a>
+						<a><%=scalers.getString("name")%></a>
 					</div>
 				</dd>
 				<%
@@ -197,112 +154,102 @@
 	</div>
 	<%
 		String industry = null;
-		String workDistrict = null;
-		String salary = null;
-		String experience = null;
-		String education = null;
+		String nature = null;
+		String scale = null;
+		java.util.Date date = new java.util.Date();
+		int year = date.getYear();
 		PrintWriter out1 = response.getWriter();
 		industry = request.getParameter("industry");
-		workDistrict = request.getParameter("workDistrict");
-		salary = request.getParameter("salary");
-		experience = request.getParameter("experience");
-		education = request.getParameter("education");
+		nature = request.getParameter("nature");
+		scale = request.getParameter("scale");
 		String selectSql = null;
-		if (industry != null && workDistrict != null && salary != null
-				&& experience != null && education != null) {
+		if (industry != null && nature != null && scale != null) {
 			industry = industry != null && !industry.equals("")
 					? java.net.URLDecoder.decode(industry, "utf-8")
 					: "";
-			workDistrict = workDistrict != null && !workDistrict.equals("")
-					? java.net.URLDecoder.decode(workDistrict, "utf-8")
+			nature = nature != null && !nature.equals("")
+					? java.net.URLDecoder.decode(nature, "utf-8")
 					: "";
-			salary = salary != null && !salary.equals("")
-					? java.net.URLDecoder.decode(salary, "utf-8")
+			scale = scale != null && !scale.equals("")
+					? java.net.URLDecoder.decode(scale, "utf-8")
 					: "";
-			experience = experience != null && !experience.equals("")
-					? java.net.URLDecoder.decode(experience, "utf-8")
-					: "";
-			education = education != null && !education.equals("")
-					? java.net.URLDecoder.decode(education, "utf-8")
-					: "";
-			selectSql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and ";
+			selectSql = "select * from t_company where companyName is not null and ";
 			if (industry.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
 				selectSql += " industry='" + industry + "' and ";
 			}
-			if (workDistrict.equals("全部")) {
+			if (nature.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
-				selectSql += " district='" + workDistrict + "' and ";
+				selectSql += " nature='" + nature + "' and ";
 			}
-			if (salary.equals("全部")) {
-				selectSql += " 1=1 and ";
-			} else {
-				selectSql += " salary='" + salary + "' and ";
-			}
-			if (experience.equals("全部")) {
-				selectSql += " 1=1 and ";
-			} else {
-				selectSql += " experience='" + experience + "' and ";
-			}
-			if (education.equals("全部")) {
+			if (scale.equals("全部")) {
 				selectSql += " 1=1 ";
 			} else {
-				selectSql += " education='" + education + "'";
+				selectSql += " scale='" + scale + "'";
 			}
 			System.out.println(selectSql);
 
 		} else {
-			selectSql = "select * from t_company_job";
+			selectSql = "select * from t_company where companyName is not null ";
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
+
 		while (resultset.next()) {
 	%>
 	<div class="talent">
 		<div class="search_talent_list">
 			<div class="search_talent_list_font">
 				<a
-					href="../company/ViewJob.jsp?jobId=<%=resultset.getString("id")%>"
-					target="mainFrame" class="disc_talent fl"><%=resultset.getString("position")%></a>
-				<a class="fl disc_talent_mes"
-					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("cid")%>"><%=resultset.getString("companyName")%></a>
-			</div>
-			<div class="disc_job_pay">
-				<%=resultset.getString(9)%>
+					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("id")%>"
+					target="mainFrame" class="disc_talent fl"><%=resultset.getString("companyName")%></a>
+				<span class="fl disc_talent_mes"><%=resultset.getString("scale") == null
+						? "暂无"
+						: resultset.getString("scale")%></span>
 			</div>
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
-				<span class="search_talent_list_box">更新时间：<em
-					class="search_talent_list_box_em"><%=resultset.getString("addTime")%></em></span>
+				<span class="search_talent_list_box">行业：<em
+					class="search_talent_list_box_em"><%=resultset.getString("industry") == null
+						? "暂无"
+						: resultset.getString("industry")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
-					class="search_talent_list_box">经验：<em
-					class="search_talent_list_box_em"><%=resultset.getString("experience")%></em></span>
-				<span class="search_talent_list_box_line">|</span> <span
-					class="search_talent_list_box">学历：<em
-					class="search_talent_list_box_em"><%=resultset.getString("education")%></em></span>
+					class="search_talent_list_box">性质：<em
+					class="search_talent_list_box_em"><%=resultset.getString("nature") == null
+						? "暂无"
+						: resultset.getString("nature")%></em></span>
+				<span class="search_talent_list_box_line">|</span><span
+					class="search_talent_list_box">联系方式：<em
+					class="search_talent_list_box_em"><%=resultset.getString("telphone") == null
+						? "暂无"
+						: resultset.getString("telphone")%></em></span>
+				<span class="search_talent_list_box_line">|</span>
 			</div>
 			<div class="clear"></div>
 		</div>
 	</div>
 	<%
 		}
-		int count = dbo.getRowCount(selectSql);
-		if (count <= 0) {
+		int count=dbo.getRowCount(selectSql);
+		if (count<=0) {
 	%>
 	<div class="seachno">
 		<div class="seachno_left">
-			<img src="../images/search-no.gif" width="144" height="102">
+			<img
+				src="../images/search-no.gif"
+				width="144" height="102">
 		</div>
 		<div class="listno-content">
-			<strong>很抱歉，没有找到满足条件的职位</strong><br> <span> 建议您：<br>
+			<strong>很抱歉，没有找到满足条件的企业</strong><br> <span> 建议您：<br>
 				1、适当减少已选择的条件<br> 2、适当删减或更改搜索关键字<br>
 		</div>
 	</div>
 	<%
 		}
 	%>
+
 
 	<!--滚动展示内容-->
 	<SCRIPT>
@@ -341,8 +288,6 @@
 
 				$(this).attr("class", "seled");
 				$(this).attr("id", $(this).html());
-				//	alert($(this).attr("id"));
-				//	alert(RetSelecteds()); //返回选中结果  
 				window.location.href = RetSelecteds();
 
 			});
@@ -350,9 +295,8 @@
 		});
 
 		function RetSelecteds() {
-			var result = "SearchJob.jsp?";
-			var array = [ "industry", "workDistrict", "salary", "education",
-					"experience" ];
+			var result = "SearchCompany.jsp?";
+			var array = [ "industry", "nature", "scale" ];
 			var i = 0;
 			$("#filter a[class='seled']").each(
 					function() {
@@ -371,8 +315,7 @@
 		}
 
 		function GetUrlData() {
-			var array = [ "industry", "workDistrict", "salary", "education",
-					"experience" ];
+			var array = [ "industry", "nature", "scale" ];
 			var url = location.search;
 			var request = new Object();
 			var urlData = new Array(5);

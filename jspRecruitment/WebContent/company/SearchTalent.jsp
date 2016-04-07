@@ -420,7 +420,7 @@
 					"experience" ];
 			var url = location.search;
 			var request = new Object();
-			var urlData = new Array(6);
+			var urlData = new Array(7);
 			if (url.indexOf("?") != -1) {
 				var str = url.substr(1);
 				strs = str.split("&");

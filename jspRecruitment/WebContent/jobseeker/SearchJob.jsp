@@ -201,13 +201,18 @@
 		String salary = null;
 		String experience = null;
 		String education = null;
+		String keyword = null;
 		PrintWriter out1 = response.getWriter();
 		industry = request.getParameter("industry");
 		workDistrict = request.getParameter("workDistrict");
 		salary = request.getParameter("salary");
 		experience = request.getParameter("experience");
 		education = request.getParameter("education");
+		keyword = request.getParameter("keyword");
 		String selectSql = null;
+		if (keyword != null) {
+			keyword = "%" + Encode.getNewString(keyword) + "%";
+		}
 		if (industry != null && workDistrict != null && salary != null
 				&& experience != null && education != null) {
 			industry = industry != null && !industry.equals("")
@@ -225,7 +230,12 @@
 			education = education != null && !education.equals("")
 					? java.net.URLDecoder.decode(education, "utf-8")
 					: "";
-			selectSql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and ";
+			if (keyword != null) {
+				selectSql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and position like '"
+						+ keyword + "' and ";
+			} else {
+				selectSql = "select * from t_company_job,t_company where t_company.id=t_company_job.cid and ";
+			}
 			if (industry.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
@@ -254,7 +264,11 @@
 			System.out.println(selectSql);
 
 		} else {
-			selectSql = "select * from t_company_job";
+			if(keyword!=null){
+				selectSql = "select * from t_company_job where position like '"+keyword+"'";
+			}else{
+				selectSql = "select * from t_company_job";
+			}
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
@@ -354,12 +368,16 @@
 			var array = [ "industry", "workDistrict", "salary", "education",
 					"experience" ];
 			var i = 0;
+			var urlData = GetUrlData();
+			if(urlData.length>5){
+				result += "keyword="+urlData[1]+"&";
+			}
 			$("#filter a[class='seled']").each(
 					function() {
 						var s = $(this).html() != '' ? encodeURI(encodeURI($(
 								this).html())) : encodeURI(encodeURI("全部"));
 						if (i < 4) {
-							result += array[i] + "=" + s + "&&";
+							result += array[i] + "=" + s + "&";
 						} else {
 							result += array[i] + "=" + s;
 						}
@@ -371,22 +389,23 @@
 		}
 
 		function GetUrlData() {
-			var array = [ "industry", "workDistrict", "salary", "education",
+			var array = ["c","keyword", "industry", "workDistrict", "salary", "education",
 					"experience" ];
 			var url = location.search;
 			var request = new Object();
-			var urlData = new Array(5);
+			var urlData = new Array(7);
 			if (url.indexOf("?") != -1) {
 				var str = url.substr(1);
-				strs = str.split("&&");
+				strs = str.split("&");
 				for (var i = 0; i < strs.length; i++) {
 					request[strs[i].split("=")[0]] = unescape(decodeURI(decodeURI(strs[i]
 							.split("=")[1])));
 				}
+				for (var i = 0; i <= strs.length; i++) {
+					urlData[i] = request[array[i]];
+				}
 			}
-			for (var i = 0; i <= 4; i++) {
-				urlData[i] = request[array[i]];
-			}
+			
 			return urlData;
 		}
 	</script>

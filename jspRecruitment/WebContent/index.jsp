@@ -185,7 +185,7 @@
 			</div>
 			 -->
 			<div class="index_search fl">
-				<form action="http://127.0.0.1/recruitment/upload/job/" method="get"
+				<form action="" method="get"
 					onsubmit="return search_keyword(this);" id="index_search_form">
 					<div class="index_search_box">
 						<div class="index_search_t">
@@ -198,9 +198,9 @@
 							<span id='search_name'>找工作</span>
 							<div class="index_header_seach_find_list" style="display: none">
 								<a href="javascript:void(0)"
-									onclick="top_search('job', '找工作', 'http://127.0.0.1/recruitment/upload/job/', '1', 'job'); $('#search').attr('name', 'c');">找工作</a>
+									onclick="top_search('job', '找工作', 'jobseeker/SearchJob.jsp', '1', 'job'); $('#search').attr('name', 'c');">找工作</a>
 								<a href="javascript:void(0)"
-									onclick="top_search('resume', '找人才', 'http://127.0.0.1/recruitment/upload/resume/', '1', 'resume'); $('#search').attr('name', 'c');">
+									onclick="top_search('resume', '找人才', 'company/SearchTalent.jsp', '1', 'resume'); $('#search').attr('name', 'c');">
 									找人才</a>
 							</div>
 						</div>

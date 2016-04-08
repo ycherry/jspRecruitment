@@ -59,7 +59,7 @@ body {
 	width: 20%;
 	height: 600px;
 	float: left;
-	background-color: green;
+	background-color: white;
 	align: right;
 }
 
@@ -72,7 +72,7 @@ body {
 	width: 80%;
 	height: 600px;
 	float: left;
-	background-color: black;
+	background-color: white;
 }
 
 #iframe-main {

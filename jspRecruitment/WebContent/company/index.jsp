@@ -37,7 +37,6 @@
 <script src="../js/public.js" language="javascript"></script>
 <script src="../js/reg_ajax.js" type="text/javascript"></script>
 <script src="../js/index.js" language="javascript"></script>
-<script src="../js/search.js" type="text/javascript"></script>
 <script src="../js/util/slides.jquery.js" type="text/javascript"></script>
 <style type="text/css">
 body {
@@ -180,8 +179,8 @@ body {
 						<dt>网站特色</dt>
 						<dd>
 							<ul>
-								<li><a href="m_redeem.html" title="积分兑换">积分兑换</a></li>
-								<li><a href="index.php?m=subscribe" title="订阅服务">订阅服务</a></li>
+								<li><a href="https://www.baidu.com" title="积分兑换">积分兑换</a></li>
+								<li><a href="https://www.baidu.com" title="订阅服务">订阅服务</a></li>
 							</ul>
 						<dd>
 					</dl>
@@ -190,13 +189,13 @@ body {
 						<dd>
 							<ul>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/kf.html"
+									href="https://www.baidu.com"
 									title="客服中心">客服中心</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/gg.html"
+									href="https://www.baidu.com"
 									title="广告投放">广告投放</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/newuser.html"
+									href="https://www.baidu.com"
 									title="新手指引">新手指引</a></li>
 							</ul>
 						<dd>

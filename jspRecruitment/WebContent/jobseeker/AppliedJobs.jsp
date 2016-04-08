@@ -62,7 +62,7 @@
 				</span> <span class="List_Title_span List_Title_w200"> <a
 					href="<%=request.getContextPath() %>/company/ViewCompany.jsp?cid=<%=rs.getString("cid") %>"
 					target="mainFrame" title="信息技术" class="List_Ope_a"><%=rs.getString("companyName") %> </a>
-				</span><span class="List_Title_span List_Title_w150">
+				</span><span class="List_Title_span List_Title_w150" >
 				<%
 				String status=null;
 				if(rs.getString("status")==null||rs.getString("status").equals("")){
@@ -73,8 +73,8 @@
 					status="不符合公司职位需求";
 				}
 				
-				%> <span
-					class=" is_browse2"><%=status %></span>
+				%> <font
+					class=" is_browse2"  color="#f60"><%=status %></font>
 				</span> <span class="List_Title_span List_Title_w150"><%=rs.getString("applyTime") %></span> <span
 					class="List_Title_span List_Title_w150"> <a
 					href="javascript:void(0)"

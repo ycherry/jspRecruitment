@@ -95,7 +95,7 @@
 													}
 												%>
 												<span class="job_news_list_span job_w80"> <font
-													color="blue"><%=responseMessage %></font>
+													color="red"><%=responseMessage %></font>
 												</span>
 												<span class="job_news_list_span job_w80"><a
 													href="javascript:void(0)"

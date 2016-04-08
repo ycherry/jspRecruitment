@@ -241,7 +241,8 @@
 					<div class="Recommended_jobs_cont">
 						<div class="Latest_talent_cont_box">
 							<%
-								String selectJobSql1 = "select *,count(distinct t_company_job.cid=t_company.id) from t_company,t_company_job where t_company_job.cid=t_company.id and position is not null and updateTime is not null order by firstUpdateTime desc limit 0,6";
+							//	String selectJobSql1 = "select *,count(distinct t_company_job.cid=t_company.id) from t_company,t_company_job where t_company_job.cid=t_company.id and position is not null and updateTime is not null order by firstUpdateTime desc limit 0,6";
+							String selectJobSql1 = "select * from t_company where id in (select distinct(cid) from t_company_job)";
 								ResultSet companyrs = dbc.getRs(selectJobSql1);
 								while (companyrs.next()) {
 							%>

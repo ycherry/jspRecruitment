@@ -281,7 +281,7 @@
 					href="../company/ViewJob.jsp?jobId=<%=resultset.getString("id")%>"
 					target="mainFrame" class="disc_talent fl"><%=resultset.getString("position")%></a>
 				<a class="fl disc_talent_mes"
-					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("cid")%>"><%=resultset.getString("companyName")%></a>
+					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("cid")%>" target="mainFrame"><%=resultset.getString("companyName")%></a>
 			</div>
 			<div class="disc_job_pay">
 				<%=resultset.getString(9)%>
@@ -347,20 +347,13 @@
 			//为filter下的所有a标签添加单击事件  
 			$("#filter a").click(function() {
 				$(this).parents("dl").children("dd").each(function() {
-					//下面三种方式效果相同（第三种写法的内部就是调用了find()函数，所以，第二、三种方法是等价的。）  
-					//$(this).children("div").children("a").removeClass("seled");  
-					//$(this).find("a").removeClass("seled");  
 					$('a', this).removeClass("seled");
 				});
-
 				$(this).attr("class", "seled");
 				$(this).attr("id", $(this).html());
-				//	alert($(this).attr("id"));
-				//	alert(RetSelecteds()); //返回选中结果  
 				window.location.href = RetSelecteds();
 
 			});
-			//	alert(RetSelecteds()); //返回选中结果  
 		});
 
 		function RetSelecteds() {
@@ -369,8 +362,8 @@
 					"experience" ];
 			var i = 0;
 			var urlData = GetUrlData();
-			if(urlData.length>5){
-				result += "keyword="+urlData[1]+"&";
+			if(urlData.length>6){
+				result += "c=search&keyword="+urlData[1]+"&";
 			}
 			$("#filter a[class='seled']").each(
 					function() {
@@ -401,11 +394,10 @@
 					request[strs[i].split("=")[0]] = unescape(decodeURI(decodeURI(strs[i]
 							.split("=")[1])));
 				}
-				for (var i = 0; i <= strs.length; i++) {
+				for (var i = 0; i < strs.length; i++) {
 					urlData[i] = request[array[i]];
 				}
-			}
-			
+			}			
 			return urlData;
 		}
 	</script>

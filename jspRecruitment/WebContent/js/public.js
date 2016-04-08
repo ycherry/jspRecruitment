@@ -1,963 +1,1397 @@
-$(function() {
-   // $("img").lazyload({event : "mouseover"});
-});
-function check_code(){
-	document.getElementById("vcode_img").src=weburl+"/app/include/authcode.inc.php?"+Math.random();
-}
-function check_codes(){
-	document.getElementById("vcode_imgs").src=weburl+"/app/include/authcode.inc.php?"+Math.random();
-}
-function checkcode(){
-	document.getElementById("vcode_img").src=weburl+"/app/include/authcode.inc.php?"+Math.random();
-}
-function get_comindes_jobid(){
-	var codewebarr="";
-	$("input[name=checkbox_job]:checked").each(function(){ 
-		if(codewebarr==""){codewebarr=$(this).val();}else{codewebarr=codewebarr+","+$(this).val();}
+function get_comindes_jobid() {
+	var codewebarr = "";
+	$("input[name=checkbox_job]:checked").each(function() {
+		if (codewebarr == "") {
+			codewebarr = $(this).val();
+		} else {
+			codewebarr = codewebarr + "," + $(this).val();
+		}
 	});
 	return codewebarr;
 }
-function search_keyword(myform){
-    var keyword = myform.keyword.value;
-    var placeholder = myform.keyword.placeholder;
-	if(placeholder==keyword&&keyword){
-		myform.keyword.value='';
+function search_keyword(myform, jobseekerId, companyId, adminName) {
+	console.log("jobseekerId:" + jobseekerId + " companyId:" + companyId
+			+ " adminName:" + adminName);
+	if (jobseekerId == "null" && companyId == "null" && adminName == "null") {
+		alert("è¯·å…ˆç™»å½•ï¼");
+		$('#index_search_form').attr('action', "index.jsp");
+		return;
+	} else {
+		var keyword = myform.keyword.value;
+		var placeholder = myform.keyword.placeholder;
+		if (placeholder == keyword && keyword) {
+			myform.keyword.value = '';
+		}
 	}
 }
-function check_keyword(name){
-	var keyword=$("#keyword").val();
-	if(keyword&&keyword==name){$("#keyword").val('');}
+function check_keyword(name) {
+	var keyword = $("#keyword").val();
+	if (keyword && keyword == name) {
+		$("#keyword").val('');
+	}
 }
 
-function search_hide(id){$("#"+id).hide();}
-function logout(url,redirecturl){
-	$.get(url,function(msg){
-		if(msg==1 || msg.indexOf('script')){
-			if(msg.indexOf('script')){
+function search_hide(id) {
+	$("#" + id).hide();
+}
+function logout(url, redirecturl) {
+	$.get(url, function(msg) {
+		if (msg == 1 || msg.indexOf('script')) {
+			if (msg.indexOf('script')) {
 				$('#uclogin').html(msg);
 			}
-			layer.msg('ÄúÒÑ³É¹¦ÍË³ö£¡', 2, 9,function(){window.location.href =redirecturl?redirecturl:weburl;});
-		}else{
-			layer.msg('ÍË³öÊ§°Ü£¡', 2, 8);
+			layer.msg('ï¿½ï¿½ï¿½Ñ³É¹ï¿½ï¿½Ë³ï¿½ï¿½ï¿½', 2, 9, function() {
+				window.location.href = redirecturl ? redirecturl : weburl;
+			});
+		} else {
+			layer.msg('ï¿½Ë³ï¿½Ê§ï¿½Ü£ï¿½', 2, 8);
 		}
 	});
 }
 
-$(document).ready(function(){	
-	$("#sq_job").click(function(){
-		var jobid=$("#jobid").val();
-		$.post(weburl+"/index.php?m=ajax&c=index_ajaxjob",{jobid:jobid},function(data){
-			if(data==4){
-				layer.msg('Äú²»·ûºÏ¸Ã¹«Ë¾ÒªÇó£¬ÎŞ·¨Ìá½»ÉêÇë£¡', 2, 8);
-			}else if(!data || data==0){
-				showcomlogin();
-			}else if(data==2){
-				layer.alert('Äú»¹Ã»ÓĞ¼òÀú£¬ÊÇ·ñÏÈÌí¼Ó¼òÀú£¿', 0, 'ÌáÊ¾',function(){window.location.href =weburl+"/member/index.php?c=resume";window.event.returnValue = false;return false; });
-			}else if(data==3){
-				layer.msg('ÄúÒÑÉêÇë¹ı¸ÃÖ°Î»£¡', 2, 3);
-			}else{
-				$(".POp_up_r").html('');
-				$(".POp_up_r").append(data);
-				$.layer({
-					type : 1,
-					title :'ÉêÇëÖ°Î»', 
-					closeBtn : [0 , true],
-					border : [10 , 0.3 , '#000', true],
-					area : ['380px','auto'],
-					page : {dom :"#sqjob_show"}
-				});
-			}
-		});
-		
-	});
-	$(".yun_topLogin").hover(function(){
-		$(this).find(".yun_More").attr("class","yun_More yun_Morecurrent");
-		$(this).find("ul").show();
-	},function(){
-		$(this).find(".yun_More").attr("class","yun_More");
-		$(this).find("ul").hide();
-	});
-	$(".yun_topNav").hover(function(){
-		$(this).find(".yun_navMore").attr("class","yun_navMore yun_webMorecurrent");
-		$(this).find(".yun_webMoredown").show();
-	},function(){
-		$(this).find(".yun_navMore").attr("class","yun_navMore");
-		$(this).find(".yun_webMoredown").hide();
-	});
-	$("#click_sq").click(function(){
-		var companyname=$("#companyname").val();
-		var jobname=$("#jobname").val();
-		var companyuid=$("#companyuid").val();
-		var jobid=$("#jobid").val();
-		var eid=$("input[name=resume]:checked").val();
-		$('#sqjob_show').hide();
-		$('#bg').hide();
-		layer.closeAll();
-		var loadi = layer.load('Ö´ĞĞÖĞ£¬ÇëÉÔºò...',0);
-		$.post(weburl+"/index.php?m=ajax&c=sq_job",{companyname:companyname,jobname:jobname,companyuid:companyuid,jobid:jobid,eid:eid},function(data){
-			layer.close(loadi);
-			if(data==4){
-				layer.msg('Äú²»·ûºÏ¸Ã¹«Ë¾ÒªÇó£¬ÎŞ·¨Ìá½»ÉêÇë£¡', 2, 8);
-			}else if(data==1){
-				var i = $.layer({ 
-					area:['auto','auto'],
-					dialog:{
-						msg:'ÉêÇë³É¹¦£¬ÊÇ·ñ·µ»Ø¸öÈËÖĞĞÄ£¿',
-						btns:2,
-						type:4,
-						btn:['¸öÈËÖĞĞÄ','¹Ø±Õ'],
-						yes:function(){window.location.href=weburl+"/member/index.php?c=job";window.event.returnValue = false;return false;},
-						no:function(){layer.close(i);}
+$(document)
+		.ready(
+				function() {
+					$("#sq_job")
+							.click(
+									function() {
+										var jobid = $("#jobid").val();
+										$
+												.post(
+														weburl
+																+ "/index.php?m=ajax&c=index_ajaxjob",
+														{
+															jobid : jobid
+														},
+														function(data) {
+															if (data == 4) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸Ã¹ï¿½Ë¾Òªï¿½ï¿½ï¿½Ş·ï¿½ï¿½á½»ï¿½ï¿½ï¿½ë£¡',
+																				2,
+																				8);
+															} else if (!data
+																	|| data == 0) {
+																showcomlogin();
+															} else if (data == 2) {
+																layer
+																		.alert(
+																				'ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğ¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½ï¿½ï¿½ï¿½',
+																				0,
+																				'ï¿½ï¿½Ê¾',
+																				function() {
+																					window.location.href = weburl
+																							+ "/member/index.php?c=resume";
+																					window.event.returnValue = false;
+																					return false;
+																				});
+															} else if (data == 3) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°Î»ï¿½ï¿½',
+																				2,
+																				3);
+															} else {
+																$(".POp_up_r")
+																		.html(
+																				'');
+																$(".POp_up_r")
+																		.append(
+																				data);
+																$
+																		.layer({
+																			type : 1,
+																			title : 'ï¿½ï¿½ï¿½ï¿½Ö°Î»',
+																			closeBtn : [
+																					0,
+																					true ],
+																			border : [
+																					10,
+																					0.3,
+																					'#000',
+																					true ],
+																			area : [
+																					'380px',
+																					'auto' ],
+																			page : {
+																				dom : "#sqjob_show"
+																			}
+																		});
+															}
+														});
+
+									});
+					$(".yun_topLogin").hover(
+							function() {
+								$(this).find(".yun_More").attr("class",
+										"yun_More yun_Morecurrent");
+								$(this).find("ul").show();
+							},
+							function() {
+								$(this).find(".yun_More").attr("class",
+										"yun_More");
+								$(this).find("ul").hide();
+							});
+					$(".yun_topNav").hover(
+							function() {
+								$(this).find(".yun_navMore").attr("class",
+										"yun_navMore yun_webMorecurrent");
+								$(this).find(".yun_webMoredown").show();
+							},
+							function() {
+								$(this).find(".yun_navMore").attr("class",
+										"yun_navMore");
+								$(this).find(".yun_webMoredown").hide();
+							});
+					$("#click_sq")
+							.click(
+									function() {
+										var companyname = $("#companyname")
+												.val();
+										var jobname = $("#jobname").val();
+										var companyuid = $("#companyuid").val();
+										var jobid = $("#jobid").val();
+										var eid = $(
+												"input[name=resume]:checked")
+												.val();
+										$('#sqjob_show').hide();
+										$('#bg').hide();
+										layer.closeAll();
+										var loadi = layer.load(
+												'Ö´ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½Ôºï¿½...', 0);
+										$
+												.post(
+														weburl
+																+ "/index.php?m=ajax&c=sq_job",
+														{
+															companyname : companyname,
+															jobname : jobname,
+															companyuid : companyuid,
+															jobid : jobid,
+															eid : eid
+														},
+														function(data) {
+															layer.close(loadi);
+															if (data == 4) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸Ã¹ï¿½Ë¾Òªï¿½ï¿½ï¿½Ş·ï¿½ï¿½á½»ï¿½ï¿½ï¿½ë£¡',
+																				2,
+																				8);
+															} else if (data == 1) {
+																var i = $
+																		.layer({
+																			area : [
+																					'auto',
+																					'auto' ],
+																			dialog : {
+																				msg : 'ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½Ç·ñ·µ»Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½',
+																				btns : 2,
+																				type : 4,
+																				btn : [
+																						'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+																						'ï¿½Ø±ï¿½' ],
+																				yes : function() {
+																					window.location.href = weburl
+																							+ "/member/index.php?c=job";
+																					window.event.returnValue = false;
+																					return false;
+																				},
+																				no : function() {
+																					layer
+																							.close(i);
+																				}
+																			}
+																		});
+															} else if (data == 2) {
+																layer
+																		.msg(
+																				'ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½Ô£ï¿½',
+																				2,
+																				3);
+																return false;
+															} else if (data == 3) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°Î»ï¿½ï¿½',
+																				2,
+																				0);
+																return false;
+															} else if (data == 5) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½Ö°Î»ï¿½Ñ¹ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°Î»ï¿½ï¿½',
+																				2,
+																				3);
+																return false;
+															} else if (data == 6) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½Ö°Î»ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½',
+																				2,
+																				8);
+																return false;
+															} else {
+																layer
+																		.alert(
+																				'ï¿½ï¿½ï¿½Èµï¿½Â¼ï¿½ï¿½',
+																				0,
+																				'ï¿½ï¿½Ê¾',
+																				function() {
+																					window.location.href = "index.php?m=login&usertype=1";
+																					window.event.returnValue = false;
+																					return false;
+																				});
+															}
+														});
+									})
+					$(".sq_resume")
+							.click(
+									function() {
+										if ($(this).attr("uid")) {
+											$("#uid").val($(this).attr("uid"));
+										}
+										if ($(this).attr("username")) {
+											$("#username").val(
+													$(this).attr("username"));
+										}
+										$
+												.post(
+														weburl
+																+ "/index.php?m=ajax&c=index_ajaxresume",
+														{
+															show_job : 1
+														},
+														function(data) {
+															var buypack = $(
+																	"#buypack")
+																	.val();
+															var data = eval('('
+																	+ data
+																	+ ')');
+															var status = data.status;
+															var integral = data.integral;
+															if (data.html) {
+																$("#jobname")
+																		.html(
+																				data.html);
+															}
+															if (data.linkman) {
+																$("#linkman")
+																		.val(
+																				data.linkman);
+															}
+															if (data.linktel) {
+																$("#linktel")
+																		.val(
+																				data.linktel);
+															}
+															if (data.address) {
+																$("#address")
+																		.val(
+																				data.address);
+															}
+															if (data.intertime) {
+																$("#intertime")
+																		.val(
+																				data.intertime);
+															}
+															if (data.content) {
+																$("#content")
+																		.text(
+																				data.content);
+																$("#update_yq")
+																		.attr(
+																				"checked",
+																				true);
+															}
+															if (status == 6) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½Èµï¿½Â¼ï¿½ï¿½',
+																				2,
+																				3);
+																return false;
+															}
+															if (!status
+																	|| status == 0) {
+																layer
+																		.alert(
+																				'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½Â¼ï¿½ï¿½',
+																				0,
+																				'ï¿½ï¿½Ê¾',
+																				function() {
+																					window.location.href = weburl
+																							+ "/index.php?m=login&usertype=2&type=out";
+																					window.event.returnValue = false;
+																					return false;
+																				});
+
+															} else if (status == 1) {
+																var msg = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½Û³ï¿½"
+																		+ integral
+																		+ integral_pricename
+																		+ "ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+																layer
+																		.confirm(
+																				msg,
+																				function() {
+																					layer
+																							.closeAll();
+																					$
+																							.layer({
+																								type : 1,
+																								title : 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+																								closeBtn : [
+																										0,
+																										true ],
+																								border : [
+																										10,
+																										0.3,
+																										'#000',
+																										true ],
+																								area : [
+																										'380px',
+																										'auto' ],
+																								page : {
+																									dom : "#job_box"
+																								}
+																							});
+																				});
+															} else if (status == 2) {
+																var msg = "ï¿½ï¿½ÄµÈ¼ï¿½ï¿½ï¿½È¨ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Û³ï¿½"
+																		+ integral
+																		+ integral_pricename
+																		+ "ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+																layer
+																		.confirm(
+																				msg,
+																				function() {
+																					layer
+																							.closeAll();
+																					$
+																							.layer({
+																								type : 1,
+																								title : 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+																								closeBtn : [
+																										0,
+																										true ],
+																								border : [
+																										10,
+																										0.3,
+																										'#000',
+																										true ],
+																								area : [
+																										'380px',
+																										'auto' ],
+																								page : {
+																									dom : "#job_box"
+																								}
+																							});
+																				});
+															} else if (status == 3) {
+																$
+																		.layer({
+																			type : 1,
+																			title : 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+																			closeBtn : [
+																					0,
+																					true ],
+																			border : [
+																					10,
+																					0.3,
+																					'#000',
+																					true ],
+																			area : [
+																					'380px',
+																					'auto' ],
+																			page : {
+																				dom : "#job_box"
+																			}
+																		});
+															} else if (status == 4) {
+																if (buypack == 1) {
+																	layer
+																			.confirm(
+																					'ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½',
+																					function() {
+																						showpacklist();
+																					});
+																} else {
+																	layer
+																			.msg(
+																					'ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê£¡',
+																					2,
+																					8);
+																	return false;
+																}
+															} else if (status == 5) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½Ğµï¿½Ö°Î»ï¿½ï¿½',
+																				2,
+																				8);
+																return false;
+															}
+														});
+									});
+					$("#click_invite")
+							.click(
+									function() {
+										layer.closeAll();
+										var uid = $("#uid").val();
+										var content = $("#content").val();
+										var username = $("#username").val();
+										var job = $("#jobname").val();
+										var intertime = $("#intertime").val();
+										var linkman = $("#linkman").val();
+										var linktel = $("#linktel").val();
+										var address = $("#address").val();
+										job = job.split("+");
+										var jobname = job[0];
+										var jobid = job[1];
+										if ($("#update_yq").attr("checked") == 'checked') {
+											var update_yq = 1;
+										} else {
+											var update_yq = 0;
+										}
+
+										loadi = layer.load('Ö´ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½Ôºï¿½...', 0);
+										$
+												.post(
+														weburl
+																+ "/index.php?m=ajax&c=sava_ajaxresume",
+														{
+															uid : uid,
+															content : content,
+															username : username,
+															jobname : jobname,
+															update_yq : update_yq,
+															address : address,
+															linkman : linkman,
+															linktel : linktel,
+															intertime : intertime,
+															jobid : jobid
+														},
+														function(data) {
+															layer.close(loadi);
+															var data = eval('('
+																	+ data
+																	+ ')');
+															var status = data.status;
+															var integral = data.integral;
+															if (status == 8) {
+																layer
+																		.msg(
+																				data.msg,
+																				2,
+																				8);
+																return false;
+															} else if (status == 9) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ñ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
+																				2,
+																				8);
+																return false;
+															} else if (!status
+																	|| status == 0) {
+																layer
+																		.alert(
+																				'ï¿½ï¿½ï¿½Èµï¿½Â¼ï¿½ï¿½',
+																				0,
+																				'ï¿½ï¿½Ê¾',
+																				function() {
+																					window.location.href = "index.php?m=login&usertype=2&type=out";
+																					window.event.returnValue = false;
+																					return false;
+																				});
+															} else if (status == 5) {
+																layer
+																		.confirm(
+																				'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'
+																						+ integral
+																						+ integral_pricename
+																						+ 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½ï¿½Ç·ï¿½ï¿½Öµï¿½ï¿½',
+																				function() {
+																					window.location.href = weburl
+																							+ "/member/index.php?c=pay";
+																					window.event.returnValue = false;
+																					return false;
+																				});
+															} else if (status == 3) {
+																layer
+																		.msg(
+																				'ï¿½ï¿½ï¿½Ñ³É¹ï¿½ï¿½ï¿½ï¿½ë£¡',
+																				2,
+																				9,
+																				function() {
+																					location
+																							.reload();
+																				});
+															}
+														});
+									})
+					$("input[name=city]").click(function() {
+						$('.city_box').show();
+					})
+					$(".p_t_right").click(function() {
+						$("#bg").hide(1000);
+						$('.city_box').hide(1000);
+					})
+					$("#colse_box").click(function() {
+						$('.job_box').hide();
+					})
+					$("#close_job")
+							.click(
+									function() {
+										var check_val = "0";
+										var name_val = "ï¿½ï¿½ï¿½ï¿½";
+										$(
+												"input[type='checkbox'][name='job_box']:checked")
+												.each(
+														function() {
+															var info = $(this)
+																	.val()
+																	.split("+");
+															check_val += ","
+																	+ info[0];
+															name_val += "+"
+																	+ info[1];
+														});
+										check_val = check_val.replace("0,", "");
+										$("#qw_job").val(check_val);
+										name_val = name_val
+												.replace("ï¿½ï¿½ï¿½ï¿½+", "");
+										$("#qw_show_job").html(name_val);
+										$("#bg").hide(1000);
+										$('#pannel_job').hide(1000);
+									})
+					$("#click")
+							.click(
+									function() {
+										var info = $(
+												"input[@type=radio][name=cityid][checked]")
+												.val();
+										var info_arr = info.split("+");
+										var name = info_arr[0];
+										var id = info_arr[1];
+										$("#sea_place").val(name);
+										$("#cityid").val(id);
+										$("#bg").attr("style", "display:none");
+										$('.city_box').hide(1000);
+									});
+					$("#click_head")
+							.click(
+									function() {
+										var info = $(
+												"input[@type=radio][name=cityid][checked]")
+												.val();
+										var info_arr = info.split("+");
+										var name = info_arr[0];
+										var id = info_arr[1];
+										$("#sea_place_head").val(name);
+										$("#cityid_head").val(id);
+										$("#bg").hide(1000);
+										$('#city_box_head').hide(1000);
+									});
+					$(".header_seach_find").mouseover(function() {
+						$(".index_header_seach_find_list").show();
+					}).mouseout(function() {
+						$(".index_header_seach_find_list").hide();
+					});
+					$(".header_seach_find_list").mouseover(function() {
+						$(".index_header_seach_find_list").show();
+					});
+
+					$(".index_search_place").mouseover(function() {
+						$(".index_place_position").show();
+					}).mouseout(function() {
+						$(".index_place_position").hide();
+					});
+					$(".index_place_position").mouseover(function() {
+						$(".index_place_position").show();
+					});
+					$(".Company_post_ms span").click(function() {
+						$(".Company_post_ms span").attr("class", "");
+						$(this).attr("class", "Company_post_cur");
+						$(".Company_toggle").hide();
+						var name = $(this).attr("name");
+						$("#Company_job_" + name).show();
+					});
+					$(".header_Remind_hover").hover(
+							function() {
+								$(".header_Remind_list").show();
+								$(".header_Remind_em").addClass(
+										"header_Remind_em_hover");
+							},
+							function() {
+								$(".header_Remind_list").hide();
+								$(".header_Remind_em_hover").removeClass(
+										"header_Remind_em_hover");
+							});
+
+					$(".header_fixed_login_after").hover(function() {
+						$(".header_fixed_reg_box").show();
+					}, function() {
+						$(".header_fixed_reg_box").hide();
+					});
+
+					if (!isPlaceholder()) {
+						$("input")
+								.not("input[type='password']")
+								.each(
+										function() {
+											if ($(this).val() == ""
+													&& $(this).attr(
+															"placeholder") != "") {
+												$(this).val(
+														$(this).attr(
+																"placeholder"));
+												$(this)
+														.focus(
+																function() {
+																	if ($(this)
+																			.val() == $(
+																			this)
+																			.attr(
+																					"placeholder"))
+																		$(this)
+																				.val(
+																						"");
+																});
+												$(this)
+														.blur(
+																function() {
+																	if ($(this)
+																			.val() == "")
+																		$(this)
+																				.val(
+																						$(
+																								this)
+																								.attr(
+																										"placeholder"));
+																});
+											}
+										});
 					}
-				});
-			}else if(data==2){
-				layer.msg('ÏµÍ³³ö´í£¬ÇëÉÔºóÔÙÊÔ£¡', 2, 3);return false;
-			}else if(data==3){
-				layer.msg('ÄúÒÑÉêÇë¹ı¸ÃÖ°Î»£¡', 2, 0);return false;
-			}else if(data==5){
-				layer.msg('¸ÃÖ°Î»ÒÑ¹ıÆÚ£¬²»ÄÜÉêÇë¸ÃÖ°Î»£¡', 2, 3);return false;
-			}else if(data==6){
-				layer.msg('¸ÃÖ°Î»²»´æÔÚ£¡', 2, 8);return false;
-			}else{
-				layer.alert('ÇëÏÈµÇÂ¼£¡',0,'ÌáÊ¾',function(){window.location.href="index.php?m=login&usertype=1";window.event.returnValue=false;return false;});
-			}
-		});
-	})
-	$(".sq_resume").click(function(){
-		if($(this).attr("uid")){$("#uid").val($(this).attr("uid"));}
-		if($(this).attr("username")){$("#username").val($(this).attr("username"));}
-		$.post(weburl+"/index.php?m=ajax&c=index_ajaxresume",{show_job:1},function(data){
-			var buypack=$("#buypack").val();
-			var data=eval('('+data+')');
-			var status=data.status;
-			var integral=data.integral;
-			if(data.html){
-				$("#jobname").html(data.html);
-			}
-			if(data.linkman){
-				$("#linkman").val(data.linkman);
-			}
-			if(data.linktel){
-				$("#linktel").val(data.linktel);
-			}
-			if(data.address){
-				$("#address").val(data.address);
-			}
-			if(data.intertime){
-				$("#intertime").val(data.intertime);
-			}
-			if(data.content){
-				$("#content").text(data.content);
-				$("#update_yq").attr("checked",true);
-			}
-			if(status == 6){
-			    layer.msg('ÇëÏÈµÇÂ¼£¡', 2, 3);return false;
-			}
-			if(!status || status == 0){
-				layer.alert('Äú²»ÊÇÆóÒµÓÃ»§£¬ÇëÏÈµÇÂ¼£¡', 0, 'ÌáÊ¾',function(){
-					window.location.href =weburl+"/index.php?m=login&usertype=2&type=out"; window.event.returnValue = false;return false;
-				});
+					;
 
-			}else if(status==1){
-				var msg="ÑûÇëÃæÊÔ½«¿Û³ı"+integral+integral_pricename+"£¬ÊÇ·ñ¼ÌĞø£¿";
-				layer.confirm(msg,function(){
-					layer.closeAll();
-					$.layer({
-						type : 1,
-						title :'ÑûÇëÃæÊÔ', 
-						closeBtn : [0 , true],
-						border : [10 , 0.3 , '#000', true],
-						area : ['380px','auto'],
-						page : {dom :"#job_box"}
-					});
-				});
-			}else if(status==2){
-				var msg="ÄãµÄµÈ¼¶ÌØÈ¨ÒÑ¾­ÓÃÍê,½«¿Û³ı"+integral+integral_pricename+"£¬ÊÇ·ñ¼ÌĞø£¿";
-				layer.confirm(msg,function(){
-					layer.closeAll();
-					$.layer({
-						type : 1,
-						title :'ÑûÇëÃæÊÔ', 
-						closeBtn : [0 , true],
-						border : [10 , 0.3 , '#000', true],
-						area : ['380px','auto'],
-						page : {dom :"#job_box"}
-					});
-				});
-			}else if(status==3){ 
-				$.layer({
-					type : 1,
-					title :'ÑûÇëÃæÊÔ', 
-					closeBtn : [0 , true],
-					border : [10 , 0.3 , '#000', true],
-					area : ['380px','auto'],
-					page : {dom :"#job_box"}
-				});
-			}else if(status==4){
-				if(buypack==1){
-					layer.confirm('»áÔ±ÑûÇë¼òÀúÒÑÓÃÍê,Äú»¹¿ÉÒÔ¹ºÂòÔöÖµ°ü£¡', function(){showpacklist();});
-				}else{
-					layer.msg('»áÔ±ÑûÇë¼òÀúÒÑÓÃÍê£¡', 2, 8);return false;
-				}
-			}else if(status==5){
-				layer.msg('ÄúÔİÎŞ·¢²¼ÖĞµÄÖ°Î»£¡', 2, 8);return false;
-			}
-		});
-	});
-	$("#click_invite").click(function(){
-		layer.closeAll();
-		var uid=$("#uid").val();
-		var content=$("#content").val();
-		var username=$("#username").val();
-		var job=$("#jobname").val();
-		var intertime=$("#intertime").val();
-		var linkman=$("#linkman").val();
-		var linktel=$("#linktel").val();
-		var address=$("#address").val();
-		job=job.split("+");
-		var jobname=job[0];
-		var jobid=job[1];
-		if($("#update_yq").attr("checked")=='checked'){
-			var update_yq=1;
-		}else{
-			var update_yq=0;
-		}
-		
-		loadi = layer.load('Ö´ĞĞÖĞ£¬ÇëÉÔºò...',0);
-		$.post(weburl+"/index.php?m=ajax&c=sava_ajaxresume",{uid:uid,content:content,username:username,jobname:jobname,update_yq:update_yq,address:address,linkman:linkman,linktel:linktel,intertime:intertime,jobid:jobid},function(data){
-			layer.close(loadi);
-			var data=eval('('+data+')');
-			var status=data.status;
-			var integral=data.integral;
-			if(status==8){
-				layer.msg(data.msg, 2, 8);return false;
-			}else if(status==9){
-				layer.msg('¸ÃÓÃ»§ÒÑ±»ÄãÁĞÈëºÚÃûµ¥£¡', 2, 8);return false;
-			}else if(!status || status==0){
-				layer.alert('ÇëÏÈµÇÂ¼£¡', 0, 'ÌáÊ¾',function(){window.location.href ="index.php?m=login&usertype=2&type=out";window.event.returnValue = false;return false;  });
-			}else if(status==5){
-				layer.confirm('Äú»¹ÓĞ'+integral+integral_pricename+'£¡²»¹»ÑûÇëÃæÊÔ£¬ÊÇ·ñ³äÖµ£¿', function(){window.location.href =weburl+"/member/index.php?c=pay";window.event.returnValue = false;return false;  });
-			}else if(status==3){
-				layer.msg('ÄúÒÑ³É¹¦ÑûÇë£¡', 2, 9,function(){location.reload();}); 
-			} 
-		});
-	})
-	$("input[name=city]").click(function(){
-		$('.city_box').show();
-	})
-	$(".p_t_right").click(function(){
-		$("#bg").hide(1000);
-		$('.city_box').hide(1000);
-	})
-	$("#colse_box").click(function(){
-		$('.job_box').hide();
-	})
-	$("#close_job").click(function(){
-		var check_val="0";
-		var name_val = "²»ÏŞ";
-		$("input[type='checkbox'][name='job_box']:checked").each(function(){
-		  var info = $(this).val().split("+");
-			  check_val+=","+info[0];
-			  name_val+="+"+info[1];
-		  });
-		  check_val = check_val.replace("0,","");
-		  $("#qw_job").val(check_val);
-		  name_val = name_val.replace("²»ÏŞ+","");
-		  $("#qw_show_job").html(name_val);
-		  $("#bg").hide(1000);
-		  $('#pannel_job').hide(1000);
-	})
-	$("#click").click(function(){
-		var info = $("input[@type=radio][name=cityid][checked]").val();
-		var info_arr = info.split("+");
-		var name = info_arr[0];
-		var id = info_arr[1];
-		$("#sea_place").val(name);
-		$("#cityid").val(id);
-		$("#bg").attr("style","display:none");
-		$('.city_box').hide(1000);
-	});
-	$("#click_head").click(function(){
-		var info = $("input[@type=radio][name=cityid][checked]").val();
-		var info_arr = info.split("+");
-		var name = info_arr[0];
-		var id = info_arr[1];
-		$("#sea_place_head").val(name);
-		$("#cityid_head").val(id);
-		$("#bg").hide(1000);
-		$('#city_box_head').hide(1000);
-	});
-	$(".header_seach_find").mouseover(function(){
-	    $(".index_header_seach_find_list").show();
-	}).mouseout(function(){
-	    $(".index_header_seach_find_list").hide();
-	});
-	$(".header_seach_find_list").mouseover(function(){
-	    $(".index_header_seach_find_list").show();
-	});
-
-	$(".index_search_place").mouseover(function(){
-		$(".index_place_position").show();
-	}).mouseout(function(){
-		$(".index_place_position").hide();
-	});
-	$(".index_place_position").mouseover(function(){
-		$(".index_place_position").show();
-	});
-	$(".Company_post_ms span").click(function(){
-		$(".Company_post_ms span").attr("class","");
-		$(this).attr("class","Company_post_cur");
-		$(".Company_toggle").hide();
-		var name=$(this).attr("name");
-		$("#Company_job_"+name).show();
-	});
-	$(".header_Remind_hover").hover(function(){
-		$(".header_Remind_list").show();
-		$(".header_Remind_em").addClass("header_Remind_em_hover");
-	},function(){
-		$(".header_Remind_list").hide();
-		$(".header_Remind_em_hover").removeClass("header_Remind_em_hover");
-	}); 
-	
-	$(".header_fixed_login_after").hover(function(){
-		$(".header_fixed_reg_box").show();
-	},function(){
-		$(".header_fixed_reg_box").hide();
-	});
-	
-	
-	if(!isPlaceholder()){
-		$("input").not("input[type='password']").each(
-		function(){
-			if($(this).val()=="" && $(this).attr("placeholder")!=""){
-				$(this).val($(this).attr("placeholder"));
-				$(this).focus(function(){
-					if($(this).val()==$(this).attr("placeholder")) $(this).val("");
-				});
-				$(this).blur(function(){
-					if($(this).val()=="") $(this).val($(this).attr("placeholder"));
-				});
-			}
-		});
-	};
-	
-})
-function isPlaceholder(){
-    var input = document.createElement('input');
-    return 'placeholder' in input;
+				})
+function isPlaceholder() {
+	var input = document.createElement('input');
+	return 'placeholder' in input;
 }
-function fav_job(id,type){
-	$.post(weburl+"/index.php?m=ajax&c=favjobuser",{id:id},function(data){
-		if(data==1){
-			var i = $.layer({ 
-				area : ['auto','auto'],
+function fav_job(id, type) {
+	$.post(weburl + "/index.php?m=ajax&c=favjobuser", {
+		id : id
+	}, function(data) {
+		if (data == 1) {
+			var i = $.layer({
+				area : [ 'auto', 'auto' ],
 				dialog : {
-					msg:'ÊÕ²Ø³É¹¦£¬ÊÇ·ñ·µ»Ø¸öÈËÖĞĞÄ£¿',
+					msg : 'ï¿½Õ²Ø³É¹ï¿½ï¿½ï¿½ï¿½Ç·ñ·µ»Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½',
 					btns : 2,
 					type : 4,
-					btn : ['²é¿´ÊÕ²Ø','¹Ø±Õ'],
-					yes : function(){
-						window.location.href =weburl+"/member/index.php?c=favorite";window.event.returnValue = false;return false;
+					btn : [ 'ï¿½é¿´ï¿½Õ²ï¿½', 'ï¿½Ø±ï¿½' ],
+					yes : function() {
+						window.location.href = weburl
+								+ "/member/index.php?c=favorite";
+						window.event.returnValue = false;
+						return false;
 					},
-					no : function(){
+					no : function() {
 						layer.close(i);
 					}
 				}
 			});
-		}else if(data==2){
-			layer.msg('ÏµÍ³³ö´í£¬ÇëÉÔºóÔÙÊÔ£¡', 2, 3);return false;
-		}else if(data==3){
-			layer.msg('ÄúÒÑÊÕ²Ø¹ı¸ÃÖ°Î»£¡', 2, 0);return false;
-		}else if(data==0){
-			if(type==2){
+		} else if (data == 2) {
+			layer.msg('ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½Ô£ï¿½', 2, 3);
+			return false;
+		} else if (data == 3) {
+			layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½Õ²Ø¹ï¿½ï¿½ï¿½Ö°Î»ï¿½ï¿½', 2, 0);
+			return false;
+		} else if (data == 0) {
+			if (type == 2) {
 				$("#touch_lo").hide();
 				$("#tologoin").show("1000");
-			}else{
-				layer.msg('ÇëÏÈµÇÂ¼£¡', 2, 3);return false;
+			} else {
+				layer.msg('ï¿½ï¿½ï¿½Èµï¿½Â¼ï¿½ï¿½', 2, 3);
+				return false;
 			}
-		}else if(data==4){
-			if(type==2){
+		} else if (data == 4) {
+			if (type == 2) {
 				$("#touch_lo").hide();
 				$("#tologoin").show("1000");
-			}else{
-				layer.msg('¶Ô²»Æğ£¬Äú²»ÊÇ¸öÈËÓÃ»§£¬ÎŞ·¨ÊÕ²ØÖ°Î»£¡', 2, 8);return false;
+			} else {
+				layer.msg('ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ş·ï¿½ï¿½Õ²ï¿½Ö°Î»ï¿½ï¿½', 2, 8);
+				return false;
 			}
 		}
 	});
 }
-function addwebfav(url,title){
-	var title,url;
-	if(document.all){
-		window.external.addFavorite(url,title);
-	}else if(window.sidebar){
-		window.sidebar.addPanel(title,url,"");
+function addwebfav(url, title) {
+	var title, url;
+	if (document.all) {
+		window.external.addFavorite(url, title);
+	} else if (window.sidebar) {
+		window.sidebar.addPanel(title, url, "");
 	}
 }
-function setHomepage(url){
-   var url;
-   if(document.all){
-	  document.body.style.behavior='url(#default#homepage)';
-	  document.body.setHomePage(url);
-   }else if(window.sidebar){
-		if(window.netscape){
-			 try{
-				 netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-			 }
-			 catch(e){
-				layer.alert('ÄúµÄä¯ÀÀÆ÷Î´ÆôÓÃ[ÉèÎªÊ×Ò³]¹¦ÄÜ£¬¿ªÆô·½·¨£ºÏÈÔÚµØÖ·À¸ÄÚÊäÈëabout:config,È»ºó½«Ïî signed.applets.codebase_principal_support Öµ¸ÃÎªtrue¼´¿É£¡', 2,8);return false; 
-			 }
+function setHomepage(url) {
+	var url;
+	if (document.all) {
+		document.body.style.behavior = 'url(#default#homepage)';
+		document.body.setHomePage(url);
+	} else if (window.sidebar) {
+		if (window.netscape) {
+			try {
+				netscape.security.PrivilegeManager
+						.enablePrivilege("UniversalXPConnect");
+			} catch (e) {
+				layer
+						.alert(
+								'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½Îªï¿½ï¿½Ò³]ï¿½ï¿½ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½about:config,È»ï¿½ï¿½ï¿½ï¿½ signed.applets.codebase_principal_support Öµï¿½ï¿½Îªtrueï¿½ï¿½ï¿½É£ï¿½',
+								2, 8);
+				return false;
+			}
 		}
-		var prefs=Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-		prefs.setCharPref('browser.startup.homepage',url);
-   }
+		var prefs = Components.classes['@mozilla.org/preferences-service;1']
+				.getService(Components.interfaces.nsIPrefBranch);
+		prefs.setCharPref('browser.startup.homepage', url);
+	}
 }
-function marquee(time,id){
-	$(function(){
-		var _wrap=$(id);
-		var _interval=time;
+function marquee(time, id) {
+	$(function() {
+		var _wrap = $(id);
+		var _interval = time;
 		var _moving;
-		_wrap.hover(function(){
+		_wrap.hover(function() {
 			clearInterval(_moving);
-		},function(){
-			_moving=setInterval(function(){
-			var _field=_wrap.find('li:first');
-			var _h=_field.height();
-			_field.animate({marginTop:-_h+'px'},800,function(){
-			_field.css('marginTop',0).appendTo(_wrap);
-			})
-		},_interval)
+		}, function() {
+			_moving = setInterval(function() {
+				var _field = _wrap.find('li:first');
+				var _h = _field.height();
+				_field.animate({
+					marginTop : -_h + 'px'
+				}, 800, function() {
+					_field.css('marginTop', 0).appendTo(_wrap);
+				})
+			}, _interval)
 		}).trigger('mouseleave');
 	});
 }
-function forget(){
+function forget() {
 	var aucode = $("#txt_CheckCode").val();
-	var username =  $("#username").val();
-	if(username==""){
-		$("#msg_error").html("<font color='red'>ÇëÌîĞ´Äã×¢²áÊ±µÄÓÃ»§Ãû£¡</font>");
+	var username = $("#username").val();
+	if (username == "") {
+		$("#msg_error").html("<font color='red'>ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½×¢ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½</font>");
 		return false;
 	}
-	if(aucode==""){
-		$("#msg_error").html("<font color='red'>ÑéÖ¤Âë²»ÄÜÎª¿Õ£¡</font>");
+	if (aucode == "") {
+		$("#msg_error").html("<font color='red'>ï¿½ï¿½Ö¤ï¿½ë²»ï¿½ï¿½Îªï¿½Õ£ï¿½</font>");
 		return false;
 	}
 	return true;
 }
-function unselectall(){
-	if(document.getElementById('chkAll').checked){
-		document.getElementById('chkAll').checked = document.getElementById('chkAll').checked&0;
+function unselectall() {
+	if (document.getElementById('chkAll').checked) {
+		document.getElementById('chkAll').checked = document
+				.getElementById('chkAll').checked & 0;
 	}
 }
-function CheckAll(form){
-	for (var i=0;i<form.elements.length;i++){
+function CheckAll(form) {
+	for (var i = 0; i < form.elements.length; i++) {
 		var e = form.elements[i];
-		if (e.Name != 'chkAll'&&e.disabled==false)
-		e.checked = form.chkAll.checked;
+		if (e.Name != 'chkAll' && e.disabled == false)
+			e.checked = form.chkAll.checked;
 	}
 }
-function get_zph(id,url){
-	var pid=id;
-	var stime=$("#zph_stime_"+id).val();
-	var etime=$("#zph_etime_"+id).val();
-	if(stime<'0' && etime>'0'){
-		layer.msg('ÕĞÆ¸»áÒÑ¾­¿ªÊ¼£¡', 2,8);return false;
-	}else if(etime<'0'){
-		layer.msg("ÕĞÆ¸»áÒÑ¾­½áÊø£¡", 2,8);return false;
+function get_zph(id, url) {
+	var pid = id;
+	var stime = $("#zph_stime_" + id).val();
+	var etime = $("#zph_etime_" + id).val();
+	if (stime < '0' && etime > '0') {
+		layer.msg('ï¿½ï¿½Æ¸ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½', 2, 8);
+		return false;
+	} else if (etime < '0') {
+		layer.msg("ï¿½ï¿½Æ¸ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 2, 8);
+		return false;
 	}
-	$("#zph_name").html($(".title"+pid).html());
-	
+	$("#zph_name").html($(".title" + pid).html());
+
 	$("input[name=pid]").val(pid);
-	$.get(url,function(data){
-		var data=eval('('+data+')');
-		var status=data.status;
-		var content=data.content;
-		if(status==0){
+	$.get(url, function(data) {
+		var data = eval('(' + data + ')');
+		var status = data.status;
+		var content = data.content;
+		if (status == 0) {
 			$("#error_zph").show();
 			$("#TB_ajaxContent").hide();
 			$("#error_zph").html(content);
-		}else if(status==8){
-			layer.msg(content, 2,8);return false;
-		}else{
+		} else if (status == 8) {
+			layer.msg(content, 2, 8);
+			return false;
+		} else {
 			$("#error_zph").hide();
 			$("#TB_ajaxContent").show();
 			$("#joblist").html(content);
 			$("input[name=uid]").val(data.uid);
 		}
-		if(status==2){
+		if (status == 2) {
 			$(".Corporate_box_sub").hide();
 		}
 		$.layer({
 			type : 1,
-			title :'Ô¤Ô¼ÕĞÆ¸»á',  
-			closeBtn : [0 , true],
-			border : [10 , 0.3 , '#000', true],
-			area : ['380px','auto'],
-			page : {dom :"#TB_window"}
+			title : 'Ô¤Ô¼ï¿½ï¿½Æ¸ï¿½ï¿½',
+			closeBtn : [ 0, true ],
+			border : [ 10, 0.3, '#000', true ],
+			area : [ '380px', 'auto' ],
+			page : {
+				dom : "#TB_window"
+			}
 		});
 	});
 };
-function clickzph(){
-	var uid=$("input[name=uid]").val();
-	var pid=$("input[name=pid]").val();
-	var jobid=get_comindes_jobid();
-	$.get(weburl+"/index.php?m=ajax&c=zphcom&uid="+uid+"&pid="+pid+"&jobid="+jobid, function(data){
-		var data=eval('('+data+')');
-		var status=data.status;
-		var content=data.content;
+function clickzph() {
+	var uid = $("input[name=uid]").val();
+	var pid = $("input[name=pid]").val();
+	var jobid = get_comindes_jobid();
+	$.get(weburl + "/index.php?m=ajax&c=zphcom&uid=" + uid + "&pid=" + pid
+			+ "&jobid=" + jobid, function(data) {
+		var data = eval('(' + data + ')');
+		var status = data.status;
+		var content = data.content;
 		layer.closeAll();
-		if(status==0){
-			layer.msg(content, 2,8);
-		}else{
-			layer.msg(content, 2,9);
-		} return false;
+		if (status == 0) {
+			layer.msg(content, 2, 8);
+		} else {
+			layer.msg(content, 2, 9);
+		}
+		return false;
 	})
 }
-function report_com(){
+function report_com() {
 	$.layer({
 		type : 1,
-		title :'¾Ù±¨¸ÃÖ°Î»', 
-		closeBtn : [0 , true],
-		border : [10 , 0.3 , '#000', true],
-		area : ['380px','250px'],
-		page : {dom :"#report"}
+		title : 'ï¿½Ù±ï¿½ï¿½ï¿½Ö°Î»',
+		closeBtn : [ 0, true ],
+		border : [ 10, 0.3, '#000', true ],
+		area : [ '380px', '250px' ],
+		page : {
+			dom : "#report"
+		}
 	});
 }
-function checklogin(){
+function checklogin() {
 	var username = $("#username").val();
 	var password = $("#password").val();
 	var authcode = $("#authcode").val();
-	if(username == "" || password=="" || authcode==""){
-		layer.msg('ÇëÍêÕûÌîĞ´ÓÃ»§Ãû£¬ÃÜÂë£¬ÑéÖ¤Âë£¡', 2, 8);
+	if (username == "" || password == "" || authcode == "") {
+		layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½Ö¤ï¿½ë£¡', 2, 8);
 		return false;
 	}
-	$.post(weburl+"/index.php?m=login&c=loginsave",{comid:1,username:username,password:password,authcode:authcode,usertype:"1"},function(data){
-		if(data.error==1){
+	$.post(weburl + "/index.php?m=login&c=loginsave", {
+		comid : 1,
+		username : username,
+		password : password,
+		authcode : authcode,
+		usertype : "1"
+	}, function(data) {
+		if (data.error == 1) {
 			window.location.reload();
-		}else{
+		} else {
 			layer.msg(data, 2, 8);
 		}
 	});
 }
-function check_skill(id){
+function check_skill(id) {
 	$(".pop-ul-ul").hide();
 	$(".user_tck_box1").removeClass("tanchu");
-	$("#showskill"+id).addClass("tanchu");
-	$("#skill"+id).show();
+	$("#showskill" + id).addClass("tanchu");
+	$("#skill" + id).show();
 }
-function box_delete(id){
-	$("#sk"+id).remove();
-	$("#td_"+id).remove();
-	 $("#zn"+id).removeAttr("checked");
+function box_delete(id) {
+	$("#sk" + id).remove();
+	$("#td_" + id).remove();
+	$("#zn" + id).removeAttr("checked");
 }
-function checked_input2(id,name,divid,fid){
-	var check_length = $("input[type='checkbox'][name='"+name+"'][checked]").length;
-	if(name=="job_classid"){
-		if($("#zn"+id).attr("checked")=="checked"){
-			if(check_length>=5){
-				layer.msg('Äú×î¶àÖ»ÄÜÑ¡ÔñÎå¸ö', 2,8);
-				$("#zn"+id).attr("checked",false);
-			}else{
-				var info = $("#zn"+id).val();
+function checked_input2(id, name, divid, fid) {
+	var check_length = $("input[type='checkbox'][name='" + name + "'][checked]").length;
+	if (name == "job_classid") {
+		if ($("#zn" + id).attr("checked") == "checked") {
+			if (check_length >= 5) {
+				layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½', 2, 8);
+				$("#zn" + id).attr("checked", false);
+			} else {
+				var info = $("#zn" + id).val();
 				var info_arr = info.split("+");
-				if(id==fid){
-					$("."+fid).remove();
-				}else{
-					$("#td_"+fid).remove();
+				if (id == fid) {
+					$("." + fid).remove();
+				} else {
+					$("#td_" + fid).remove();
 				}
-				$("#"+divid).append("<li id='td_"+id+"' class='show_type"+id+" "+fid+"' ><input id='chk_"+id+"' onclick='box_delete("+id+");' type='checkbox' checked value='"+info+"' name='"+name+"'>"+info_arr[1]+"</li>");
+				$("#" + divid).append(
+						"<li id='td_" + id + "' class='show_type" + id + " "
+								+ fid + "' ><input id='chk_" + id
+								+ "' onclick='box_delete(" + id
+								+ ");' type='checkbox' checked value='" + info
+								+ "' name='" + name + "'>" + info_arr[1]
+								+ "</li>");
 			}
-		}else{
-			$("#td_"+id).remove();
+		} else {
+			$("#td_" + id).remove();
 		}
 	}
 }
-$(document).ready(function () {
-    $('body').click(function (evt) {
-        if (!$(evt.target).parent().hasClass('index_header_seach_find') && !$(evt.target).hasClass('index_header_seach_find') && evt.target.id != 'search_name') {
-            $('.index_header_seach_find .index_header_seach_find_list').hide();
-        }
-    });
-	var jobarr=new Array();
-	$("#close_skill").click(function(){
-		$("#bg").hide();
-		$('#skill_box').hide();
-		var skill_val = "";
-		var i=0;
-		$("input[type='checkbox'][name='job_classid']:checked").each(function(){
-		  var info = $(this).val().split("+");
-			jobarr[i]=info[0];
-			i++;
-		  skill_val+="<li id=\"sk"+info[0]+"\" class=\"show_type"+info[0]+"\" onclick=\"box_delete('"+info[0]+"');\"><input type=\"checkbox\" name=\"job_classid[]\" checked=\"\" value="+info[0]+"><span>"+info[1]+"</span></li>";
-		  });
-		$("#job_classid").html(skill_val);
-	})
-})
-function checkmore(type,div,size,msg){
-	if(msg=="Õ¹¿ª"){
-		var msg="ÊÕÆğ";
-		$("#"+type+" a:gt("+size+")").show();
-		$("#"+div).html("<a class=\"yun_close  icon\" href=\"javascript:;\" onclick=\"checkmore('"+type+"','"+div+"','"+size+"','"+msg+"');\">"+msg+"</a>");
-	}else{
-		var msg="Õ¹¿ª";
-		$("#"+type+" a:gt("+size+")").hide();
-		$("#"+div).show();
-		$("#"+div).html("<a class=\"yun_open  icon\" href=\"javascript:;\" onclick=\"checkmore('"+type+"','"+div+"','"+size+"','"+msg+"');\">"+msg+"</a>");
+$(document)
+		.ready(
+				function() {
+					$('body')
+							.click(
+									function(evt) {
+										if (!$(evt.target).parent().hasClass(
+												'index_header_seach_find')
+												&& !$(evt.target)
+														.hasClass(
+																'index_header_seach_find')
+												&& evt.target.id != 'search_name') {
+											$(
+													'.index_header_seach_find .index_header_seach_find_list')
+													.hide();
+										}
+									});
+					var jobarr = new Array();
+					$("#close_skill")
+							.click(
+									function() {
+										$("#bg").hide();
+										$('#skill_box').hide();
+										var skill_val = "";
+										var i = 0;
+										$(
+												"input[type='checkbox'][name='job_classid']:checked")
+												.each(
+														function() {
+															var info = $(this)
+																	.val()
+																	.split("+");
+															jobarr[i] = info[0];
+															i++;
+															skill_val += "<li id=\"sk"
+																	+ info[0]
+																	+ "\" class=\"show_type"
+																	+ info[0]
+																	+ "\" onclick=\"box_delete('"
+																	+ info[0]
+																	+ "');\"><input type=\"checkbox\" name=\"job_classid[]\" checked=\"\" value="
+																	+ info[0]
+																	+ "><span>"
+																	+ info[1]
+																	+ "</span></li>";
+														});
+										$("#job_classid").html(skill_val);
+									})
+				})
+function checkmore(type, div, size, msg) {
+	if (msg == "Õ¹ï¿½ï¿½") {
+		var msg = "ï¿½ï¿½ï¿½ï¿½";
+		$("#" + type + " a:gt(" + size + ")").show();
+		$("#" + div).html(
+				"<a class=\"yun_close  icon\" href=\"javascript:;\" onclick=\"checkmore('"
+						+ type + "','" + div + "','" + size + "','" + msg
+						+ "');\">" + msg + "</a>");
+	} else {
+		var msg = "Õ¹ï¿½ï¿½";
+		$("#" + type + " a:gt(" + size + ")").hide();
+		$("#" + div).show();
+		$("#" + div).html(
+				"<a class=\"yun_open  icon\" href=\"javascript:;\" onclick=\"checkmore('"
+						+ type + "','" + div + "','" + size + "','" + msg
+						+ "');\">" + msg + "</a>");
 	}
 }
-function checkrest(url){window.location.href="index.php?m="+url;}
-function Close(id){
-	$("#"+id).hide();
+function checkrest(url) {
+	window.location.href = "index.php?m=" + url;
+}
+function Close(id) {
+	$("#" + id).hide();
 	$("#bg").hide();
 }
-function check_pl(){
-	if($.trim($("#content").val())==""){
-		layer.msg('ÆÀÂÛÄÚÈİ²»ÄÜÎª¿Õ£¡', 2,2);return false;
+function check_pl() {
+	if ($.trim($("#content").val()) == "") {
+		layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½', 2, 2);
+		return false;
 	}
 }
-function huifu(id){
-	$("#huifu"+id).show();
+function huifu(id) {
+	$("#huifu" + id).show();
 }
-function check_huifu(id){
-	if($("#reply"+id).val()==""){
-		layer.msg('»Ø¸´ÄÚÈİ²»ÄÜÎª¿Õ£¡', 2,2);return false;
+function check_huifu(id) {
+	if ($("#reply" + id).val() == "") {
+		layer.msg('ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½', 2, 2);
+		return false;
 	}
 }
 
-function addfriend_im(id,type,status,username){
-	$.post(weburl+"/index.php?m=ajax&c=makefriends",{id:id,type:type},function(data){
-		if(data=="5"){
-			layer.alert('ÇëÏÈµÇÂ¼£¡', 0, 'ÌáÊ¾',function(){window.location.href =weburl+"/index.php?m=login&usertype=1";window.event.returnValue = false;return false;   });
-		}else if(data=="4"){
-			layer.msg('²»ÄÜÌí¼Ó×Ô¼ºÎªºÃÓÑ£¡', 2, 0);return false;
-		}else if(data=="3"){
-			layer.msg('ÄúÎ´Í¨¹ıÉí·İÑéÖ¤²»ÄÜÌí¼ÓºÃÓÑ£¡', 2, 8);return false;
-		}else if(data=="2"){
-			layer.msg('¶Ô·½Î´Í¨¹ıÉí·İÉóºË£¬²»ÄÜ¼ÓÆäÎªºÃÓÑ£¡', 2, 8);return false;
-		}else if(data=="1"){
-			$("#WB_webim").find(".wbim_min_friend").click();
-			setTimeout("add_im('"+id+"','"+type+"','"+status+"','"+username+"')",200);
-		}else if(data=="6"){
-			$("#WB_webim").find(".wbim_min_friend").click();
-			setTimeout("show_im('"+id+"')",200);
-		}else if(data=="7"){
-			$("#WB_webim").find(".wbim_min_friend").click();
-			setTimeout("add_im('"+id+"','"+type+"','"+status+"','"+username+"')",200);
-		}
-	});
+function show_im(id) {
+	$('#WB_webim').find('#im_' + id).click();
 }
-function show_im(id){
-	$('#WB_webim').find('#im_'+id).click();
-}
-function add_im(id,type,status,username){
-	$('#WB_webim').find('#im_'+id).click();
-	var lis=$("#list_content4").find("ul").find("li");
-	var ul=$("#list_content4").find("ul");
-	var statusHtml='';
-	if(status=="1"){
-		statusHtml='<span class="W_chat_stat W_chat_stat_online"></span>';
-	}else{
-		statusHtml='<span class="W_chat_stat W_chat_stat_offline"></span>';
+function add_im(id, type, status, username) {
+	$('#WB_webim').find('#im_' + id).click();
+	var lis = $("#list_content4").find("ul").find("li");
+	var ul = $("#list_content4").find("ul");
+	var statusHtml = '';
+	if (status == "1") {
+		statusHtml = '<span class="W_chat_stat W_chat_stat_online"></span>';
+	} else {
+		statusHtml = '<span class="W_chat_stat W_chat_stat_offline"></span>';
 	}
-	var typeName='';
-	if(type=="2"){
-		typeName='ÆóÒµ';
-	}else if(type=="1"){
-		typeName='¸öÈË';
+	var typeName = '';
+	if (type == "2") {
+		typeName = 'ï¿½ï¿½Òµ';
+	} else if (type == "1") {
+		typeName = 'ï¿½ï¿½ï¿½ï¿½';
 	}
-	var lihtml='<li class="clearfix" style="height:20px;line-height:20px;"><div class="webim_list_name" id="right_im_'+type+'"><div class="list_head_state" style="float:left;margin-top:5px; margin-right:5px;">'+statusHtml+'</div><span class="user_name" id="im_'+id+'" uid="'+id+'" usertype="'+type+'" style="float:left;">['+typeName+'] '+username+'</span></div></li>';
+	var lihtml = '<li class="clearfix" style="height:20px;line-height:20px;"><div class="webim_list_name" id="right_im_'
+			+ type
+			+ '"><div class="list_head_state" style="float:left;margin-top:5px; margin-right:5px;">'
+			+ statusHtml
+			+ '</div><span class="user_name" id="im_'
+			+ id
+			+ '" uid="'
+			+ id
+			+ '" usertype="'
+			+ type
+			+ '" style="float:left;">['
+			+ typeName
+			+ '] '
+			+ username
+			+ '</span></div></li>';
 
-	if(lis.length==1){
-		if(lis.text()=="ÔİÎŞºÃÓÑ"){
+	if (lis.length == 1) {
+		if (lis.text() == "ï¿½ï¿½ï¿½Şºï¿½ï¿½ï¿½") {
 			ul.html(lihtml);
-		}else if(lis.attr("uid")!=id){
+		} else if (lis.attr("uid") != id) {
 			ul.append(lihtml);
 		}
-	}else{
-		var flag=false;
-		for(var i in lis){
-			if(lis[i].attr("uid")==id){
-				flag=true;break;
+	} else {
+		var flag = false;
+		for ( var i in lis) {
+			if (lis[i].attr("uid") == id) {
+				flag = true;
+				break;
 			}
 		}
-		if(!flag){
+		if (!flag) {
 			ul.append(lihtml);
 		}
 	}
 }
-function layer_del(msg,url){ 
-	if(msg==''){
-		var i=layer.load('Ö´ĞĞÖĞ£¬ÇëÉÔºò...',0);
-		$.get(url,function(data){
+function layer_del(msg, url) {
+	if (msg == '') {
+		var i = layer.load('Ö´ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½Ôºï¿½...', 0);
+		$.get(url, function(data) {
 			layer.close(i);
-			var data=eval('('+data+')');
-			if(data.url=='1'){
-				layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.reload();});return false;
-			}else{
-				layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.href=data.url;});return false;
+			var data = eval('(' + data + ')');
+			if (data.url == '1') {
+				layer.msg(data.msg, Number(data.tm), Number(data.st),
+						function() {
+							location.reload();
+						});
+				return false;
+			} else {
+				layer.msg(data.msg, Number(data.tm), Number(data.st),
+						function() {
+							location.href = data.url;
+						});
+				return false;
 			}
 		});
-	}else{
-		layer.confirm(msg, function(){
-			var i=layer.load('Ö´ĞĞÖĞ£¬ÇëÉÔºò...',0);
-			$.get(url,function(data){
+	} else {
+		layer.confirm(msg, function() {
+			var i = layer.load('Ö´ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½Ôºï¿½...', 0);
+			$.get(url, function(data) {
 				layer.close(i);
-				var data=eval('('+data+')');
-				if(data.url=='1'){
-					layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.reload();});return false;
-				}else{
-					layer.msg(data.msg, Number(data.tm), Number(data.st),function(){location.href=data.url;});return false;
+				var data = eval('(' + data + ')');
+				if (data.url == '1') {
+					layer.msg(data.msg, Number(data.tm), Number(data.st),
+							function() {
+								location.reload();
+							});
+					return false;
+				} else {
+					layer.msg(data.msg, Number(data.tm), Number(data.st),
+							function() {
+								location.href = data.url;
+							});
+					return false;
 				}
 			});
 		});
 	}
 }
 function top_search(M, name, url, is_module_open, module_dir) {
-    if ((is_module_open == '1') && (module_dir != '')) {
-        $('#index_search_form #m').attr('name', '');
-    } else {
-        $('#index_search_form #m').attr('name', 'm');
-    }
-    $('#index_search_form').attr('action', url);
-    $('#index_search_form #m').val(M);
+	if ((is_module_open == '1') && (module_dir != '')) {
+		$('#index_search_form #m').attr('name', '');
+	} else {
+		$('#index_search_form #m').attr('name', 'm');
+	}
+	$('#index_search_form').attr('action', url);
+	$('#index_search_form').attr('target', "_blank");
+	$('#index_search_form #m').val(M);
 	$(".index_header_seach_find_list").hide();
-	$('#search_name').html(name)
+	$('#search_name').html(name);
 }
-function top_searchs(M,name){
+function top_searchs(M, name) {
 	$("input[name='m']").val(M);
 	$(".index_place_position").hide();
 	$('#search_name').html(name)
 }
-function returnmessage(frame_id){ 
-	if(frame_id==''||frame_id==undefined){
-		frame_id='supportiframe';
+function returnmessage(frame_id) {
+	if (frame_id == '' || frame_id == undefined) {
+		frame_id = 'supportiframe';
 	}
-	var message = $(window.frames[frame_id].document).find("#layer_msg").val(); 
-	if(message != null){
-		var url=$(window.frames[frame_id].document).find("#layer_url").val();
-		var layer_time=$(window.frames[frame_id].document).find("#layer_time").val();
-		var layer_st=$(window.frames[frame_id].document).find("#layer_st").val();
-		if(message=='ÑéÖ¤Âë´íÎó£¡'){$("#vcode_img").trigger("click");}
-		if(url=='1'){
-			layer.msg(message, layer_time, Number(layer_st),function(){ location.reload();});
-		}else if(url==''){
+	var message = $(window.frames[frame_id].document).find("#layer_msg").val();
+	if (message != null) {
+		var url = $(window.frames[frame_id].document).find("#layer_url").val();
+		var layer_time = $(window.frames[frame_id].document)
+				.find("#layer_time").val();
+		var layer_st = $(window.frames[frame_id].document).find("#layer_st")
+				.val();
+		if (message == 'ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½') {
+			$("#vcode_img").trigger("click");
+		}
+		if (url == '1') {
+			layer.msg(message, layer_time, Number(layer_st), function() {
+				location.reload();
+			});
+		} else if (url == '') {
 			layer.msg(message, layer_time, Number(layer_st));
-		}else{
-			layer.msg(message, layer_time, Number(layer_st),function(){location.href = url;});
+		} else {
+			layer.msg(message, layer_time, Number(layer_st), function() {
+				location.href = url;
+			});
 		}
 	}
 }
-function com_msg(){
-	var msg_content=$.trim($("#msg_content").val());
-	if(msg_content==''){
-		layer.msg('×ÉÑ¯ÄÚÈİ²»ÄÜÎª¿Õ£¡', 2,2);return false;
+function com_msg() {
+	var msg_content = $.trim($("#msg_content").val());
+	if (msg_content == '') {
+		layer.msg('ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½', 2, 2);
+		return false;
 	}
 }
-function job_class(id,type,grade){
-	if(type=='f'){
-		var height=$("#dt_job_"+id).offset().top;
-		$("#layout_job .dt_job_"+grade).removeClass('cur');
-		$("#layout_job .dd_job_"+grade).hide();
-		if(grade=='1'){
-			var top=parseInt(height)-parseInt(615);
+function job_class(id, type, grade) {
+	if (type == 'f') {
+		var height = $("#dt_job_" + id).offset().top;
+		$("#layout_job .dt_job_" + grade).removeClass('cur');
+		$("#layout_job .dd_job_" + grade).hide();
+		if (grade == '1') {
+			var top = parseInt(height) - parseInt(615);
 			$("#layout_job .dd_job_2").hide();
 			$("#layout_job .dt_job_2").removeClass('cur');
-		}else{ 
-			var top=34;
+		} else {
+			var top = 34;
 		}
-		$("#dt_job_"+id).addClass('cur');
-		$("#dd_job_"+id).css("top",top);
-		$("#dd_job_"+id).fadeIn("slow");
-	}else{
+		$("#dt_job_" + id).addClass('cur');
+		$("#dd_job_" + id).css("top", top);
+		$("#dd_job_" + id).fadeIn("slow");
+	} else {
 		var check_length = $("input[type='checkbox'][name='job_class'][checked]").length;
-		if($("#job_"+id).attr("checked")=="checked"){
-			if(check_length>=5){
-				layer.msg('Äú×î¶àÖ»ÄÜÑ¡ÔñÎåÏî£¡', 2,8,function(){$("#job_"+id).attr("checked",false);}); 
-			}else{
-				var value=$("#job_"+id).val();
-				$("#job_choosed").append("<span id='span_job_"+id+"'><input id='ck_job_"+id+"'  value='"+id+"' onclick=\"del_ck('job_"+id+"')\" name='job_class' checked='checked' type='checkbox' target='"+value+"'>"+value+"</span>");
+		if ($("#job_" + id).attr("checked") == "checked") {
+			if (check_length >= 5) {
+				layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½î£¡', 2, 8, function() {
+					$("#job_" + id).attr("checked", false);
+				});
+			} else {
+				var value = $("#job_" + id).val();
+				$("#job_choosed")
+						.append(
+								"<span id='span_job_"
+										+ id
+										+ "'><input id='ck_job_"
+										+ id
+										+ "'  value='"
+										+ id
+										+ "' onclick=\"del_ck('job_"
+										+ id
+										+ "')\" name='job_class' checked='checked' type='checkbox' target='"
+										+ value + "'>" + value + "</span>");
 			}
-		}else{
-			$("#span_job_"+id).remove();
+		} else {
+			$("#span_job_" + id).remove();
 		}
 	}
 }
-function job_city(id,type,grade){
-	if(type=='province'){
-		var height=$("#dt_"+id).offset().top;
-		if(grade=='1'){
-			var top=parseInt(height)-parseInt(570);
-		}else{
-			var top=34;
+function job_city(id, type, grade) {
+	if (type == 'province') {
+		var height = $("#dt_" + id).offset().top;
+		if (grade == '1') {
+			var top = parseInt(height) - parseInt(570);
+		} else {
+			var top = 34;
 		}
-		$("#layout_inner .dt_"+grade).removeClass('cur');
-		$("#dt_"+id).addClass('cur');
-		$("#layout_inner .dd_"+grade).hide();
-		$("#dd_"+id).css("top",top);
-		$("#dd_"+id).show();
-	}else{
+		$("#layout_inner .dt_" + grade).removeClass('cur');
+		$("#dt_" + id).addClass('cur');
+		$("#layout_inner .dd_" + grade).hide();
+		$("#dd_" + id).css("top", top);
+		$("#dd_" + id).show();
+	} else {
 		var check_length = $("input[type='checkbox'][name='select_city'][checked]").length;
-		if($("#"+id).attr("checked")=="checked"){
-			if(check_length>=5){
-				layer.msg('Äú×î¶àÖ»ÄÜÑ¡ÔñÎå¸ö³ÇÊĞ£¡', 2,8,function(){$("#"+id).attr("checked",false);}); 
-			}else{
-				var value=$("#"+id).val();
-				$("#choosed").append("<span id='span_"+id+"'><input id='ck_"+id+"'  value='"+id+"' onclick=\"del_ck('"+id+"')\" name='select_city' checked='checked' type='checkbox' target='"+value+"'>"+value+"</span>");
+		if ($("#" + id).attr("checked") == "checked") {
+			if (check_length >= 5) {
+				layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½', 2, 8, function() {
+					$("#" + id).attr("checked", false);
+				});
+			} else {
+				var value = $("#" + id).val();
+				$("#choosed")
+						.append(
+								"<span id='span_"
+										+ id
+										+ "'><input id='ck_"
+										+ id
+										+ "'  value='"
+										+ id
+										+ "' onclick=\"del_ck('"
+										+ id
+										+ "')\" name='select_city' checked='checked' type='checkbox' target='"
+										+ value + "'>" + value + "</span>");
 			}
-		}else{
-			$("#span_"+id).remove();
+		} else {
+			$("#span_" + id).remove();
 		}
 	}
 }
-function select_prop(name,id,div){
-	var chk_value =[];
-	var chk_ids =[];
-	$('input[name="'+name+'"]:checked').each(function(){
+function select_prop(name, id, div) {
+	var chk_value = [];
+	var chk_ids = [];
+	$('input[name="' + name + '"]:checked').each(function() {
 		chk_value.push($(this).attr('target'));
 		chk_ids.push($(this).val());
 	});
-	if(chk_value.length==0){
-		layer.msg('ÇëÑ¡ÔñÖ°Î»Àà±ğ£¡', 2,2);return false;
-	}else{
-		$("#"+id+" dt").removeClass("cur");
-		$("#"+id+" dd").hide();
-		$("#"+id).val(chk_value);
-		$("#"+name).val(chk_ids);
-		$("#"+id).removeClass("city_cur");
-		$("#"+div).hide();
+	if (chk_value.length == 0) {
+		layer.msg('ï¿½ï¿½Ñ¡ï¿½ï¿½Ö°Î»ï¿½ï¿½ï¿½', 2, 2);
+		return false;
+	} else {
+		$("#" + id + " dt").removeClass("cur");
+		$("#" + id + " dd").hide();
+		$("#" + id).val(chk_value);
+		$("#" + name).val(chk_ids);
+		$("#" + id).removeClass("city_cur");
+		$("#" + div).hide();
 	}
 }
-function close_prop(div,id){
-	$("#"+div).hide();
-	$("#"+id).removeClass("city_cur");
+function close_prop(div, id) {
+	$("#" + div).hide();
+	$("#" + id).removeClass("city_cur");
 }
-function del_ck(id){
-	$("#span_"+id).remove();
-	$("#"+id).removeAttr("checked");
+function del_ck(id) {
+	$("#span_" + id).remove();
+	$("#" + id).removeAttr("checked");
 }
-function atn(id,url){
-	if(id){
-		$.post(url,{id:id},function(data){
-			if(data==1){
-				$("#atn_"+id).removeClass('zg-btn-unfollow');
-				$("#atn_"+id).addClass('zg-btn-green'); 
-				if($("#atn_"+id).attr('tagName')=='input'){
-					$("#atn_"+id).val("È¡Ïû¹Ø×¢"); 
-				}else{
-					$("#atn_"+id).html("È¡Ïû¹Ø×¢");
-				}
-				$("#guanzhu"+id).val('È¡Ïû¹Ø×¢');
-				var antnum=$("#antnum"+id).html();
-				$("#antnum" + id).html(parseInt(antnum) + 1);
-				$("#atn_" + id).addClass('company_att');
-			}else if(data==2){
-				$("#atn_"+id).removeClass('zg-btn-green');
-				$("#atn_"+id).addClass('zg-btn-unfollow attentioned'); 
-				if($("#atn_"+id).attr('tagName')=='input'){
-					$("#atn_"+id).val("¹Ø×¢"); 
-				}else{
-					$("#atn_"+id).html("¹Ø×¢");
-				}
-				$("#guanzhu"+id).val('+¹Ø×¢');
-				var antnum=$("#antnum"+id).html();
-				$("#antnum" + id).html(parseInt(antnum) - 1);
-				$("#atn_" + id).removeClass('company_att');
-			}else if(data==3){
-				layer.msg('ÇëÏÈµÇÂ¼£¡Ö»ÓĞ¸öÈËÓÃ»§²ÅÄÜ¹Ø×¢', 2, 3);return false;
-			}else if(data==4){
-				layer.msg('Ö»ÓĞ¸öÈËÓÃ»§²ÅÄÜ¹Ø×¢', 2, 3);return false;
-			}
-		});
-	}
-}
-function jsmsg(id){
+function jsmsg(id) {
 	var myuid = $("#myuid").val();
-	if(myuid==""){
-		layer.msg('Äã»¹Ã»ÓĞµÇÂ¼£¡', 2, 8);
+	if (myuid == "") {
+		layer.msg('ï¿½ã»¹Ã»ï¿½Ğµï¿½Â¼ï¿½ï¿½', 2, 8);
 	}
-	$("#msg"+id).show();
+	$("#msg" + id).show();
 }
-function showImgDelay(imgObj,imgSrc,maxErrorNum){  
-    if(maxErrorNum>0){ 
-        imgObj.onerror=function(){
-            showImgDelay(imgObj,imgSrc,maxErrorNum-1);
-        };
-        setTimeout(function(){
-            imgObj.src=imgSrc;
-        },500);
-		maxErrorNum=parseInt(maxErrorNum)-parseInt(1);
-    }
+function showImgDelay(imgObj, imgSrc, maxErrorNum) {
+	if (maxErrorNum > 0) {
+		imgObj.onerror = function() {
+			showImgDelay(imgObj, imgSrc, maxErrorNum - 1);
+		};
+		setTimeout(function() {
+			imgObj.src = imgSrc;
+		}, 500);
+		maxErrorNum = parseInt(maxErrorNum) - parseInt(1);
+	}
 }
-function reportSub(){
-	var authcode=$("#report_authcode").val();
-	var r_reason=$("#r_reason").val();
-	var r_uid=$("#r_uid").val();
-	var id=$("#id").val();
-	var r_name=$("#r_name").val();
-	if($.trim(r_reason)==""){
-		layer.msg('¾Ù±¨ÄÚÈİ²»ÄÜÎª¿Õ£¡', 2, 8);
+function reportSub() {
+	var authcode = $("#report_authcode").val();
+	var r_reason = $("#r_reason").val();
+	var r_uid = $("#r_uid").val();
+	var id = $("#id").val();
+	var r_name = $("#r_name").val();
+	if ($.trim(r_reason) == "") {
+		layer.msg('ï¿½Ù±ï¿½ï¿½ï¿½ï¿½İ²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½', 2, 8);
 		return false;
 	}
-	$.post(weburl+"/job/index.php?c=report",{authcode:authcode,r_reason:r_reason,id:id,r_name:r_name,r_uid:r_uid},function(data){
+	$.post(weburl + "/job/index.php?c=report", {
+		authcode : authcode,
+		r_reason : r_reason,
+		id : id,
+		r_name : r_name,
+		r_uid : r_uid
+	}, function(data) {
 		layer.closeAll();
-		if(data==1){
-			layer.msg('ÑéÖ¤Âë²»ÕıÈ·£¡', 2, 8);
-		}else if(data==2){
-			layer.msg('ÄúÒÑ¾­¾Ù±¨¹ı¸ÃÓÃ»§£¡', 2, 8);
-		}else if(data==3){
-			layer.msg('¾Ù±¨³É¹¦£¡', 2,9);
-		}else if(data==4){
-			layer.msg('¾Ù±¨Ê§°Ü£¡', 2, 8);
-		}else if(data==5){
-			layer.msg('ÍøÕ¾ÒÑ¹Ø±Õ¾Ù±¨¹¦ÄÜ£¡', 2, 8);
+		if (data == 1) {
+			layer.msg('ï¿½ï¿½Ö¤ï¿½ë²»ï¿½ï¿½È·ï¿½ï¿½', 2, 8);
+		} else if (data == 2) {
+			layer.msg('ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½Ù±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½', 2, 8);
+		} else if (data == 3) {
+			layer.msg('ï¿½Ù±ï¿½ï¿½É¹ï¿½ï¿½ï¿½', 2, 9);
+		} else if (data == 4) {
+			layer.msg('ï¿½Ù±ï¿½Ê§ï¿½Ü£ï¿½', 2, 8);
+		} else if (data == 5) {
+			layer.msg('ï¿½ï¿½Õ¾ï¿½Ñ¹Ø±Õ¾Ù±ï¿½ï¿½ï¿½ï¿½Ü£ï¿½', 2, 8);
 		}
 	})
 }
-//Ö°Î»ÏêÇéÒ³£¬ÉêÇë¼ÇÂ¼·ÖÒ³
-function forrecord(id,page){ 
-	$.post(weburl+"/index.php?m=ajax&c=jobrecord",{id:id,page:page},function(data){
+// Ö°Î»ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ò³
+function forrecord(id, page) {
+	$.post(weburl + "/index.php?m=ajax&c=jobrecord", {
+		id : id,
+		page : page
+	}, function(data) {
 		$(".Company_job_record_div").html(data);
 	});
-} 
-$(function(){
-	$('body').click(function(evt) {
-		if($(evt.target).parents("#listhy").length==0 && evt.target.id != "buttonhy") {
-			$('#listhy').hide();
-		}
-	})
+}
+$(function() {
+	$('body').click(
+			function(evt) {
+				if ($(evt.target).parents("#listhy").length == 0
+						&& evt.target.id != "buttonhy") {
+					$('#listhy').hide();
+				}
+			})
 });
 
-function checkform_redeem_show(){
-	var num=$("#num").val();
-	var stock=$("#stock").val();
-	var uid=$("#uid").val();
-	var restriction=$("#restriction").val();
-	if(!uid){
-		layer.msg('Äú»¹Ã»ÓĞµÇÂ¼£¬ÇëÏÈµÇÂ¼£¡', 2, 8);
+function checkform_redeem_show() {
+	var num = $("#num").val();
+	var stock = $("#stock").val();
+	var uid = $("#uid").val();
+	var restriction = $("#restriction").val();
+	if (!uid) {
+		layer.msg('ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ğµï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Èµï¿½Â¼ï¿½ï¿½', 2, 8);
 		return false;
 	}
-	if(num==0){
-		layer.msg('ÇëÕıÈ·ÌîĞ´¶Ò»»ÊıÁ¿£¡', 2, 8);
+	if (num == 0) {
+		layer.msg('ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ğ´ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 2, 8);
 		return false;
 	}
-	if(Number(num)>Number(restriction) && restriction!="0"){
-		layer.msg('³¬³öÏŞ¹ºÊıÁ¿,ÇëÕıÈ·ÌîĞ´£¡', 2, 8);
+	if (Number(num) > Number(restriction) && restriction != "0") {
+		layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½Ş¹ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ğ´ï¿½ï¿½', 2, 8);
 		return false;
 	}
-	if(Number(num)>Number(stock)){
-		layer.msg('³¬³ö¿â´æÊıÁ¿,ÇëÕıÈ·ÌîĞ´£¡', 2, 8);
+	if (Number(num) > Number(stock)) {
+		layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½Ğ´ï¿½ï¿½', 2, 8);
 		return false;
 	}
 	return true;
 }
-function redeem_dh(){
-	var linkman=$("input[name=linkman]").val();
-	var linktel=$("input[name=linktel]").val();
-	var password=$("input[name=password]").val();
-	if(!linkman || !linktel){
-		layer.msg('ÁªÏµÈË»òÁªÏµµç»°²»ÄÜÎª¿Õ£¡', 2, 8);
+function redeem_dh() {
+	var linkman = $("input[name=linkman]").val();
+	var linktel = $("input[name=linktel]").val();
+	var password = $("input[name=password]").val();
+	if (!linkman || !linktel) {
+		layer.msg('ï¿½ï¿½Ïµï¿½Ë»ï¿½ï¿½ï¿½Ïµï¿½ç»°ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½', 2, 8);
 		return false;
 	}
-	if(!password){
-		layer.msg('ÇëÊäÈëÃÜÂë£¡', 2, 8);
+	if (!password) {
+		layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¡', 2, 8);
 		return false;
 	}
 	return true;

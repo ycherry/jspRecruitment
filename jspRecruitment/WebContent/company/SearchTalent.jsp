@@ -396,7 +396,7 @@
 			var i = 0;
 			var urlData = GetUrlData();
 			if(urlData.length>5){
-				result += "keyword="+urlData[1]+"&";
+				result += "c=search&keyword="+urlData[1]+"&";
 			}
 			$("#filter a[class='seled']").each(
 					function() {
@@ -428,7 +428,7 @@
 					request[strs[i].split("=")[0]] = unescape(decodeURI(decodeURI(strs[i]
 							.split("=")[1])));
 				}
-				for (var i = 0; i <= strs.length; i++) {
+				for (var i = 0; i < strs.length; i++) {
 					urlData[i] = request[array[i]];
 				}
 			}

@@ -116,8 +116,7 @@
 					</div>
 				</dd>
 				<%
-					ResultSet naturers = con
-							.getRs("SELECT * FROM t_filter where keyid =19");
+					ResultSet naturers = con.getRs("SELECT * FROM t_filter where keyid =19");
 					while (naturers.next()) {
 				%>
 				<dd>
@@ -137,8 +136,7 @@
 					</div>
 				</dd>
 				<%
-					ResultSet scalers = con
-							.getRs("SELECT * FROM t_filter where keyid =26");
+					ResultSet scalers = con.getRs("SELECT * FROM t_filter where keyid =26");
 					while (scalers.next()) {
 				%>
 				<dd>
@@ -156,24 +154,30 @@
 		String industry = null;
 		String nature = null;
 		String scale = null;
+		String keyword = null;
 		java.util.Date date = new java.util.Date();
 		int year = date.getYear();
 		PrintWriter out1 = response.getWriter();
 		industry = request.getParameter("industry");
 		nature = request.getParameter("nature");
 		scale = request.getParameter("scale");
+		keyword = request.getParameter("keyword");
 		String selectSql = null;
+		if (keyword != null) {
+			keyword = "%" + Encode.getNewString(keyword) + "%";
+		}
 		if (industry != null && nature != null && scale != null) {
 			industry = industry != null && !industry.equals("")
 					? java.net.URLDecoder.decode(industry, "utf-8")
 					: "";
-			nature = nature != null && !nature.equals("")
-					? java.net.URLDecoder.decode(nature, "utf-8")
-					: "";
-			scale = scale != null && !scale.equals("")
-					? java.net.URLDecoder.decode(scale, "utf-8")
-					: "";
-			selectSql = "select * from t_company where companyName is not null and ";
+			nature = nature != null && !nature.equals("") ? java.net.URLDecoder.decode(nature, "utf-8") : "";
+			scale = scale != null && !scale.equals("") ? java.net.URLDecoder.decode(scale, "utf-8") : "";
+			if (keyword != null) {
+				selectSql = "select * from t_company where companyName is not null and companyName like '" + keyword
+						+ "' and ";
+			} else {
+				selectSql = "select * from t_company where companyName is not null and ";
+			}
 			if (industry.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
@@ -192,7 +196,12 @@
 			System.out.println(selectSql);
 
 		} else {
-			selectSql = "select * from t_company where companyName is not null ";
+			if (keyword != null) {
+				selectSql = "select * from t_company where companyName is not null and companyName like '" + keyword
+						+ "'";
+			} else {
+				selectSql = "select * from t_company where companyName is not null ";
+			}
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
@@ -205,41 +214,30 @@
 				<a
 					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("id")%>"
 					target="mainFrame" class="disc_talent fl"><%=resultset.getString("companyName")%></a>
-				<span class="fl disc_talent_mes"><%=resultset.getString("scale") == null
-						? "暂无"
-						: resultset.getString("scale")%></span>
+				<span class="fl disc_talent_mes"><%=resultset.getString("scale") == null ? "暂无" : resultset.getString("scale")%></span>
 			</div>
 			<div class="clear"></div>
 			<div class="disc_talent_detail">
 				<span class="search_talent_list_box">行业：<em
-					class="search_talent_list_box_em"><%=resultset.getString("industry") == null
-						? "暂无"
-						: resultset.getString("industry")%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("industry") == null ? "暂无" : resultset.getString("industry")%></em></span>
 				<span class="search_talent_list_box_line">|</span> <span
 					class="search_talent_list_box">性质：<em
-					class="search_talent_list_box_em"><%=resultset.getString("nature") == null
-						? "暂无"
-						: resultset.getString("nature")%></em></span>
+					class="search_talent_list_box_em"><%=resultset.getString("nature") == null ? "暂无" : resultset.getString("nature")%></em></span>
 				<span class="search_talent_list_box_line">|</span><span
 					class="search_talent_list_box">联系方式：<em
-					class="search_talent_list_box_em"><%=resultset.getString("telphone") == null
-						? "暂无"
-						: resultset.getString("telphone")%></em></span>
-				<span class="search_talent_list_box_line">|</span>
+					class="search_talent_list_box_em"><%=resultset.getString("telphone") == null ? "暂无" : resultset.getString("telphone")%></em></span>
 			</div>
 			<div class="clear"></div>
 		</div>
 	</div>
 	<%
 		}
-		int count=dbo.getRowCount(selectSql);
-		if (count<=0) {
+		int count = dbo.getRowCount(selectSql);
+		if (count <= 0) {
 	%>
 	<div class="seachno">
 		<div class="seachno_left">
-			<img
-				src="../images/search-no.gif"
-				width="144" height="102">
+			<img src="../images/search-no.gif" width="144" height="102">
 		</div>
 		<div class="listno-content">
 			<strong>很抱歉，没有找到满足条件的企业</strong><br> <span> 建议您：<br>
@@ -298,12 +296,16 @@
 			var result = "SearchCompany.jsp?";
 			var array = [ "industry", "nature", "scale" ];
 			var i = 0;
+			var urlData = GetUrlData();
+			if (urlData.length > 3) {
+				result += "c=search&keyword=" + urlData[1] + "&";
+			}
 			$("#filter a[class='seled']").each(
 					function() {
 						var s = $(this).html() != '' ? encodeURI(encodeURI($(
 								this).html())) : encodeURI(encodeURI("全部"));
 						if (i < 4) {
-							result += array[i] + "=" + s + "&&";
+							result += array[i] + "=" + s + "&";
 						} else {
 							result += array[i] + "=" + s;
 						}
@@ -315,22 +317,22 @@
 		}
 
 		function GetUrlData() {
-			var array = [ "industry", "nature", "scale" ];
+			var array = [ "c", "keyword", "industry", "nature", "scale" ];
 			var url = location.search;
 			var request = new Object();
 			var urlData = new Array(5);
 			if (url.indexOf("?") != -1) {
 				var str = url.substr(1);
-				strs = str.split("&&");
+				strs = str.split("&");
 				for (var i = 0; i < strs.length; i++) {
 					request[strs[i].split("=")[0]] = unescape(decodeURI(decodeURI(strs[i]
 							.split("=")[1])));
 				}
+				for (var i = 0; i < strs.length; i++) {
+					urlData[i] = request[array[i]];
+				}
 			}
-			for (var i = 0; i <= 4; i++) {
-				urlData[i] = request[array[i]];
-			}
-			return urlData;
+		return urlData;
 		}
 	</script>
 

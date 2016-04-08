@@ -14,21 +14,17 @@
 	if (request.getSession(false) != null) {
 		System.out.println("第一步");
 		if (((Company) request.getSession().getAttribute("company")) != null
-				&& (((Company) request.getSession().getAttribute(
-						"company"))).getId() != null) {
-			company = (Company) request.getSession().getAttribute(
-					"company");
+				&& (((Company) request.getSession().getAttribute("company"))).getId() != null) {
+			company = (Company) request.getSession().getAttribute("company");
 			companyId = company.getId();
-		} else if (((Jobseeker) request.getSession().getAttribute(
-				"jobseeker")) != null
-				&& (((Jobseeker) request.getSession().getAttribute(
-						"jobseeker"))).getId() != null) {
-			jobseeker = (Jobseeker) request.getSession().getAttribute(
-					"jobseeker");
+		} else
+			if (((Jobseeker) request.getSession().getAttribute("jobseeker")) != null
+					&& (((Jobseeker) request.getSession().getAttribute("jobseeker"))).getId() != null) {
+			jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
 			jobseekerId = jobseeker.getId();
-		} else if (((Admin) request.getSession().getAttribute("admin")) != null
-				&& (((Admin) request.getSession().getAttribute("admin")))
-						.getUserName() != null) {
+		} else
+				if (((Admin) request.getSession().getAttribute("admin")) != null
+						&& (((Admin) request.getSession().getAttribute("admin"))).getUserName() != null) {
 			admin = (Admin) request.getSession().getAttribute("admin");
 			adminName = admin.getUserName();
 		}
@@ -60,9 +56,7 @@
 						<div class=" fr">
 							<div class="yun_topLogin_cont">
 								<%
-									if (company.getUserName() == null
-											&& jobseeker.getUserName() == null
-											&& admin.getUserName() == null) {
+									if (company.getUserName() == null && jobseeker.getUserName() == null && admin.getUserName() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -144,6 +138,8 @@
 								$(this).next().show();
 							});
 					$("img.lazy").lazyload();
+					top_search('job', '找工作', 'jobseeker/SearchJob.jsp', '1', 'job'); 
+					$('#search').attr('name', 'c');
 				});
 	</script>
 	<!--content  start-->
@@ -153,40 +149,10 @@
 				DataBaseOperation data = new DataBaseOperation();
 				DBConn dbc = new DBConn();
 			%>
-			<!-- 
-			<div class="index_nav_left">
-				<div class="index_nav">
-					<div class="index_nav_tit">
-						<a href="javascript:void(0);" id="navMenu"><span
-							class="index_nav_tit_name">全部职位分类</span><i
-							class="index_nav_tit_icon png"></i></a>
-					</div>
-
-					<div class="pos" id="boxNav" style="display: black;">
-						<div class="lst" id="navLst">
-							<ul>
-								<%/*			DataBaseOperation data = new DataBaseOperation();
-			 String sql = null;
-			 sql = "select * from t_industry";
-			 DBConn dbc = new DBConn();
-			 ResultSet rs = dbc.getRs(sql);
-			 while (rs.next()) {
-			 */%>
-								<li><a class="index_nav_l"
-									href="http://127.0.0.1/recruitment/upload/job/?c=search&job1=35">
-										<p class="lnk"><%//=rs.getString("name")%></p> <i
-										class="index_nav_icon"></i>
-								</a></li>
-								<%//			}%>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			 -->
 			<div class="index_search fl">
 				<form action="" method="get"
-					onsubmit="return search_keyword(this);" id="index_search_form">
+					onsubmit="search_keyword(this,'<%=jobseekerId%>','<%=companyId%>','<%=adminName%>');"
+					id="index_search_form">
 					<div class="index_search_box">
 						<div class="index_search_t">
 							<input type="hidden" value="job" id="m" /> <input type="hidden"
@@ -195,13 +161,15 @@
 								placeholder='请输入要搜索的关键字' />
 						</div>
 						<div class="index_header_seach_find">
-							<span id='search_name'>找工作</span>
+							<span id='search_name'>找人才</span>
 							<div class="index_header_seach_find_list" style="display: none">
 								<a href="javascript:void(0)"
-									onclick="top_search('job', '找工作', 'jobseeker/SearchJob.jsp', '1', 'job'); $('#search').attr('name', 'c');">找工作</a>
-								<a href="javascript:void(0)"
-									onclick="top_search('resume', '找人才', 'company/SearchTalent.jsp', '1', 'resume'); $('#search').attr('name', 'c');">
-									找人才</a>
+									onclick="top_search('job', '找工作', 'jobseeker/SearchJob.jsp', '1', 'job'); $('#search').attr('name', 'c');"
+									target="_blank">找工作</a> <a href="javascript:void(0)"
+									onclick="top_search('resume', '找人才', 'company/SearchTalent.jsp', '1', 'resume'); $('#search').attr('name', 'c');"
+									target="_blank"> 找人才</a><a href="javascript:void(0)"
+									onclick="top_search('company', '找企业', 'jobseeker/SearchCompany.jsp', '1', 'company'); $('#search').attr('name', 'c');"
+									target="_blank"> 找企业</a>
 							</div>
 						</div>
 						<div class="index_serch_bth_b">
@@ -209,114 +177,6 @@
 						</div>
 					</div>
 				</form>
-			</div>
-			<div class="clear"></div>
-			<div class="inbdex_box">
-				<!--  
-				<div class="index_left_mune">
-					<a href="jobseeker/SearchJob.jsp" class="index_left_mune_a"
-						target="_blank">
-						<div>
-							<i class="index_left_mune_icon png"></i>
-						</div>
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_1.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>找工作</dd>
-						</dl>
-					</a> <a href="company/SearchTalent.jsp" class="index_left_mune_a"
-						target="_blank">
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon//i_m_2.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>找人才</dd>
-						</dl>
-					</a> <a href="http://127.0.0.1/recruitment/upload/company/"
-						class="index_left_mune_a" target="_blank">
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_3.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>找企业</dd>
-						</dl>
-					</a> <a href="http://127.0.0.1/recruitment/upload/once/"
-						class="index_left_mune_a" target="_blank">
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_4.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>微招聘</dd>
-						</dl>
-					</a> <a href="http://127.0.0.1/recruitment/upload/tiny/"
-						class="index_left_mune_a" target="_blank">
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_5.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>微简历</dd>
-						</dl>
-					</a><a href="http://127.0.0.1/recruitment/upload/zph/"
-						class="index_left_mune_a" target="_blank">
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_8.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>招聘会</dd>
-						</dl>
-					</a> <a href="http://127.0.0.1/recruitment/upload/tiny/"
-						class="index_left_mune_a" target="_blank">
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_5.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>微简历</dd>
-						</dl>
-					</a> <a href="http://127.0.0.1/recruitment/upload/job/"
-						class="index_left_mune_a" target="_blank">
-						<div>
-							<i class="index_left_mune_icon png"></i>
-						</div>
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_1.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>找工作</dd>
-						</dl>
-					</a> <a href="http://127.0.0.1/recruitment/upload/company/"
-						class="index_left_mune_a" target="_blank">
-						<dl class="index_left_mune_list">
-							<dt>
-								<img src="images/indexIcon/i_m_3.png" width="28" height="28"
-									class="png" />
-							</dt>
-							<dd>找企业</dd>
-						</dl>
-					</a>
-				</div>
-				
-				<div class="cont_Projector">
-					<div class="Projector">
-						<div id="slides" class="s_lb">
-							<div class="slides_container">
-								<div class="slide">
-									<a href='index.jsp' rel='nofollow'><img
-										src='images/zhaopin.jpg' height='215' width='900'></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				-->
 			</div>
 			<div class="clear"></div>
 			<div class="index_Emergency_job">
@@ -352,7 +212,6 @@
 										<span class="com_index_rue_listspan">￥</span> <em
 											class="com_index_rue_list_xz f60"><%=jobrs.getString("salary")%></em>
 									</div>
-
 									<div class="com_index_rue_list_t index_exper">
 										<div class="com_index_rue_listspan experience">
 											<span>经验：</span>
@@ -361,10 +220,8 @@
 											class="com_index_rue_list_xz com_index_rue_list_jy f61 experience_value">
 											<em><%=jobrs.getString("experience")%></em>
 										</div>
-
 									</div>
 								</dd>
-
 							</dl>
 						</div>
 						<%
@@ -405,9 +262,9 @@
 										%>
 										<div class="com_index_rue_list_yx">
 											<a href="javascript:void(0)"
-												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=cjobrs.getString("cid")%>','company')"><%=cjobrs.getString("position") %></a>
-											<div class="fr">	<span >￥</span> <em
-												class="com_index_rue_list_xz f60"><%=cjobrs.getString("salary") %></em>
+												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=cjobrs.getString("cid")%>','company')"><%=cjobrs.getString("position")%></a>
+											<div class="fr">
+												<span>￥</span> <em class="com_index_rue_list_xz f60"><%=cjobrs.getString("salary")%></em>
 											</div>
 										</div>
 										<%

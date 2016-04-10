@@ -101,28 +101,6 @@
 	</div>
 	<div class="clear"></div>
 	<!--滚动展示内容-->
-	<div class="header_fixed" id="header_fix" style="display: none">
-		<div class="header_fixed_cont">
-
-			<div class="header_fixed_login">
-				<div class="header_fixed_login_l" style="display: block">
-					<a href="http://127.0.0.1/recruitment/upload/index.php?m=login"
-						style="color: #fff"><span class="header_fixed_login_dl"
-						did="login" style="background: none;"> 登录 </span></a>|<span
-						class="header_fixed_login_dl" did="register"> 注册
-						<div class="header_fixed_reg_box" id="register_t"
-							style="display: none">
-							<a
-								href="http://127.0.0.1/recruitment/upload/index.php?m=register&usertype=1"
-								class="header_fixed_login_a">个人注册</a> <a
-								href="http://127.0.0.1/recruitment/upload/index.php?m=register&usertype=2"
-								class="header_fixed_login_a">企业注册</a>
-						</div>
-					</span>
-				</div>
-			</div>
-		</div>
-	</div>
 	<script>
 		$(document).ready(
 				function() {

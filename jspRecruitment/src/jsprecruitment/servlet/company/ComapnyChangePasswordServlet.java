@@ -43,11 +43,13 @@ public class ComapnyChangePasswordServlet extends HttpServlet {
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
 		String userName=((Company)request.getSession().getAttribute("company")).getUserName();
+		String userId=((Company)request.getSession().getAttribute("company")).getUid();
 		String password=request.getParameter("password");
 		String newPassword=request.getParameter("newPassword");
 		String sql="select * from t_user where userName='"+userName+"' and userPass='"+password+"'";
 		if(dbo.getRowCount(sql)>0){
-			String changePassSql="update t_user set userPass='"+newPassword+"'";
+			String changePassSql="update t_user set userPass='"+newPassword+ "' where id='" + userId + "'";
+			System.out.println("changePassSql:"+changePassSql);
 			if(dbo.update(changePassSql)>0){
 				System.out.println("修改密码成功");
 				request.getSession().invalidate();

@@ -13,6 +13,7 @@ function search_keyword(myform, jobseekerId, companyId, adminName) {
 	console.log("jobseekerId:" + jobseekerId + " companyId:" + companyId
 			+ " adminName:" + adminName);
 	if (jobseekerId == "null" && companyId == "null" && adminName == "null") {
+		$('#index_search_form').attr('target', "_self");
 		alert("请先登录！");
 		$('#index_search_form').attr('action', "index.jsp");
 		return;

@@ -94,6 +94,7 @@ public class LoginServlet extends HttpServlet {
 				ResultSet rs = data.select(selectSql);
 				try {
 					company.setId(rs.getString("id"));
+					company.setUid(rs.getString("userId"));
 					company.setUserName(username);
 					session.setAttribute("jobseeker", jobseeker);
 					session.setAttribute("company", company);

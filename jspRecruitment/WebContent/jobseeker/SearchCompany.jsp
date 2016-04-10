@@ -161,7 +161,10 @@
 		industry = request.getParameter("industry");
 		nature = request.getParameter("nature");
 		scale = request.getParameter("scale");
-		keyword = request.getParameter("keyword");
+		if (request.getParameter("keyword") != null
+				&& !request.getParameter("keyword").toString().equals("undefined") ) {
+			keyword = request.getParameter("keyword");
+		}
 		String selectSql = null;
 		if (keyword != null) {
 			keyword = "%" + Encode.getNewString(keyword) + "%";

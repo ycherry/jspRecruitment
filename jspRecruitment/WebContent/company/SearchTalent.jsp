@@ -210,7 +210,10 @@
 		salary = request.getParameter("salary");
 		experience = request.getParameter("experience");
 		education = request.getParameter("education");
-		keyword = request.getParameter("keyword");
+		if (request.getParameter("keyword") != null
+				&& !request.getParameter("keyword").toString().equals("undefined") ) {
+			keyword = request.getParameter("keyword");
+		}
 		String selectSql = null;
 		if(keyword!=null){
 			 keyword ="%"+Encode.getNewString(keyword)+"%";

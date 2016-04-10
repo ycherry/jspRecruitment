@@ -208,7 +208,11 @@
 		salary = request.getParameter("salary");
 		experience = request.getParameter("experience");
 		education = request.getParameter("education");
-		keyword = request.getParameter("keyword");
+		if (request.getParameter("keyword") != null
+				&& !request.getParameter("keyword").toString().equals("undefined") ) {
+			keyword = request.getParameter("keyword");
+		}
+
 		String selectSql = null;
 		if (keyword != null) {
 			keyword = "%" + Encode.getNewString(keyword) + "%";
@@ -264,9 +268,10 @@
 			System.out.println(selectSql);
 
 		} else {
-			if(keyword!=null){
-				selectSql = "select * from t_company_job where position like '"+keyword+"'";
-			}else{
+			if (keyword != null) {
+				selectSql = "select * from t_company_job where position like '"
+						+ keyword + "'";
+			} else {
 				selectSql = "select * from t_company_job";
 			}
 		}
@@ -281,7 +286,8 @@
 					href="../company/ViewJob.jsp?jobId=<%=resultset.getString("id")%>"
 					target="mainFrame" class="disc_talent fl"><%=resultset.getString("position")%></a>
 				<a class="fl disc_talent_mes"
-					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("cid")%>" target="mainFrame"><%=resultset.getString("companyName")%></a>
+					href="../company/ViewCompany.jsp?cid=<%=resultset.getString("cid")%>"
+					target="mainFrame"><%=resultset.getString("companyName")%></a>
 			</div>
 			<div class="disc_job_pay">
 				<%=resultset.getString(9)%>
@@ -362,8 +368,8 @@
 					"experience" ];
 			var i = 0;
 			var urlData = GetUrlData();
-			if(urlData.length>6){
-				result += "c=search&keyword="+urlData[1]+"&";
+			if (urlData.length > 6) {
+				result += "c=search&keyword=" + urlData[1] + "&";
 			}
 			$("#filter a[class='seled']").each(
 					function() {
@@ -382,8 +388,8 @@
 		}
 
 		function GetUrlData() {
-			var array = ["c","keyword", "industry", "workDistrict", "salary", "education",
-					"experience" ];
+			var array = [ "c", "keyword", "industry", "workDistrict", "salary",
+					"education", "experience" ];
 			var url = location.search;
 			var request = new Object();
 			var urlData = new Array(7);
@@ -397,7 +403,7 @@
 				for (var i = 0; i < strs.length; i++) {
 					urlData[i] = request[array[i]];
 				}
-			}			
+			}
 			return urlData;
 		}
 	</script>

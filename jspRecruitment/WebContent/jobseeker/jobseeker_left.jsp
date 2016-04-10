@@ -42,6 +42,13 @@
 			<li><a href="changePassword.jsp" target="mainFrame"><i
 					class=""></i>&nbsp;&nbsp;修改密码</a></li>
 		</ul>
+		<a href="#resumeMenu" class="nav-header menu-first collapsed"
+			data-toggle="collapse"><i class=""></i>简历管理</a>
+		<ul id="resumeMenu" class="nav nav-list collapse menu-second">
+			<li><a href="buildResume.jsp" target="mainFrame"><i class=""></i>&nbsp;&nbsp;填写简历信息</a></li>
+			<li><a href="ViewResume.jsp?resumeId=<%=resumeId%>"
+				target="mainFrame"><i class=""></i>&nbsp;&nbsp;预览简历信息</a></li>
+		</ul>
 		<a href="#recruitmentMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>求职管理</a>
 		<ul id="recruitmentMenu" class="nav nav-list collapse menu-second">
@@ -53,14 +60,7 @@
 					class="icon-list-alt"></i> 面试邀请</a></li>
 			<li><a href="AppliedJobs.jsp" target="mainFrame"><i
 					class="icon-list-alt"></i> 申请的职位</a></li>
-		</ul>
-		<a href="#resumeMenu" class="nav-header menu-first collapsed"
-			data-toggle="collapse"><i class=""></i>简历管理</a>
-		<ul id="resumeMenu" class="nav nav-list collapse menu-second">
-			<li><a href="buildResume.jsp" target="mainFrame"><i class=""></i>&nbsp;&nbsp;填写简历信息</a></li>
-			<li><a href="ViewResume.jsp?resumeId=<%=resumeId%>"
-				target="mainFrame"><i class=""></i>&nbsp;&nbsp;预览简历信息</a></li>
-		</ul>
+		</ul>	
 		<a href="#otherMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>退出系统</a>
 		<ul id="otherMenu" class="nav nav-list collapse menu-second">

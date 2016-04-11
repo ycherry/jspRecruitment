@@ -2,9 +2,9 @@
 <html>
 <head>
 <title>欢迎登陆人才招聘网</title>
-<script type="text/javascript" src="Js/util/jquery.js"></script>
-<script type="text/javascript" src="Js/util/bootstrap.js"></script>
-<script type="text/javascript" src="Js/util/angular.js"></script>
+<script type="text/javascript" src="js/util/jquery.js"></script>
+<script type="text/javascript" src="js/util/bootstrap.js"></script>
+<script type="text/javascript" src="js/util/angular.js"></script>
 <link rel="stylesheet" type="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" type="stylesheet" href="	css/style/common.css">
 <link rel="stylesheet" type="stylesheet" href="	css/style/login.css">

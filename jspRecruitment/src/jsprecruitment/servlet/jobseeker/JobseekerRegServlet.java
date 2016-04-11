@@ -64,23 +64,17 @@ public class JobseekerRegServlet extends HttpServlet {
 					}else{
 						System.out.println("t_resume注册失败");
 						out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册失败！');window.location.href=reg.html'</script>");
-			//			response.sendRedirect("reg.html");
 					}
 				}else{
 					System.out.println("查询注册失败");
 					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册失败！');window.location.href=reg.html'</script>");
-				//	out.println("fail");
-				//	response.sendRedirect("reg.html");
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}else{
 			System.out.println("t_user注册失败");
 			out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('注册失败！');window.location.href=reg.html'</script>");
-		//	out.println("注册失败!");
-		//	response.sendRedirect("reg.html");
 		}
 		
 	}

@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,7 +73,6 @@ public class UpdateJobServlet extends HttpServlet {
 						"company")).getUserName();
 				job.setContents(request.getParameter("contents"));
 				job.setAddTime(new java.sql.Date(date.getTime()));
-				System.out.println("系统时间" + new java.sql.Date(date.getTime()));
 				job.setDistrict(request.getParameter("district"));
 				job.setEducation(request.getParameter("education"));
 				job.setExperience(request.getParameter("experience"));
@@ -113,8 +111,6 @@ public class UpdateJobServlet extends HttpServlet {
 					out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert(更新职位失败！');window.location.href='company/pubJob.jsp?intId="
 							+ intId + "'</script>");
 				}
-
-				// to do:获取系统时间存入数据库
 	}
 
 }

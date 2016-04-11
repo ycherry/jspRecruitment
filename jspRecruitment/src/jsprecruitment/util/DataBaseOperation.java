@@ -3,18 +3,13 @@ package jsprecruitment.util;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-/**
- * ���ݿ������
- */
+
 public class DataBaseOperation {
 	private DBConn con = new DBConn();
 	private Statement stmt;
 	private ResultSet rs;
 
-	/**
-	 * ��ü�¼���� output parameter: nem = -2; Exception nem = -1 ; Error num = 0
-	 * ;Nothing num > 0;Right
-	 */
+	
 	public int getRowCount(String strSql) {
 		int intCount = 0;
 		try {
@@ -58,10 +53,7 @@ public class DataBaseOperation {
 		return rs;
 	}
 
-	/**
-	 * ���ݿ������� �������: insert SQL �������: num = -2 >Exception num = 0
-	 * >nothing num > 1 right
-	 */
+	
 	public int insert(String sql) {
 		int count = 0;
 		stmt = con.getStmt();
@@ -78,10 +70,7 @@ public class DataBaseOperation {
 		return count;
 	}
 
-	/**
-	 * *���ݿ���²��� �������: update SQL �������: num = -2 >Exception num = 0
-	 * >nothing num > 1 right
-	 */
+	
 	public int update(String sql) {
 		int count = 0;
 		stmt = con.getStmt();
@@ -98,10 +87,7 @@ public class DataBaseOperation {
 		return count;
 	}
 
-	/**
-	 * ɾ������ �������: delete SQL �������: count = -2>Exception num = 0
-	 * >nothing count > 1 >right
-	 */
+	
 	public int delete(String sql) {
 		int count = 0;
 		stmt = con.getStmt();

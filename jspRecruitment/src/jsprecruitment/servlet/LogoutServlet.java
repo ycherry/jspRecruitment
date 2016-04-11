@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,7 +30,6 @@ public class LogoutServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		request.getSession().invalidate();
 		PrintWriter out=response.getWriter();
-		System.out.println("退出系统成功");
 		request.getSession().invalidate();
 		out.println("<script language='javascript' charset='utf-8' type='text/javascript'>alert('退出成功！');parent.location.href='login.jsp'</script>");
 	}

@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jsprecruitment.util.DBConn;
 import jsprecruitment.util.DataBaseOperation;
 
 /**
@@ -37,11 +35,8 @@ public class DeleteCompanyServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		DataBaseOperation dbo = new DataBaseOperation();
 		PrintWriter out = response.getWriter();
-		DBConn dbc = new DBConn();
 		String companyId = request.getParameter("companyId");
 		String userId = request.getParameter("userId");
-		System.out.println("DeleteCompanyServlet resumeId:" + companyId);
-		System.out.println("DeleteCompanyServlet userId:" + userId);
 		// 删除用户信息包括：jobinterview，jobapply，resume，user
 		Boolean jobInterviewFlag = false;
 		Boolean jobApplyFlag = false;

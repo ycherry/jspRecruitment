@@ -3,9 +3,7 @@ package jsprecruitment.servlet.company;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +44,6 @@ public class DeleteJobServlet extends HttpServlet {
 		String intId=request.getParameter("intId");
 		DataBaseOperation dbo=new DataBaseOperation();
 		PrintWriter out=response.getWriter();
-		System.out.println(intId);
 		String deleteSql="delete from t_company_job where id='"+intId+"'";
 		String deleteInterviewSql="delete from t_company_interview where jobId='"+intId+"'";
 		String deleteApplySql="delete from t_job_apply where jobId='"+intId+"'";

@@ -1,22 +1,18 @@
 package jsprecruitment.servlet.company;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jsprecruitment.entity.Company;
 import jsprecruitment.util.DBConn;
-import jsprecruitment.util.DataBaseOperation;
-import jsprecruitment.util.Encode;
 
 /**
  * Servlet implementation class ReceivedResumeServlet
@@ -47,10 +43,6 @@ public class ReceivedResumeServlet extends HttpServlet {
 		String selectSql = null;
 		ResultSet rs = null;
 		String jobId = request.getParameter("jobId");
-		System.out.println("jobId:" + jobId);
-		// String
-		// jobName=java.net.URLDecoder.decode(request.getParameter("jobName"),
-		// "utf-8");
 		String jobName = "";
 		System.out.println("jobId:" + jobId);
 		if (jobId.equals("0")) {

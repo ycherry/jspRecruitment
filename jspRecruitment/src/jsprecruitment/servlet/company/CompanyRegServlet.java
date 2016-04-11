@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,7 +50,6 @@ public class CompanyRegServlet extends HttpServlet {
 		company.setUserName(request.getParameter("companyName"));
 		company.setPassword(request.getParameter("password"));
 		company.setFirstUpdateTime(new java.sql.Date(date.getTime()));
-		System.out.println("企业名称："+company.getUserName());
 		String sql="insert into t_user(userName,userPass,userType) values('"+company.getUserName()+"','"+company.getPassword()+"','2')";
 		String selectsql="select id from t_user where userName='"+company.getUserName()+"'";
 		try {

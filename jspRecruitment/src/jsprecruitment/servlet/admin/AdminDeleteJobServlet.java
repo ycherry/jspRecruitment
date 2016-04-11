@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jsprecruitment.util.DBConn;
 import jsprecruitment.util.DataBaseOperation;
 
 /**
@@ -32,11 +30,9 @@ public class AdminDeleteJobServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("已调用");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		DataBaseOperation dbo = new DataBaseOperation();
-		DBConn dbc = new DBConn();
 		PrintWriter out = response.getWriter();
 		String jobId = request.getParameter("jobId");
 		System.out.println("DeleteJobseekerServlet resumeId:" + jobId);
@@ -66,7 +62,7 @@ public class AdminDeleteJobServlet extends HttpServlet {
 		if (dbo.getRowCount(selectJobApplySql) > 0) {
 			String deleteJobApplySql = "delete from t_job_apply where jobId="
 					+ jobId;
-			if (dbo.delete(selectJobApplySql) > 0) {
+			if (dbo.delete(deleteJobApplySql) > 0) {
 				jobApplyFlag = true;
 			} else {
 				jobApplyFlag = false;

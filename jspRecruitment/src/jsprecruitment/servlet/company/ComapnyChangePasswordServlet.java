@@ -49,7 +49,6 @@ public class ComapnyChangePasswordServlet extends HttpServlet {
 		String sql="select * from t_user where userName='"+userName+"' and userPass='"+password+"'";
 		if(dbo.getRowCount(sql)>0){
 			String changePassSql="update t_user set userPass='"+newPassword+ "' where id='" + userId + "'";
-			System.out.println("changePassSql:"+changePassSql);
 			if(dbo.update(changePassSql)>0){
 				System.out.println("修改密码成功");
 				request.getSession().invalidate();

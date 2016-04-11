@@ -63,8 +63,6 @@ public class LoginServlet extends HttpServlet {
 					+ "' and userType=" + type;
 		}	
 		intT=data.getRowCount(selectUserSql);
-		System.out.println(selectUserSql);
-		System.out.println(intT);
 		if (intT > 0) {
 			System.out.println("登陆成功");
 			HttpSession session = request.getSession();

@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jsprecruitment.util.DBConn;
 import jsprecruitment.util.DataBaseOperation;
 
 /**
@@ -32,16 +30,12 @@ public class DeleteJobseekerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("已调用");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		DataBaseOperation dbo = new DataBaseOperation();
 		PrintWriter out = response.getWriter();
-		DBConn dbc = new DBConn();
 		String resumeId = request.getParameter("resumeId");
 		String userId = request.getParameter("userId");
-		System.out.println("DeleteJobseekerServlet resumeId:" + resumeId);
-		System.out.println("DeleteJobseekerServlet userId:" + userId);
 		// 删除用户信息包括：jobinterview，jobapply，resume，user
 		Boolean jobInterviewFlag = false;
 		Boolean jobApplyFlag = false;

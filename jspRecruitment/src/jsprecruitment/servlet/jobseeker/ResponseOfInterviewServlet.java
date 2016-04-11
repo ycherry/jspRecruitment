@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,8 +36,6 @@ public class ResponseOfInterviewServlet extends HttpServlet {
 		PrintWriter out=response.getWriter();
 		String interviewId=request.getParameter("interviewId");
 		String status=request.getParameter("responseStatus");
-		System.out.println("interviewId:"+interviewId);
-		System.out.println("status:"+status);
 		int count=-1;
 		if(status!=null&&status.equals("3")){
 			String deleteSql="delete from t_company_interview where id='"+interviewId+"'";

@@ -52,7 +52,6 @@ public class BuildResumeServlet extends HttpServlet {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String birthday = request.getParameter("birthday");
-		System.out.println("servlet birthday:" + birthday);
 		java.util.Date utilDate;
 		try {
 			utilDate = sdf.parse(birthday);

@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,12 +45,6 @@ public class ApplyJobServlet extends HttpServlet {
 		String companyId = request.getParameter("companyId");
 		String companyName = Encode.getNewString(request.getParameter("companyName"));
 		Jobseeker jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
-		System.out.println("jobName:" + jobName);
-		System.out.println("jobid:" + jobId);
-		System.out.println("companyId:" + companyId);
-		System.out.println("companyName:" + companyName);
-		System.out.println("jobseeker.getId():" + jobseeker.getId());
-		System.out.println("jobseeker.getUid():" + jobseeker.getUid());
 		// this.doPost(request, response);
 		String selectSql = "select * from t_job_apply where resumeId='" + jobseeker.getId() + "' and jobId='" + jobId
 				+ "'";

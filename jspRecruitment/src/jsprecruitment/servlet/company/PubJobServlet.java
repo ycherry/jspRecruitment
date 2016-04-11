@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,7 +73,6 @@ public class PubJobServlet extends HttpServlet {
 				"company")).getUserName();
 		job.setContents(request.getParameter("contents"));
 		job.setAddTime(new java.sql.Date(date.getTime()));
-		System.out.println("系统时间" + new java.sql.Date(date.getTime()));
 		job.setDistrict(request.getParameter("district"));
 		job.setEducation(request.getParameter("education"));
 		job.setExperience(request.getParameter("experience"));

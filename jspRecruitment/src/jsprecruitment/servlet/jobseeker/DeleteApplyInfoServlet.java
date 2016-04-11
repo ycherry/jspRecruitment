@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,8 +35,6 @@ public class DeleteApplyInfoServlet extends HttpServlet {
 		DataBaseOperation dbo=new DataBaseOperation();
 		String resumeId=request.getParameter("resumeId");
 		String jobId=request.getParameter("jobId");
-		System.out.println("resumeId:"+resumeId);
-		System.out.println("jobId:"+jobId);
 		String deleteSql="delete from t_job_apply where jobId="+jobId+" and resumeId="+resumeId;
 		System.out.println("deleteSql:"+deleteSql);
 		if(dbo.delete(deleteSql)>0){

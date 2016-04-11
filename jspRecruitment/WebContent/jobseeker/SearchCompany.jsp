@@ -292,7 +292,6 @@
 				window.location.href = RetSelecteds();
 
 			});
-			//	alert(RetSelecteds()); //返回选中结果  
 		});
 
 		function RetSelecteds() {
@@ -315,7 +314,6 @@
 
 						i++;
 					});
-			//result += "#talentList";
 			return result;
 		}
 

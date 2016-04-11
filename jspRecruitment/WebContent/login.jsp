@@ -183,9 +183,7 @@
 			</div>
 		</div>
 	</div>
-
 	<!--foot  end-->
 
-	
 </body>
 </html>

@@ -366,7 +366,6 @@
 			$("#filter a").each(function(index, item, arr) {
 				if (urlData.indexOf($(item).html()) !== -1) {
 					$(this).parents("dl").children("dd").each(function() {
-						//	$('a', item).removeClass("seled");
 						$(this).find("a").removeClass("seled");
 					});
 					$(item).attr("class", "seled");
@@ -384,12 +383,8 @@
 
 				$(this).attr("class", "seled");
 				$(this).attr("id", $(this).html());
-				//	alert($(this).attr("id"));
-				//	alert(RetSelecteds()); //返回选中结果  
 				window.location.href = RetSelecteds();
-
 			});
-			//	alert(RetSelecteds()); //返回选中结果  
 		});
 
 		function RetSelecteds() {

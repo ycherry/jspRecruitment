@@ -72,10 +72,6 @@
 							}
 							ResultSet rs = con.getRs("SELECT * FROM t_company_job WHERE cid='" + companyId + "'order by id desc");
 							while (rs.next()) {
-								/*			interview.setCompanyName(rs.getString(4));
-											interview.setJobId(rs.getString(1));
-											interview.setJobName(rs.getString(3));
-								*/
 								companyName = rs.getObject("companyName").toString();
 								int intId = Integer.parseInt(rs.getObject("id").toString());
 								int jobId = Integer.parseInt(rs.getObject("id").toString());

@@ -22,22 +22,14 @@
 <link rel="stylesheet" type="text/css" href="../css/style/common.css">
 
 
-<script src="../js/util/jquery-1.8.0.min.js" language="javascript"></script>
-<script src="../js/util/jquery-1.4.2.min.js" language="javascript"></script>
-<script src="../js/util/jquery-ui-1.8.custom.min.js"
-	language="javascript"></script>
-<script src="../js/util/jquery-1.10.0.js" language="javascript"></script>
-<script src="../js/util/bootstrap.js" language="javascript"></script>
+<script src="../js/util/jquery-1.8.0.min.js"></script>
+<script src="../js/util/jquery-1.4.2.min.js"></script>
+<script src="../js/util/jquery-ui-1.8.custom.min.js"></script>
+<script src="../js/util/jquery-1.10.0.js"></script>
+<script src="../js/util/bootstrap.js" ></script>
 <script type="text/javascript"
 	src="../js/util/jquery.validate-1.13.1.js"></script>
-
-
-<script src="../js/layer/layer.min.js" language="javascript"></script>
-<script src="../js/util/lazyload.min.js" language="javascript"></script>
-<script src="../js/public.js" language="javascript"></script>
-<script src="../js/reg_ajax.js" type="text/javascript"></script>
-<script src="../js/index.js" language="javascript"></script>
-<script src="../js/search.js" type="text/javascript"></script>
+<script src="../js/index.js" ></script>
 <script src="../js/util/slides.jquery.js" type="text/javascript"></script>
 <style type="text/css">
 body {

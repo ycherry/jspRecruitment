@@ -7,7 +7,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <script type="text/javascript" src="../js/util/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
 	src="../js/util/jquery-ui-1.8.custom.min.js"></script>

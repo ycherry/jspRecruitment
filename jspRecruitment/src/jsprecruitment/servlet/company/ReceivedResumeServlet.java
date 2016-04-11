@@ -66,7 +66,7 @@ public class ReceivedResumeServlet extends HttpServlet {
 		} else {
 			selectSql = "select * from t_resume,t_job_apply where t_resume.id = t_job_apply.resumeId and t_job_apply.jobId='"
 					+ jobId + "'";
-			String selectNameSql = "select jobName from t_job_apply where jobId='" + jobId + "'";
+			String selectNameSql = "select position from t_company_job where id='" + jobId + "'";
 			rs = dbc.getRs(selectSql);
 			ResultSet resultset = dbc.getRs(selectNameSql);
 			try {

@@ -134,7 +134,7 @@
 				</div>
 				<div class="col-sm-6">
 					<select class="form-control selectpicker" name="experience">
-						<option data-hidden="true"><%=jobseeker.getExperience() != null ? jobseeker.getExperience() : "无经验"%></option>
+						<option data-hidden="true"><%=jobseeker.getExperience() != null ? jobseeker.getExperience() : "应届毕业生"%></option>
 						<%
 							ResultSet experiencers = dbc.getRs("SELECT * FROM t_filter where keyid =10");
 							while (experiencers.next()) {

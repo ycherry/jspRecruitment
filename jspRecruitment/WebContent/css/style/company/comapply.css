@@ -202,7 +202,7 @@ padding-left: 10px;}
 .firm_sta_logo{ float:left; height:89px; background:url("../images/firm_bg1.png") no-repeat center bottom; margin-right:20px; display:inline-block;}
 .firm_sta_logo img{ width:185px; height:75px; border:1px solid #ddd7d7;}
 .firm_sta_mes{ float:left; width:480px;}
-.firm_sta_mes h3{ font-weight:normal; color: #000; font-size:18px;}
+.firm_sta_mes h3{ font-weight:normal; color:#1369c0; font-size:24px;}
 .firm_sta_mesed{ font-size:12px; color: #888383; padding:12px 0 10px 0;}
 .firm_sta_mesed i{ color:#454040; padding-right:8px;}
 .firm_sta_mesgz{ color:#454040;line-height:28px;}

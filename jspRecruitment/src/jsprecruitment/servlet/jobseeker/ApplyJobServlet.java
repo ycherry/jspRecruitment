@@ -55,20 +55,29 @@ public class ApplyJobServlet extends HttpServlet {
 		// this.doPost(request, response);
 		String selectSql = "select * from t_job_apply where resumeId='" + jobseeker.getId() + "' and jobId='" + jobId
 				+ "'";
+		String selectInterviewSql = "select * from t_company_interview where resumeId='" + jobseeker.getId()
+				+ "' and jobId='" + jobId + "'";
 		if (dbo.getRowCount(selectSql) <= 0) {
-			String insertSql = "insert into t_job_apply(resumeId,resumeUid,jobId,jobName,companyName,companyId,applyTime) values('"
-					+ jobseeker.getId() + "','" + jobseeker.getUid() + "','" + jobId + "','" + jobName + "','"
-					+ companyName + "','" + companyId + "','" + new java.sql.Date(date.getTime()) + "')";
-			if (dbo.insert(insertSql) > 0) {
-				System.out.println("申请职位成功！");
-				out.println(
-						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('申请职位成功！');window.location.href='company/ViewJob.jsp?jobId="
-								+ jobId + "'</script>");
+			if (dbo.getRowCount(selectInterviewSql) <= 0) {
+				String insertSql = "insert into t_job_apply(resumeId,resumeUid,jobId,jobName,companyName,companyId,applyTime) values('"
+						+ jobseeker.getId() + "','" + jobseeker.getUid() + "','" + jobId + "','" + jobName + "','"
+						+ companyName + "','" + companyId + "','" + new java.sql.Date(date.getTime()) + "')";
+				if (dbo.insert(insertSql) > 0) {
+					System.out.println("申请职位成功！");
+					out.println(
+							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('申请职位成功！');window.location.href='company/ViewJob.jsp?jobId="
+									+ jobId + "'</script>");
+				} else {
+					System.out.println("申请职位失败！");
+					out.println(
+							"<script language='javascript' charset='utf-8' type='text/javascript'>alert('申请职位失败！');window.location.href='company/ViewJob.jsp?jobId='"
+									+ jobId + "''</script>");
+				}
 			} else {
-				System.out.println("申请职位失败！");
+				System.out.println("已发送面试邀请！");
 				out.println(
-						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('申请职位失败！');window.location.href='company/ViewJob.jsp?jobId='"
-								+ jobId + "''</script>");
+						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('企业已发送面试邀请，请注意查看！!');window.location.href='company/ViewJob.jsp?jobId="
+								+ jobId + "'</script>");
 			}
 		} else {
 			System.out.println("不能重复申请！");

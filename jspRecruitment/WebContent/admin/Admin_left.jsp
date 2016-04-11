@@ -23,7 +23,7 @@
 	<div class="sidebar-menu">
 		<!-- http://getbootstrap.com/components/#glyphicons 图标 -->
 		<a href="#userMeun" class="nav-header menu-first collapsed"
-			data-toggle="collapse"><i class=""></i>用户信息管理</a>
+			data-toggle="collapse"><i class=""></i>基本信息管理</a>
 		<ul id="userMeun" class="nav nav-list collapse menu-second">
 			<li><a href="<%=request.getContextPath() %>/admin/ChangePassword.jsp" target="mainFrame"><i
 					class=""></i>修改密码</a></li>
@@ -31,8 +31,9 @@
 		<a href="#recruitmentMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>用户管理</a>
 		<ul id="recruitmentMenu" class="nav nav-list collapse menu-second">
-			<li><a href="SearchJob.jsp" target="mainFrame"><i
+		<!-- 	<li><a href="../jobseeker/SearchJob.jsp" target="mainFrame"><i
 					class="icon-pencil"></i> 用户信息管理</a></li>
+		 -->
 			<li><a href="<%=request.getContextPath() %>/admin/ResumeManagement.jsp" target="mainFrame"><i
 					class="icon-list-alt"></i> 简历管理</a></li>
 		</ul>

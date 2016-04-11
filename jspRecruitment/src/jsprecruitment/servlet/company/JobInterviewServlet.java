@@ -138,7 +138,7 @@ public class JobInterviewServlet extends HttpServlet {
 			}
 			if(resourcePage.equals("/jspRecruitment/company/SearchTalent.jsp")){
 				out.println(
-						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('发送面试邀请失败！');window.location.href='company/SearchTalent.jsp'</script>");
+						"<script language='javascript' charset='utf-8' type='text/javascript'>alert('一个职位不能重复邀请一个人！');window.location.href='company/SearchTalent.jsp'</script>");
 			}
 			out.println(
 					"<script language='javascript' charset='utf-8' type='text/javascript'>alert('一个职位不能重复邀请一个人！');window.location.href='jobseeker/ViewResume.jsp?resumeId="

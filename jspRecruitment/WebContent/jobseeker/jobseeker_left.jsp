@@ -59,7 +59,7 @@
 			<li><a href="InterviewInvitation.jsp" target="mainFrame"><i
 					class="icon-list-alt"></i> 面试邀请</a></li>
 			<li><a href="AppliedJobs.jsp" target="mainFrame"><i
-					class="icon-list-alt"></i> 申请的职位</a></li>
+					class="icon-list-alt"></i> 申请记录</a></li>
 		</ul>	
 		<a href="#otherMenu" class="nav-header menu-first collapsed"
 			data-toggle="collapse"><i class=""></i>退出系统</a>

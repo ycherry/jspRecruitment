@@ -187,7 +187,38 @@ select.error {
 	font-family: 微软雅黑;
 	display: inline-block
 }
-.interview_btn_align{
-	text-align:right;
-	margin-right:20px;
+
+.interview_btn_align {
+	text-align: right;
+	margin-right: 20px;
+}
+
+.disc_search {
+	float: right;
+	display: block;
+}
+
+.Search_text {
+	width: 154px;
+	height: 26px;
+	line-height: 28px;
+	color: #333;
+	font-size: 12px;
+	text-indent: 10px;
+	border: 1px solid #e5e5e5;
+	float: left;
+	font-family: 宋体;
+	margin-top: 5px;
+}
+
+.Search_submit {
+	width: 42px;
+	height: 28px;
+	line-height: 28px;
+	background: #1369c0;
+	border: none;
+	cursor: pointer;
+	color: #fff;
+	float: left;
+	margin-top: 4px;
 }

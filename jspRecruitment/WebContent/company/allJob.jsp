@@ -33,12 +33,18 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/style/company/index_style.css">
 </head>
-<body class="container" align="center">
+<body align="center">
 	<div class="admin_mainbody">
 		<div class=right_box>
 			<div class=admincont_box>
 				<div class="com_tit">
 					<span class="com_tit_span">全部招聘信息</span>
+					<div class="disc_search">
+						<input type="text" name="keyword" value=""
+							placeholder="请输入要搜索的关键字" class="Search_text" id="Search_text">
+						<input type="button" value="搜索" class="Search_submit"
+							onclick="searchPosition()">
+					</div>
 				</div>
 				<div class="com_body">
 					<div class=admin_textbox_04>
@@ -49,7 +55,7 @@
 							method="post" id='myform'>
 							<div class="clear"></div>
 							<div class="job_news_list job_news_list_h1 mt10">
-								<span class="job_news_list_span job_w120"
+								<span class="job_news_list_span job_w140"
 									style="text-align: center">职位名称</span> <span
 									class="job_news_list_span job_w120">发布时间</span> <span
 									class="job_news_list_span job_w100">有效时间</span> <span
@@ -61,16 +67,29 @@
 							<%
 								DBConn con = new DBConn();
 								DataBaseOperation dbo = new DataBaseOperation();
-								String strChecked = "checked";
-								String companyId = ((Company) request.getSession().getAttribute("company")).getId();
-								String companyName = null;
-								ResultSet rs = con.getRs("SELECT * FROM t_company_job WHERE cid='" + companyId + "'order by id desc");
+								/*	String companyId = ((Company) request.getSession().getAttribute(
+											"company")).getId();
+									String selectPositionSql = "SELECT * FROM t_company_job WHERE cid='"
+											+ companyId + "'order by id desc";
+									ResultSet rs = con.getRs(selectPositionSql);
+								 */
+								ResultSet rs = null;
+								if (request.getAttribute("PositionResultSet") != null) {
+									rs = (ResultSet) request.getAttribute("PositionResultSet");
+								} else {
+									String companyId = ((Company) request.getSession()
+											.getAttribute("company")).getId();
+									String selectPositionSql = "SELECT * FROM t_company_job WHERE cid='"
+											+ companyId + "'order by id desc";
+								    rs = con.getRs(selectPositionSql);
+								}
 								while (rs.next()) {
 									int intId = Integer.parseInt(rs.getObject("id").toString());
-									String selectSql = "select count(*) from t_job_apply where jobId='" + rs.getObject("id") + "'";
+									String selectSql = "select count(*) from t_job_apply where jobId='"
+											+ rs.getObject("id") + "'";
 							%>
 							<div class="job_news_list" style="padding-bottom: 18px;">
-								<span class="job_news_list_span job_w120"
+								<span class="job_news_list_span job_w140"
 									style="text-align: center"><a
 									href="viewJobDetails.jsp?intId=<%=intId%>" target="_blank"
 									class="com_Release_name"><%=rs.getObject("position")%></a></span> <span
@@ -87,14 +106,44 @@
 							</div>
 							<%
 								}
+
+								int count = 0;
+								if (request.getAttribute("positionCount") != null) {
+									count = (Integer) request.getAttribute("positionCount");
+								}
+
+								if (count <= 0) {
 							%>
-							<div class="diggg mt10 fltR"></div>
+							<div class="seachno">
+								<div class="seachno_left">
+									<img src="../images/search-no.gif" width="144" height="102">
+								</div>
+								<div class="listno-content">
+									<strong>贵公司暂时还未发布职位信息</strong><br> <span> 建议您：<br>
+										1、完善企业信息<br> 2、发布一条职位信息<br>
+								</div>
+							</div>
+							<%
+								}
+							%>
 						</form>
-						<div class="clear"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	//	searchPosition();
+	});
+	
+	function searchPosition(){
+		var keyword=$("#Search_text").val();
+		console.log(keyword);
+		var contextpath="<%=request.getContextPath()%>";
+			window.location.href = contextpath
+					+ "/SearchPositionServlet?keyword=" + keyword;
+		}
+	</script>
 </body>
 </html>

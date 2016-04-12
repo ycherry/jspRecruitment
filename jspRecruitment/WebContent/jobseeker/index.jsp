@@ -114,7 +114,7 @@ body {
 			<iframe src="jobseeker_left.jsp" name="leftFrame" id="iframe-left"></iframe>
 		</div>
 		<div id="main">
-			<iframe src="jobseeker_body.html" name="mainFrame" id="iframe-main"></iframe>
+			<iframe src="SearchJob.jsp" name="mainFrame" id="iframe-main"></iframe>
 		</div>
 
 

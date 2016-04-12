@@ -90,6 +90,14 @@
     <url-pattern>/DeleteInterviewInfoServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>SearchPositionServlet</servlet-name>
+    <servlet-class>jsprecruitment.servlet.company.SearchPositionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchPositionServlet</servlet-name>
+    <url-pattern>/SearchPositionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>JobseekerRegServlet</servlet-name>
     <servlet-class>jsprecruitment.servlet.jobseeker.JobseekerRegServlet</servlet-class>
   </servlet>

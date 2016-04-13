@@ -5,6 +5,8 @@
 <script type="text/javascript" src="js/util/jquery.js"></script>
 <script type="text/javascript" src="js/util/bootstrap.js"></script>
 <script type="text/javascript" src="js/util/angular.js"></script>
+<script type="text/javascript" src="js/util/jquery-1.10.0.js"></script>
+<script type="text/javascript" src="js/util/jquery.validate-1.13.1.js"></script>
 <link rel="stylesheet" type="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" type="stylesheet" href="	css/style/common.css">
 <link rel="stylesheet" type="stylesheet" href="	css/style/login.css">
@@ -13,10 +15,10 @@
 <body>
 	<div class="top">
 		<div class="top_left ">
-			<div class="welcome" >欢迎来到jsp人才系统！</div>
+			<div class="welcome">欢迎来到jsp人才系统！</div>
 		</div>
 		<div class="top_right">
-		<a class="welcome" href="index.jsp">返回首页</a>
+			<a class="welcome" href="index.jsp">返回首页</a>
 		</div>
 	</div>
 	<div class="logoin_banner">
@@ -29,7 +31,7 @@
 			</div>
 		</div>
 	</div>
-	<form role="form" name="login" action="LoginServlet">
+	<form role="form" name="loginForm" action="LoginServlet" id="loginForm">
 		<div class="logoin_cont_box">
 			<div class="logoin_bg"></div>
 			<div class="login_left ">
@@ -39,14 +41,12 @@
 					<div class="lgoin_box_cot" id='login_cur'>
 						<div class="col-md-offset-1 col-md-10 login_box_list logoin_re">
 							<input type="text" class="form-control" id="user" name="user"
-								placeholder="请输入您的用户名" ng-model="user" required>
+								placeholder="请输入您的用户名">
 						</div>
 						<div class="col-md-offset-1 col-md-10 login_box_list logoin_re">
 							<input type="password" class="form-control" id="password"
-								name="password" placeholder="请输入您的密码" ng-model="password"
-								required>
+								name="password" placeholder="请输入您的密码">
 						</div>
-
 						<div class=" col-md-offset-1 login_box_list logoin_re">
 							<div class=" col-md-6	">
 								<label style="color: #ffffff"> <input type="radio"
@@ -184,6 +184,27 @@
 		</div>
 	</div>
 	<!--foot  end-->
-
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#loginForm").validate({
+				rules : {
+					user : {
+						required : true
+					},
+					password : {
+						required : true
+					}
+				},
+				messages : {
+					user : {
+						required : "请输入用户名"
+					},
+					password : {
+						required : "请输入密码"
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>

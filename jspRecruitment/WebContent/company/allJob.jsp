@@ -97,9 +97,9 @@
 								<span class="job_news_list_span job_w100"><%=rs.getObject("deadline")%></span>
 								<span class="job_news_list_span job_w120"><%=dbo.getRowCount(selectSql)%></span>
 								<span class="job_news_list_span job_w120"><a
-									href="ViewJob.jsp?jobId=<%=intId%>" class="uesr_name_a">预览</a></span>
+									href="<%=request.getContextPath()%>/company/ViewJob.jsp?jobId=<%=intId%>" class="uesr_name_a">预览</a></span>
 								<span class="job_news_list_span job_w120"><a
-									href="updateJob.jsp?intId=<%=intId%>" class="uesr_name_a">编辑</a></span>
+									href="<%=request.getContextPath()%>/company/updateJob.jsp?intId=<%=intId%>" class="uesr_name_a">编辑</a></span>
 								<span class="job_news_list_span job_w120"><a
 									href=" ../DeleteJobServlet?intId=<%=intId%>"
 									class="uesr_name_a">删除</a></span>

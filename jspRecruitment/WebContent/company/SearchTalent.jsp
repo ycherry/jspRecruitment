@@ -82,6 +82,11 @@
 <body class="container" align="center">
 	<div class="row regTitle">
 		<font color="red"><strong>搜索简历信息</strong></font>
+		<div class="disc_search">
+			<input type="text" name="keyword" value="" placeholder="请输入要搜索的关键字"
+				class="Search_text" id="Search_text"> <input type="button"
+				value="搜索" class="Search_submit" onclick="searchTalent()">
+		</div>
 	</div>
 	<div class="filter_box" id="talentList">
 		<div id="filter">
@@ -201,7 +206,7 @@
 		String salary = null;
 		String experience = null;
 		String education = null;
-		String keyword= null;
+		String keyword = null;
 		java.util.Date date = new java.util.Date();
 		int year = date.getYear();
 		PrintWriter out1 = response.getWriter();
@@ -211,13 +216,14 @@
 		experience = request.getParameter("experience");
 		education = request.getParameter("education");
 		if (request.getParameter("keyword") != null
-				&& !request.getParameter("keyword").toString().equals("undefined") ) {
+				&& !request.getParameter("keyword").toString()
+						.equals("undefined")) {
 			keyword = request.getParameter("keyword");
 		}
 		String selectSql = null;
-		if(keyword!=null){
-			 keyword ="%"+Encode.getNewString(keyword)+"%";
-		}   
+		if (keyword != null) {
+			keyword = "%" + Encode.getNewString(keyword) + "%";
+		}
 		if (industry != null && workDistrict != null && salary != null
 				&& experience != null && education != null) {
 			industry = industry != null && !industry.equals("")
@@ -235,12 +241,13 @@
 			education = education != null && !education.equals("")
 					? java.net.URLDecoder.decode(education, "utf-8")
 					: "";
-			if(keyword!=null){
-				selectSql = "select * from t_resume where fullName is not null and fullName like '"+keyword+"' and ";
-			}else{
+			if (keyword != null) {
+				selectSql = "select * from t_resume where fullName is not null and fullName like '"
+						+ keyword + "' and ";
+			} else {
 				selectSql = "select * from t_resume where fullName is not null and ";
 			}
-			
+
 			if (industry.equals("全部")) {
 				selectSql += " 1=1 and ";
 			} else {
@@ -269,12 +276,13 @@
 			System.out.println(selectSql);
 
 		} else {
-			if(keyword!=null){
-				selectSql = "select * from t_resume where fullName is not null and fullName like '"+keyword+"'";
-			}else{
+			if (keyword != null) {
+				selectSql = "select * from t_resume where fullName is not null and fullName like '"
+						+ keyword + "'";
+			} else {
 				selectSql = "select * from t_resume where fullName is not null ";
 			}
-			
+
 		}
 		System.out.println(selectSql);
 		ResultSet resultset = con.getRs(selectSql);
@@ -393,9 +401,15 @@
 					"experience" ];
 			var i = 0;
 			var urlData = GetUrlData();
-			if(urlData.length>5){
-				result += "c=search&keyword="+urlData[1]+"&";
+			var keyword = $("#Search_text").val();
+			//	if(urlData.length>5){
+			if (urlData[1]) {
+				result += "c=search&keyword=" + urlData[1] + "&";
+			} else {
+				result += "c=search&keyword=" + keyword + "&";
 			}
+
+			//	}
 			$("#filter a[class='seled']").each(
 					function() {
 						var s = $(this).html() != '' ? encodeURI(encodeURI($(
@@ -408,14 +422,12 @@
 
 						i++;
 					});
-					
-			//result += "#talentList";
 			return result;
 		}
 
 		function GetUrlData() {
-			var array = ["c","keyword", "industry", "workDistrict", "salary", "education",
-					"experience" ];
+			var array = [ "c", "keyword", "industry", "workDistrict", "salary",
+					"education", "experience" ];
 			var url = location.search;
 			var request = new Object();
 			var urlData = new Array(7);
@@ -430,8 +442,12 @@
 					urlData[i] = request[array[i]];
 				}
 			}
-			
+
 			return urlData;
+		}
+
+		function searchTalent() {
+			window.location.href = RetSelecteds();
 		}
 	</script>
 

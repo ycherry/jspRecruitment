@@ -43,7 +43,7 @@
 			<div class="resume_content_top_box">
 				<div class="resume_content_left">
 					<div class="resume_content_name">
-						<span class="resume_content_name_s"><%=rs.getString("fullName")==null?"暂无":rs.getString("fullName")%></span>(<%=rs.getString("gender")== null?"暂无":rs.getString("gender")%>,<%=rs.getDate("updateTime")==null?"暂无":(year - rs.getDate("updateTime").getYear())%>岁)
+						<span class="resume_content_name_s"><%=rs.getString("fullName")==null?"暂无":rs.getString("fullName")%></span>(<%=rs.getString("gender")== null?"暂无":rs.getString("gender")%>,<%=rs.getDate("updateTime")==null?"暂无":(year - rs.getDate("birthday").getYear())%>岁)
 					</div>
 					<span class="resume_content_msg_c" style="width: 140px;"> <span
 						class="resume_content_msg_span">学历：</span><%=rs.getString("education") == null ? "未知" : rs.getString("education")%>

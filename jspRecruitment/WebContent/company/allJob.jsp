@@ -74,19 +74,16 @@
 									ResultSet rs = con.getRs(selectPositionSql);
 								 */
 								ResultSet rs = null;
+								String companyId = ((Company) request.getSession().getAttribute("company")).getId();
+								String selectPositionSql = "SELECT * FROM t_company_job WHERE cid='" + companyId + "'order by id desc";
 								if (request.getAttribute("PositionResultSet") != null) {
 									rs = (ResultSet) request.getAttribute("PositionResultSet");
 								} else {
-									String companyId = ((Company) request.getSession()
-											.getAttribute("company")).getId();
-									String selectPositionSql = "SELECT * FROM t_company_job WHERE cid='"
-											+ companyId + "'order by id desc";
-								    rs = con.getRs(selectPositionSql);
+									rs = con.getRs(selectPositionSql);
 								}
 								while (rs.next()) {
 									int intId = Integer.parseInt(rs.getObject("id").toString());
-									String selectSql = "select count(*) from t_job_apply where jobId='"
-											+ rs.getObject("id") + "'";
+									String selectSql = "select count(*) from t_job_apply where jobId='" + rs.getObject("id") + "'";
 							%>
 							<div class="job_news_list" style="padding-bottom: 18px;">
 								<span class="job_news_list_span job_w140"
@@ -110,6 +107,8 @@
 								int count = 0;
 								if (request.getAttribute("positionCount") != null) {
 									count = (Integer) request.getAttribute("positionCount");
+								} else {
+									count=dbo.getRowCount(selectPositionSql);
 								}
 
 								if (count <= 0) {
@@ -119,7 +118,7 @@
 									<img src="../images/search-no.gif" width="144" height="102">
 								</div>
 								<div class="listno-content">
-									<strong>贵公司暂时还未发布职位信息</strong><br> <span> 建议您：<br>
+									<strong>暂时还未发布职位信息</strong><br> <span> 建议您：<br>
 										1、完善企业信息<br> 2、发布一条职位信息<br>
 								</div>
 							</div>

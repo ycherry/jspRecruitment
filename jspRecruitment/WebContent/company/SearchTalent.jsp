@@ -29,7 +29,11 @@
 	href="../css/bootstrap-select.css.map">
 <link rel="stylesheet" type="text/css" href="../css/style/search.css">
 </head>
-
+<%
+	String header = request.getHeader("Referer");
+	String[] path = header.split("\\?");
+	String resourcePage = path[0].substring(21);
+%>
 <body class="container" align="center">
 	<div class="row regTitle">
 		<font color="red"><strong>搜索简历信息</strong></font>
@@ -318,10 +322,9 @@
 				$(this).removeClass("seling");
 			});
 
-			//选中filter下所有的dt标签，并且为dt标签后面的第一个dd标签下的a标签添加样式seled。(感叹jquery的强大)  
-			$("#filter dt+dd a").attr("class", "seled");
+			 
+			reset();
 			var urlData = GetUrlData();
-			console.log(urlData);
 			$("#filter a").each(function(index, item, arr) {
 				if (urlData.indexOf($(item).html()) !== -1) {
 					$(this).parents("dl").children("dd").each(function() {
@@ -330,8 +333,8 @@
 					$(item).attr("class", "seled");
 				}
 			});
-			if(urlData[1]){
-				$("#Search_text").attr("value",urlData[1]);
+			if (urlData[1]) {
+				$("#Search_text").attr("value", urlData[1]);
 			}
 
 			//为filter下的所有a标签添加单击事件  
@@ -356,17 +359,14 @@
 			var i = 0;
 			var urlData = GetUrlData();
 			var keyword = $("#Search_text").val();
-			//	if(urlData.length>5){
-			if(keyword){
-				urlData[1]=null;
+			var sourcePage="<%=resourcePage%>";
+			console.log(sourcePage);
+			if (sourcePage=="/jspRecruitment/index.jsp"&&urlData[1]&&!keyword) {
+				keyword = urlData[1];
 			}
-			if (urlData[1]) {
-				result += "c=search&keyword=" + urlData[1] + "&";
-			} else {
-				result += "c=search&keyword=" + keyword + "&";
-			}
-
-			//	}
+			console.log(sourcePage=="/jspRecruitment/index.jsp"&&urlData[1]);
+			console.log(keyword);
+			result += "c=search&keyword=" + keyword + "&";
 			$("#filter a[class='seled']").each(
 					function() {
 						var s = $(this).html() != '' ? encodeURI(encodeURI($(
@@ -403,7 +403,11 @@
 			return urlData;
 		}
 
+		function reset() {
+			$("#filter dt+dd a").attr("class", "seled");
+		}
 		function searchTalent() {
+			reset();
 			window.location.href = RetSelecteds();
 		}
 	</script>

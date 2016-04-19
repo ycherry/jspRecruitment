@@ -165,7 +165,7 @@
 					<label>企业简介:</label>
 				</div>
 				<div class="col-sm-6">
-					<textarea type="text" class="form-control" name="introduction"
+					<textarea type="text" class="form-control" name="introduction" rows="6" cols="12"
 						placeholder="请介绍一下您的公司吧"><%=rs.getString("introduction") == null ? ' ' : rs.getString("introduction")%></textarea>
 				</div>
 			</div>

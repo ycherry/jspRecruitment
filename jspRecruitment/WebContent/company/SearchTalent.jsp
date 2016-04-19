@@ -27,56 +27,7 @@
 	href="../css/bootstrap-select.css">
 <link rel="stylesheet" type="text/css"
 	href="../css/bootstrap-select.css.map">
-<style type="text/css">
-#filter {
-	width: 90%;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 12px;
-	display: block;
-	padding-bottom: 20px;
-}
-
-#filter dl {
-	clear: both;
-	border-bottom: 1px solid #ebebeb;
-}
-
-#filter dl dt {
-	float: left;
-	width: auto;
-	height: 14px;
-	padding: 0 0 4px 0;
-	font-weight: bold;
-	color: #333333;
-	margin: 10px 0 5px 0;
-	font-size: larger;
-}
-
-#filter dl dd {
-	float: left;
-	width: auto;
-	padding: 0;
-	color: #005AA0;
-	margin: 10px 8px 5px 0;
-}
-
-#filter a {
-	cursor: pointer;
-	font-size: larger;
-}
-
-.seling {
-	background-color: #005AA0;
-	color: #FFFFFF;
-}
-
-.seled {
-	background-color: #005AA0;
-	color: #FFFFFF;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../css/style/search.css">
 </head>
 
 <body class="container" align="center">
@@ -379,6 +330,9 @@
 					$(item).attr("class", "seled");
 				}
 			});
+			if(urlData[1]){
+				$("#Search_text").attr("value",urlData[1]);
+			}
 
 			//为filter下的所有a标签添加单击事件  
 			$("#filter a").click(function() {
@@ -403,6 +357,9 @@
 			var urlData = GetUrlData();
 			var keyword = $("#Search_text").val();
 			//	if(urlData.length>5){
+			if(keyword){
+				urlData[1]=null;
+			}
 			if (urlData[1]) {
 				result += "c=search&keyword=" + urlData[1] + "&";
 			} else {

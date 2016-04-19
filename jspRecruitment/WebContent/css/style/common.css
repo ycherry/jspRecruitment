@@ -196,6 +196,7 @@ select.error {
 .disc_search {
 	float: right;
 	display: block;
+	font-size: 13px;
 }
 
 .Search_text {

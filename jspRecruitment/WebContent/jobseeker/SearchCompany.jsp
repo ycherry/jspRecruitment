@@ -27,61 +27,17 @@
 	href="../css/bootstrap-select.css">
 <link rel="stylesheet" type="text/css"
 	href="../css/bootstrap-select.css.map">
-<style type="text/css">
-#filter {
-	width: 90%;
-	height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	font-size: 12px;
-	display: block;
-	padding-bottom: 20px;
-}
-
-#filter dl {
-	clear: both;
-	border-bottom: 1px solid #ebebeb;
-}
-
-#filter dl dt {
-	float: left;
-	width: auto;
-	height: 14px;
-	padding: 0 0 4px 0;
-	font-weight: bold;
-	color: #333333;
-	margin: 10px 0 5px 0;
-	font-size: larger;
-}
-
-#filter dl dd {
-	float: left;
-	width: auto;
-	padding: 0;
-	color: #005AA0;
-	margin: 10px 8px 5px 0;
-}
-
-#filter a {
-	cursor: pointer;
-	font-size: larger;
-}
-
-.seling {
-	background-color: #005AA0;
-	color: #FFFFFF;
-}
-
-.seled {
-	background-color: #005AA0;
-	color: #FFFFFF;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="../css/style/search.css">
 </head>
 
 <body class="container" align="center">
 	<div class="row regTitle">
 		<font color="red"><strong>搜索企业信息</strong></font>
+		<div class="disc_search">
+			<input type="text" name="keyword" value="" placeholder="请输入要搜索的关键字"
+				class="Search_text" id="Search_text"> <input type="button"
+				value="搜索" class="Search_submit" onclick="searchCompany()">
+		</div>
 	</div>
 	<div class="filter_box" id="talentList">
 		<div id="filter">
@@ -299,8 +255,14 @@
 			var array = [ "industry", "nature", "scale" ];
 			var i = 0;
 			var urlData = GetUrlData();
-			if (urlData.length > 3) {
+			var keyword = $("#Search_text").val();
+			if(keyword){
+				urlData[1]=null;
+			}
+			if (urlData[1]) {
 				result += "c=search&keyword=" + urlData[1] + "&";
+			} else {
+				result += "c=search&keyword=" + keyword + "&";
 			}
 			$("#filter a[class='seled']").each(
 					function() {
@@ -334,6 +296,10 @@
 				}
 			}
 		return urlData;
+		}
+		
+		function searchCompany() {
+			window.location.href = RetSelecteds();
 		}
 	</script>
 

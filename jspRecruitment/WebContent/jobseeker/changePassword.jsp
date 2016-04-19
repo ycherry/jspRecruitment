@@ -23,38 +23,38 @@
 				<font color="red"><strong>修改密码</strong></font>
 			</div>
 			<div class="row updateInfoLabel">
-				<div class="col-sm-offset-1 col-sm-3 ">
+				<div class="col-sm-4 col-xs-4">
 					<label>当前密码:</label>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-6 col-xs-8">
 					<input type="password" class="form-control" name="password"
 						id="password" placeholder="请输入当前密码（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
-				<div class="col-sm-offset-1 col-sm-3 ">
+				<div class="col-sm-4 col-xs-4 ">
 					<label>新密码:</label>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-6 col-xs-8">
 					<input type="password" class="form-control" name="newPassword"
 						id="newPassword" placeholder="请输入新密码（必填）">
 				</div>
 			</div>
 			<div class="row updateInfoLabel">
-				<div class="col-sm-offset-1 col-sm-3 ">
+				<div class="col-sm-4 col-xs-4 ">
 					<label>确认密码:</label>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-6 col-xs-8">
 					<input type="password" class="form-control" name="confirmPassword"
 						id="confirmPassword" placeholder="请输入新密码（必填）">
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="col-sm-offset-4 col-sm-2">
+				<div class="col-sm-offset-4 col-sm-2 col-xs-6">
 					<button type="submit" name="Submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;修&nbsp;&nbsp;&nbsp;&nbsp;改&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				</div>
-				<div class="col-sm-offset-1 col-sm-2">
+				<div class="col-sm-offset-1 col-sm-2 col-xs-6">
 					<button type="reset" name="Reset" class="btn btn-default">&nbsp;&nbsp;&nbsp;&nbsp;重&nbsp;&nbsp;&nbsp;&nbsp;置&nbsp;&nbsp;&nbsp;&nbsp;</button>
 				</div>
 			</div>

@@ -177,7 +177,7 @@ button,input,textarea,th,td {
 	line-height: 35px;
 	position: relative;
 	text-align: center;
-	width: 80px;
+	width: 100px;
 }
 
 .yun_topLogin a {
@@ -196,7 +196,7 @@ button,input,textarea,th,td {
 	padding-left: 10px;
 	position: relative;
 	text-align: left;
-	width: 80px;
+	width: 100px;
 	z-index: 13;
 }
 
@@ -205,7 +205,7 @@ button,input,textarea,th,td {
 	border-left: 1px solid #CCCCCC;
 	border-right: 1px solid #CCCCCC;
 	padding-left: 9px;
-	width: 80px;
+	width: 100px;
 }
 
 .yun_Moredown {
@@ -240,7 +240,7 @@ button,input,textarea,th,td {
 	float: left;
 	line-height: 28px;
 	text-align: center;
-	width: 78px;
+	width: 98px;
 }
 
 .yun_Moredown li a {

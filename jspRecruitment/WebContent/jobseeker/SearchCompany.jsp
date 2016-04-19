@@ -233,6 +233,9 @@
 					$(item).attr("class", "seled");
 				}
 			});
+			if(urlData[1]){
+				$("#Search_text").attr("value",urlData[1]);
+			}
 
 			//为filter下的所有a标签添加单击事件  
 			$("#filter a").click(function() {

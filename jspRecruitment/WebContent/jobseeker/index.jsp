@@ -121,7 +121,7 @@ body {
 	</div>
 	<!-- footer start -->
 	<div class="row">
-		<dl class="col-md-offset-2 login_list">
+		<dl class="col-md-offset-2 col-md-3 col-xs-offset-4 col-xs-8 login_list">
 			<dt>
 				<img src="../images/login/log_img1.png" class="png">
 			</dt>
@@ -130,7 +130,7 @@ body {
 				<div class="login_list_p">提供快捷、高效、可靠地网上招聘</div>
 			</dd>
 		</dl>
-		<dl class="login_list">
+		<dl class="login_list col-md-3 col-xs-offset-4 col-xs-8">
 			<dt>
 				<img src="../images/login/log_img2.png" class="png">
 			</dt>
@@ -139,7 +139,7 @@ body {
 				<div class="login_list_p">好机会主动找上你，成就职业成功</div>
 			</dd>
 		</dl>
-		<dl class="login_list">
+		<dl class="login_list col-md-3 col-xs-offset-4 col-xs-8 ">
 			<dt>
 				<img src="../images/login/log_img3.png" class="png">
 			</dt>

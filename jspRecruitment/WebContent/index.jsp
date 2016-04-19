@@ -14,17 +14,21 @@
 	if (request.getSession(false) != null) {
 		System.out.println("第一步");
 		if (((Company) request.getSession().getAttribute("company")) != null
-				&& (((Company) request.getSession().getAttribute("company"))).getId() != null) {
-			company = (Company) request.getSession().getAttribute("company");
+				&& (((Company) request.getSession().getAttribute(
+						"company"))).getId() != null) {
+			company = (Company) request.getSession().getAttribute(
+					"company");
 			companyId = company.getId();
-		} else
-			if (((Jobseeker) request.getSession().getAttribute("jobseeker")) != null
-					&& (((Jobseeker) request.getSession().getAttribute("jobseeker"))).getId() != null) {
-			jobseeker = (Jobseeker) request.getSession().getAttribute("jobseeker");
+		} else if (((Jobseeker) request.getSession().getAttribute(
+				"jobseeker")) != null
+				&& (((Jobseeker) request.getSession().getAttribute(
+						"jobseeker"))).getId() != null) {
+			jobseeker = (Jobseeker) request.getSession().getAttribute(
+					"jobseeker");
 			jobseekerId = jobseeker.getId();
-		} else
-				if (((Admin) request.getSession().getAttribute("admin")) != null
-						&& (((Admin) request.getSession().getAttribute("admin"))).getUserName() != null) {
+		} else if (((Admin) request.getSession().getAttribute("admin")) != null
+				&& (((Admin) request.getSession().getAttribute("admin")))
+						.getUserName() != null) {
 			admin = (Admin) request.getSession().getAttribute("admin");
 			adminName = admin.getUserName();
 		}
@@ -33,8 +37,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>jsp人才系统_最新招聘信息_找工作</title>
 <meta name="keywords" content="jsp人才系统，招聘，招聘网，找工作" />
-<link rel="stylesheet" href="css/style/css.css" type="text/css" />
-<link rel="stylesheet" href="css/style/index.css" type="text/css" />
+
 <script src="js/util/jquery-1.8.0.min.js" language="javascript"></script>
 <script src="js/layer/layer.min.js" language="javascript"></script>
 <script src="js/util/lazyload.min.js" language="javascript"></script>
@@ -43,6 +46,9 @@
 <script src="js/index.js" language="javascript"></script>
 <script src="js/search.js" type="text/javascript"></script>
 <script src="js/util/slides.jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/style/css.css" type="text/css" />
+<link rel="stylesheet" href="css/style/index.css" type="text/css" />
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
 </head>
 <body class="index_body_box">
 	<div class="top">
@@ -56,7 +62,9 @@
 						<div class=" fr">
 							<div class="yun_topLogin_cont">
 								<%
-									if (company.getUserName() == null && jobseeker.getUserName() == null && admin.getUserName() == null) {
+									if (company.getUserName() == null
+											&& jobseeker.getUserName() == null
+											&& admin.getUserName() == null) {
 								%>
 								<div class="yun_topLogin">
 									<a class="yun_More" href="javascript:void(0)">用户登录</a>
@@ -166,13 +174,13 @@
 						class="index_more" target="_blank">更多>></a>
 				</div>
 				<div class="Recommended_jobs_cont">
-					<div class="Latest_talent_cont_box">
+					<div class="Latest_talent_cont_box row">
 						<%
 							String selectJobSql = "select * from t_company_job order by addTime desc limit 0,6";
 							ResultSet jobrs = dbc.getRs(selectJobSql);
 							while (jobrs.next()) {
 						%>
-						<div class="com_index_rue_list fl">
+						<div class="com_index_rue_list fl col-sm-3 col-xs-6">
 							<dl style="border-bottom: 0px; padding-bottom: 0px">
 								<dd id="com_index_rue_list2">
 									<div class="com_index_rue_list_t">
@@ -213,18 +221,19 @@
 					<div class="Latest_talent_h1">
 						<b><i
 							class="Latest_talent_h1_icon Latest_talent_h1_icon_new_post png"></i>知名企业</b><a
-							href="http://127.0.0.1/recruitment/upload/job/index.php?c=search"
+							href="javascript:void(0)"
+							onclick="more('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','companys')"
 							class="index_more" target="_blank">更多>></a>
 					</div>
 					<div class="Recommended_jobs_cont">
-						<div class="Latest_talent_cont_box">
+						<div class="Latest_talent_cont_box row">
 							<%
-							//	String selectJobSql1 = "select *,count(distinct t_company_job.cid=t_company.id) from t_company,t_company_job where t_company_job.cid=t_company.id and position is not null and updateTime is not null order by firstUpdateTime desc limit 0,6";
-							String selectJobSql1 = "select * from t_company where id in (select distinct(cid) from t_company_job)";
+								//	String selectJobSql1 = "select *,count(distinct t_company_job.cid=t_company.id) from t_company,t_company_job where t_company_job.cid=t_company.id and position is not null and updateTime is not null order by firstUpdateTime desc limit 0,6";
+								String selectJobSql1 = "select * from t_company where id in (select distinct(cid) from t_company_job)";
 								ResultSet companyrs = dbc.getRs(selectJobSql1);
 								while (companyrs.next()) {
 							%>
-							<div class="com_index_rue_list fl">
+							<div class="com_index_rue_list fl col-sm-3 col-xs-6">
 								<dl style="border-bottom: 0px; padding-bottom: 0px">
 									<dd id="com_index_rue_list2">
 										<div class="com_index_rue_list_t">
@@ -270,14 +279,14 @@
 						class="index_more" target="_blank">更多>></a>
 				</div>
 
-				<div class="Latest_talent_cont">
+				<div class="Latest_talent_cont row">
 					<%
 						String selectTalent = "select  * from t_resume where updateTime is not null order by firstUpdateTime desc limit 0,6";
 						ResultSet talentrs = dbc.getRs(selectTalent);
 						while (talentrs.next()) {
 					%>
-					<div class="Latest_talent_cont_box">
-						<div class="com_index_rue_list fl">
+					<div class="Latest_talent_cont_box ">
+						<div class="com_index_rue_list fl  col-sm-3 col-xs-6">
 							<dl>
 								<dt>
 									<img width="24" height="30"
@@ -285,6 +294,7 @@
 										class="lazy" src=""
 										onerror="showImgDelay(this,'http://127.0.0.1/recruitment/upload/data/logo/20141210/14204024737.JPG',2);" />
 								</dt>
+
 								<dd>
 									<%
 										String name = null;
@@ -421,6 +431,8 @@
 			    window.open("company/SearchTalent.jsp");
 			}else if(pathName=="jobs"){
 				window.open("jobseeker/SearchJob.jsp");
+			}else if(pathName=="companys"){
+				window.open("jobseeker/SearchCompany.jsp");
 			}	
 		}		
 	}

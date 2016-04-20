@@ -1,36 +1,26 @@
 function checkmore(type){
 	var html=$("#"+type).html();
-	if(html=="¸ü¶à"){
+	if(html=="ï¿½ï¿½ï¿½"){
 		$("."+type).show();
 		$("#"+type).attr('class','showcheck');
-		$("#"+type).html('ÊÕÆð');
+		$("#"+type).html('ï¿½ï¿½ï¿½ï¿½');
 	}else{
 		$("."+type).hide();
 		$("#"+type).attr('class','hidecheck');
-		$("#"+type).html('¸ü¶à');
+		$("#"+type).html('ï¿½ï¿½ï¿½');
 	}
 }
 function checkmore_search(){
 	var searchlist=$("#searchlist").html();
-	if(searchlist=="¸ü¶àÑ¡Ïî"){
+	if(searchlist=="ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½"){
 		$(".search_more").show();
-		$("#searchlist").html('ÊÕÆðÑ¡Ïî');
+		$("#searchlist").html('ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½');
 	}else{
 		$(".search_more").hide();
-		$("#searchlist").html('¸ü¶àÑ¡Ïî');
+		$("#searchlist").html('ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½');
 	}
 }
 $(document).ready(function(){
-	$('.delete').live('click',function(){
-		var id = $(this).attr('data-id');
-		var pid = $(this).attr('data-pid');
-		if(parseInt(pid)>0)
-		{
-			unsel(id,pid);
-		}else{
-			unsel(id)	
-		}
-	});	
 	$('.search_job_list').hover(function(){
 		$(".search_job_list").removeClass("search_job_list_cur_line");
 		$(this).addClass('search_job_list_cur_line');  
@@ -44,7 +34,7 @@ $(document).ready(function(){
 	);
 
 	$(".com_admin_ask").hover(function(){  
-		layer.tips("¼ÓÈëËÑË÷Æ÷£¬·½±ãÏÂ´ÎÖ±½ÓËÑË÷£¬ÎÞÐèµã»÷ÖÚ¶àÌõ¼þ£¡", this, {
+		layer.tips("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", this, {
 			guide: 1,
 			style: ['background-color:#F26C4F; color:#fff;top:-7px', '#F26C4F']
 		});
@@ -70,7 +60,7 @@ function index_job(job_class){
 		var jobids=(job_class)?job_class.split(','):(new Array());
 		var job_class_append=','+(job_class?job_class:'')+',';
 		var selhtml="";
-		html='<div class="student_tips" style="left: 120px;"></div><div class="sPopupTitle290"><h1 class="student_tips_h1"><span>ÒÑÑ¡Ôñ</span></h1><div class="dialog-content"><ul class="selected clearfix">{selall}</ul></div><div class="tips_ture"><a href="javascript:determine();"  class="tips_sub1">È·ÈÏ</a><a href="javascript:closelayer();" class="tips_sub2">È¡Ïû</a></div></div><div class="clear"></div><div class="sPopupBlock"><table id="jobTab" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody>';
+		html='<div class="student_tips" style="left: 120px;"></div><div class="sPopupTitle290"><h1 class="student_tips_h1"><span>ï¿½ï¿½Ñ¡ï¿½ï¿½</span></h1><div class="dialog-content"><ul class="selected clearfix">{selall}</ul></div><div class="tips_ture"><a href="javascript:determine();"  class="tips_sub1">È·ï¿½ï¿½</a><a href="javascript:closelayer();" class="tips_sub2">È¡ï¿½ï¿½</a></div></div><div class="clear"></div><div class="sPopupBlock"><table id="jobTab" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody>';
 
 			for(var i=0;i<ji.length;i++){
 				var jobclassid1=ji[i];
@@ -87,7 +77,7 @@ function index_job(job_class){
 						var jobclassid2=jt[jobclassid1][j];
 
 						if(job_class_append.indexOf(','+jobclassid2+',')>=0){
-							selhtml +='<li class="all'+jobclassid2+'"><a class="clean g3 selall" href="javascript:void(0);" data-val="'+jobclassid2+'+'+jn[jobclassid2]+'"><span class="text">'+jn[jobclassid2]+'</span><span class="delete" data-id="'+jobclassid2+'">ÒÆ³ý</span></a></li>';
+							selhtml +='<li class="all'+jobclassid2+'"><a class="clean g3 selall" href="javascript:void(0);" data-val="'+jobclassid2+'+'+jn[jobclassid2]+'"><span class="text">'+jn[jobclassid2]+'</span><span class="delete" data-id="'+jobclassid2+'">ï¿½Æ³ï¿½</span></a></li>';
 							disabled = "disabled";
 							allchecked = "checked";
 						}
@@ -106,7 +96,7 @@ function index_job(job_class){
 								var checked = "";
 								var jobclassid3=jt[jobclassid2][k];
 								if(job_class_append.indexOf(','+jobclassid3+',')>=0){
-									selhtml +='<li class="job_class_'+jobclassid3+' parent_'+jobclassid2+'"><a class="clean g3 selall" href="javascript:void(0);" data-val="'+jobclassid3+'+'+jn[jobclassid3]+'"><span class="text">'+jn[jobclassid3]+'</span><span class="delete" data-id="'+jobclassid3+'" data-pid ="'+jobclassid2+'">ÒÆ³ý</span></a></li>';
+									selhtml +='<li class="job_class_'+jobclassid3+' parent_'+jobclassid2+'"><a class="clean g3 selall" href="javascript:void(0);" data-val="'+jobclassid3+'+'+jn[jobclassid3]+'"><span class="text">'+jn[jobclassid3]+'</span><span class="delete" data-id="'+jobclassid3+'" data-pid ="'+jobclassid2+'">ï¿½Æ³ï¿½</span></a></li>';
 									if(allchecked==''){
 										checked = "checked";
 									}
@@ -138,7 +128,7 @@ function index_job(job_class){
 		$("#jobdiv").html(html);
 			$.layer({
 				type : 1,
-				title : 'Ö°Î»Àà±ð',
+				title : 'Ö°Î»ï¿½ï¿½ï¿½',
 				offset : ['20px' , '50%'],
 				closeBtn : [0 , true],
 				fix : false,
@@ -151,7 +141,7 @@ function index_job(job_class){
 		$("#jobdiv").html(html);
 		$.layer({
 			type : 1,
-			title : 'Ö°Î»Àà±ð',
+			title : 'Ö°Î»ï¿½ï¿½ï¿½',
 			offset : ['100px' , '50%'],
 			closeBtn : [0 , true],
 			fix : false,
@@ -192,7 +182,7 @@ function index_city(cityin_name_selector,cityin_selector){
 		$("#citydiv").html(html);
 			$.layer({
 				type : 1,
-				title : 'Ñ¡Ôñ¹¤×÷µØÇø',
+				title : 'Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
 				offset : ['100px' , '50%'],
 				closeBtn : [0 , true],
 				fix : false,
@@ -205,7 +195,7 @@ function index_city(cityin_name_selector,cityin_selector){
 		$("#citydiv").html(html);
 		$.layer({
 			type : 1,
-			title : 'Ñ¡Ôñ¹¤×÷µØÇø',
+			title : 'Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',
 			offset : ['100px' , '50%'],
 			closeBtn : [0 , true],
 			fix : false,
@@ -282,22 +272,22 @@ function addsel(id,pid){
 	if(parseInt(pid)>0){		
 		if(i>5){
 			unsel(id,pid);
-			layer.msg('Äú×î¶àÖ»ÄÜÑ¡ÔñÎåÏî£¡', 2,2);
+			layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½î£¡', 2,2);
 			return false;
 		}else{
 			var name = $('#job_class_'+id).attr('data-name');
-			html = '<li class="job_class_'+id+' parent_'+pid+'"><a class="clean g3 selall" href="javascript:void(0);" data-val="'+id+'+'+name+'"><span class="text">'+name+'</span><span class="delete" data-id="'+id+'" data-pid ="'+pid+'">ÒÆ³ý</span></a></li>';
+			html = '<li class="job_class_'+id+' parent_'+pid+'"><a class="clean g3 selall" href="javascript:void(0);" data-val="'+id+'+'+name+'"><span class="text">'+name+'</span><span class="delete" data-id="'+id+'" data-pid ="'+pid+'">ï¿½Æ³ï¿½</span></a></li>';
 			$('.job_class_'+id).remove();
 			$('.selected').first().append(html);
 		}
 	}else{
 		if(i>4){
 			unsel(id);
-			layer.msg('Äú×î¶àÖ»ÄÜÑ¡ÔñÎåÏî£¡', 2,2);
+			layer.msg('ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½î£¡', 2,2);
 			return false;
 		}else{
 			var name = $('#all'+id).attr('data-name');
-			html = '<li class="all'+id+'"><a class="clean g3 selall" href="javascript:void(0);"  data-val="'+id+'+'+name+'"><span class="text">'+name+'</span><span class="delete" data-id="'+id+'">ÒÆ³ý</span></a></li>';
+			html = '<li class="all'+id+'"><a class="clean g3 selall" href="javascript:void(0);"  data-val="'+id+'+'+name+'"><span class="text">'+name+'</span><span class="delete" data-id="'+id+'">ï¿½Æ³ï¿½</span></a></li>';
 			$('.parent_'+id).remove();
 			$('.all'+id).remove();
 			$('.selected').first().append(html);

@@ -228,14 +228,15 @@
 			} else {
 				selectSql += " education='" + education + "'";
 			}
+			selectSql += " order by firstUpdateTime desc";
 			System.out.println(selectSql);
 
 		} else {
 			if (keyword != null) {
 				selectSql = "select * from t_resume where fullName is not null and fullName like '"
-						+ keyword + "'";
+						+ keyword + "' order by firstUpdateTime desc";
 			} else {
-				selectSql = "select * from t_resume where fullName is not null ";
+				selectSql = "select * from t_resume where fullName is not null order by firstUpdateTime desc";
 			}
 
 		}

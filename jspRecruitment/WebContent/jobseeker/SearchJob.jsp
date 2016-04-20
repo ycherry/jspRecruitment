@@ -225,14 +225,15 @@
 			} else {
 				selectSql += " education='" + education + "'";
 			}
+			selectSql += " order by addtime desc";
 			System.out.println(selectSql);
 
 		} else {
 			if (keyword != null) {
 				selectSql = "select * from t_company_job where position like '"
-						+ keyword + "'";
+						+ keyword + "' order by addtime desc";
 			} else {
-				selectSql = "select * from t_company_job";
+				selectSql = "select * from t_company_job order by addtime desc";
 			}
 		}
 		System.out.println(selectSql);

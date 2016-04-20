@@ -35,6 +35,7 @@
 body {
 	text-align: center;
 	align: center;
+	font-family: 微软雅黑;
 }
 
 .regTitle {
@@ -208,7 +209,7 @@ select.error {
 	text-indent: 10px;
 	border: 1px solid #e5e5e5;
 	float: left;
-	font-family: 宋体;
+	font-family: 微软雅黑;
 	margin-top: 5px;
 }
 
@@ -223,3 +224,7 @@ select.error {
 	float: left;
 	margin-top: 4px;
 }
+.a_grey{
+	color:#505050;
+}
+

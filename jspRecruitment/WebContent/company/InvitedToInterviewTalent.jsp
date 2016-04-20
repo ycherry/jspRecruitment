@@ -54,10 +54,8 @@
 							<div class=admin_textbox_04>
 								<form action="index.php?c=invite&act=del" method="post"
 									target="supportiframe" id='myform'>
-									<div class=table>
-										<div id="job_checkbokid">
 											<div class="job_news_list job_news_list_h1">
-												<span class="job_news_list_span job_w100">姓名</span> <span
+												<span class="job_news_list_span job_w120">姓名</span> <span
 													class="job_news_list_span job_w150">面试职位</span> <span
 													class="job_news_list_span job_w100">工作经验</span> <span
 													class="job_news_list_span job_w100">期望薪资</span> <span
@@ -76,8 +74,7 @@
 												while (rs.next()) {
 											%>
 											<div class="job_news_list">
-												<span class="job_news_list_span job_w130"
-													style="width: 95px;">&nbsp;<a
+												<span class="job_news_list_span job_w120"><a
 													href="<%=request.getContextPath()%>/jobseeker/ViewResume.jsp?resumeId=<%=rs.getObject("id") %>"
 													target=mainFrame class="com_Release_name"><%=rs.getObject("fullName")%></a></span>
 												<span class="job_news_list_span job_w150"><%=rs.getObject("jobName")%></span>

@@ -4,6 +4,23 @@
 <%@page import="java.sql.ResultSet"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jsp人才系统_最新招聘信息_找工作</title>
+<meta name="keywords" content="jsp人才系统，招聘，招聘网，找工作" />
+
+<script src="js/util/jquery-1.10.0.js" language="javascript"></script>
+<script src="js/util/lazyload.min.js" language="javascript"></script>
+<script src="js/public.js" language="javascript"></script>
+<script src="js/reg_ajax.js" type="text/javascript"></script>
+<script src="js/index.js" language="javascript"></script>
+<script src="js/search.js" type="text/javascript"></script>
+<script src="js/util/slides.jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="css/style/css.css" type="text/css" />
+<link rel="stylesheet" href="css/style/index.css" type="text/css" />
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="css/style/common.css" type="text/css" />
+</head>
 <%
 	Jobseeker jobseeker = new Jobseeker();
 	Company company = new Company();
@@ -34,23 +51,7 @@
 		}
 	}
 %>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jsp人才系统_最新招聘信息_找工作</title>
-<meta name="keywords" content="jsp人才系统，招聘，招聘网，找工作" />
-
-<script src="js/util/jquery-1.8.0.min.js" language="javascript"></script>
-<script src="js/layer/layer.min.js" language="javascript"></script>
-<script src="js/util/lazyload.min.js" language="javascript"></script>
-<script src="js/public.js" language="javascript"></script>
-<script src="js/reg_ajax.js" type="text/javascript"></script>
-<script src="js/index.js" language="javascript"></script>
-<script src="js/search.js" type="text/javascript"></script>
-<script src="js/util/slides.jquery.js" type="text/javascript"></script>
-<link rel="stylesheet" href="css/style/css.css" type="text/css" />
-<link rel="stylesheet" href="css/style/index.css" type="text/css" />
-<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-</head>
-<body class="index_body_box">
+<body class="index_body_box body_font">
 	<div class="top">
 		<div class="top_cot">
 			<div class="top_cot_content">
@@ -149,11 +150,11 @@
 						<div class="index_header_seach_find">
 							<span id='search_name'>找人才</span>
 							<div class="index_header_seach_find_list" style="display: none">
-								<a href="javascript:void(0)"
+								<a href="javascript:void(0)"  class="a_grey"
 									onclick="top_search('job', '找工作', 'jobseeker/SearchJob.jsp', '1', 'job'); $('#search').attr('name', 'c');"
-									target="_blank">找工作</a> <a href="javascript:void(0)"
+									target="_blank">找工作</a> <a href="javascript:void(0)" class="a_grey"
 									onclick="top_search('resume', '找人才', 'company/SearchTalent.jsp', '1', 'resume'); $('#search').attr('name', 'c');"
-									target="_blank"> 找人才</a><a href="javascript:void(0)"
+									target="_blank"> 找人才</a><a href="javascript:void(0)" class="a_grey"
 									onclick="top_search('company', '找企业', 'jobseeker/SearchCompany.jsp', '1', 'company'); $('#search').attr('name', 'c');"
 									target="_blank"> 找企业</a>
 							</div>
@@ -191,12 +192,12 @@
 											class="com_index_rue_list_date fr"><%=jobrs.getString("addTime")%></span>
 									</div>
 									<div class="com_index_rue_list_yx">
-										<a href="javascript:void(0)"
+										<a href="javascript:void(0)" class="fl"
 											onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=jobrs.getString("cid")%>','company')"><%=jobrs.getString("companyName")%></a>
 									</div>
 									<div class="com_index_rue_list_t index_talent">
-										<span class="com_index_rue_listspan">￥</span> <em
-											class="com_index_rue_list_xz f60"><%=jobrs.getString("salary")%></em>
+										<span class="com_index_rue_listspan fl">￥</span> <em
+											class="com_index_rue_list_xz f60 fl"><%=jobrs.getString("salary")%></em>
 									</div>
 									<div class="com_index_rue_list_t index_exper">
 										<div class="com_index_rue_listspan experience">
@@ -204,7 +205,7 @@
 										</div>
 										<div
 											class="com_index_rue_list_xz com_index_rue_list_jy f61 experience_value">
-											<em><%=jobrs.getString("experience")%></em>
+											<span><%=jobrs.getString("experience")%></span>
 										</div>
 									</div>
 								</dd>
@@ -249,7 +250,7 @@
 												while (cjobrs.next()) {
 										%>
 										<div class="com_index_rue_list_yx">
-											<a href="javascript:void(0)"
+											<a href="javascript:void(0)" class="fl" 
 												onclick="viewDetail('<%=jobseekerId%>','<%=companyId%>','<%=adminName%>','<%=cjobrs.getString("cid")%>','company')"><%=cjobrs.getString("position")%></a>
 											<div class="fr">
 												<span>￥</span> <em class="com_index_rue_list_xz f60"><%=cjobrs.getString("salary")%></em>
@@ -329,7 +330,7 @@
 								</dd>
 							</dl>
 							<div class="com_index_rue_list_yx">
-								<span class="com_index_rue_listspan">意向职位：</span><%=talentrs.getString("intentionJobs")%>
+								<span class="com_index_rue_listspan fl">意向职位：</span><span class="fl"><%=talentrs.getString("intentionJobs")%></span>
 							</div>
 						</div>
 					</div>
@@ -354,14 +355,14 @@
 						<dd>
 							<ul>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/index.html"
-									title="关于我们">关于我们</a></li>
+									href="https://www.baidu.com/"
+									title="关于我们" class="a_grey">关于我们</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/service.html"
-									title="注册协议">注册协议</a></li>
+									href="https://www.baidu.com/"
+									title="注册协议" class="a_grey">注册协议</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/phpyun.html"
-									title="法律声明">法律声明</a></li>
+									href="https://www.baidu.com/"
+									title="法律声明" class="a_grey">法律声明</a></li>
 							</ul>
 							<dd>
 					</dl>
@@ -370,17 +371,17 @@
 						<dd>
 							<ul>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/yh.html"
-									title="银行帐户">银行帐户</a></li>
+									href="https://www.baidu.com/"
+									title="银行帐户" class="a_grey">银行帐户</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/pinpai.html"
-									title="品牌推广">品牌推广</a></li>
+									href="https://www.baidu.com/"
+									title="品牌推广" class="a_grey">品牌推广</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/charge.html"
-									title="收费标准">收费标准</a></li>
+									href="https://www.baidu.com/"
+									title="收费标准" class="a_grey">收费标准</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/indexzy.html"
-									title="经营资源">经营资源</a></li>
+									href="https://www.baidu.com/"
+									title="经营资源" class="a_grey">经营资源</a></li>
 							</ul>
 							<dd>
 					</dl>
@@ -388,8 +389,8 @@
 						<dt>网站特色</dt>
 						<dd>
 							<ul>
-								<li><a href="m_redeem.html" title="积分兑换">积分兑换</a></li>
-								<li><a href="index.php?m=subscribe" title="订阅服务">订阅服务</a></li>
+								<li><a href="m_redeem.html" title="积分兑换" class="a_grey">积分兑换</a></li>
+								<li><a href="index.php?m=subscribe" title="订阅服务" class="a_grey">订阅服务</a></li>
 							</ul>
 							<dd>
 					</dl>
@@ -398,14 +399,14 @@
 						<dd>
 							<ul>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/kf.html"
-									title="客服中心">客服中心</a></li>
+									href="https://www.baidu.com/"
+									title="客服中心" class="a_grey">客服中心</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/gg.html"
-									title="广告投放">广告投放</a></li>
+									href="https://www.baidu.com/"
+									title="广告投放" class="a_grey">广告投放</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/newuser.html"
-									title="新手指引">新手指引</a></li>
+									href="https://www.baidu.com/"
+									title="新手指引" class="a_grey">新手指引</a></li>
 							</ul>
 							<dd>
 					</dl>
@@ -415,8 +416,6 @@
 		</div>
 	</div>
 	<!--foot  end-->
-	<div id="bg" style=""></div>
-	<div id="uclogin" style="display: none"></div>
 </body>
 </html>
 

@@ -101,9 +101,8 @@
 								method="post" id='myform'>
 								<div class="clear"></div>
 
-								<div class="job_news_list job_news_list_h1 mt10">
-									<span class="job_news_list_span job_w30">&nbsp;</span> <span
-										class="job_news_list_span job_w80" style="text-align: left">姓名</span>
+								<div class="job_news_list job_news_list_h1 mt10"> <span
+										class="job_news_list_span job_w120" >姓名</span>
 									<span class="job_news_list_span job_w120">求职意向</span> <span
 										class="job_news_list_span job_w100">工作经验</span> <span
 										class="job_news_list_span job_w120">期望薪资</span> <span
@@ -120,12 +119,7 @@
 											resumeNumber++;
 								%>
 								<div class="job_news_list" style="padding-bottom: 18px;">
-
-									<span class="job_news_list_span job_w30"
-										style="padding-right: 10px;"> <input type="checkbox"
-										name="delid[]" value="2">
-									</span> <span class="job_news_list_span job_w80"
-										style="text-align: left"><a
+								<span class="job_news_list_span job_w120"><a
 										href="<%=request.getContextPath() %>/jobseeker/ViewResume.jsp?resumeId=<%=resultset.getString("id") %>"
 										target="_blank" class="com_Release_name"><%=resultset.getString("fullName")%></a></span>
 									<span class="job_news_list_span job_w120"><%=resultset.getString("intentionJobs")%></span>

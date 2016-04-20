@@ -139,6 +139,8 @@ body {
 		</dl>
 	</div>
 	<div class="clear"></div>
+<!--foot  start-->
+	<div class="clear"></div>
 	<div class="footer">
 		<div class="foot">
 			<div class="foot_conent">
@@ -147,52 +149,68 @@ body {
 						<dt>关于我们</dt>
 						<dd>
 							<ul>
-								<li><a href="https://www.baidu.com/" title="关于我们">关于我们</a></li>
-								<li><a href="https://www.baidu.com/" title="注册协议">注册协议</a></li>
-								<li><a href="https://www.baidu.com/" title="法律声明">法律声明</a></li>
+								<li><a
+									href="https://www.baidu.com/"
+									title="关于我们" class="a_grey">关于我们</a></li>
+								<li><a
+									href="https://www.baidu.com/"
+									title="注册协议" class="a_grey">注册协议</a></li>
+								<li><a
+									href="https://www.baidu.com/"
+									title="法律声明" class="a_grey">法律声明</a></li>
 							</ul>
-						<dd>
+							<dd>
 					</dl>
 					<dl class="footer_list">
 						<dt>支付信息</dt>
 						<dd>
 							<ul>
-								<li><a href="https://www.baidu.com/" title="银行帐户">银行帐户</a></li>
-								<li><a href="https://www.baidu.com/" title="品牌推广">品牌推广</a></li>
-								<li><a href="https://www.baidu.com/" title="收费标准">收费标准</a></li>
-								<li><a href="https://www.baidu.com/" title="经营资源">经营资源</a></li>
+								<li><a
+									href="https://www.baidu.com/"
+									title="银行帐户" class="a_grey">银行帐户</a></li>
+								<li><a
+									href="https://www.baidu.com/"
+									title="品牌推广" class="a_grey">品牌推广</a></li>
+								<li><a
+									href="https://www.baidu.com/"
+									title="收费标准" class="a_grey">收费标准</a></li>
+								<li><a
+									href="https://www.baidu.com/"
+									title="经营资源" class="a_grey">经营资源</a></li>
 							</ul>
-						<dd>
+							<dd>
 					</dl>
 					<dl class="footer_list">
 						<dt>网站特色</dt>
 						<dd>
 							<ul>
-								<li><a href="m_redeem.html" title="积分兑换">积分兑换</a></li>
-								<li><a href="index.php?m=subscribe" title="订阅服务">订阅服务</a></li>
+								<li><a href="m_redeem.html" title="积分兑换" class="a_grey">积分兑换</a></li>
+								<li><a href="index.php?m=subscribe" title="订阅服务" class="a_grey">订阅服务</a></li>
 							</ul>
-						<dd>
+							<dd>
 					</dl>
 					<dl class="footer_list">
 						<dt>咨询反馈</dt>
 						<dd>
 							<ul>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/kf.html"
-									title="客服中心">客服中心</a></li>
+									href="https://www.baidu.com/"
+									title="客服中心" class="a_grey">客服中心</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/gg.html"
-									title="广告投放">广告投放</a></li>
+									href="https://www.baidu.com/"
+									title="广告投放" class="a_grey">广告投放</a></li>
 								<li><a
-									href="http://127.0.0.1/recruitment/upload/about/newuser.html"
-									title="新手指引">新手指引</a></li>
+									href="https://www.baidu.com/"
+									title="新手指引" class="a_grey">新手指引</a></li>
 							</ul>
-						<dd>
+							<dd>
 					</dl>
 				</div>
 			</div>
+			<div class="clear"></div>
 		</div>
 	</div>
+	<!--foot  end-->
 </body>
 
 </html>
